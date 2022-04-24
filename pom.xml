@@ -10,7 +10,7 @@
 	<name>Cucumber default step definitions using Smart Testing Automation Framework</name>
 
 	<properties>
-		<smart-testauto-framework.version>3.0.2</smart-testauto-framework.version>
+		<smart-testauto-framework.version>3.0.4-snapshot</smart-testauto-framework.version>
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>

@@ -18,13 +18,8 @@
 package org.uitnet.testing.smartfwk.core.defaults.stepdefs.en.ui;
 
 import org.testng.Assert;
-import org.uitnet.testing.smartfwk.ui.core.DefaultAppConnector;
-import org.uitnet.testing.smartfwk.ui.core.SmartAppConnector;
-import org.uitnet.testing.smartfwk.ui.core.appdriver.SmartAppDriver;
-import org.uitnet.testing.smartfwk.ui.core.cache.DefaultSmartCache;
-import org.uitnet.testing.smartfwk.ui.core.cache.SmartCache;
+import org.uitnet.testing.smartfwk.ui.core.SmartCucumberUiScenarioContext;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
-import org.uitnet.testing.smartfwk.ui.core.defaults.DefaultInfo;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
 import org.uitnet.testing.smartfwk.ui.core.utils.StringUtil;
 
@@ -43,40 +38,29 @@ import io.cucumber.java.en.When;
  *
  */
 public class DefaultUiBasicAppOperationsStepDefs {
-	private DefaultAppConnector appConnector;
-	private Scenario runningScenario;
-	private SmartAppDriver appDriver;
-	private SmartCache globalCache;
+	private SmartCucumberUiScenarioContext scenarioContext;
 
-	public DefaultUiBasicAppOperationsStepDefs() {
-		appConnector = SmartAppConnector.connect(DefaultInfo.DEFAULT_APP_NAME);
-		globalCache = DefaultSmartCache.getInstance();
-		globalCache.setAppConnector(appConnector);
+	public DefaultUiBasicAppOperationsStepDefs(SmartCucumberUiScenarioContext scenarioContext) {
+		this.scenarioContext = scenarioContext;
 	}
 
 	@Before
 	public void beforeScenario(Scenario scenario) {
-		runningScenario = scenario;
-		globalCache.clear();
-
-		globalCache.setRunningScenario(scenario);
-		globalCache.publish(globalCache);
-
-		if (appConnector != null) {
-			appConnector.captureScreenshot(runningScenario, "scenario-STARTED");
-		}
+		scenarioContext.setScenario(scenario);
+		scenarioContext.captureScreenshotWithScenarioStatus("scenario-STARTED");
 	}
 
 	@After
 	public void afterScenario(Scenario scenario) {
-		if (appConnector != null) {
-			appConnector.captureScreenshot(scenario, "scenario-" + scenario.getStatus());
-		}
-		
-		if(appDriver != null) {
+		scenarioContext.captureScreenshotWithScenarioStatus("scenario-" + scenario.getStatus());
+		if (scenarioContext.getTestConfigManager().isParallelMode()) {
+			scenarioContext.closeAllApps();
+		} else {
 			try {
-				appDriver.getWebDriver().switchTo().defaultContent();
-			}catch(Exception | Error e) { }
+				scenarioContext.closeAllChildWindows();
+				scenarioContext.switchToDefaultContent();
+			} catch (Exception | Error e) {
+			}
 		}
 	}
 
@@ -87,12 +71,14 @@ public class DefaultUiBasicAppOperationsStepDefs {
 	@When("Connect to {string} application.")
 	@Given("Connected to {string} application.")
 	public void connect_or_switch_to_application(String appName) {
-		appConnector = SmartAppConnector.connect(appName);
-		globalCache.setAppConnector(appConnector);
-		
-		appDriver = appConnector.setActiveUserProfileName(DefaultInfo.DEFAULT_USER_PROFILE_NAME);
-		globalCache.setAppDriver(appDriver);
-		globalCache.publish(globalCache);
+		scenarioContext.connectOrSwitch(appName);
+	}
+
+	@Then("Connection to application is successful.")
+	@Then("Application switching is successful.")
+	@Then("Application is switched successfully.")
+	public void app_connected_or_switched_success() {
+		// do nothing
 	}
 
 	@Given("User is logged in using {string} user profile.")
@@ -102,9 +88,7 @@ public class DefaultUiBasicAppOperationsStepDefs {
 	@When("User switch to {string} user profile.")
 	@When("Switch to {string} user profile.")
 	public void user_login_using_user_profile(String userProfileName) {
-		appDriver = appConnector.setActiveUserProfileName(userProfileName);
-		globalCache.setAppDriver(appDriver);
-		globalCache.publish(globalCache);
+		scenarioContext.setActiveUserProfileOnActiveApp(userProfileName);
 	}
 
 	@Given("User profile {string} is already activated on {string} application.")
@@ -113,8 +97,7 @@ public class DefaultUiBasicAppOperationsStepDefs {
 	@When("Switch to {string} user profile on {string} application.")
 	@When("Activate {string} user profile on {string} application.")
 	public void activate_user_profile_on_app(String userProfile, String appName) {
-		connect_or_switch_to_application(appName);
-		user_login_using_user_profile(userProfile);
+		scenarioContext.connectOrSwitch(appName, userProfile);
 	}
 
 	@Given("Switch to {string} application using {string} user profile.")
@@ -128,14 +111,15 @@ public class DefaultUiBasicAppOperationsStepDefs {
 	@Given("{string} URL is already opened.")
 	@When("Open {string} URL.")
 	public void open_url(String url) {
-		if(url.startsWith("file:///")) {
-			String newUrl = "file:///" + Locations.getProjectRootDir().replace("\\", "/") + "/" + url.split("file:///")[1].trim();
-			appDriver.openURL(newUrl);
+		if (url.startsWith("file:///")) {
+			String newUrl = "file:///" + Locations.getProjectRootDir().replace("\\", "/") + "/"
+					+ url.split("file:///")[1].trim();
+			scenarioContext.getActiveAppDriver().openURL(newUrl);
 		} else {
-			appDriver.openURL(url);
+			scenarioContext.getActiveAppDriver().openURL(url);
 		}
 	}
-	
+
 	@Then("The {string} URL is displayed.")
 	@Then("{string} URL is displayed.")
 	@Then("The {string} URL is opened.")
@@ -159,7 +143,7 @@ public class DefaultUiBasicAppOperationsStepDefs {
 	@Then("Connected to {string} application successfully.")
 	@Then("{string} application is opened successfully.")
 	public void application_is_switched_successfully(String appName) {
-		if (!StringUtil.isTextMatchedWithExpectedValue(appConnector.getAppName(), appName,
+		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveAppName(), appName,
 				TextMatchMechanism.exactMatchWithExpectedValue)) {
 			Assert.fail(appName + " is not activated.");
 		}
@@ -168,8 +152,8 @@ public class DefaultUiBasicAppOperationsStepDefs {
 	@Then("{string} user profile is switched successfully.")
 	@Then("{string} user profile is activated successfully.")
 	public void user_profile_is_switched_successfully(String userProfile) {
-		if (!StringUtil.isTextMatchedWithExpectedValue(appConnector.getActiveUserProfileName(), userProfile,
-				TextMatchMechanism.exactMatchWithExpectedValue)) {
+		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveUserProfileNameOfActiveApp(),
+				userProfile, TextMatchMechanism.exactMatchWithExpectedValue)) {
 			Assert.fail(userProfile + " is not activated.");
 		}
 	}
@@ -177,25 +161,19 @@ public class DefaultUiBasicAppOperationsStepDefs {
 	@Then("{string} user profile is switched successfully on {string} application.")
 	@Then("{string} user profile is activated successfully on {string} application.")
 	public void user_profile_is_switched_successfully(String userProfile, String appName) {
-		if (!StringUtil.isTextMatchedWithExpectedValue(appConnector.getActiveUserProfileName(), userProfile,
+		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveUserProfileName(appName), userProfile,
 				TextMatchMechanism.exactMatchWithExpectedValue)) {
 			Assert.fail(userProfile + " is not activated.");
 		}
-		
-		if (!StringUtil.isTextMatchedWithExpectedValue(appConnector.getAppName(), appName,
+
+		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveAppName(), appName,
 				TextMatchMechanism.exactMatchWithExpectedValue)) {
 			Assert.fail(appName + " is not activated.");
 		}
 	}
 
-	@When("Take screenshot.")
+	@Then("Take screenshot.")
 	public void take_screenshot() {
-		appConnector.captureScreenshot(runningScenario, "scenario-RUNNUNG");
+		scenarioContext.captureScreenshot("scenario-RUNNUNG");
 	}
-
-	@Then("Screenshot is taken.")
-	public void screenshot_is_taken() {
-		// do nothing
-	}
-
 }

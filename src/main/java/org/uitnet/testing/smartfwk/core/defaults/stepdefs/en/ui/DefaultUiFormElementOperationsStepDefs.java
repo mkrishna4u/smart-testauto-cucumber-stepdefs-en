@@ -20,11 +20,7 @@ package org.uitnet.testing.smartfwk.core.defaults.stepdefs.en.ui;
 import java.util.List;
 
 import org.uitnet.testing.smartfwk.api.core.support.PageObjectInfo;
-import org.uitnet.testing.smartfwk.ui.core.AbstractAppConnector;
-import org.uitnet.testing.smartfwk.ui.core.appdriver.SmartAppDriver;
-import org.uitnet.testing.smartfwk.ui.core.cache.DefaultSmartCache;
-import org.uitnet.testing.smartfwk.ui.core.cache.SmartCache;
-import org.uitnet.testing.smartfwk.ui.core.cache.SmartCacheSubscriber;
+import org.uitnet.testing.smartfwk.ui.core.SmartCucumberUiScenarioContext;
 import org.uitnet.testing.smartfwk.ui.core.objects.DOMObjectValidator;
 import org.uitnet.testing.smartfwk.ui.core.objects.NewTextLocation;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
@@ -33,7 +29,6 @@ import org.uitnet.testing.smartfwk.validator.FieldValidator;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.docstring.DocString;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -44,41 +39,20 @@ import io.cucumber.java.en.When;
  *
  */
 public class DefaultUiFormElementOperationsStepDefs {
-	// ------------- Common Code for step definition - START -------
-	private AbstractAppConnector appConnector;
-	private Scenario runningScenario;
-	private SmartAppDriver appDriver;
-	private SmartCache globalCache;
+	SmartCucumberUiScenarioContext scenarioContext;
 
 	/**
 	 * Constructor
 	 */
-	public DefaultUiFormElementOperationsStepDefs() {
-		globalCache = DefaultSmartCache.getInstance();
-
-		appConnector = globalCache.getAppConnector();
-		runningScenario = globalCache.getRunningScenario();
-		appDriver = globalCache.getAppDriver();
-
-		// Subscribe to the the cache to get the latest data
-		globalCache.subscribe(new SmartCacheSubscriber() {
-			@Override
-			protected void onMessage(SmartCache message) {
-				appConnector = message.getAppConnector();
-				runningScenario = message.getRunningScenario();
-				appDriver = message.getAppDriver();
-			}
-		});
+	public DefaultUiFormElementOperationsStepDefs(SmartCucumberUiScenarioContext scenarioContext) {
+		this.scenarioContext = scenarioContext;
 	}
 
-	// ------------- Common Code for step definition - END -------
-
-	// ------------- Step definition starts here -----------------
 	/**
-	 * Data table will have the following columns, first row will be ignored due to column header. example below:
-	 * | Page Element | 
-	 * | PO.poObject{maxTimeToWaitInSeconds: 6} |
-	 * | PO.poObject |
+	 * Data table will have the following columns, first row will be ignored due to
+	 * column header. example below: | Page Element | |
+	 * PO.poObject{maxTimeToWaitInSeconds: 6} | | PO.poObject |
+	 * 
 	 * @param dataTable
 	 */
 	@Then("Verify that the following elements are visible:")
@@ -87,15 +61,16 @@ public class DefaultUiFormElementOperationsStepDefs {
 	public void verify_that_the_following_elements_are_visible(DataTable dataTable) {
 		List<List<String>> rows = dataTable.asLists();
 		List<String> row = null;
-		for(int i = 1; i < rows.size(); i++) {
+		for (int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
-			String po =  row.get(0); // Page object
+			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-			PageObjectUtil.invokeValidatorMethod("validateVisible", new Class<?>[] {Integer.TYPE}, 
-					new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+			PageObjectUtil.invokeValidatorMethod("validateVisible", new Class<?>[] { Integer.TYPE },
+					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+					scenarioContext);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param po
@@ -107,15 +82,16 @@ public class DefaultUiFormElementOperationsStepDefs {
 	@Then("Verify that {string} page element is visible.")
 	public void verify_that_the_page_element_is_visible(String po) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateVisible", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("validateVisible", new Class<?>[] { Integer.TYPE },
+				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				scenarioContext);
 	}
-	
+
 	/**
-	 * Data table will have the following columns, first row will be ignored due to column header. example below:
-	 * | Page Element | 
-	 * | PO.poObject{maxTimeToWaitInSeconds: 6} |
-	 * | PO.poObject |
+	 * Data table will have the following columns, first row will be ignored due to
+	 * column header. example below: | Page Element | |
+	 * PO.poObject{maxTimeToWaitInSeconds: 6} | | PO.poObject |
+	 * 
 	 * @param dataTable
 	 */
 	@Then("Verify that the following elements are hidden:")
@@ -127,15 +103,16 @@ public class DefaultUiFormElementOperationsStepDefs {
 	public void verify_that_the_following_elements_are_hidden(DataTable dataTable) {
 		List<List<String>> rows = dataTable.asLists();
 		List<String> row = null;
-		for(int i = 1; i < rows.size(); i++) {
+		for (int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
-			String po =  row.get(0); // Page object
+			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-			PageObjectUtil.invokeValidatorMethod("validateHidden", new Class<?>[] {Integer.TYPE}, 
-					new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+			PageObjectUtil.invokeValidatorMethod("validateHidden", new Class<?>[] { Integer.TYPE },
+					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+					scenarioContext);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param po
@@ -154,15 +131,16 @@ public class DefaultUiFormElementOperationsStepDefs {
 	@Then("Verify that {string} page element is not visible.")
 	public void verify_that_the_page_element_is_hidden(String po) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateHidden", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("validateHidden", new Class<?>[] { Integer.TYPE },
+				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				scenarioContext);
 	}
-	
+
 	/**
-	 * Data table will have the following columns, first row will be ignored due to column header. example below:
-	 * | Page Element | 
-	 * | PO.poObject{maxTimeToWaitInSeconds: 6} |
-	 * | PO.poObject |
+	 * Data table will have the following columns, first row will be ignored due to
+	 * column header. example below: | Page Element | |
+	 * PO.poObject{maxTimeToWaitInSeconds: 6} | | PO.poObject |
+	 * 
 	 * @param dataTable
 	 */
 	@Then("Verify that the following elements are disabled:")
@@ -171,15 +149,16 @@ public class DefaultUiFormElementOperationsStepDefs {
 	public void verify_that_the_following_elements_are_disabled(DataTable dataTable) {
 		List<List<String>> rows = dataTable.asLists();
 		List<String> row = null;
-		for(int i = 1; i < rows.size(); i++) {
+		for (int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
-			String po =  row.get(0); // Page object
+			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-			PageObjectUtil.invokeValidatorMethod("validateDisabled", new Class<?>[] {Integer.TYPE}, 
-					new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+			PageObjectUtil.invokeValidatorMethod("validateDisabled", new Class<?>[] { Integer.TYPE },
+					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+					scenarioContext);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param po
@@ -189,15 +168,16 @@ public class DefaultUiFormElementOperationsStepDefs {
 	@Then("Verify that {string} page element is disabled.")
 	public void verify_that_the_page_element_is_disabled(String po) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateDisabled", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("validateDisabled", new Class<?>[] { Integer.TYPE },
+				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				scenarioContext);
 	}
-	
+
 	/**
-	 * Data table will have the following columns, first row will be ignored due to column header. example below:
-	 * | Page Element | 
-	 * | PO.poObject{maxTimeToWaitInSeconds: 6} |
-	 * | PO.poObject |
+	 * Data table will have the following columns, first row will be ignored due to
+	 * column header. example below: | Page Element | |
+	 * PO.poObject{maxTimeToWaitInSeconds: 6} | | PO.poObject |
+	 * 
 	 * @param dataTable
 	 */
 	@Then("Verify that the following elements are enabled:")
@@ -206,15 +186,16 @@ public class DefaultUiFormElementOperationsStepDefs {
 	public void verify_that_the_following_elements_are_enabled(DataTable dataTable) {
 		List<List<String>> rows = dataTable.asLists();
 		List<String> row = null;
-		for(int i = 1; i < rows.size(); i++) {
+		for (int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
-			String po =  row.get(0); // Page object
+			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-			PageObjectUtil.invokeValidatorMethod("validateEnabled", new Class<?>[] {Integer.TYPE}, 
-					new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+			PageObjectUtil.invokeValidatorMethod("validateEnabled", new Class<?>[] { Integer.TYPE },
+					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+					scenarioContext);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param po
@@ -224,129 +205,170 @@ public class DefaultUiFormElementOperationsStepDefs {
 	@Then("Verify that {string} page element is enabled.")
 	public void verify_that_the_page_element_is_enabled(String po) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateEnabled", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("validateEnabled", new Class<?>[] { Integer.TYPE },
+				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				scenarioContext);
 	}
-	
+
 	@When("Type {string} text in {string} element.")
 	@When("Type {string} text in {string} page object.")
 	@When("Type {string} text in {string} page element.")
 	public void type_text_in_element(String textToType, String po) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("typeText", new Class<?>[] {String.class, NewTextLocation.class, Integer.TYPE}, 
-				new Object[] {textToType, NewTextLocation.replace, poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("typeText",
+				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE },
+				new Object[] { textToType, NewTextLocation.replace, poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				scenarioContext);
 	}
-	
+
 	@When("Type the following text in {string} element:")
 	@When("Type the following text in {string} page object:")
 	@When("Type the following text in {string} page element:")
 	public void type_the_following_text_in_element(String po, DocString textToType) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("typeText", new Class<?>[] {String.class, NewTextLocation.class, Integer.TYPE}, 
-				new Object[] {textToType.getContent(), NewTextLocation.replace, poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("typeText",
+				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE }, new Object[] {
+						textToType.getContent(), NewTextLocation.replace, poInfo.getMaxIterationsToLocateElements() },
+				poInfo, scenarioContext);
 	}
-	
+
 	@Then("Verify {string} element displays {string} value.")
 	public void verify_element_displays_value(String po, String value) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateValue", new Class<?>[] {String.class, TextMatchMechanism.class, Integer.TYPE}, 
-				new Object[] {value, TextMatchMechanism.exactMatchWithExpectedValueWithRemovedWhiteSpace, poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil
+				.invokeValidatorMethod("validateValue",
+						new Class<?>[] { String.class, TextMatchMechanism.class, Integer.TYPE },
+						new Object[] { value, TextMatchMechanism.exactMatchWithExpectedValueWithRemovedWhiteSpace,
+								poInfo.getMaxIterationsToLocateElements() },
+						poInfo, scenarioContext);
 	}
-	
+
 	@Then("Verify {string} element displays following value:")
 	public void verify_element_displays_value(String po, DocString value) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateValue", new Class<?>[] {String.class, TextMatchMechanism.class, Integer.TYPE}, 
-				new Object[] {value.getContent(), TextMatchMechanism.exactMatchWithExpectedValueWithRemovedWhiteSpace, poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("validateValue",
+				new Class<?>[] { String.class, TextMatchMechanism.class, Integer.TYPE },
+				new Object[] { value.getContent(), TextMatchMechanism.exactMatchWithExpectedValueWithRemovedWhiteSpace,
+						poInfo.getMaxIterationsToLocateElements() },
+				poInfo, scenarioContext);
 	}
-	
+
 	@Then("Verify {string} element contains {string} substring.")
 	@Then("Verify {string} element contains {string} sub text.")
 	@Then("Verify the value of {string} element contains {string} substring.")
 	@Then("Verify the value of {string} element contains {string} sub text.")
 	public void verify_element_contains_value(String po, String substring) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateValue", new Class<?>[] {String.class, TextMatchMechanism.class, Integer.TYPE}, 
-				new Object[] {substring, TextMatchMechanism.containsExpectedValue, poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("validateValue",
+				new Class<?>[] { String.class, TextMatchMechanism.class, Integer.TYPE }, new Object[] { substring,
+						TextMatchMechanism.containsExpectedValue, poInfo.getMaxIterationsToLocateElements() },
+				poInfo, scenarioContext);
 	}
-	
+
 	@Then("Verify {string} element value starts with {string} text.")
 	public void verify_element_value_starts_with(String po, String value) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateValue", new Class<?>[] {String.class, TextMatchMechanism.class, Integer.TYPE}, 
-				new Object[] {value, TextMatchMechanism.startsWithExpectedValue, poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("validateValue",
+				new Class<?>[] { String.class, TextMatchMechanism.class, Integer.TYPE }, new Object[] { value,
+						TextMatchMechanism.startsWithExpectedValue, poInfo.getMaxIterationsToLocateElements() },
+				poInfo, scenarioContext);
 	}
-	
+
 	@Then("Verify {string} element value ends with {string} text.")
 	public void verify_element_value_ends_with(String po, String value) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		PageObjectUtil.invokeValidatorMethod("validateValue", new Class<?>[] {String.class, TextMatchMechanism.class, Integer.TYPE}, 
-				new Object[] {value, TextMatchMechanism.endsWithExpectedValue, poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+		PageObjectUtil.invokeValidatorMethod("validateValue",
+				new Class<?>[] { String.class, TextMatchMechanism.class, Integer.TYPE }, new Object[] { value,
+						TextMatchMechanism.endsWithExpectedValue, poInfo.getMaxIterationsToLocateElements() },
+				poInfo, scenarioContext);
 	}
-	
+
 	@Then("Verify that the attribute {string} of {string} element contains {string} value.")
 	public void verify_that_the_attribute_of_element_contains_value(String attributeName, String po, String value) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", null, null, poInfo, appDriver);
-		String attrValue = domObjectValidator.getAttributeValue(attributeName, poInfo.getMaxIterationsToLocateElements());
-		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->" + attributeName, attrValue, value, TextMatchMechanism.exactMatchWithExpectedValueWithRemovedWhiteSpace);
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod(
+				"getDOMObjectValidator", null, null, poInfo, scenarioContext);
+		String attrValue = domObjectValidator.getAttributeValue(attributeName,
+				poInfo.getMaxIterationsToLocateElements());
+		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->" + attributeName, attrValue,
+				value, TextMatchMechanism.exactMatchWithExpectedValueWithRemovedWhiteSpace);
 	}
-	
+
 	@Then("Verify that the attribute {string} of {string} element contains {string} substring.")
 	@Then("Verify that the attribute {string} of {string} element contains {string} sub text.")
-	public void verify_that_the_attribute_of_element_contains_substring(String attributeName, String po, String substring) {
+	public void verify_that_the_attribute_of_element_contains_substring(String attributeName, String po,
+			String substring) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", null, null, poInfo, appDriver);
-		String attrValue = domObjectValidator.getAttributeValue(attributeName, poInfo.getMaxIterationsToLocateElements());
-		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->" + attributeName, attrValue, substring, TextMatchMechanism.containsExpectedValue);
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod(
+				"getDOMObjectValidator", null, null, poInfo, scenarioContext);
+		String attrValue = domObjectValidator.getAttributeValue(attributeName,
+				poInfo.getMaxIterationsToLocateElements());
+		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->" + attributeName, attrValue,
+				substring, TextMatchMechanism.containsExpectedValue);
 	}
-	
+
 	@Then("Verify that the attribute {string} value of {string} element starts with {string} text.")
-	public void verify_that_the_attribute_value_of_element_starts_with_text(String attributeName, String po, String text) {
+	public void verify_that_the_attribute_value_of_element_starts_with_text(String attributeName, String po,
+			String text) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", null, null, poInfo, appDriver);
-		String attrValue = domObjectValidator.getAttributeValue(attributeName, poInfo.getMaxIterationsToLocateElements());
-		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->" + attributeName, attrValue, text, TextMatchMechanism.startsWithExpectedValue);
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod(
+				"getDOMObjectValidator", null, null, poInfo, scenarioContext);
+		String attrValue = domObjectValidator.getAttributeValue(attributeName,
+				poInfo.getMaxIterationsToLocateElements());
+		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->" + attributeName, attrValue,
+				text, TextMatchMechanism.startsWithExpectedValue);
 	}
-	
+
 	@Then("Verify that the attribute {string} value of {string} element ends with {string} text.")
-	public void verify_that_the_attribute_value_of_element_ends_with_text(String attributeName, String po, String text) {
+	public void verify_that_the_attribute_value_of_element_ends_with_text(String attributeName, String po,
+			String text) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", null, null, poInfo, appDriver);
-		String attrValue = domObjectValidator.getAttributeValue(attributeName, poInfo.getMaxIterationsToLocateElements());
-		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->" + attributeName, attrValue, text, TextMatchMechanism.endsWithExpectedValue);
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod(
+				"getDOMObjectValidator", null, null, poInfo, scenarioContext);
+		String attrValue = domObjectValidator.getAttributeValue(attributeName,
+				poInfo.getMaxIterationsToLocateElements());
+		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->" + attributeName, attrValue,
+				text, TextMatchMechanism.endsWithExpectedValue);
 	}
-	
+
 	@Then("Verify that the text part of {string} element contains {string} text.")
 	public void verify_that_the_text_part_of_element_contains_text(String po, String text) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", null, null, poInfo, appDriver);
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod(
+				"getDOMObjectValidator", null, null, poInfo, scenarioContext);
 		String textValue = domObjectValidator.getText(poInfo.getMaxIterationsToLocateElements());
-		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->text", textValue, text, TextMatchMechanism.exactMatchWithExpectedValueWithRemovedWhiteSpace);
+		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->text", textValue, text,
+				TextMatchMechanism.exactMatchWithExpectedValueWithRemovedWhiteSpace);
 	}
-	
+
 	@Then("Verify that the text part of {string} element contains {string} substring.")
 	@Then("Verify that the text part of {string} element contains {string} sub text.")
 	public void verify_that_the_text_part_of_element_contains_substring(String po, String substring) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", null, null, poInfo, appDriver);
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod(
+				"getDOMObjectValidator", null, null, poInfo, scenarioContext);
 		String textValue = domObjectValidator.getText(poInfo.getMaxIterationsToLocateElements());
-		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->text", textValue, substring, TextMatchMechanism.containsExpectedValue);
+		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->text", textValue, substring,
+				TextMatchMechanism.containsExpectedValue);
 	}
-	
+
 	@Then("Verify that the text part of {string} element starts with {string} text.")
 	public void verify_that_the_text_part_of_element_starts_with_text(String po, String text) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", null, null, poInfo, appDriver);
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod(
+				"getDOMObjectValidator", null, null, poInfo, scenarioContext);
 		String textValue = domObjectValidator.getText(poInfo.getMaxIterationsToLocateElements());
-		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->text", textValue, text, TextMatchMechanism.startsWithExpectedValue);
+		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->text", textValue, text,
+				TextMatchMechanism.startsWithExpectedValue);
 	}
-	
+
 	@Then("Verify that the text part of {string} element ends with {string} text.")
 	public void verify_that_the_text_part_of_element_ends_with_text(String po, String text) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", null, null, poInfo, appDriver);
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod(
+				"getDOMObjectValidator", null, null, poInfo, scenarioContext);
 		String textValue = domObjectValidator.getText(poInfo.getMaxIterationsToLocateElements());
-		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->text", textValue, text, TextMatchMechanism.endsWithExpectedValue);
+		FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPoObjectName() + "->text", textValue, text,
+				TextMatchMechanism.endsWithExpectedValue);
 	}
 }

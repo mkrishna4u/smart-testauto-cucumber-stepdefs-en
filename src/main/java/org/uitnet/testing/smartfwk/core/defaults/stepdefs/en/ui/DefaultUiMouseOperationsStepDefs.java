@@ -18,14 +18,9 @@
 package org.uitnet.testing.smartfwk.core.defaults.stepdefs.en.ui;
 
 import org.uitnet.testing.smartfwk.api.core.support.PageObjectInfo;
-import org.uitnet.testing.smartfwk.ui.core.AbstractAppConnector;
-import org.uitnet.testing.smartfwk.ui.core.appdriver.SmartAppDriver;
-import org.uitnet.testing.smartfwk.ui.core.cache.DefaultSmartCache;
-import org.uitnet.testing.smartfwk.ui.core.cache.SmartCache;
-import org.uitnet.testing.smartfwk.ui.core.cache.SmartCacheSubscriber;
+import org.uitnet.testing.smartfwk.ui.core.SmartCucumberUiScenarioContext;
 import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.When;
 
 /**
@@ -34,37 +29,16 @@ import io.cucumber.java.en.When;
  * @author Madhav Krishna
  *
  */
-public class DefaultUiMouseOperationsStepDefs {
-	// ------------- Common Code for step definition - START -------
-	private AbstractAppConnector appConnector;
-	private Scenario runningScenario;
-	private SmartAppDriver appDriver;
-	private SmartCache globalCache;
+public class DefaultUiMouseOperationsStepDefs {	
+	private SmartCucumberUiScenarioContext scenarioContext;
 
 	/**
 	 * Constructor
 	 */
-	public DefaultUiMouseOperationsStepDefs() {
-		globalCache = DefaultSmartCache.getInstance();
-
-		appConnector = globalCache.getAppConnector();
-		runningScenario = globalCache.getRunningScenario();
-		appDriver = globalCache.getAppDriver();
-
-		// Subscribe to the the cache to get the latest data
-		globalCache.subscribe(new SmartCacheSubscriber() {
-			@Override
-			protected void onMessage(SmartCache message) {
-				appConnector = message.getAppConnector();
-				runningScenario = message.getRunningScenario();
-				appDriver = message.getAppDriver();
-			}
-		});
+	public DefaultUiMouseOperationsStepDefs(SmartCucumberUiScenarioContext scenarioContext) {
+		this.scenarioContext = scenarioContext;
 	}
 
-	// ------------- Common Code for step definition - END -------
-
-	// ------------- Step definition starts here -----------------
 	/**
 	 * Page object should be specified using the format.
 	 *   When POs are in ./src/main/page_objects/ directory: "<PO-classname>.<field-name>{maxTimeToWaitInSeconds: 6}"
@@ -80,7 +54,7 @@ public class DefaultUiMouseOperationsStepDefs {
 	public void click_on_element(String pageObject) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("click", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
 	/**
@@ -98,7 +72,7 @@ public class DefaultUiMouseOperationsStepDefs {
 	public void double_click_on_element(String pageObject) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("doubleClick", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
 	/**
@@ -116,7 +90,7 @@ public class DefaultUiMouseOperationsStepDefs {
 	public void right_click_on_element(String pageObject) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("rightClick", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
 	/**
@@ -134,7 +108,7 @@ public class DefaultUiMouseOperationsStepDefs {
 	public void click_and_hold_on_element(String pageObject) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("clickAndHold", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
 	/**
@@ -152,7 +126,8 @@ public class DefaultUiMouseOperationsStepDefs {
 	public void release_hold_click_from_element(String pageObject) {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("release", new Class<?>[] {Integer.TYPE}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, appDriver);
+				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				scenarioContext);
 	}
 
 }

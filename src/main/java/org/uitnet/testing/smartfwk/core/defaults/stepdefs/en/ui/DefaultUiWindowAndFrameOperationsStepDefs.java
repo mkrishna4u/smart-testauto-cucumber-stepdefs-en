@@ -19,17 +19,8 @@ package org.uitnet.testing.smartfwk.core.defaults.stepdefs.en.ui;
 
 import java.util.Set;
 
-import org.uitnet.testing.smartfwk.api.core.support.PageObjectInfo;
-import org.uitnet.testing.smartfwk.ui.core.AbstractAppConnector;
-import org.uitnet.testing.smartfwk.ui.core.appdriver.SmartAppDriver;
-import org.uitnet.testing.smartfwk.ui.core.cache.DefaultSmartCache;
-import org.uitnet.testing.smartfwk.ui.core.cache.SmartCache;
-import org.uitnet.testing.smartfwk.ui.core.cache.SmartCacheSubscriber;
-import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
+import org.uitnet.testing.smartfwk.ui.core.SmartCucumberUiScenarioContext;
 
-import io.cucumber.java.Scenario;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
 /**
@@ -39,65 +30,43 @@ import io.cucumber.java.en.When;
  *
  */
 public class DefaultUiWindowAndFrameOperationsStepDefs {
-	// ------------- Common Code for step definition - START -------
-	private AbstractAppConnector appConnector;
-	private Scenario runningScenario;
-	private SmartAppDriver appDriver;
-	private SmartCache globalCache;
+	private SmartCucumberUiScenarioContext scenarioContext;
 
 	/**
 	 * Constructor
 	 */
-	public DefaultUiWindowAndFrameOperationsStepDefs() {
-		globalCache = DefaultSmartCache.getInstance();
-
-		appConnector = globalCache.getAppConnector();
-		runningScenario = globalCache.getRunningScenario();
-		appDriver = globalCache.getAppDriver();
-
-		// Subscribe to the the cache to get the latest data
-		globalCache.subscribe(new SmartCacheSubscriber() {
-			@Override
-			protected void onMessage(SmartCache message) {
-				appConnector = message.getAppConnector();
-				runningScenario = message.getRunningScenario();
-				appDriver = message.getAppDriver();
-			}
-		});
+	public DefaultUiWindowAndFrameOperationsStepDefs(SmartCucumberUiScenarioContext scenarioContext) {
+		this.scenarioContext = scenarioContext;
 	}
-
-	// ------------- Common Code for step definition - END -------
-
-	// ------------- Step definition starts here -----------------
-	
 	
 	@When("Switch to {string} window.")
 	@When("Focus {string} window.")
 	public void switch_to_window(String windowHandleName) {
-		Set<String> windowHandles = appDriver.getWebDriver().getWindowHandles();
-		runningScenario.log("AVAILABLE WINDOW HANDLE NAMES: " + windowHandles);
-		appDriver.getWebDriver().switchTo().window(windowHandleName);
+		Set<String> windowHandles = scenarioContext.getActiveAppDriver().getWebDriver().getWindowHandles();
+		scenarioContext.log("AVAILABLE WINDOW HANDLE NAMES: " + windowHandles);
+		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().window(windowHandleName);
 	}
-	
+
 	@When("Switch to default content.")
 	public void switch_to_default_content() {
-		appDriver.getWebDriver().switchTo().defaultContent();
+		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().defaultContent();
 	}
-	
+
 	@When("Switch to {string} frame.")
 	public void switch_to_frame(String frameNameOrId) {
-		if("parent".equals(frameNameOrId)) {
-			appDriver.getWebDriver().switchTo().parentFrame();
-		} else if(frameNameOrId.startsWith("INDEX:")){
-			appDriver.getWebDriver().switchTo().frame(Integer.valueOf(frameNameOrId.substring("INDEX:".length(), frameNameOrId.length()).trim()));
+		if ("parent".equals(frameNameOrId)) {
+			scenarioContext.getActiveAppDriver().getWebDriver().switchTo().parentFrame();
+		} else if (frameNameOrId.startsWith("INDEX:")) {
+			scenarioContext.getActiveAppDriver().getWebDriver().switchTo()
+					.frame(Integer.valueOf(frameNameOrId.substring("INDEX:".length(), frameNameOrId.length()).trim()));
 		} else {
-			appDriver.getWebDriver().switchTo().frame(frameNameOrId);
+			scenarioContext.getActiveAppDriver().getWebDriver().switchTo().frame(frameNameOrId);
 		}
 	}
-	
+
 	@When("Switch to frame number {int}.")
 	public void switch_to_frame_number(Integer frameNumber) {
-		appDriver.getWebDriver().switchTo().frame(frameNumber);
+		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().frame(frameNumber);
 	}
-	
+
 }
