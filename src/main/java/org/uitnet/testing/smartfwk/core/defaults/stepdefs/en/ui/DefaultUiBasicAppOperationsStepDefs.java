@@ -54,7 +54,7 @@ public class DefaultUiBasicAppOperationsStepDefs {
 	public void afterScenario(Scenario scenario) {
 		scenarioContext.captureScreenshotWithScenarioStatus("scenario-" + scenario.getStatus());
 		if (scenarioContext.getTestConfigManager().isParallelMode()) {
-			scenarioContext.closeAllApps();
+			scenarioContext.close();
 		} else {
 			try {
 				scenarioContext.closeAllChildWindows();
