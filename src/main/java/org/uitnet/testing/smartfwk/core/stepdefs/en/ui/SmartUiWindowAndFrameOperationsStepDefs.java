@@ -15,11 +15,11 @@
  * limitations under the License.
  * 
  */
-package org.uitnet.testing.smartfwk.core.defaults.stepdefs.en.ui;
+package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 
 import java.util.Set;
 
-import org.uitnet.testing.smartfwk.ui.core.SmartCucumberUiScenarioContext;
+import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 
 import io.cucumber.java.en.When;
 
@@ -29,30 +29,34 @@ import io.cucumber.java.en.When;
  * @author Madhav Krishna
  *
  */
-public class DefaultUiWindowAndFrameOperationsStepDefs {
-	private SmartCucumberUiScenarioContext scenarioContext;
+public class SmartUiWindowAndFrameOperationsStepDefs {
+	private SmartCucumberScenarioContext scenarioContext;
 
 	/**
 	 * Constructor
 	 */
-	public DefaultUiWindowAndFrameOperationsStepDefs(SmartCucumberUiScenarioContext scenarioContext) {
+	public SmartUiWindowAndFrameOperationsStepDefs(SmartCucumberScenarioContext scenarioContext) {
 		this.scenarioContext = scenarioContext;
 	}
 	
-	@When("Switch to {string} window.")
-	@When("Focus {string} window.")
+	@When("switch to {string} window.")
 	public void switch_to_window(String windowHandleName) {
 		Set<String> windowHandles = scenarioContext.getActiveAppDriver().getWebDriver().getWindowHandles();
 		scenarioContext.log("AVAILABLE WINDOW HANDLE NAMES: " + windowHandles);
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().window(windowHandleName);
 	}
+	
+	@When("focus {string} window.")
+	public void switch_to_window_1(String windowHandleName) {
+		switch_to_window(windowHandleName);
+	}
 
-	@When("Switch to default content.")
+	@When("switch to default content.")
 	public void switch_to_default_content() {
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().defaultContent();
 	}
 
-	@When("Switch to {string} frame.")
+	@When("switch to {string} frame.")
 	public void switch_to_frame(String frameNameOrId) {
 		if ("parent".equals(frameNameOrId)) {
 			scenarioContext.getActiveAppDriver().getWebDriver().switchTo().parentFrame();
@@ -64,7 +68,7 @@ public class DefaultUiWindowAndFrameOperationsStepDefs {
 		}
 	}
 
-	@When("Switch to frame number {int}.")
+	@When("switch to frame number {int}.")
 	public void switch_to_frame_number(Integer frameNumber) {
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().frame(frameNumber);
 	}
