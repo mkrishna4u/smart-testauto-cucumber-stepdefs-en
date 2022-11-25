@@ -1,5 +1,9 @@
-# smart-testauto-defaultdefs-en (Work in progress...)
- Default cucumber steps definitions using Smart Testing Automation Framework (URL: https://github.com/mkrishna4u/smart-testauto-framework)
+# smart-testauto-cucumber-stepdefs-en (English)
+This is a plugin project for STAS (Smart TestAuto Studio) (URL: https://github.com/mkrishna4u/smart-testauto-framework) to support standard cucumber steps definitions in English version.
+
+# Documentation
+Please refer the following document to understand the STAS standard cucumber step definitions.
+[https://github.com/mkrishna4u/smart-testauto-cucumber-defaults-en/tree/main/docs/STAS-StepDefinitions-En-TestDevelopersGuide.pdf](https://github.com/mkrishna4u/smart-testauto-cucumber-defaults-en/tree/main/docs/STAS-StepDefinitions-En-TestDevelopersGuide.pdf "STAS Standard Cucumber Step Definitions (English)") 
 
  
 # License
