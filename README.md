@@ -3,7 +3,7 @@ This is a plugin project for STAS (Smart TestAuto Studio) (URL: https://github.c
 
 # Documentation
 Please refer the following document to understand the STAS standard cucumber step definitions.
-[https://github.com/mkrishna4u/smart-testauto-cucumber-defaults-en/tree/main/docs/STAS-StepDefinitions-En-TestDevelopersGuide.pdf](https://github.com/mkrishna4u/smart-testauto-cucumber-defaults-en/tree/main/docs/STAS-StepDefinitions-En-TestDevelopersGuide.pdf "STAS Standard Cucumber Step Definitions (English)") 
+[https://github.com/mkrishna4u/smart-testauto-cucumber-stepdefs-en/blob/main/docs/STAS-StepDefinitions-En-TestDevelopersGuide.pdf](https://github.com/mkrishna4u/smart-testauto-cucumber-stepdefs-en/blob/main/docs/STAS-StepDefinitions-En-TestDevelopersGuide.pdf "STAS Standard Cucumber Step Definitions (English)") 
 
  
 # License
