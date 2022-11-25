@@ -7,8 +7,10 @@
 	<artifactId>smart-testauto-cucumber-stepdefs-en</artifactId>
 	<version>6.0.0-alpha1</version>
 	<packaging>jar</packaging>
-	<name>Cucumber default step definitions using Smart Testing Automation Framework (English)</name>
-
+	<name>smart-testauto-cucumber-stepdefs-en</name>
+	<description>STAS standard Cucumber step definitions (English)</description>
+	<url>https://github.com/mkrishna4u/smart-testauto-cucumber-stepdefs-en</url>
+	
     <developers>
 		<developer>
 			<id>1</id>
@@ -42,7 +44,20 @@
 		<maven.resources.plugin.version>3.3.0</maven.resources.plugin.version>
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+		<maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
+		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 	</properties>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -124,7 +139,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin> -->
+			</plugin>  -->
 		</plugins>
 	</build>
 </project>

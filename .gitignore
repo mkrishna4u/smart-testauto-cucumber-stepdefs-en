@@ -8,3 +8,4 @@ cucumber-reports
 /test-results/cucumber-html-reports
 /test-results/cucumber-reports
 /test-results/screen-captures
+javadoc
