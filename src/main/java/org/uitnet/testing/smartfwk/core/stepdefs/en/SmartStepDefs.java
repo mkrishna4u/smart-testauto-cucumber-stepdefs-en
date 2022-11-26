@@ -18,6 +18,7 @@
 package org.uitnet.testing.smartfwk.core.stepdefs.en;
 
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
+import org.uitnet.testing.smartfwk.ui.core.config.TestConfigManager;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -38,14 +39,18 @@ public class SmartStepDefs {
 	
 	@Before
 	public void beforeScenario(Scenario scenario) {
-		this.scenarioContext.setScenario(scenario);
+		if(TestConfigManager.getInstance().getUseDefaultStepDefsHooks()) {
+			this.scenarioContext.setScenario(scenario);
+		}
 	}
 
 	@After
 	public void afterScenario(Scenario scenario) {
-		if(scenarioContext.isUiScenario()) {
-			scenarioContext.captureScreenshotWithScenarioStatus("scenario-" + scenario.getStatus());
+		if(TestConfigManager.getInstance().getUseDefaultStepDefsHooks()) {
+			if(scenarioContext.isUiScenario()) {
+				scenarioContext.captureScreenshotWithScenarioStatus("scenario-" + scenario.getStatus());
+			}
+			scenarioContext.close();
 		}
-		scenarioContext.close();
 	}
 }
