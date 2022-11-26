@@ -39,9 +39,7 @@ public class SmartStepDefs {
 	
 	@Before
 	public void beforeScenario(Scenario scenario) {
-		if(TestConfigManager.getInstance().getUseDefaultStepDefsHooks()) {
-			this.scenarioContext.setScenario(scenario);
-		}
+		this.scenarioContext.setScenario(scenario);
 	}
 
 	@After
