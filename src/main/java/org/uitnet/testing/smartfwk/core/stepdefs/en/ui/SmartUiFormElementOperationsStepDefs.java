@@ -751,7 +751,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName
 	 * @param dataTable
 	 */
-	@Then("varify the selected value\\(s) of the following page objects on {string}:")
+	@Then("verify the selected value\\(s) of the following page objects on {string}:")
 	public void validate_the_selected_values_of_the_following_page_objects(String pageOrScreenName, DataTable dataTable) {
 		List<List<String>> rows = dataTable.asLists();
 		
@@ -773,7 +773,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		}
 	}
 	
-	@Then("varify the selected value\\(s) of the following page elements on {string}:")
+	@Then("verify the selected value\\(s) of the following page elements on {string}:")
 	public void validate_the_selected_values_of_the_following_page_objects_1(String pageOrScreenName, DataTable dataTable) {
 		validate_the_selected_values_of_the_following_page_objects(pageOrScreenName, dataTable);
 	}
