@@ -54,23 +54,43 @@ public class SmartVariableManagementStepDefs {
 	
 	@When("store null value into {string} variable.")
 	public void store_null_value_into_variable(String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.addParamValue(variableName, null);		
 	}
 	
 	@When("store empty list into {string} variable.")
 	public void store_empty_list_into_variable(String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<Object> list = new LinkedList<>();
 		scenarioContext.addParamValue(variableName, list);		
 	}
 	
 	@When("print {string} variable.")
 	public void print_variable(String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.log(variableName);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@When("append {string} prefix to each value present in {string} list variable.")
 	public void append_prefix_to_each_value_in_list_variable(String prefix, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			List<String> list2 = new LinkedList<>();
@@ -83,6 +103,11 @@ public class SmartVariableManagementStepDefs {
 	
 	@When("append {string} prefix to the value of {string} variable.")
 	public void append_prefix_to_the_value_of_variable(String prefix, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String str = scenarioContext.getParamValueAsString(variableName);
 		if(str != null) {
 			
@@ -93,6 +118,11 @@ public class SmartVariableManagementStepDefs {
 	@SuppressWarnings("unchecked")
 	@When("append {string} suffix to each value present in {string} list variable.")
 	public void append_suffix_to_each_value_in_list_variable(String suffix, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			List<String> list2 = new LinkedList<>();
@@ -105,6 +135,11 @@ public class SmartVariableManagementStepDefs {
 	
 	@When("append {string} suffix to the value of {string} variable.")
 	public void append_suffix_to_the_value_of_variable(String suffix, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String str = scenarioContext.getParamValueAsString(variableName);
 		if(str != null) {
 			scenarioContext.addParamValue(variableName, str + suffix);
@@ -114,6 +149,11 @@ public class SmartVariableManagementStepDefs {
 	@SuppressWarnings("unchecked")
 	@When("append prefix={string} and suffix={string} to each value present in {string} list variable.")
 	public void append_prefix_and_suffix_to_each_value_in_list_variable(String prefix, String suffix, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			List<String> list2 = new LinkedList<>();
@@ -126,6 +166,11 @@ public class SmartVariableManagementStepDefs {
 	
 	@When("append prefix={string} and suffix={string} to the value of {string} variable.")
 	public void append_prefix_and_suffix_to_the_value_of_variable(String prefix, String suffix, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String str = scenarioContext.getParamValueAsString(variableName);
 		if(str != null) {
 			scenarioContext.addParamValue(variableName, prefix + str + suffix);
@@ -134,6 +179,11 @@ public class SmartVariableManagementStepDefs {
 	
 	@When("convert {string} variable value into list using delimiter={string} and store into {string} variable.")
 	public void convert_variable_value_into_list_using_delimiter_and_store_into_variable(String variableName, String delimiter, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String str = scenarioContext.getParamValueAsString(variableName);
 		if(!StringUtil.isEmptyAfterTrim(str)) {
 			String[] arr = str.split(delimiter);
@@ -148,6 +198,11 @@ public class SmartVariableManagementStepDefs {
 	@SuppressWarnings("unchecked")
 	@When("convert {string} list variable value into plain text using delimiter={string} and store into {string} variable.")
 	public void convert_list_variable_value_into_plain_text_using_delimiter_and_store_into_variable(String variableName, String delimiter, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			String str = "";
@@ -167,6 +222,11 @@ public class SmartVariableManagementStepDefs {
 	public void convert_list_variable_value_into_plain_text_using_delimiter_valueprefix_valuesuffix_and_store_into_variable(
 			String variableName, String delimiter, 
 			String valuePrefix, String valueSuffix, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			String str = "";
@@ -193,6 +253,11 @@ public class SmartVariableManagementStepDefs {
 	@When("convert {string} list variable value into plain text using delimiter={string}, valuePrefix={string}, valueSuffix={string}, default={string} and store into {string} variable.")
 	public void convert_list_variable_value_into_plain_text_using_delimiter_valueprefix_valuesuffix_default_and_store_into_variable(String variableName, String delimiter, 
 			String valuePrefix, String valueSuffix, String defaultValue, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			String str = "";
@@ -218,6 +283,11 @@ public class SmartVariableManagementStepDefs {
 	@SuppressWarnings("unchecked")
 	@When("copy {string} variable value to {string} variable.")
 	public void copy_variable_value_to_variable(String variableName, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object value = scenarioContext.getParamValue(variableName);
 		if(value != null && value instanceof List) {
 			List<Object> list = (List<Object>) value;
@@ -261,6 +331,11 @@ public class SmartVariableManagementStepDefs {
 	 */
 	@Then("verify valueOf\\({string}) variable {string} {string}.")
 	public void verify_valueof_variable1_op_expected_value(String variableName1, String operator, String expectedValue) { 
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object avalue = scenarioContext.getParamValue(variableName1);
 		Object evalue = expectedValue;
 		ValueMatchOperator oper = ValueMatchOperator.valueOf2(operator);
@@ -287,6 +362,11 @@ public class SmartVariableManagementStepDefs {
 	 */
 	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable.")
 	public void verify_valueof_variable1_op_valueof_variable2(String variableName1, String operator, String variableName2) { 
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object avalue = scenarioContext.getParamValue(variableName1);
 		Object evalue = scenarioContext.getParamValue(variableName2);
 		ValueMatchOperator oper = ValueMatchOperator.valueOf2(operator);
@@ -326,6 +406,11 @@ public class SmartVariableManagementStepDefs {
 	 */
 	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable [TextMatchMechanism={string}].")
 	public void verify_valueof_variable1_op_valueof_variable2_textmatchmechanism(String variableName1, String operator, String variableName2, String textMatchMechanism) { 
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object avalue = scenarioContext.getParamValue(variableName1);
 		Object evalue = scenarioContext.getParamValue(variableName2);
 		ValueMatchOperator oper = ValueMatchOperator.valueOf2(operator);
@@ -370,6 +455,11 @@ public class SmartVariableManagementStepDefs {
 	@Then("split valueOf\\({string}) variable using {string} separator and store index\\({int}) into {string} variable [ShouldTrim={string}].")
 	public void split_valueof_variable_using_separator_and_store_index_into_variable(String variableName, String separator, int nthIndex,
 			String newVariableName, String shouldTrim) { 
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object value = scenarioContext.getParamValue(variableName);
 		if(shouldTrim != null && (shouldTrim.equalsIgnoreCase("yes") || shouldTrim.equalsIgnoreCase("true"))) {
 			shouldTrim = "yes";

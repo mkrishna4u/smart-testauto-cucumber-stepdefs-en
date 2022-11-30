@@ -50,6 +50,11 @@ public class SmartDatabaseManagementStepDefs {
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void get_first_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String queryTxt = query.getContent();
 		queryTxt = scenarioContext.applyParamsValueOnText(queryTxt);
 		
@@ -88,6 +93,11 @@ public class SmartDatabaseManagementStepDefs {
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void get_last_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String queryTxt = query.getContent();
 		queryTxt = scenarioContext.applyParamsValueOnText(queryTxt);
 		
@@ -118,6 +128,11 @@ public class SmartDatabaseManagementStepDefs {
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void get_all_entries_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String queryTxt = query.getContent();
 		queryTxt = scenarioContext.applyParamsValueOnText(queryTxt);
 		
@@ -142,6 +157,11 @@ public class SmartDatabaseManagementStepDefs {
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void get_entity_data_as_json_document_using_query_below_and_store_into_variable_app_name_db_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String queryTxt = query.getContent();
 		queryTxt = scenarioContext.applyParamsValueOnText(queryTxt);
 		
@@ -163,6 +183,11 @@ public class SmartDatabaseManagementStepDefs {
 	@When("update {string} entity data using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void update_entity_data_using_query_below_app_name_database_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String appName, String databaseProfileName, DocString query) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String queryTxt = query.getContent();
 		queryTxt = scenarioContext.applyParamsValueOnText(queryTxt);
 		
@@ -182,6 +207,11 @@ public class SmartDatabaseManagementStepDefs {
 	@When("delete {string} entity data using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void delete_entity_data_using_query_below_app_name_database_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String appName, String databaseProfileName, DocString query) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String queryTxt = query.getContent();
 		queryTxt = scenarioContext.applyParamsValueOnText(queryTxt);
 		
@@ -201,6 +231,11 @@ public class SmartDatabaseManagementStepDefs {
 	@When("insert new data into {string} entity using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void insert_new_data_into_entity_using_query_below_app_name_database_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String appName, String databaseProfileName, DocString query) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String queryTxt = query.getContent();
 		queryTxt = scenarioContext.applyParamsValueOnText(queryTxt);
 		

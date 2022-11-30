@@ -53,12 +53,22 @@ public class SmartJsonDataManagementStepDefs {
 	
 	@When("read {string} JSON file contents and store into {string} variable.")
 	public void read_json_file_contents_and_store_into_variable(String jsonDataRelativeFilePath, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		JsonDocumentReader reader = new JsonDocumentReader(new File(Locations.getProjectRootDir() + File.separator + jsonDataRelativeFilePath), false);
 		scenarioContext.addParamValue(variableName, reader.getDocumentContext());
 	}
 	
 	@When("convert {string} JSON text into JSON object and store into {string} variable.")
 	public void convert_json_text_into_json_object_and_store_into_variable(String jsonText, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		jsonText = scenarioContext.applyParamsValueOnText(jsonText);
 		JsonDocumentReader reader = new JsonDocumentReader(jsonText, false);
 		
@@ -67,12 +77,22 @@ public class SmartJsonDataManagementStepDefs {
 	
 	@When("convert {string} variable contents into JSON object and store into {string} variable.")
 	public void convert_variable_contents_into_json_object_and_store_into_variable(String jsonInputVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String jsonInput = scenarioContext.getParamValueAsString(jsonInputVariableName);
 		convert_json_text_into_json_object_and_store_into_variable(jsonInput, variableName);
 	}
 	
 	@When("convert the following JSON text into JSON object and store into {string} variable:")
 	public void convert_the_following_json_text_into_json_object_and_store_into_variable(String variableName, DocString jsonText) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String jsonTxt = jsonText.getContent();
 		jsonTxt = scenarioContext.applyParamsValueOnText(jsonTxt);
 		JsonDocumentReader reader = new JsonDocumentReader(jsonTxt, false);
@@ -88,6 +108,11 @@ public class SmartJsonDataManagementStepDefs {
 	 */
 	@When("read {string} parameter value from JSON object [JSONObjRefVariable={string}] and store into {string} variable.")
 	public void read_parameter_value_from_json_object_json_obj_ref_variable_and_store_into_variable(String jsonPath, String jsonObjRefVariable, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object jsonObjContext = scenarioContext.getParamValue(jsonObjRefVariable);
 		Assert.assertNotNull(jsonObjContext, "'" +jsonObjRefVariable + "' variable does not have JSON object. Found null.");
 		assertTrue(jsonObjContext instanceof DocumentContext, "'" +jsonObjRefVariable + "' variable is not a JSON object. It should be the instance of DocumentContext class.");
@@ -114,6 +139,11 @@ public class SmartJsonDataManagementStepDefs {
 	 */
 	@When("update the following parameters values into JSON object [JSONObjRefVariable={string}]:")
 	public void read_parameter_value_from_json_object_json_obj_ref_variable(String jsonObjRefVariable, DataTable jsonParamInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object jsonObjContext = scenarioContext.getParamValue(jsonObjRefVariable);
 		Assert.assertNotNull(jsonObjContext, "'" +jsonObjRefVariable + "' variable does not have JSON object. Found null.");
 		assertTrue(jsonObjContext instanceof DocumentContext, "'" +jsonObjRefVariable + "' variable is not a JSON object. It should be the instance of DocumentContext class.");
@@ -155,6 +185,11 @@ public class SmartJsonDataManagementStepDefs {
 	 */
 	@Then("verify the following parameters of JSON object matches with the expected information as per the tabular info given below [JSONObjRefVariable={string}]:")
 	public void verify_the_following_parameters_of_json_object_matches_with_the_expected_information_as_per_the_tabular_info_given_below_json_obj_ref_variable(String jsonObjRefVariable, DataTable jsonParamInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object jsonObjContext = scenarioContext.getParamValue(jsonObjRefVariable);
 		Assert.assertNotNull(jsonObjContext, "'" +jsonObjRefVariable + "' variable does not have JSON object. Found null.");
 		assertTrue(jsonObjContext instanceof DocumentContext, "'" +jsonObjRefVariable + "' variable is not a JSON object. It should be the instance of DocumentContext class.");

@@ -48,6 +48,11 @@ public class SmartFileUploadStepDefs {
 	@When("upload {string} file\\(s) using {string} page element.")
 	@When("upload {string} file\\(s) using {string} page object.")
 	public void upload_file_using_page_element_(String files, String po) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
 		
 		JsonDocumentReader jsonReader = new JsonDocumentReader(files, false);

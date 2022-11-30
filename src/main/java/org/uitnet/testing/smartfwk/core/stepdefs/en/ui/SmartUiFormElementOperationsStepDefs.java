@@ -72,6 +72,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify that the following page objects are visible on {string}:")
 	public void verify_that_the_following_page_elements_are_visible(String pageOrScreenName, DataTable dataTable) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<List<String>> rows = dataTable.asLists();
 		List<String> row = null;
 		for (int i = 1; i < rows.size(); i++) {
@@ -114,6 +119,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify {string} page element is visible on {string}.")
 	public void verify_that_the_page_element_is_visible(String po, String pageOrScreenName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		PageObjectUtil.invokeValidatorMethod("validateVisible", new Class<?>[] { Integer.TYPE },
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
@@ -180,6 +190,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify that the following page objects are hidden on {string}:")
 	public void verify_that_the_following_page_elements_are_hidden(String pageOrScreenName, DataTable dataTable) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<List<String>> rows = dataTable.asLists();
 		List<String> row = null;
 		for (int i = 1; i < rows.size(); i++) {
@@ -248,6 +263,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify {string} page object is hidden on {string}.")
 	public void verify_that_the_page_element_is_hidden(String po, String pageOrScreenName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		PageObjectUtil.invokeValidatorMethod("validateHidden", new Class<?>[] { Integer.TYPE },
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
@@ -301,6 +321,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify that the following page objects are disabled on {string}:")
 	public void verify_that_the_following_page_elements_are_disabled(String pageOrScreenName, DataTable dataTable) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<List<String>> rows = dataTable.asLists();
 		List<String> row = null;
 		for (int i = 1; i < rows.size(); i++) {
@@ -325,6 +350,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify that {string} page object is disabled on {string}.")
 	public void verify_that_the_page_element_is_disabled(String po, String pageOrScreenName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		PageObjectUtil.invokeValidatorMethod("validateDisabled", new Class<?>[] { Integer.TYPE },
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
@@ -348,6 +378,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify that the following page objects are enabled on {string}:")
 	public void verify_that_the_following_page_elements_are_enabled(String pageOrScreenName, DataTable dataTable) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<List<String>> rows = dataTable.asLists();
 		List<String> row = null;
 		for (int i = 1; i < rows.size(); i++) {
@@ -372,6 +407,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify that {string} page element is enabled on {string}.")
 	public void verify_that_the_page_element_is_enabled(String po, String pageOrScreenName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		PageObjectUtil.invokeValidatorMethod("validateEnabled", new Class<?>[] { Integer.TYPE },
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
@@ -391,6 +431,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@When("type {string} text in {string} page object at {string} location.")
 	public void type_text_in_page_element(String textToType, String po, String location) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		String txt = scenarioContext.applyParamsValueOnText(textToType);
 		PageObjectUtil.invokeValidatorMethod("typeText",
@@ -411,7 +456,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@When("type {string} text in {string} page object.")
 	public void type_text_in_page_element(String textToType, String po) {
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);		
 		String txt = scenarioContext.applyParamsValueOnText(textToType);
 		PageObjectUtil.invokeValidatorMethod("typeText",
 				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE },
@@ -426,6 +476,11 @@ public class SmartUiFormElementOperationsStepDefs {
 
 	@When("type the following text in {string} page object:")
 	public void type_the_following_text_in_page_element(String po, DocString textToType) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String txt = scenarioContext.applyParamsValueOnText(textToType.getContent());
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
@@ -443,6 +498,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	@Then("verify that the text part of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_that_the_text_part_of_page_element_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
 		
@@ -469,6 +529,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	@Then("verify that {string} attribute value of {string} page element matches {string} text where TextMatchMechanism={string}.")
 	public void verify_that_attribute_value_of_page_element_matches_text_where_textmatchmechanism(String attributeName, String po, String expectedText, String textMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
 		
@@ -490,6 +555,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	@Then("verify that the value of {string} page element matches {string} text where TextMatchMechanism={string}.")
 	public void verify_value_of_page_element_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
 		
@@ -504,6 +574,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	@Then("get input text value of {string} page element and store into {string} variable.")
 	public void get_input_text_value_of_page_element_and_store_into_variable(String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		
 		WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
@@ -521,6 +596,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	@SuppressWarnings("unchecked")
 	@Then("get input text value of each element of {string} page element and store into {string} variable.")
 	public void get_input_text_value_of_each_element_of_page_element_and_store_into_variable(String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		
 		List<String> list = new LinkedList<>();
@@ -547,7 +627,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		scenarioContext.addParamValue(variableName, list);
 	}
 	
-	@Then("get input text value of of each element of {string} page object and store into {string} variable.")
+	@Then("get input text value of each element of {string} page object and store into {string} variable.")
 	public void get_input_text_value_of_each_element_of_page_element_and_store_into_variable_1(String po, String variableName) {
 		get_input_text_value_of_each_element_of_page_element_and_store_into_variable(po, variableName);
 	}
@@ -555,6 +635,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	@SuppressWarnings("unchecked")
 	@Then("get text part of each element of {string} page element and store into {string} variable.")
 	public void verify_text_part_of_each_element_of_page_element_and_store_into_variable(String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		
 		List<String> list = new LinkedList<>();
@@ -589,6 +674,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	@SuppressWarnings("unchecked")
 	@Then("get {string} attribute value of each element of {string} page element and store into {string} variable.")
 	public void get_attribute_value_of_each_element_of_page_element_and_store_into_variable(String attributeName, String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		
 		List<String> list = new LinkedList<>();
@@ -624,6 +714,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	@SuppressWarnings("unchecked")
 	@Then("verify text part of each element of {string} page element matches {string} text where TextMatchMechanism={string}.")
 	public void verify_text_part_of_each_element_of_page_element_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
 		
@@ -656,6 +751,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	@SuppressWarnings("unchecked")
 	@Then("verify {string} attribute value of each element of {string} page element matches {string} text where TextMatchMechanism={string}.")
 	public void verify_attribute_value_of_each_element_of_page_element_matches_text_where_textmatchmechanism(String attributeName, String po, String expectedText, String textMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
@@ -695,6 +795,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@When("call {string} validator method of {string} page object to {string}.")
 	public void call_validator_method_of_page_object_to(String methodsAsJson, String po, String operation) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		
 		JsonDocumentReader jsonReader = new JsonDocumentReader(methodsAsJson, false);
@@ -720,6 +825,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@When("call {string} validator method of {string} page object to {string} and store output to {string} variable.")
 	public void call_validator_method_of_page_object_to_and_store_output_to_variable(String methodsAsJson, String po, String operation, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		
 		JsonDocumentReader jsonReader = new JsonDocumentReader(methodsAsJson, false);
@@ -753,6 +863,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@Then("verify the selected value\\(s) of the following page objects on {string}:")
 	public void validate_the_selected_values_of_the_following_page_objects(String pageOrScreenName, DataTable dataTable) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<List<String>> rows = dataTable.asLists();
 		
 		String po, operator, expectedInfo;
@@ -797,6 +912,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	@When("fill the following form fields value\\(s) present on {string}:")
 	public void fill_the_following_form_fields_value_present_on_page(String pageOrScreenName, DataTable dataTable) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		List<List<String>> rows = dataTable.asLists();
 		
 		String po, inputValueStr;

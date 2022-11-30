@@ -53,12 +53,22 @@ public class SmartYamlDataManagementStepDefs {
 	
 	@When("read {string} YAML file contents and store into {string} variable.")
 	public void read_yaml_file_contents_and_store_into_variable(String yamlDataRelativeFilePath, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		YamlDocumentReader reader = new YamlDocumentReader(new File(Locations.getProjectRootDir() + File.separator + yamlDataRelativeFilePath), false);
 		scenarioContext.addParamValue(variableName, reader.getDocumentContext());
 	}
 	
 	@When("convert {string} YAML text into YAML object and store into {string} variable.")
 	public void convert_yaml_text_into_yaml_object_and_store_into_variable(String yamlText, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		yamlText = scenarioContext.applyParamsValueOnText(yamlText);
 		YamlDocumentReader reader = new YamlDocumentReader(yamlText, false);
 		
@@ -67,12 +77,22 @@ public class SmartYamlDataManagementStepDefs {
 	
 	@When("convert {string} variable contents into YAML object and store into {string} variable.")
 	public void convert_variable_contents_into_yaml_object_and_store_into_variable(String yamlInputVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String yamlInput = scenarioContext.getParamValueAsString(yamlInputVariableName);
 		convert_yaml_text_into_yaml_object_and_store_into_variable(yamlInput, variableName);
 	}
 	
 	@When("convert the following YAML text into YAML object and store into {string} variable:")
 	public void convert_the_following_yaml_text_into_yaml_object_and_store_into_variable(String variableName, DocString yamlText) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String yamlTxt = yamlText.getContent();
 		yamlTxt = scenarioContext.applyParamsValueOnText(yamlTxt);
 		YamlDocumentReader reader = new YamlDocumentReader(yamlTxt, false);
@@ -88,6 +108,11 @@ public class SmartYamlDataManagementStepDefs {
 	 */
 	@When("read {string} parameter value from YAML object [YAMLObjRefVariable={string}] and store into {string} variable.")
 	public void read_parameter_value_from_yaml_object_yaml_obj_ref_variable_and_store_into_variable(String yamlPath, String yamlObjRefVariable, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object yamlObjContext = scenarioContext.getParamValue(yamlObjRefVariable);
 		Assert.notNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
 		assertTrue(yamlObjContext instanceof DocumentContext, "'" +yamlObjRefVariable + "' variable is not a YAML object. It should be the instance of DocumentContext class.");
@@ -114,6 +139,11 @@ public class SmartYamlDataManagementStepDefs {
 	 */
 	@When("update the following parameters values into YAML object [YAMLObjRefVariable={string}]:")
 	public void read_parameter_value_from_yaml_object_yaml_obj_ref_variable(String yamlObjRefVariable, DataTable yamlParamInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object yamlObjContext = scenarioContext.getParamValue(yamlObjRefVariable);
 		Assert.notNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
 		assertTrue(yamlObjContext instanceof DocumentContext, "'" +yamlObjRefVariable + "' variable is not a YAML object. It should be the instance of DocumentContext class.");
@@ -155,6 +185,11 @@ public class SmartYamlDataManagementStepDefs {
 	 */
 	@Then("verify the following parameters of YAML object matches with the expected information as per the tabular info given below [YAMLObjRefVariable={string}]:")
 	public void verify_the_following_parameters_of_yaml_object_matches_with_the_expected_information_as_per_the_tabular_info_given_below_yaml_obj_ref_variable(String yamlObjRefVariable, DataTable yamlParamInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object yamlObjContext = scenarioContext.getParamValue(yamlObjRefVariable);
 		Assert.notNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
 		assertTrue(yamlObjContext instanceof DocumentContext, "'" +yamlObjRefVariable + "' variable is not a YAML object. It should be the instance of DocumentContext class.");

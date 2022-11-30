@@ -80,6 +80,11 @@ public class SmartApiStepDefs {
 	public void make_http_put_request_using_the_following_request_body_on(String appName,
 			String targetServer, String targetURL, String userProfile, String contentType, String accept, 
 			String requestVariableName, String responseVariableName, DocString requestBody) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String reqTxt = requestBody.getContent();
 		reqTxt = scenarioContext.applyParamsValueOnText(reqTxt);
 		
@@ -104,6 +109,11 @@ public class SmartApiStepDefs {
 	public void make_http_post_request_using_the_following_request_body_on_1(String appName,
 			String targetServer, String targetURL, String userProfile, String contentType, String accept, 
 			String requestVariableName, String responseVariableName, DocString requestBody) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String reqTxt = requestBody.getContent();
 		reqTxt = scenarioContext.applyParamsValueOnText(reqTxt);
 		
@@ -145,6 +155,11 @@ public class SmartApiStepDefs {
 	public void make_http_post_put_request_to_upload_the_following_files_on(String appName,
 			String targetServer, String targetURL, String userProfile, String contentType, String accept, 
 			String requestVariableName, String responseVariableName, DataTable filesDetails) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpMultipartRequest httpRequest = new HttpMultipartRequest();
 		httpRequest.setContentType(contentType);
 		httpRequest.setResponseContentType(accept);
@@ -215,6 +230,11 @@ public class SmartApiStepDefs {
 	public void make_http_post_request_using_the_contents_of_the_following_template_file_on(String appName,
 			String targetServer, String targetURL, String userProfile, String contentType, String accept,
 			String requestVariableName, String responseVariableName, DocString requestTemplateFile) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String templateFilePath = requestTemplateFile.getContent().trim();
 		templateFilePath = scenarioContext.applyParamsValueOnText(templateFilePath);
 		
@@ -252,6 +272,11 @@ public class SmartApiStepDefs {
 			+ "using [UserProfile={string}] with header info [Accept={string}] and variable info [ReqVar={string}, RespVar={string}].")
 	public void make_http_post_put_request_by_setting_json_object_on(String jsonObjVariableName, String appName,
 			String targetServer, String targetURL, String userProfile, String accept, String requestVariableName, String responseVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String contents = null;
 		try {
 			DocumentContext jsonDoc = (DocumentContext) scenarioContext.getParamValue(jsonObjVariableName);
@@ -285,6 +310,11 @@ public class SmartApiStepDefs {
 			+ "using [UserProfile={string}] with header info [Accept={string}] and variable info [ReqVar={string}, RespVar={string}].")
 	public void make_http_post_put_request_by_setting_xml_object_on(String xmlObjVariableName, String appName,
 			String targetServer, String targetURL, String userProfile, String accept, String requestVariableName, String responseVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String contents = null;
 		try {
 			Document xmlDoc = (Document) scenarioContext.getParamValue(xmlObjVariableName);
@@ -317,6 +347,11 @@ public class SmartApiStepDefs {
 	@When("make HTTP GET request on target server [AppName={string}, TargetServer={string}, TargetURL={string}] using [UserProfile={string}] with header info [Accept={string}] and variable info [RespVar={string}].")
 	public void make_http_get_request_on(String appName,
 			String targetServer, String targetURL, String userProfile, String accept, String responseVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpRequest httpRequest = new HttpRequest();
 		httpRequest.setResponseContentType(accept);
 
@@ -328,6 +363,11 @@ public class SmartApiStepDefs {
 	@When("make HTTP DELETE request on target server [AppName={string}, TargetServer={string}, TargetURL={string}] using [UserProfile={string}] with header info [Accept={string}] and variable info [RespVar={string}].")
 	public void make_http_delete_request_on(String appName,
 			String targetServer, String targetURL, String userProfile, String accept, String responseVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpRequest httpRequest = new HttpRequest();
 		httpRequest.setResponseContentType(accept);
 
@@ -340,6 +380,11 @@ public class SmartApiStepDefs {
 	@When("make HTTP HEAD request on target server [AppName={string}, TargetServer={string}, TargetURL={string}] using [UserProfile={string}].")
 	public void make_http_head_request_on(String appName,
 			String targetServer, String targetURL, String userProfile, String accept, String responseVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpRequest httpRequest = new HttpRequest();
 		httpRequest.setResponseContentType(accept);
 
@@ -351,6 +396,11 @@ public class SmartApiStepDefs {
 	
 	@Then("verify {string} HTTP response contains HTTPStatusCode={int}.")
 	public void verify_http_response_contains_http_status_code(String responseVariableName, int httpStatusCode) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(responseVariableName);
 		Assert.assertNotNull(httpResponse, "HTTP response not found.");
 		
@@ -359,6 +409,11 @@ public class SmartApiStepDefs {
 	
 	@Then("verify {string} HTTP response contains ContentType={string}.")
 	public void verify_http_response_contains_content_type(String responseVariableName, String contentType) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(responseVariableName);
 		Assert.assertNotNull(httpResponse, "HTTP response not found.");
 		
@@ -377,6 +432,11 @@ public class SmartApiStepDefs {
 	 */
 	@Then("verify {string} HTTP response contains following header information:")
 	public void verify_http_response_variable_contains_http_status_code(String responseVariableName, DataTable expectedHeaderInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(responseVariableName);
 		Assert.assertNotNull(httpResponse, "HTTP response not found.");
 		
@@ -413,6 +473,11 @@ public class SmartApiStepDefs {
 	 */
 	@Then("verify {string} HTTP response contains JSON data with the following expected params information:")
 	public void verify_http_response_contains_json_data_with_the_following_expected_params_information(String responseVariableName, DataTable expectedParamsInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(responseVariableName);
 		Assert.assertNotNull(httpResponse, "HTTP response not found.");
 		
@@ -455,6 +520,11 @@ public class SmartApiStepDefs {
 	 */
 	@Then("verify {string} HTTP response contains XML data with the following expected params information:")
 	public void verify_http_response_contains_xml_data_with_the_following_expected_params_information(String responseVariableName, DataTable expectedParamsInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(responseVariableName);
 		Assert.assertNotNull(httpResponse, "HTTP response not found.");
 		
@@ -488,6 +558,11 @@ public class SmartApiStepDefs {
 	 */
 	@Then("verify downloaded file as part of {string} HTTP response contains following expected name:")
 	public void verify_downloaded_file_as_part_of_http_response_contains_following_expected_name(String httpResponseVariableName, DocString expectedFileInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(httpResponseVariableName);
 		Assert.assertNotNull(httpResponse, "HTTP response not found.");
 		
@@ -514,6 +589,11 @@ public class SmartApiStepDefs {
 	 */
 	@Then("verify downloaded file as part of {string} HTTP response contains following keywords in its contents:")
 	public void verify_downloaded_file_as_part_of_http_response_contains_following_keywords_in_its_contents(String httpResponseVariableName, DocString keywordsInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(httpResponseVariableName);
 		Assert.assertNotNull(httpResponse, "HTTP response not found.");
 		
@@ -535,6 +615,11 @@ public class SmartApiStepDefs {
 	
 	@Then("retrieve {string} JSON path value from the payload of {string} HTTP response and store into {string} variable.")
 	public void retrive_json_path_value_from_the_payload_of_http_response_and_store_into_variable(String jsonPath, String httpResponseVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(httpResponseVariableName);
 		Assert.assertNotNull(httpResponse, "HTTP response not found.");
 		

@@ -51,6 +51,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Given("set the following properties for {string} web driver of {string} application:")
 	public void set_the_following_properties_for_web_driver_of_application(String browserType, String appName, String jsonString) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.overrideDriverProps(appName, browserType, jsonString);
 	}
 
@@ -61,6 +66,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@When("open {string} application.")
 	public void connect_or_switch_to_application(String appName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.connectOrSwitch(appName);
 	}
 	
@@ -120,6 +130,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("connection to application is successful.")
 	public void app_connected_or_switched_success() {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do nothing
 	}
 	
@@ -129,6 +144,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("application switching is successful.")
 	public void app_connected_or_switched_success_1() {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do nothing
 	}
 	
@@ -138,6 +158,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("application is switched successfully.")
 	public void app_connected_or_switched_success_2() {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do nothing
 	}
 
@@ -150,6 +175,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Given("user is logged in using {string} user profile.")
 	public void user_login_using_user_profile(String userProfileName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.setActiveUserProfileOnActiveApp(userProfileName);
 	}
 	
@@ -232,6 +262,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Given("user is already logged in using {string} user profile on {string} application.")
 	public void user_login_using_user_profile_on_application(String userProfileName, String appName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		connect_or_switch_to_application(appName);
 		user_login_using_user_profile(userProfileName);
 	}
@@ -244,6 +279,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@When("switch to {string} application using {string} user profile.")
 	public void switch_to_application_using_user_profile(String appName, String userProfileName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		connect_or_switch_to_application(appName);
 		user_login_using_user_profile(userProfileName);
 	}
@@ -266,6 +306,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Given("URL {string} is already opened.")
 	public void open_url(String url) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		if (url.startsWith("file:///")) {
 			String newUrl = "file:///" + Locations.getProjectRootDir().replace("\\", "/") + "/"
 					+ url.split("file:///")[1].trim();
@@ -301,6 +346,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("the {string} URL is displayed.")
 	public void url_is_displayed(String url) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do not do anything
 	}
 	
@@ -310,6 +360,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("{string} URL is displayed.")
 	public void url_is_displayed_1(String url) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do not do anything
 	}
 	
@@ -319,6 +374,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("the {string} URL is opened.")
 	public void url_is_displayed_2(String url) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do not do anything
 	}
 	
@@ -328,6 +388,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("{string} URL is opened.")
 	public void url_is_displayed_3(String url) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do not do anything
 	}
 	
@@ -337,6 +402,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("verify {string} page is displayed.")
 	public void verify_the_page_is_displayed(String pageName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do not do anything.
 	}
 
@@ -346,6 +416,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("the {string} page is displayed.")
 	public void the_page_is_displayed(String pageName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do not do anything
 	}
 	
@@ -355,6 +430,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("{string} page is displayed.")
 	public void the_page_is_displayed_1(String pageName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do not do anything
 	}
 
@@ -364,6 +444,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("{string} application is switched successfully.")
 	public void application_is_switched_successfully(String appName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveAppName(), appName,
 				TextMatchMechanism.exactMatchWithExpectedValue)) {
 			Assert.fail(appName + " is not activated.");
@@ -394,6 +479,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("{string} user profile is switched successfully.")
 	public void user_profile_is_switched_successfully(String userProfile) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveUserProfileNameOfActiveApp(),
 				userProfile, TextMatchMechanism.exactMatchWithExpectedValue)) {
 			Assert.fail(userProfile + " is not activated.");
@@ -416,6 +506,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("{string} user profile is switched successfully on {string} application.")
 	public void user_profile_is_switched_successfully(String userProfile, String appName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveUserProfileName(appName), userProfile,
 				TextMatchMechanism.exactMatchWithExpectedValue)) {
 			Assert.fail(userProfile + " is not activated.");
@@ -442,6 +537,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("take screenshot.")
 	public void take_screenshot() {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		if(scenarioContext.isUiScenario()) {
 			scenarioContext.captureScreenshot("scenario-RUNNUNG");
 		}
@@ -453,6 +553,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("take screenshot and store filename in {string} variable.")
 	public void take_screenshot_and_store_filename_in_variable(String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		if(scenarioContext.isUiScenario()) {
 			String fileName = scenarioContext.captureScreenshot("scenario-RUNNUNG");
 			scenarioContext.addParamValue(variableName, fileName);
@@ -466,6 +571,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@Then("{string} will be {string}.")
 	public void action_will_be_performed(String action, String performed) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		// do nothing
 	}
 	
@@ -476,6 +586,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 */
 	@When("wait for {int} seconds.")
 	public void wait_for_seconds(int waitNumSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.waitForSeconds(waitNumSeconds);
 	}
 }

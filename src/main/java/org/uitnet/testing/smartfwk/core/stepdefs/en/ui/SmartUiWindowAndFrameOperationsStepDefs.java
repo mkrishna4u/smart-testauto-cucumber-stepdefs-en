@@ -41,6 +41,11 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	
 	@When("switch to {string} window.")
 	public void switch_to_window(String windowHandleName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Set<String> windowHandles = scenarioContext.getActiveAppDriver().getWebDriver().getWindowHandles();
 		scenarioContext.log("AVAILABLE WINDOW HANDLE NAMES: " + windowHandles);
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().window(windowHandleName);
@@ -53,11 +58,21 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 
 	@When("switch to default content.")
 	public void switch_to_default_content() {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().defaultContent();
 	}
 
 	@When("switch to {string} frame.")
 	public void switch_to_frame(String frameNameOrId) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		if ("parent".equals(frameNameOrId)) {
 			scenarioContext.getActiveAppDriver().getWebDriver().switchTo().parentFrame();
 		} else if (frameNameOrId.startsWith("INDEX:")) {
@@ -70,6 +85,11 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 
 	@When("switch to frame number {int}.")
 	public void switch_to_frame_number(Integer frameNumber) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().frame(frameNumber);
 	}
 

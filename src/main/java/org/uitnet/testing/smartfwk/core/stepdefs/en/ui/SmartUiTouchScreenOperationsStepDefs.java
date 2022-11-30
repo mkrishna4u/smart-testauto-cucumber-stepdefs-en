@@ -52,6 +52,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 */
 	@When("tap on {string} page object for {int} milliseconds to {string}.")
 	public void tap_on_page_element_for_milliseconds_to(String pageObject, int holdDurationInMs, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -66,6 +71,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	
 	@When("double tap on {string} page object using {int} milliseconds as pause duration to {string}.")
 	public void double_tap_on_page_element_using_milliseconds_as_pause_duration_to(String pageObject, int pauseDurationInMs, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -80,6 +90,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	
 	@When("tap {int} times on {string} page object using {int} milliseconds as pause duration to {string}.")
 	public void tap_n_times_on_page_element_using_milliseconds_as_pause_duration_to(int nTimes, String pageObject, int pauseDurationInMs, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -94,6 +109,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	
 	@When("swipe up {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_up_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -108,6 +128,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	
 	@When("swipe down {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_down_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -122,6 +147,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	
 	@When("swipe left {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_left_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -136,6 +166,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	
 	@When("swipe right {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_right_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);

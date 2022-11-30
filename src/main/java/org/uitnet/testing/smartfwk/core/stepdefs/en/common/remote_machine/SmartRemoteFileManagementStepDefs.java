@@ -41,6 +41,11 @@ public class SmartRemoteFileManagementStepDefs {
 
 	@When("remove expected file\\(s) [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] from remote machine [AppName={string}, RemoteMachineName:{string}].")
 	public void remove_expected_files_from_remote_machine(String remoteDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
 		handler.deleteFiles(remoteDirectory, TextMatchMechanism.valueOf2(fileNameMatchMechanism), expectedFileName);
@@ -48,6 +53,11 @@ public class SmartRemoteFileManagementStepDefs {
 	
 	@When("download expected remote file(s) [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] from remote machine [AppName={string}, RemoteMachineName:{string}].")
 	public void download_expected_files_from_remote_machine(String remoteDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
 		handler.downloadFiles(remoteDirectory, TextMatchMechanism.valueOf2(fileNameMatchMechanism), expectedFileName, 
@@ -56,6 +66,11 @@ public class SmartRemoteFileManagementStepDefs {
 	
 	@When("upload local file(s) [LocalDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] on remote machine [AppName={string}, RemoteMachineName:{string}, RemoteDirectory={string}].")
 	public void upload_expected_files_on_remote_machine(String localDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName, String remoteDirectory) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
 		handler.uploadFiles(Locations.getProjectRootDir() + localDirectory, TextMatchMechanism.valueOf2(fileNameMatchMechanism), expectedFileName, 
@@ -66,6 +81,11 @@ public class SmartRemoteFileManagementStepDefs {
 			+ "is uploaded on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
 	public void verify_that_the_expected_file_is_present_on_remote_machine(String remoteDirectory, String expectedFileName, 
 			String fileNameMatchMechanism, String appName, String remoteMachineName, Integer maxTimeToWaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
 		handler.validateFileExists(remoteDirectory, TextMatchMechanism.valueOf2(fileNameMatchMechanism), expectedFileName, maxTimeToWaitInSeconds);
@@ -82,6 +102,11 @@ public class SmartRemoteFileManagementStepDefs {
 			+ "is present on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
 	public void verify_that_the_expected_directory_is_present_on_remote_machine(String remoteDirectory, String expectedFolderName, 
 			String folderNameMatchMechanism, String appName, String remoteMachineName, Integer maxTimeToWaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
 		handler.validateFolderExists(remoteDirectory, TextMatchMechanism.valueOf2(folderNameMatchMechanism), expectedFolderName, maxTimeToWaitInSeconds);

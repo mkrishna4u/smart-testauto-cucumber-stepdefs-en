@@ -43,11 +43,21 @@ public class SmartLocalFileManagementStepDefs {
 
 	@When("remove {string} file from the local downloads directory.")
 	public void remove_file_from_the_local_downloads_directory(String fileName) {
-	    LocalMachineFileSystem.deleteFiles(Locations.getProjectRootDir() + "/test-results/downloads", TextMatchMechanism.exactMatchWithExpectedValue, fileName);
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		LocalMachineFileSystem.deleteFiles(Locations.getProjectRootDir() + "/test-results/downloads", TextMatchMechanism.exactMatchWithExpectedValue, fileName);
 	}
 	
 	@Then("verify that the {string} file with extension {string} is downloaded [MaxTimeToWaitInSeconds={int}].")
 	public void verify_that_the_file_with_extension_is_downloaded_maxtimetowaitinseconds(String fileName, String fileExtension, Integer maxTimeToWaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		DownloadedFileValidator.validateBrowserFileDownloaded(fileName, fileExtension, false, maxTimeToWaitInSeconds);
 	}
 	
@@ -67,7 +77,12 @@ public class SmartLocalFileManagementStepDefs {
 	 */
 	@Then("verify that the downloaded file {string} contains the following keywords [KeywordDelimiter={string}, InOrder={string}, ShouldPrint={string}]:")
 	public void verify_that_the_downloaded_file_contains_the_following_text(String fileNameWithExtension, String keywordDelimiter, String inOrder, String shouldPrint, DocString keywords) {
-	    FileContentsValidator fcValidator = new FileContentsValidator(Locations.getProjectRootDir() + "/test-results/downloads/" + fileNameWithExtension, 
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		FileContentsValidator fcValidator = new FileContentsValidator(Locations.getProjectRootDir() + "/test-results/downloads/" + fileNameWithExtension, 
 	    		"Yes".equalsIgnoreCase(shouldPrint));	    
 	    
 	    String txt = scenarioContext.applyParamsValueOnText(keywords.getContent());

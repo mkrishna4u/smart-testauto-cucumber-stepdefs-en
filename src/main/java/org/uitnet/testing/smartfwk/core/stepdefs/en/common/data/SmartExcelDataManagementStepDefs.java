@@ -40,12 +40,22 @@ public class SmartExcelDataManagementStepDefs {
 	
 	@When("read {string} sheet data of {string} excel file into tabular form and store into {string} excelsheet variable.")
 	public void read_sheet_data_of_excel_file_into_tabular_form_and_store_inot_variable(String sheetName, String relativeExcelFilePath, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Table tabularData = ExcelFileReader.getSheetData(relativeExcelFilePath, sheetName);
 		scenarioContext.addParamValue(variableName, tabularData);
 	}
 	
 	@When("read {string} column data from {string} excelsheet variable and store into {string} variable.")
 	public void read_column_data_from_excelsheet_variable_and_store_into_variable(String columnName, String excelsheetVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Table tabularData = (Table) scenarioContext.getParamValue(excelsheetVariableName);
 		
 		List<String> colData = tabularData.getColumnData(columnName);
@@ -55,6 +65,11 @@ public class SmartExcelDataManagementStepDefs {
 	
 	@When("read {int} row of {string} column data from {string} excelsheet variable and store into {string} variable.")
 	public void read_nth_row_of_column_data_from_excelsheet_variable_and_store_into_variable(int nthRow, String columnName, String excelsheetVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Table tabularData = (Table) scenarioContext.getParamValue(excelsheetVariableName);
 		
 		List<String> colData = tabularData.getColumnData(columnName);
@@ -64,6 +79,11 @@ public class SmartExcelDataManagementStepDefs {
 	
 	@When("read all column names from {string} excelsheet variable and store into {string} variable.")
 	public void read_all_column_names_from_excelsheet_variable_and_store_into_variable(String excelsheetVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Table tabularData = (Table) scenarioContext.getParamValue(excelsheetVariableName);
 		
 		List<String> colNames = tabularData.getColumnNames();
@@ -73,6 +93,11 @@ public class SmartExcelDataManagementStepDefs {
 	
 	@When("read column count from {string} excelsheet variable and store into {string} variable.")
 	public void read_column_count_from_excelsheet_variable_and_store_into_variable(String excelsheetVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Table tabularData = (Table) scenarioContext.getParamValue(excelsheetVariableName);
 		
 		List<String> colNames = tabularData.getColumnNames();
@@ -82,6 +107,11 @@ public class SmartExcelDataManagementStepDefs {
 	
 	@When("read row count from {string} excelsheet variable and store into {string} variable.")
 	public void read_row_count_from_excelsheet_variable_and_store_into_variable(String excelsheetVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Table tabularData = (Table) scenarioContext.getParamValue(excelsheetVariableName);
 		
 		scenarioContext.addParamValue(variableName, tabularData.getRowCount());

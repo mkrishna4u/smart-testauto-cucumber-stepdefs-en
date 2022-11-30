@@ -40,6 +40,11 @@ public class SmartTextualDataManagementStepDefs {
 
 	@When("read {string} file data as text and store into {string} variable.")
 	public void read_file_data_as_text_and_store_into_variable(String relativeFilePath, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		FileContentsValidator fileContentValidator = new FileContentsValidator(
 				Locations.getProjectRootDir() + File.separator + relativeFilePath, false);
 		scenarioContext.addParamValue(variableName, fileContentValidator.extractFileContents());
@@ -47,6 +52,11 @@ public class SmartTextualDataManagementStepDefs {
 	
 	@When("read {string} file data as text and store into {string} variable [OCRLanguage={string}, ShouldPrintOnConsole={string}].")
 	public void read_file_data_as_text_and_store_into_variable(String relativeFilePath, String variableName, String ocrLanguage, String shouldPrintOnConsole) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		FileContentsValidator fileContentValidator = new FileContentsValidator(
 				Locations.getProjectRootDir() + File.separator + relativeFilePath,
 				("yes".equalsIgnoreCase(shouldPrintOnConsole) || "true".equalsIgnoreCase(shouldPrintOnConsole)) ? true : false

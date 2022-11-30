@@ -52,12 +52,22 @@ public class SmartXmlDataManagementStepDefs {
 	
 	@When("read {string} XML file contents and store into {string} variable.")
 	public void read_xml_file_contents_and_store_into_variable(String xmlDataRelativeFilePath, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		XmlDocumentReader reader = new XmlDocumentReader(new File(Locations.getProjectRootDir() + File.separator + xmlDataRelativeFilePath));
 		scenarioContext.addParamValue(variableName, reader.getDocument());
 	}
 	
 	@When("convert {string} XML text into XML object and store into {string} variable.")
 	public void convert_xml_text_into_xml_object_and_store_into_variable(String xmlText, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		xmlText = scenarioContext.applyParamsValueOnText(xmlText);
 		XmlDocumentReader reader = new XmlDocumentReader(xmlText);
 		
@@ -66,12 +76,22 @@ public class SmartXmlDataManagementStepDefs {
 	
 	@When("convert {string} variable contents into XML object and store into {string} variable.")
 	public void convert_variable_contents_into_xml_object_and_store_into_variable(String xmlInputVariableName, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String xmlInput = scenarioContext.getParamValueAsString(xmlInputVariableName);
 		convert_xml_text_into_xml_object_and_store_into_variable(xmlInput, variableName);
 	}
 	
 	@When("convert the following XML text into XML object and store into {string} variable:")
 	public void convert_the_following_xml_text_into_xml_object_and_store_into_variable(String variableName, DocString xmlText) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		String xmlTxt = xmlText.getContent();
 		xmlTxt = scenarioContext.applyParamsValueOnText(xmlTxt);
 		XmlDocumentReader reader = new XmlDocumentReader(xmlTxt);
@@ -88,6 +108,11 @@ public class SmartXmlDataManagementStepDefs {
 	 */
 	@When("read {string} parameter value from XML object [XMLObjRefVariable={string}] and store into {string} variable.")
 	public void read_parameter_value_from_xml_object_xml_obj_ref_variable_and_store_into_variable(String xmlPath, String xmlObjRefVariable, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object xmlObjContext = scenarioContext.getParamValue(xmlObjRefVariable);
 		Assert.notNull(xmlObjContext, "'" +xmlObjRefVariable + "' variable does not have XML object. Found null.");
 		assertTrue(xmlObjContext instanceof Document, "'" +xmlObjRefVariable + "' variable is not a XML object. It should be the instance of Document class.");
@@ -114,6 +139,11 @@ public class SmartXmlDataManagementStepDefs {
 	 */
 	@Then("verify the following parameters of XML object matches with the expected information as per the tabular info given below [XMLObjRefVariable={string}]:")
 	public void verify_the_following_parameters_of_xml_object_matches_with_the_expected_information_as_per_the_tabular_info_given_below_xml_obj_ref_variable(String xmlObjRefVariable, DataTable xmlParamInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object xmlObjContext = scenarioContext.getParamValue(xmlObjRefVariable);
 		Assert.notNull(xmlObjContext, "'" +xmlObjRefVariable + "' variable does not have XML object. Found null.");
 		assertTrue(xmlObjContext instanceof Document, "'" +xmlObjRefVariable + "' variable is not a XML object. It should be the instance of Document class.");

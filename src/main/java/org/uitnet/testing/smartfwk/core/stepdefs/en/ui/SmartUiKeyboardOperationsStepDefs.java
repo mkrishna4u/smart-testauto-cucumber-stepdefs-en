@@ -62,6 +62,11 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 */
 	@When("use {string} key\\(s) on {string} page element to {string}.")
 	public void use_keys_on_page_object_to_perform_operation(String keys, String po, String operation) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
 		
 		JsonDocumentReader jsonReader = new JsonDocumentReader(keys, false);
@@ -97,6 +102,11 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 */
 	@When("use {string} key\\(s) and {string} mouse event together on {string} page element to {string}.")
 	public void use_keys_and_mouse_event_together_on_page_object_to(String keys, String mouseEvent, String po, String operation) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
 		
 		JsonDocumentReader jsonReader = new JsonDocumentReader(keys, false);

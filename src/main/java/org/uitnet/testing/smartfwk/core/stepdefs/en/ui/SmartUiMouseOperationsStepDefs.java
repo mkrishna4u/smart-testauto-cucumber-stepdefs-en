@@ -50,6 +50,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 */
 	@When("click on {string} page object to {string}.")
 	public void click_on_page_element(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("click", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -57,11 +62,21 @@ public class SmartUiMouseOperationsStepDefs {
 	
 	@When("click on {string} page element to {string}.")
 	public void click_on_page_element_1(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		click_on_page_element(pageObject, actionName);
 	}
 	
 	@When("click {string} page element to {string}.")
 	public void click_on_page_element_2(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		click_on_page_element(pageObject, actionName);
 	}
 	
@@ -81,6 +96,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 */
 	@When("force click on {string} page object to {string}.")
 	public void force_click_on_page_element(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("forceClick", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -112,6 +132,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 */
 	@When("double click on {string} page object to {string}.")
 	public void double_click_on_page_element(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("doubleClick", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -143,6 +168,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 */
 	@When("right click on {string} page object to {string}.")
 	public void right_click_on_page_element(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("rightClick", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -174,6 +204,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 */
 	@When("click and hold on {string} page object to {string}.")
 	public void click_and_hold_on_page_element(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("clickAndHold", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
@@ -205,6 +240,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 */
 	@When("release hold click from {string} page object to {string}.")
 	public void release_hold_click_from_page_element(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("release", new Class<?>[] {Integer.TYPE}, 
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
@@ -218,6 +258,11 @@ public class SmartUiMouseOperationsStepDefs {
 	
 	@When("drag {string} page element and drop on {string} page element.")
 	public void drag_and_drop_page_element(String dragElemPageObject, String dropElemPageObject) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(dragElemPageObject);
 		PageObjectUtil.invokeValidatorMethod("release", new Class<?>[] {Integer.TYPE}, 
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
@@ -235,6 +280,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 */
 	@When("mouse hoverover on {string} page object to {string}.")
 	public void mouse_hoverover_on_page_element(String pageObject, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
 		PageObjectUtil.invokeValidatorMethod("mouseHoverOver", new Class<?>[] {Integer.TYPE}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
