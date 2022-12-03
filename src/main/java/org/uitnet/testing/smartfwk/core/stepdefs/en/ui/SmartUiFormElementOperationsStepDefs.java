@@ -255,7 +255,81 @@ public class SmartUiFormElementOperationsStepDefs {
 		verify_that_the_following_page_elements_are_hidden(pageOrScreenName, dataTable);
 	}
 	
+	/**
+	 * Checks the visibility of the page element and store yes / no value into variable based on element visibility.
+	 * @param po - page object / page element
+	 * @param variableName - name of the variable where system will store the visibility. For visible element it will store "yes" else
+	 * 			it will store "no".
+	 */
+	@Then("get visibility of {string} page element and store into {string} variable.")
+	public void get_visibility_of_page_element_and_store_into_variable(String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		Boolean visible = false;
+		try {
+			visible = (Boolean) PageObjectUtil.invokeValidatorMethod("isVisible", new Class<?>[] { Integer.TYPE },
+					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+					scenarioContext);
+		} catch(Throwable th) {
+			scenarioContext.log("Visibility is 'no' because: " + th.getMessage());
+		}
+		
+		scenarioContext.addParamValue(variableName, visible ? "yes": "no");
+	}
 
+	/**
+	 * Checks the visibility of the page object and store yes / no value into variable based on element visibility.
+	 * 
+	 * @param po - page object
+	 * @param variableName - name of the variable where system will store the visibility. For visible element it will store "yes" else
+	 * 			it will store "no".
+	 */
+	@Then("get visibility of {string} page object and store into {string} variable.")
+	public void get_visibility_of_page_element_and_store_into_variable2(String po, String variableName) {
+		get_visibility_of_page_element_and_store_into_variable(po, variableName);
+	}
+	
+	/**
+	 * Checks the presence of the page element and store yes / no value into variable based on element presence.
+	 * @param po - page object / page element
+	 * @param variableName - name of the variable where system will store the presence status. For present element it will store "yes" else
+	 * 			it will store "no".
+	 */
+	@Then("get presence of {string} page element and store into {string} variable.")
+	public void get_presence_of_page_element_and_store_into_variable(String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		Boolean visible = false;
+		try {
+			visible = (Boolean) PageObjectUtil.invokeValidatorMethod("isPresent", new Class<?>[] { Integer.TYPE },
+					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+					scenarioContext);
+		} catch(Throwable th) {
+			scenarioContext.log("Presence is 'no' because: " + th.getMessage());
+		}
+		
+		scenarioContext.addParamValue(variableName, visible ? "yes": "no");
+	}
+
+	/**
+	 * Checks the presence of the page object and store yes / no value into variable based on element presence on page.
+	 * @param po - page object / page element
+	 * @param variableName - name of the variable where system will store the presence status. For present element it will store "yes" else
+	 * 			it will store "no".
+	 */
+	@Then("get presence of {string} page object and store into {string} variable.")
+	public void check_presence_of_page_element_and_store_into_variable2(String po, String variableName) {
+		get_presence_of_page_element_and_store_into_variable(po, variableName);
+	}
+	
 	/**
 	 * 
 	 * @param po
