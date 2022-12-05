@@ -24,6 +24,7 @@ import org.uitnet.testing.smartfwk.ui.core.config.WebBrowserType;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
 import org.uitnet.testing.smartfwk.ui.core.utils.StringUtil;
 
+import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -47,17 +48,34 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 * 
 	 * @param browserType - refer {@link WebBrowserType}
 	 * @param appName - configured application name
-	 * @param jsonString - the parameters can be specified in JSON format as given in AppDriver.yaml file.
+	 * @param jsonDocument - the parameters can be specified in JSON format as given in AppDriver.yaml file.
 	 */
-	@Given("set the following properties for {string} web driver of {string} application:")
-	public void set_the_following_properties_for_web_driver_of_application(String browserType, String appName, String jsonString) {
+	@Given("set the following app driver properties for [AppName={string}, WebBrowser={string}]:")
+	public void set_the_following_driver_properties_for_app_webbrowser(String appName, String browserType, DocString jsonDocument) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		scenarioContext.overrideDriverProps(appName, browserType, jsonString);
+		scenarioContext.overrideDriverProps(appName, browserType, jsonDocument.getContent());
 	}
+	
+	/**
+	 * Properties are specified as json string at the same level as specified in AppDriver.yaml file.
+	 * 
+	 * @param appName - configured application name
+	 * @param jsonDocument - the parameters can be specified in JSON format as given in AppDriver.yaml file.
+	 */
+	@Given("set the following app driver properties for [AppName={string}]:")
+	public void set_the_following_driver_properties_for_app_webbrowser2(String appName, DocString jsonDocument) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		scenarioContext.overrideDriverProps(appName, WebBrowserType.notApplicable.getType(), jsonDocument.getContent());
+	}
+
 
 	/**
 	 * Used to open / connect to configured application.

@@ -29,6 +29,9 @@ import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
 import org.uitnet.testing.smartfwk.core.validator.ParamValue;
 import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
+import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
+import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
+import org.uitnet.testing.smartfwk.ui.core.utils.DataMatchUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.ObjectUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.StringUtil;
 import org.uitnet.testing.smartfwk.validator.ParameterValidator;
@@ -445,6 +448,69 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
+	 * This is used to verify each element of the list variable contains the expected text as per the text match mechanism specified.
+	 * 
+	 * @param listVariableName - the name of the element variable that may contain many elements.
+	 * @param expectedText - the expected text that can be used to match with each element of the list variable.
+	 * @param textMatchMechanism - the text match mechanism to validate each element value of the list varible with the expected text.
+	 */
+	@SuppressWarnings("unchecked")
+	@Then("verify each element of {string} list variable matches with {string} text where TextMatchMechanism={string}.")
+	public void verify_each_element_of_list_variable_matches_with_text_where_text_match_mechanism(
+			String listVariableName, String expectedText, String textMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		List<Object> list = (List<Object>) scenarioContext.getParamValue(listVariableName);		
+		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
+		TextMatchMechanism textMatchMechanismEnum = TextMatchMechanism.valueOf2(textMatchMechanism);
+		
+		if(list != null && !list.isEmpty()) {
+			for(Object actualValue : list) {
+				DataMatchUtil.validateTextValue(actualValue == null ? null : String.valueOf(actualValue), expectedText, textMatchMechanismEnum);
+			}
+		}
+	}
+	
+	/**
+	 * Calculates the length or size of the information present in variable and stores the calculated value into new variable.
+	 * -- In case of List, Map, Set, Array variable: It returns count of number of elements present in that collection.
+	 * -- In case of String, Integer, Long, Double, Float variable value: It returns the number of characters present.
+	 * 
+	 * @param variableName - this is an input variable that contains value(s).
+	 * @param newVariableName - this stores the length or size of the info present in variableName.
+	 */
+	@SuppressWarnings("unchecked")
+	@Then("get length/size of {string} variable and store into {string} variable.")
+	public void get_element_count_of_list_variable_and_store_into_variable(
+			String variableName, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		Object value = scenarioContext.getParamValue(variableName);
+		
+		if(value != null && value instanceof List) {
+			List<Object> list = (List<Object>) value;
+			scenarioContext.addParamValue(newVariableName, list == null ? 0 : list.size());
+		} else if(value != null && value instanceof Set) {
+			Set<Object> list = (Set<Object>) value;
+			scenarioContext.addParamValue(newVariableName, list == null ? 0 : list.size());
+		} else if(value != null && value instanceof Map) {
+			Map<Object, Object> map = (Map<Object, Object>) value;
+			scenarioContext.addParamValue(newVariableName, map == null ? 0 : map.size());
+		}  else if(value != null && value.getClass().isArray()) {
+			Object[] list = (Object[]) value;
+			scenarioContext.addParamValue(newVariableName, list == null ? 0 : list.length);
+		} else {
+			scenarioContext.addParamValue(newVariableName, value == null ? 0 : ("" + value).length());
+		}
+	}
+	
+	/**
 	 * 
 	 * @param variableName - could be any type like String, Integer, List, Array, Map or Set
 	 * @param separator
@@ -452,6 +518,7 @@ public class SmartVariableManagementStepDefs {
 	 * @param newVariableName
 	 * @param shouldTrim - if yes then it leading and trailing whitespaces will get removed (after split).
 	 */
+	@SuppressWarnings("unchecked")
 	@Then("split valueOf\\({string}) variable using {string} separator and store index\\({int}) into {string} variable [ShouldTrim={string}].")
 	public void split_valueof_variable_using_separator_and_store_index_into_variable(String variableName, String separator, int nthIndex,
 			String newVariableName, String shouldTrim) { 
@@ -536,5 +603,39 @@ public class SmartVariableManagementStepDefs {
 				scenarioContext.addParamValue(newVariableName, value);
 			}
 		}
+	}
+	
+	/**
+	 * Used to apply the existing variables value into the plain text data stored in inputVariableName.
+	 * 
+	 * @param inputVariableName - the variable name that contains input data.
+	 * @param newVariableName - the variable that stored the updated data.
+	 */
+	@Then("apply existing variables value on the plain text data present in {string} variable and store into {string} variable.")
+	public void apply_existing_variables_value_on_plain_text_data(String inputVariableName, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		String inputData = scenarioContext.getParamValueAsString(inputVariableName);
+		inputData = scenarioContext.applyParamsValueOnText(inputData);
+		scenarioContext.addParamValue(newVariableName, inputData);
+	}
+	
+	/**
+	 * Used to set the project root directory into the variable.
+	 * 
+	 * @param variableName - the name of the variable that stores the project root directory.
+	 */
+	@Then("get project root directory and store into {string} variable.")
+	public void get_project_root_directory_and_store_into_variable(String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		String projectRootDir = Locations.getProjectRootDir();
+		scenarioContext.addParamValue(variableName, projectRootDir);
 	}
 }

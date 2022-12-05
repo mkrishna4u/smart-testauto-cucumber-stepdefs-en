@@ -51,7 +51,7 @@ public class SmartRemoteFileManagementStepDefs {
 		handler.deleteFiles(remoteDirectory, TextMatchMechanism.valueOf2(fileNameMatchMechanism), expectedFileName);
 	}
 	
-	@When("download expected remote file(s) [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] from remote machine [AppName={string}, RemoteMachineName:{string}].")
+	@When("download expected remote file\\(s) [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] from remote machine [AppName={string}, RemoteMachineName:{string}].")
 	public void download_expected_files_from_remote_machine(String remoteDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -64,7 +64,7 @@ public class SmartRemoteFileManagementStepDefs {
 				Locations.getProjectRootDir() + "/test-results/downloads/");
 	}
 	
-	@When("upload local file(s) [LocalDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] on remote machine [AppName={string}, RemoteMachineName:{string}, RemoteDirectory={string}].")
+	@When("upload local file\\(s) [LocalDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] on remote machine [AppName={string}, RemoteMachineName:{string}, RemoteDirectory={string}].")
 	public void upload_expected_files_on_remote_machine(String localDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName, String remoteDirectory) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");

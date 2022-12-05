@@ -458,6 +458,40 @@ public class SmartApiStepDefs {
 	}
 	
 	/**
+	 * Used to verify the body/payload contents of HTTP Response. KeywordsInfo should be specified in JSON format as given below:
+	 * 
+	 * { keywords: ["1", "2"], inOrder: yes/no }
+	 * 
+	 * @param httpResponseVariableName
+	 * @param keywordsInfo
+	 */
+	@Then("verify body of {string} HTTP response contains following keywords in its contents:")
+	public void verify_body_of_http_response_contains_following_keywords_in_its_contents(String httpResponseVariableName, DocString keywordsInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		HttpResponse httpResponse = (HttpResponse) scenarioContext.getParamValue(httpResponseVariableName);
+		Assert.assertNotNull(httpResponse, "HTTP response not found.");
+		
+		String jsonStr = keywordsInfo.getContent();
+		
+		DocumentContext jsonObj = new JsonDocumentReader(jsonStr, false).getDocumentContext();
+		String inOrder = JsonYamlUtil.readNoException("$.inOrder", String.class, jsonObj);
+		List<String> keywords = JsonYamlUtil.readNoException("$.keywords", new TypeRef<List<String>>() {}, jsonObj);
+		if(keywords == null || keywords.size() == 0) {
+			Assert.fail("No expected keywords found to match in response body.");
+		}
+		
+		if("true".equalsIgnoreCase(inOrder) || "yes".equalsIgnoreCase(inOrder)) {
+			httpResponse.getValidator().validateBodyContainsKeywords(keywords, true);
+		} else {
+			httpResponse.getValidator().validateBodyContainsKeywords(keywords, false);
+		}
+	}
+	
+	/**
 	 * Verifies the HTTP response contains the JSON data with the following expected parameter's information:
 	 * 
 	 * | Parameter/JSON Path        | Operator           | Expected Information                                                                                               |
@@ -582,7 +616,7 @@ public class SmartApiStepDefs {
 	/**
 	 * Used to verify the contents of the downloaded file. KeywordsInfo should be specified in JSON format as given below:
 	 * 
-	 * { keywords: ["1", "2"], inOrder: true/false }
+	 * { keywords: ["1", "2"], inOrder: yes/no }
 	 * 
 	 * @param httpResponseVariableName
 	 * @param keywordsInfo
