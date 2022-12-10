@@ -41,7 +41,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 /**
- * Step definitions for variable and its value management.
+ * List steps definitions for variable and its value management.
  * 
  * @author Madhav Krishna
  *

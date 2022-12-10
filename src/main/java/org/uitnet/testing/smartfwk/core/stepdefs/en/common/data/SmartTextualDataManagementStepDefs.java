@@ -26,7 +26,7 @@ import org.uitnet.testing.smartfwk.validator.FileContentsValidator;
 import io.cucumber.java.en.When;
 
 /**
- * Used to read different text files data.
+ * Lists steps definitions related to plain textual data file reading.
  * 
  * @author Madhav Krishna
  *

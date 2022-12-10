@@ -30,8 +30,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 /**
- * This class contains the login steps and the shared steps that can be used in
- * all the scenarios defined in cucumber feature file.
+ * This class contains the basic steps definitions that are used on UI for making connection to
+ * application and setting the user profile to login to the system. Or Switching the
+ * application and user profile. Or open new URL on the configured application.
  * 
  * @author Madhav Krishna
  *
@@ -44,11 +45,26 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Properties are specified as json string at the same level as specified in AppDriver.yaml file.
+	 * Used to change the driver property only for the specific scenario. It will read the default information from
+	 * AppDriver.yaml file for the specified application and overwrite the existing property value by specifying into
+	 * jsonDocument.
 	 * 
-	 * @param browserType - refer {@link WebBrowserType}
-	 * @param appName - configured application name
-	 * @param jsonDocument - the parameters can be specified in JSON format as given in AppDriver.yaml file.
+	 * @param browserType - the web browser type. Refer {@link WebBrowserType} for supported web browser type.
+	 * @param appName - the configured application name
+	 * @param jsonDocument - the parameters can be specified in JSON format as given in 
+	 * 		test-config/apps-config/<app-name>/driver-configs/AppDriver.yaml file.
+	 * 		We do not have to specify all the parameters but whatever are needed to be changed in AppDriver.yaml file
+	 * 		just specify that parameters in JSON format. For example:
+	 * 		
+	 * 		{
+	 *        unexpectedAlertBehaviour: "dismiss and notify",
+	 *        driverCapabilities: {
+	 *          download.default_directory: "test-results/downloads"
+	 *        } 
+	 * 		}
+	 * 
+	 *   The above sample code will temporary change the driver config information to run that specific scenario based on
+	 *   updated information. System will use rest of the parameters as is from AppDriver.yaml file.
 	 */
 	@Given("set the following app driver properties for [AppName={string}, WebBrowser={string}]:")
 	public void set_the_following_driver_properties_for_app_webbrowser(String appName, String browserType, DocString jsonDocument) {
@@ -61,10 +77,25 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Properties are specified as json string at the same level as specified in AppDriver.yaml file.
+	 * Used to change the driver property only for the specific scenario. It will read the default information from
+	 * AppDriver.yaml file for the specified application and overwrite the existing property value by specifying into
+	 * jsonDocument.
 	 * 
-	 * @param appName - configured application name
-	 * @param jsonDocument - the parameters can be specified in JSON format as given in AppDriver.yaml file.
+	 * @param appName - the configured application name.
+	 * @param jsonDocument - the parameters can be specified in JSON format as given in 
+	 * 		test-config/apps-config/<app-name>/driver-configs/AppDriver.yaml file.
+	 * 		We do not have to specify all the parameters but whatever are needed to be changed in AppDriver.yaml file
+	 * 		just specify that parameters in JSON format. For example:
+	 * 		
+	 * 		{
+	 *        unexpectedAlertBehaviour: "dismiss and notify",
+	 *        driverCapabilities: {
+	 *          download.default_directory: "test-results/downloads"
+	 *        } 
+	 * 		}
+	 * 
+	 *   The above sample code will temporary change the driver config information to run that specific scenario based on
+	 *   updated information. System will use rest of the parameters as is from AppDriver.yaml file.
 	 */
 	@Given("set the following app driver properties for [AppName={string}]:")
 	public void set_the_following_driver_properties_for_app_webbrowser2(String appName, DocString jsonDocument) {
@@ -78,9 +109,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 
 
 	/**
-	 * Used to open / connect to configured application.
+	 * Used to open / connect to the configured application.
 	 * 
-	 * @param appName - configured application name
+	 * @param appName - the configured application name.
 	 */
 	@When("open {string} application.")
 	public void connect_or_switch_to_application(String appName) {
@@ -93,9 +124,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to open / connect to configured application.
+	 * Used to open / connect to the configured application.
 	 * 
-	 * @param appName - configured application name
+	 * @param appName - the configured application name.
 	 */
 	@Given("{string} application is already opened.")
 	public void connect_or_switch_to_application_2(String appName) {
@@ -103,9 +134,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to open / connect to configured application.
+	 * Used to open / connect to the configured application.
 	 * 
-	 * @param appName - configured application name
+	 * @param appName - the configured application name.
 	 */
 	@Given("application {string} is already opened.")
 	public void connect_or_switch_to_application_3(String appName) {
@@ -113,9 +144,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to open / connect to configured application.
+	 * Used to switch and connect to the configured application.
 	 * 
-	 * @param appName - configured application name
+	 * @param appName - the configured application name.
 	 */
 	@When("switch to {string} application.")
 	public void connect_or_switch_to_application_4(String appName) {
@@ -123,9 +154,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to open / connect to configured application.
+	 * Used to open / connect to the configured application.
 	 * 
-	 * @param appName - configured application name
+	 * @param appName - the configured application name.
 	 */
 	@When("connect to {string} application.")
 	public void connect_or_switch_to_application_5(String appName) {
@@ -133,9 +164,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to open / connect to configured application.
+	 * Used to open / connect to the configured application.
 	 * 
-	 * @param appName - configured application name
+	 * @param appName - the configured application name.
 	 */
 	@Given("already connected to {string} application.")
 	public void connect_or_switch_to_application_6(String appName) {
@@ -185,11 +216,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 
 	/**
-	 * This is used to connect to application using user profile.
-	 * Note: Application must be connected because this step definition
-	 * will activate the user profile with the latest activated application.
+	 * This is used to apply the user profile on the already activated/connected application.
+	 * Note: Application must be connected before specifying this step.
 	 * 
-	 * @param userProfileName - name of the user profile that can be activated on the application.
+	 * @param userProfileName - the name of the user profile that can be activated on the 
+	 * 		already connection/activated application.
 	 */
 	@Given("user is logged in using {string} user profile.")
 	public void user_login_using_user_profile(String userProfileName) {
@@ -202,11 +233,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * This is used to connect to application using user profile.
-	 * Note: Application must be connected because this step definition
-	 * will activate the user profile with the latest activated application.
+	 * This is used to apply the user profile on the already activated/connected application.
+	 * Note: Application must be connected before specifying this step.
 	 * 
-	 * @param userProfileName - name of the user profile that can be activated on the application.
+	 * @param userProfileName - the name of the user profile that can be activated on the 
+	 * 		already connection/activated application.
 	 */
 	@Given("user is already logged in using {string} user profile.")
 	public void user_login_using_user_profile_1(String userProfileName) {
@@ -214,11 +245,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * This is used to connect to application using user profile.
-	 * Note: Application must be connected because this step definition
-	 * will activate the user profile with the latest activated application.
+	 * This is used to apply the user profile on the already activated/connected application.
+	 * Note: Application must be connected before specifying this step.
 	 * 
-	 * @param userProfileName - name of the user profile that can be activated on the application.
+	 * @param userProfileName - the name of the user profile that can be activated on the 
+	 * 		already connection/activated application.
 	 */
 	@When("user login using {string} user profile.")
 	public void user_login_using_user_profile_2(String userProfileName) {
@@ -226,11 +257,11 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * This is used to connect to application using user profile.
-	 * Note: Application must be connected because this step definition
-	 * will activate the user profile with the latest activated application.
+	 * This is used to apply the user profile on the already activated/connected application.
+	 * Note: Application must be connected before specifying this step.
 	 * 
-	 * @param userProfileName - name of the user profile that can be activated on the application.
+	 * @param userProfileName - the name of the user profile that can be activated on the 
+	 * 		already connection/activated application.
 	 */
 	@When("login using {string} user profile.")
 	public void user_login_using_user_profile_3(String userProfileName) {
@@ -238,11 +269,12 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * This is used to switch user profile on the activated application.
-	 * Note: Application must be connected because this step definition
-	 * will activate the user profile with the latest activated application.
+	 * This is used to apply new user profile on the already activated/connected application.
+	 * This is called user profile switching. 
+	 * Note: Application must be connected before specifying this step.
 	 * 
-	 * @param userProfileName - name of the user profile that can be activated on the application.
+	 * @param userProfileName - the name of the user profile that can be activated on the 
+	 * 		already connection/activated application.
 	 */
 	@When("user switch to {string} user profile.")
 	public void user_login_using_user_profile_4(String userProfileName) {
@@ -250,22 +282,25 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * This is used to switch user profile on the activated application.
-	 * Note: Application must be connected because this step definition
-	 * will activate the user profile with the latest activated application.
+	 * This is used to apply new user profile on the already activated/connected application.
+	 * This is called user profile switching. 
+	 * Note: Application must be connected before specifying this step.
 	 * 
-	 * @param userProfileName - name of the user profile that can be activated on the application.
+	 * @param userProfileName - the name of the user profile that can be activated on the 
+	 * 		already connection/activated application.
 	 */
 	@When("switch to {string} user profile.")
 	public void user_login_using_user_profile_5(String userProfileName) {
 		user_login_using_user_profile(userProfileName);
 	}
-	
+		
 	/**
-	 * This is used to activate application and user profile together.
+	 * This is used to apply the specified user profile on the specified application.
+	 * This step will also set specified application as active application and then will
+	 * apply the specified user profile.
 	 * 
-	 * @param userProfileName - name of the user profile that can be activated on the application.
-	 * @param appName - the name of the configured application that can be activated.
+	 * @param userProfileName - the name of the user profile that can be activated on the specified application.
+	 * @param appName - the configured application name.
 	 */
 	@Given("user is already connected using {string} user profile on {string} application.")
 	public void user_login_using_user_profile_on_application_1(String userProfileName, String appName) {
@@ -273,10 +308,12 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * This is used to activate application and user profile together.
+	 * This is used to apply the specified user profile on the specified application.
+	 * This step will also set specified application as active application and then will
+	 * apply the specified user profile.
 	 * 
-	 * @param userProfileName - name of the user profile that can be activated on the application.
-	 * @param appName - the name of the configured application that can be activated.
+	 * @param userProfileName - the name of the user profile that can be activated on the specified application.
+	 * @param appName - the configured application name.
 	 */
 	@Given("user is already logged in using {string} user profile on {string} application.")
 	public void user_login_using_user_profile_on_application(String userProfileName, String appName) {
@@ -290,10 +327,12 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 
 	/**
-	 * This is used to switch application and user profile together.
+	 * This is used to apply the specified user profile on the specified application.
+	 * This step will also set specified application as active application and then will
+	 * apply the specified user profile.
 	 * 
-	 * @param appName - the name of the configured application that can be activated.
-	 * @param userProfileName - name of the user profile that can be activated on the application.
+	 * @param appName - the configured application name.
+	 * @param userProfileName - the name of the user profile that can be activated on the specified application.
 	 */
 	@When("switch to {string} application using {string} user profile.")
 	public void switch_to_application_using_user_profile(String appName, String userProfileName) {
@@ -307,10 +346,12 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * This is used to switch application and user profile together.
+	 * This is used to apply the specified user profile on the specified application.
+	 * This step will also set specified application as active application and then will
+	 * apply the specified user profile.
 	 * 
-	 * @param appName - the name of the configured application that can be activated.
-	 * @param userProfileName - name of the user profile that can be activated on the application.
+	 * @param appName - the configured application name.
+	 * @param userProfileName - the name of the user profile that can be activated on the specified application.
 	 */
 	@When("connect to {string} application using {string} user profile.")
 	public void switch_to_application_using_user_profile_1(String appName, String userProfileName) {
@@ -318,9 +359,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 
 	/**
-	 * Used to open URL.
+	 * Used to open specified URL.
 	 * 
-	 * @param url - URL that need to be opened.
+	 * @param url - the URL that need to be opened.
 	 */
 	@Given("URL {string} is already opened.")
 	public void open_url(String url) {
@@ -339,9 +380,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to open URL.
+	 * Used to open specified URL.
 	 * 
-	 * @param url - URL that need to be opened.
+	 * @param url - the URL that need to be opened.
 	 */
 	@Given("{string} URL is already opened.")
 	public void open_url_1(String url) {
@@ -349,9 +390,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to open URL.
+	 * Used to open specified URL.
 	 * 
-	 * @param url - URL that need to be opened.
+	 * @param url - the URL that need to be opened.
 	 */
 	@When("open {string} URL.")
 	public void open_url_2(String url) {
@@ -457,7 +498,8 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 
 	/**
-	 * Validates whether the application is set as active application.
+	 * Used to validate whether the application is set as active application.
+	 * 
 	 * @param appName - the name of the configured application.
 	 */
 	@Then("{string} application is switched successfully.")
@@ -474,7 +516,8 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Validates whether the application is set as active application.
+	 * Used to validate whether the application is set as active application.
+	 * 
 	 * @param appName - the name of the configured application.
 	 */
 	@Then("connected to {string} application successfully.")
@@ -483,7 +526,8 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Validates whether the application is set as active application.
+	 * Used to validate whether the application is set as active application.
+	 * 
 	 * @param appName - the name of the configured application.
 	 */
 	@Then("{string} application is opened successfully.")
@@ -492,7 +536,8 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 
 	/**
-	 * Validates whether the user profile is set as active profile on the active application.
+	 * Used to validate whether the user profile is set as active profile on the already active application.
+	 * 
 	 * @param userProfile - the name of the user profile on the active application.
 	 */
 	@Then("{string} user profile is switched successfully.")
@@ -509,7 +554,8 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Validates whether the user profile is set as active profile on the active application.
+	 * Used to validate whether the user profile is set as active profile on the already active application.
+	 * 
 	 * @param userProfile - the name of the user profile on the active application.
 	 */
 	@Then("{string} user profile is activated successfully.")
@@ -518,7 +564,8 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 
 	/**
-	 * Validates whether the user profile is set as active profile on the specified application.
+	 * Used to validate whether the user profile is set as active profile on the specified application.
+	 * 
 	 * @param userProfile - the name of the user profile on the active application.
 	 * @param appName - the name of the configured application.
 	 */
@@ -529,22 +576,21 @@ public class SmartUiBasicAppOperationsStepDefs {
 			return;
 		}
 		
-		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveUserProfileName(appName), userProfile,
-				TextMatchMechanism.exactMatchWithExpectedValue)) {
-			Assert.fail(userProfile + " is not activated.");
-		}
-
 		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveAppName(), appName,
 				TextMatchMechanism.exactMatchWithExpectedValue)) {
 			Assert.fail(appName + " is not activated.");
 		}
+		
+		if (!StringUtil.isTextMatchedWithExpectedValue(scenarioContext.getActiveUserProfileName(appName), userProfile,
+				TextMatchMechanism.exactMatchWithExpectedValue)) {
+			Assert.fail(userProfile + " is not activated.");
+		}
 	}
 	
 	/**
-	 * Validates whether the user profile is set as active profile on the specified application.
-	 * If not then it will try to set the specified profile as active profile on the specified application.
+	 * Used to validate whether the user profile is set as active profile on the specified application.
 	 * 
-	 * @param userProfile - the name of the user profile.
+	 * @param userProfile - the name of the user profile on the active application.
 	 * @param appName - the name of the configured application.
 	 */
 	@Then("{string} user profile is activated successfully on {string} application.")
@@ -588,6 +634,7 @@ public class SmartUiBasicAppOperationsStepDefs {
 	
 	/**
 	 * Just for information to make scenario meaningful.
+	 * 
 	 * @param action - the meaningful name of action.
 	 * @param performed - meaningful performed information.
 	 */

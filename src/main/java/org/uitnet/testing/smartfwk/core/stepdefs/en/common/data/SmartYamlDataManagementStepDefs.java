@@ -41,7 +41,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 /**
- * Used to perform CRUD operations on YAML text / objects.
+ * Lists steps definitions related to YAML file data reading.
  * 
  * @author Madhav Krishna
  *

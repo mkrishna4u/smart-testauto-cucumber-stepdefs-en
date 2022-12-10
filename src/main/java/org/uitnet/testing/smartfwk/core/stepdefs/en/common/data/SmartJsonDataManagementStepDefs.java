@@ -41,7 +41,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 /**
- * Used to perform CRUD operations on JSON text / objects.
+ * Lists steps definitions related to JSON file data reading and conversion of variable data into JSON format.
  * 
  * @author Madhav Krishna
  *

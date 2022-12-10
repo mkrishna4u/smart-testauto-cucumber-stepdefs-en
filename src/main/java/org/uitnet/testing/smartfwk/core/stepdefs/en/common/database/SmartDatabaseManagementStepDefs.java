@@ -31,7 +31,7 @@ import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.When;
 
 /**
- * Step definitions for database management to perform CRUD operations.
+ * Lists steps definitions related to database management to perform CRUD operations on database.
  * 
  * @author Madhav Krishna
  *

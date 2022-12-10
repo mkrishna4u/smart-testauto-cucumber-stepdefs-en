@@ -39,7 +39,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 /**
- * Used to perform CRUD operations on XML text / objects.
+ * Lists steps definitions related to XML file data reading.
  * 
  * @author Madhav Krishna
  *

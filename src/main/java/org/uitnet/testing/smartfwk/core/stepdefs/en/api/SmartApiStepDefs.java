@@ -48,7 +48,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 /**
- * Used to perform API testing automation.
+ * Lists steps definitions related to API testing automation.
  * 
  * @author Madhav Krishna
  *

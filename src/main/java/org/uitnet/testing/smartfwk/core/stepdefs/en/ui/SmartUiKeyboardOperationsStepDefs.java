@@ -29,7 +29,11 @@ import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 import io.cucumber.java.en.When;
 
 /**
- * Step definitions for Home page.
+ * Lists step definitions related to keyboard commands on the UI page objects / page elements.
+ * 
+ * Example: 
+ *   > ["CONTROL", "A"] to select all text in a specified page object / page element.
+ *   > ["CONTROL", "C"] to copy selected text in clipboard.
  * 
  * @author Madhav Krishna
  *
@@ -45,7 +49,7 @@ public class SmartUiKeyboardOperationsStepDefs {
 	}
 
 	/**
-	 * Used to perform single / multiple keys operations. like copy, paste, tab and function key oprations.
+	 * Used to perform single / multiple keys operations. like copy, paste, tab and function key operations.
 	 * To specify multiple keys, format is given below:
 	 * 
 	 * ["CONTROL", "SHIFT", "A"]
@@ -53,11 +57,16 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 * It will always fire keydown on all keys other than last specified key. Also it will fire keypress event on last key.
 	 * If there is only one key then it will fire keypress event.
 	 * 
-	 * Refer {@link Keys} enum for more information on key check .
+	 * Refer {@link Keys} enum for more information on key name.
 	 * 
 	 * @param keys - comma separated keys within square bracket.
-	 * @param po - page object / page element.
-	 * @param operation - operation to perform
+	 * @param po - the page object / page element can be specified in two way:
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       
+	 * @param operation - meaningful expected operation name.
 	 * 
 	 */
 	@When("use {string} key\\(s) on {string} page element to {string}.")
@@ -78,26 +87,53 @@ public class SmartUiKeyboardOperationsStepDefs {
 		domObjectValidator.sendKeys(poInfo.getMaxIterationsToLocateElements(), Keys.chord(keysChord));
 	}
 	
+	/**
+	 * Used to perform single / multiple keys operations. like copy, paste, tab and function key operations.
+	 * To specify multiple keys, format is given below:
+	 * 
+	 * ["CONTROL", "SHIFT", "A"]
+	 * 
+	 * It will always fire keydown on all keys other than last specified key. Also it will fire keypress event on last key.
+	 * If there is only one key then it will fire keypress event.
+	 * 
+	 * Refer {@link Keys} enum for more information on key name.
+	 * 
+	 * @param keys - comma separated keys within square bracket.
+	 * @param po - the page object / page element can be specified in two way:
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       
+	 * @param operation - meaningful expected operation name.
+	 * 
+	 */
 	@When("use {string} key\\(s) on {string} page object to {string}.")
 	public void use_keys_on_page_object_to_perform_operation_1(String keys, String po, String operation) {
 		use_keys_on_page_object_to_perform_operation(keys, po, operation);
 	}
-	
-	
+		
 	/**
-	 * Used to perform keys and mouse event together like "CONTROL + click" etc.
+	 * Used to perform keys and mouse operations together like "CONTROL + click" etc.
 	 * To specify multiple keys, format is given below:
 	 * 
 	 * ["CONTROL", "SHIFT"]
 	 * 
-	 * It will always fire keydown on all keys.
+	 * It will always fire keydown on all keys and then the mouse event. 
 	 * 
-	 * @see org.openqa.selenium.Keys enum for more information on key check .
+	 * Refer {@link Keys} enum for more information on key name.
 	 * 
-	 * @param keys - comma separated keys within square bracket. only control keys are permissible that are defined in org.openqa.selenium.Keys class.
-	 * @param mouseEvent - supported mouseEvents- click, rightClick, doubleClick
-	 * @param po - page object
-	 * @param operation - operation to perform
+	 * NOTE: At the end of this step it will release all the keydown operations.
+	 * 
+	 * @param keys - comma separated keys within square bracket.
+	 * @param mouseEvent - supported mouseEvents: click, rightClick, doubleClick.
+	 * @param po - the page object / page element can be specified in two way:
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       
+	 * @param operation - meaningful expected operation name.
 	 * 
 	 */
 	@When("use {string} key\\(s) and {string} mouse event together on {string} page element to {string}.")
@@ -150,6 +186,29 @@ public class SmartUiKeyboardOperationsStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to perform keys and mouse operations together like "CONTROL + click" etc.
+	 * To specify multiple keys, format is given below:
+	 * 
+	 * ["CONTROL", "SHIFT"]
+	 * 
+	 * It will always fire keydown on all keys and then the mouse event. 
+	 * 
+	 * Refer {@link Keys} enum for more information on key name.
+	 * 
+	 * NOTE: At the end of this step it will release all the keydown operations.
+	 * 
+	 * @param keys - comma separated keys within square bracket.
+	 * @param mouseEvent - supported mouseEvents: click, rightClick, doubleClick.
+	 * @param po - the page object / page element can be specified in two way:
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       
+	 * @param operation - meaningful expected operation name.
+	 * 
+	 */
 	@When("use {string} key\\(s) and {string} mouse event together on {string} page object to {string}.")
 	public void use_keys_and_mouse_event_together_on_page_object_to_1(String keys, String mouseEvent, String po, String operation) {
 		use_keys_and_mouse_event_together_on_page_object_to(keys, mouseEvent, po, operation);

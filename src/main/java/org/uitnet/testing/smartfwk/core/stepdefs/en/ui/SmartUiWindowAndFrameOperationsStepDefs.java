@@ -24,7 +24,7 @@ import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import io.cucumber.java.en.When;
 
 /**
- * Step definitions for Home page.
+ * List step definitions for web browser multiple windows handling and frame handling.
  * 
  * @author Madhav Krishna
  *
@@ -39,6 +39,13 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		this.scenarioContext = scenarioContext;
 	}
 	
+	/**
+	 * Used to switch to the new window by specifying the window handle name.
+	 * 
+	 * @param windowHandleName - the window handle name.
+	 *   NOTE: To get the window handle, we first have to run this step to get all available window 
+	 *         handles. Then you can use the specific window handle to switch to a particular window.
+	 */
 	@When("switch to {string} window.")
 	public void switch_to_window(String windowHandleName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -51,11 +58,23 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().window(windowHandleName);
 	}
 	
+	/**
+	 * Used to focus to the new window by specifying the window handle name. This is same operation as
+	 * window switching.
+	 * 
+	 * @param windowHandleName - the window handle name.
+	 *   NOTE: To get the window handle, we first have to run this step to get all available window 
+	 *         handles. Then you can use the specific window handle to switch to a particular window.
+	 */
 	@When("focus {string} window.")
 	public void switch_to_window_1(String windowHandleName) {
 		switch_to_window(windowHandleName);
 	}
 
+	/**
+	 * Used to default setting of the web driver. In this case if you already switched to different window 
+	 * or frame then this step will switch back to parent window or parent frame. 
+	 */
 	@When("switch to default content.")
 	public void switch_to_default_content() {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -66,6 +85,15 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().defaultContent();
 	}
 
+	/**
+	 * Used to switch to different frame of the DOM. So that web driver can access the page object / page elements
+	 * of the switched frame.
+	 * 
+	 * @param frameNameOrId - the ID or the name of the frame.
+	 *   NOTE: If we give frameNameOrId = "parent" then it will switch the driver pointer to parent frame.
+	 *   NOTE: If we give frameNameOrId = "INDEX:2" then it will switch the driver pointer to second frame.
+	 *   Else it will use the value to treat as ID or Name of the frame.
+	 */
 	@When("switch to {string} frame.")
 	public void switch_to_frame(String frameNameOrId) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -83,6 +111,12 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		}
 	}
 
+	/**
+	 * Used to switch to different frame of the DOM by specifying the index value. So that web driver can access the page object / page elements
+	 * of the switched frame.
+	 * 
+	 * @param frameNumber - the frame index in the page.
+	 */
 	@When("switch to frame number {int}.")
 	public void switch_to_frame_number(Integer frameNumber) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {

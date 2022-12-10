@@ -27,7 +27,7 @@ import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 import io.cucumber.java.en.When;
 
 /**
- * Used to perform uploaded file operation using UI.
+ * Lists steps definitions to perform uploaded file operation using UI.
  * 
  * @author Madhav Krishna
  *
@@ -44,7 +44,11 @@ public class SmartFileUploadStepDefs {
 	 * 
 	 * @param files - relative path in JSON array format like
 	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
-	 * @param po - page object used to upload the files.
+	 * @param po - the page object / page element can be specified in two way:
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 */
 	@When("upload {string} file\\(s) using {string} page element.")
 	public void upload_file_using_page_element(String files, String po) {
@@ -68,7 +72,11 @@ public class SmartFileUploadStepDefs {
 	 * 
 	 * @param files - relative path in JSON array format like
 	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
-	 * @param po - page object used to upload the files.
+	 * @param po - the page object / page element can be specified in two way:
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 */
 	@When("upload {string} file\\(s) using {string} page object.")
 	public void upload_file_using_page_element_2(String files, String po) {

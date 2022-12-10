@@ -29,7 +29,7 @@ import org.uitnet.testing.smartfwk.validator.ParameterValidator;
 import io.cucumber.java.en.When;
 
 /**
- * Used to set and clear conditions to run step selectively.
+ * Lists steps definitions related to set and clear conditions to run step conditionally.
  * 
  * @author Madhav Krishna
  *

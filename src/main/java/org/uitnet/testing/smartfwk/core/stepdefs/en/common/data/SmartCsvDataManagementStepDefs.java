@@ -26,7 +26,7 @@ import org.uitnet.testing.smartfwk.ui.core.file.reader.support.Table;
 import io.cucumber.java.en.When;
 
 /**
- * Used to perform CRUD operations on CSV files.
+ * Lists steps definitions related to CSV file data reading.
  * 
  * @author Madhav Krishna
  *

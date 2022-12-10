@@ -25,7 +25,7 @@ import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.When;
 
 /**
- * Used to generate data.
+ * Lists steps definitions to generate test data automatically.
  * 
  * @author Madhav Krishna
  *
@@ -38,7 +38,7 @@ public class SmartDataGeneratorStepDefs {
 	}
 
 	/**
-	 * Used to generate the textual data based on the inputs provided.
+	 * Used to generate the textual data based on the inputs provided and store the generated data into the variable. 
 	 * 
 	 * @param fieldName - field name or any meaningful name for that we would like to generate the data.
 	 * @param variableName - used to store the generated data.

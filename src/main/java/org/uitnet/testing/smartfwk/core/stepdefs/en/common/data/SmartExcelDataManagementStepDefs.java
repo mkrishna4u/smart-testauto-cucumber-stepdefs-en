@@ -26,7 +26,7 @@ import org.uitnet.testing.smartfwk.ui.core.file.reader.support.Table;
 import io.cucumber.java.en.When;
 
 /**
- * Used to perform CRUD operations on Excel files.
+ * Lists steps definitions related to Excel file data reading.
  * 
  * @author Madhav Krishna
  *
