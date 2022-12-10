@@ -38,6 +38,12 @@ public class SmartTextualDataManagementStepDefs {
 		this.scenarioContext = scenarioContext;
 	}
 
+	/**
+	 * Used to read data from any text file as is and store into new variable.
+	 * 
+	 * @param relativeFilePath - the relative path of the text file with respect to project root directory.
+	 * @param variableName - the name of the variable that stores the text file contents. 
+	 */
 	@When("read {string} file data as text and store into {string} variable.")
 	public void read_file_data_as_text_and_store_into_variable(String relativeFilePath, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -50,6 +56,14 @@ public class SmartTextualDataManagementStepDefs {
 		scenarioContext.addParamValue(variableName, fileContentValidator.extractFileContents());
 	}
 	
+	/**
+	 * Used to read any type (i.e. Excel, PDF, Word, PPT, image etc..) of file data and store into the new variable.
+	 * 
+	 * @param relativeFilePath - the relative path of the file with respect to project root directory.
+	 * @param variableName - the name of the variable that stores the text file contents. 
+	 * @param ocrLanguage - the OCR language name like eng, fr etc. that the file contains data.
+	 * @param shouldPrintOnConsole - this is generally used for debugging purpose to see the contents of the file.
+	 */
 	@When("read {string} file data as text and store into {string} variable [OCRLanguage={string}, ShouldPrintOnConsole={string}].")
 	public void read_file_data_as_text_and_store_into_variable(String relativeFilePath, String variableName, String ocrLanguage, String shouldPrintOnConsole) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {

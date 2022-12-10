@@ -542,7 +542,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	
 	/**
 	 * Validates whether the user profile is set as active profile on the specified application.
-	 * @param userProfile - the name of the user profile on the active application.
+	 * If not then it will try to set the specified profile as active profile on the specified application.
+	 * 
+	 * @param userProfile - the name of the user profile.
 	 * @param appName - the name of the configured application.
 	 */
 	@Then("{string} user profile is activated successfully on {string} application.")
@@ -566,7 +568,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to take screenshot while the scenario is running and store screenshot filename into variable for feature use.
+	 * Used to take screenshot while the scenario is running and store screenshot 
+	 * filename into variable for future use.
+	 * 
 	 * @param variableName - name of the variable.
 	 */
 	@Then("take screenshot and store filename in {string} variable.")
@@ -598,9 +602,9 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
-	 * Adds pause between the step.
+	 * Used to add pause between the steps.
 	 * 
-	 * @param waitNumSeconds - numeric value that represent how many minutes the pause should be added.
+	 * @param waitNumSeconds - numeric value that represent how many seconds the pause should be added.
 	 */
 	@When("wait for {int} seconds.")
 	public void wait_for_seconds(int waitNumSeconds) {

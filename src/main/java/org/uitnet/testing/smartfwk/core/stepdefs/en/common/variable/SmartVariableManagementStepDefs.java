@@ -28,6 +28,7 @@ import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
 import org.uitnet.testing.smartfwk.core.validator.ParamValue;
+import org.uitnet.testing.smartfwk.core.validator.ParamValueType;
 import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
@@ -40,7 +41,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 /**
- * Step definitions for variable management.
+ * Step definitions for variable and its value management.
  * 
  * @author Madhav Krishna
  *
@@ -55,6 +56,11 @@ public class SmartVariableManagementStepDefs {
 		this.scenarioContext = scenarioContext;
 	}
 	
+	/**
+	 * Used to store null value into the variable.
+	 * 
+	 * @param variableName - the name of the variable in which the null value will get stored.
+	 */
 	@When("store null value into {string} variable.")
 	public void store_null_value_into_variable(String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -65,6 +71,11 @@ public class SmartVariableManagementStepDefs {
 		scenarioContext.addParamValue(variableName, null);		
 	}
 	
+	/**
+	 * Store empty list into the variable.
+	 * 
+	 * @param variableName - the name of the variable in which the empty list will get stored.
+	 */
 	@When("store empty list into {string} variable.")
 	public void store_empty_list_into_variable(String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -76,6 +87,11 @@ public class SmartVariableManagementStepDefs {
 		scenarioContext.addParamValue(variableName, list);		
 	}
 	
+	/**
+	 * Used to print the value / contents of the variable in report file.
+	 * 
+	 * @param variableName - the name of the variable.
+	 */
 	@When("print {string} variable.")
 	public void print_variable(String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -86,6 +102,12 @@ public class SmartVariableManagementStepDefs {
 		scenarioContext.log(variableName);
 	}
 	
+	/**
+	 * Used to append the prefix text to each item present in list variable.
+	 * 
+	 * @param prefix - the prefix text that will be appended to each item present in the list variable.
+	 * @param variableName - the name of the list variable.
+	 */
 	@SuppressWarnings("unchecked")
 	@When("append {string} prefix to each value present in {string} list variable.")
 	public void append_prefix_to_each_value_in_list_variable(String prefix, String variableName) {
@@ -104,6 +126,14 @@ public class SmartVariableManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to append prefix text to the value present in the specified variable.
+	 * Note: It will convert the value of variable into String form and then prepend the prefix text
+	 * into the variable value and convert the variable value into String/Text form.
+	 * 
+	 * @param prefix - the prefix text that will be prepended in the value of specified variable.
+	 * @param variableName - the name of the variable.
+	 */
 	@When("append {string} prefix to the value of {string} variable.")
 	public void append_prefix_to_the_value_of_variable(String prefix, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -118,6 +148,12 @@ public class SmartVariableManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to append the suffix text to each item present in list variable.
+	 * 
+	 * @param suffix - the suffix text that will be appended to each item present in the list variable.
+	 * @param variableName - the name of the list variable.
+	 */
 	@SuppressWarnings("unchecked")
 	@When("append {string} suffix to each value present in {string} list variable.")
 	public void append_suffix_to_each_value_in_list_variable(String suffix, String variableName) {
@@ -136,6 +172,14 @@ public class SmartVariableManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to append suffix text to the value present in the specified variable.
+	 * Note: It will convert the value of variable into String form and then append the suffix text
+	 * into the variable value and convert the variable value into String/Text form.
+	 * 
+	 * @param suffix - the suffix text that will be appended in the value of specified variable.
+	 * @param variableName - the name of the variable.
+	 */
 	@When("append {string} suffix to the value of {string} variable.")
 	public void append_suffix_to_the_value_of_variable(String suffix, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -149,6 +193,13 @@ public class SmartVariableManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to append prefix and suffix text in each item present into list variable.
+	 * 
+	 * @param prefix - the prefix text to be appended.
+	 * @param suffix - the suffix text to be appended.
+	 * @param variableName - the name of the variable.
+	 */
 	@SuppressWarnings("unchecked")
 	@When("append prefix={string} and suffix={string} to each value present in {string} list variable.")
 	public void append_prefix_and_suffix_to_each_value_in_list_variable(String prefix, String suffix, String variableName) {
@@ -167,6 +218,15 @@ public class SmartVariableManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to append prefix and suffix text to the value present in the specified variable.
+	 * Note: It will convert the value of variable into String form and then append the prefix and suffix text
+	 * into the variable value and convert the variable value into String/Text form.
+	 * 
+	 * @param prefix - the prefix text that will be appended in the value of specified variable.
+	 * @param suffix - the suffix text that will be appended in the value of specified variable.
+	 * @param variableName - the name of the variable.
+	 */
 	@When("append prefix={string} and suffix={string} to the value of {string} variable.")
 	public void append_prefix_and_suffix_to_the_value_of_variable(String prefix, String suffix, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -180,6 +240,15 @@ public class SmartVariableManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to convert the variable value into list using specified delimiter.
+	 * Note: It will trim the value (means will remove the leading and trailing 
+	 * whitespaces from the value) and store into the list.
+	 * 
+	 * @param variableName - the name of the variable that value will be converted into list form.
+	 * @param delimiter - the delimiter to split the value.
+	 * @param newVariableName - the new variable name that stores the converted value.
+	 */
 	@When("convert {string} variable value into list using delimiter={string} and store into {string} variable.")
 	public void convert_variable_value_into_list_using_delimiter_and_store_into_variable(String variableName, String delimiter, String newVariableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -198,9 +267,17 @@ public class SmartVariableManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to convert the list variable value into plain text separated by the specified delimiter.
+	 * And store into new variable.
+	 * 
+	 * @param variableName - the list variable name used to converts its contents into plain text.
+	 * @param separator - the separator used to append all items of the list.
+	 * @param newVariableName - the new variable name that stores the converted value.
+	 */
 	@SuppressWarnings("unchecked")
-	@When("convert {string} list variable value into plain text using delimiter={string} and store into {string} variable.")
-	public void convert_list_variable_value_into_plain_text_using_delimiter_and_store_into_variable(String variableName, String delimiter, String newVariableName) {
+	@When("convert {string} list variable value into plain text using separator={string} and store into {string} variable.")
+	public void convert_list_variable_value_into_plain_text_using_separator_and_store_into_variable(String variableName, String separator, String newVariableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -213,17 +290,27 @@ public class SmartVariableManagementStepDefs {
 				if("".equals(str)) {
 					str = elem;
 				} else {
-					str = str + delimiter + elem;
+					str = str + separator + elem;
 				}
 			}
 			scenarioContext.addParamValue(newVariableName, str);
 		}
 	}
 	
+	/**
+	 * Used to convert the list variable value into plain text by appending prefix and suffix to 
+	 * each item of the list. The value in plain text are separated by separator.
+	 * 
+	 * @param variableName - the list variable name.
+	 * @param separator - the separated that will be used to append list items.
+	 * @param valuePrefix - prefix text that will be prepended to each item of the list.
+	 * @param valueSuffix - suffix text that will be appended to each item of the list.
+	 * @param newVariableName - the new variable name that stores the converted value.
+	 */
 	@SuppressWarnings("unchecked")
-	@When("convert {string} list variable value into plain text using delimiter={string}, valuePrefix={string}, valueSuffix={string} and store into {string} variable.")
-	public void convert_list_variable_value_into_plain_text_using_delimiter_valueprefix_valuesuffix_and_store_into_variable(
-			String variableName, String delimiter, 
+	@When("convert {string} list variable value into plain text using separator={string}, valuePrefix={string}, valueSuffix={string} and store into {string} variable.")
+	public void convert_list_variable_value_into_plain_text_using_separator_valueprefix_valuesuffix_and_store_into_variable(
+			String variableName, String separator, 
 			String valuePrefix, String valueSuffix, String newVariableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -237,7 +324,7 @@ public class SmartVariableManagementStepDefs {
 				if("".equals(str)) {
 					str = (elem == null) ? elem : valuePrefix + elem + valueSuffix;
 				} else {
-					str = (elem == null) ? str + delimiter + elem : str + delimiter + valuePrefix + elem + valueSuffix;
+					str = (elem == null) ? str + separator + elem : str + separator + valuePrefix + elem + valueSuffix;
 				}
 			}
 			scenarioContext.addParamValue(newVariableName, str);
@@ -245,16 +332,20 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
+	 * Used to convert the list variable value into plain text by appending prefix and suffix to 
+	 * each item of the list. The value in plain text are separated by separator. 
+	 * NOTE: If list variable is empty then it will return default value enclosed with provided prefix and suffix.
 	 * 
-	 * @param variableName
-	 * @param delimiter
-	 * @param valuePrefix
-	 * @param valueSuffix
+	 * @param variableName - the list variable name.
+	 * @param separator - the separated that will be used to append list items.
+	 * @param valuePrefix - prefix text that will be prepended to each item of the list.
+	 * @param valueSuffix - suffix text that will be appended to each item of the list.
 	 * @param defaultValue - if list variable is empty then it will return default value enclosed with provided prefix and suffix.
+	 * @param newVariableName - the new variable name that stores the converted value.
 	 */
 	@SuppressWarnings("unchecked")
-	@When("convert {string} list variable value into plain text using delimiter={string}, valuePrefix={string}, valueSuffix={string}, default={string} and store into {string} variable.")
-	public void convert_list_variable_value_into_plain_text_using_delimiter_valueprefix_valuesuffix_default_and_store_into_variable(String variableName, String delimiter, 
+	@When("convert {string} list variable value into plain text using separator={string}, valuePrefix={string}, valueSuffix={string}, default={string} and store into {string} variable.")
+	public void convert_list_variable_value_into_plain_text_using_separator_valueprefix_valuesuffix_default_and_store_into_variable(String variableName, String separator, 
 			String valuePrefix, String valueSuffix, String defaultValue, String newVariableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -268,7 +359,7 @@ public class SmartVariableManagementStepDefs {
 				if("".equals(str)) {
 					str = (elem == null) ? elem : valuePrefix + elem + valueSuffix;
 				} else {
-					str = (elem == null) ? str + delimiter + elem : str + delimiter + valuePrefix + elem + valueSuffix;
+					str = (elem == null) ? str + separator + elem : str + separator + valuePrefix + elem + valueSuffix;
 				}
 			}
 			if(StringUtil.isEmptyAfterTrim(str)) {
@@ -283,6 +374,12 @@ public class SmartVariableManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to copy one variable value to new new variable.
+	 * 
+	 * @param variableName - the name of the source variable.
+	 * @param newVariableName - the target variable name where the value will be copied.
+	 */
 	@SuppressWarnings("unchecked")
 	@When("copy {string} variable value to {string} variable.")
 	public void copy_variable_value_to_variable(String variableName, String newVariableName) {
@@ -326,11 +423,17 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
-	 * Used to verify the variable value with expected value.
+	 * Used to verify the variable value with expected value using the specified operator.
 	 * 
-	 * @param variableName1
-	 * @param operator
-	 * @param expectedValue
+	 * @param variableName1 - the name of the variable.
+	 * @param operator - the operator used to verify the variable value with expected value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param expectedValue - the expected value. The syntax is a JSON syntax:
+	 * 		{v: <value-here>, valueType: "string"}
+	 *    For valueType, refer {@link ParamValueType}
+	 *    Or we can directly specify value like:
+	 *    	"test value"
+	 * 
 	 */
 	@Then("verify valueOf\\({string}) variable {string} {string}.")
 	public void verify_valueof_variable1_op_expected_value(String variableName1, String operator, String expectedValue) { 
@@ -358,10 +461,12 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
-	 * Matches variableName1 variable value against variableName2 value using operator.
-	 * @param variableName1
-	 * @param operator - for operator please refer @see ValueMatchOperator class.
-	 * @param variableName2
+	 * Used to verify variableName1 variable value with variableName2 value using specified operator.
+	 * 
+	 * @param variableName1 - the name of the variable.
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param variableName2 - the expected variable name that contains the value.
 	 */
 	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable.")
 	public void verify_valueof_variable1_op_valueof_variable2(String variableName1, String operator, String variableName2) { 
@@ -389,11 +494,14 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
-	 * Matches variableName1 variable value against variableName2 value using operator.
-	 * @param variableName1
-	 * @param operator - for operator please refer @see ValueMatchOperator class.
-	 * @param variableName2
-	 * @param extraInfo - extra info to provide to justify the 
+	 * Used to verify variableName1 variable value with variableName2 value using specified operator.
+	 * In this step we can add some meaningful information.
+	 * 
+	 * @param variableName1 - the name of the variable.
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param variableName2 - the expected variable name that contains the value.
+	 * @param extraInfo - extra info to provide to justification. 
 	 */
 	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable to {string}.")
 	public void verify_valueof_variable1_op_valueof_variable2_extrainfo(String variableName1, String operator, String variableName2, String extraInfo) { 
@@ -401,11 +509,16 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
-	 * Matches variableName1 variable value against variableName2 value using operator.
-	 * @param variableName1
-	 * @param operator - for operator please refer @see ValueMatchOperator class.
-	 * @param variableName2
-	 * @param textMatchMechanism - for operator please refer @see TextMatchMechanism class.
+	 * Used to verify the value of variableName1 variable value with variableName2 value using specified operator.
+	 * In this step we can specify the TextMatchMechanism in case if the variable is list type. So system will
+	 * match each item of the list with other variable value as per the specified TextMatchMechanism.
+	 * 
+	 * @param variableName1 - the name of the variable.
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param variableName2 - the expected variable name that contains the value.
+	 * @param textMatchMechanism - the text match mechanism used to verify the value in list items. 
+	 * 		For text match mechanism, refer {@link TextMatchMechanism} class.
 	 */
 	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable [TextMatchMechanism={string}].")
 	public void verify_valueof_variable1_op_valueof_variable2_textmatchmechanism(String variableName1, String operator, String variableName2, String textMatchMechanism) { 
@@ -434,11 +547,17 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
-	 * Matches variableName1 variable value against variableName2 value using operator.
-	 * @param variableName1
-	 * @param operator - for operator please refer @see ValueMatchOperator class.
-	 * @param variableName2
-	 * @param textMatchMechanism - for operator please refer @see TextMatchMechanism class.
+	 * Used to verify the value of variableName1 variable value with variableName2 value using specified operator.
+	 * In this step we can specify the TextMatchMechanism in case if the variable is list type. So system will
+	 * match each item of the list with other variable value as per the specified TextMatchMechanism.
+	 * NOTE: In this step, we can also be able to specify extra meaningful information to make scenario meaningful.
+	 * 
+	 * @param variableName1 - the name of the variable.
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param variableName2 - the expected variable name that contains the value.
+	 * @param textMatchMechanism - the text match mechanism used to verify the value in list items. 
+	 * 		For text match mechanism, refer {@link TextMatchMechanism} class.
 	 * @param extraInfo - extra info to provide to justify the 
 	 */
 	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable [TextMatchMechanism={string}] to {string}.")
@@ -448,11 +567,12 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
-	 * This is used to verify each element of the list variable contains the expected text as per the text match mechanism specified.
+	 * Used to verify each element of the list variable contains the expected text as per the text match mechanism specified.
 	 * 
-	 * @param listVariableName - the name of the element variable that may contain many elements.
+	 * @param listVariableName - the name of the list variable that contains elements.
 	 * @param expectedText - the expected text that can be used to match with each element of the list variable.
-	 * @param textMatchMechanism - the text match mechanism to validate each element value of the list varible with the expected text.
+	 * @param textMatchMechanism  - the text match mechanism used to verify the value in list items. 
+	 * 		For text match mechanism, refer {@link TextMatchMechanism} class.
 	 */
 	@SuppressWarnings("unchecked")
 	@Then("verify each element of {string} list variable matches with {string} text where TextMatchMechanism={string}.")
@@ -476,8 +596,8 @@ public class SmartVariableManagementStepDefs {
 	
 	/**
 	 * Calculates the length or size of the information present in variable and stores the calculated value into new variable.
-	 * -- In case of List, Map, Set, Array variable: It returns count of number of elements present in that collection.
-	 * -- In case of String, Integer, Long, Double, Float variable value: It returns the number of characters present.
+	 * Note1: In case of List, Map, Set, Array variable: It returns count of number of elements present in that collection.
+	 * Note2: In case of String, Integer, Long, Double, Float variable value: It returns the number of characters present.
 	 * 
 	 * @param variableName - this is an input variable that contains value(s).
 	 * @param newVariableName - this stores the length or size of the info present in variableName.
@@ -511,12 +631,16 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
-	 * 
+	 * Used to split the value present in the specified variable using the specified separator and stores the nth index value into new variable.
+	 * In case of List, Array or Set variable, it will split each item and store the nth index into the new list. 
+	 * In case of Map variable, it will split the value of each key and will store the nth index into the new map against the same key.
+	 *  
 	 * @param variableName - could be any type like String, Integer, List, Array, Map or Set
-	 * @param separator
+	 * @param separator - used to separate the values.
 	 * @param nthIndex - index starts with 0. So 0th index means first value from split.
-	 * @param newVariableName
-	 * @param shouldTrim - if yes then it leading and trailing whitespaces will get removed (after split).
+	 * @param newVariableName - the variable name that will store the converted information.
+	 * @param shouldTrim - if yes then after split leading and trailing whitespaces will get removed.
+	 * 		valid values: yes, no
 	 */
 	@SuppressWarnings("unchecked")
 	@Then("split valueOf\\({string}) variable using {string} separator and store index\\({int}) into {string} variable [ShouldTrim={string}].")

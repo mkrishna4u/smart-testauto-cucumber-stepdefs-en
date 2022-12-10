@@ -22,6 +22,7 @@ import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
 import org.uitnet.testing.smartfwk.core.validator.ParamValue;
 import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
+import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
 import org.uitnet.testing.smartfwk.ui.core.utils.ObjectUtil;
 import org.uitnet.testing.smartfwk.validator.ParameterValidator;
 
@@ -40,15 +41,26 @@ public class SmartConditionManagementStepDefs {
 		this.scenarioContext = scenarioContext;
 	}
 
+	/**
+	 * Used to set condition or start the conditional block, so that the below steps can run conditionally until the conditional block for this named condition is not end by the Step given below:
+	 * 
+	 *   And condition="condition-name"-End.
+	 * 
+	 * @param conditionName - the meaningful name of the condition.
+	 * @param conditionLeftValue - the left value before the operator. You can also specify variable name.
+	 * @param operator - the operator that can be used to match two values. For more details on operators please refer
+	 * 		{@link ValueMatchOperator} class.
+	 * @param conditionRightValue - the right value after the operator. You can also specify variable name.
+	 */
 	@When("condition={string}-Start> if [{string} {string} {string}] condition is true then execute the steps below.")
-	public void set_condition(String conditionName, String variableName1, String operator, String variableName2) {
+	public void set_condition(String conditionName, String conditionLeftValue, String operator, String conditionRightValue) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		Object avalue = scenarioContext.getParamValueNullAsParamName(variableName1);
-		Object evalue = scenarioContext.getParamValueNullAsParamName(variableName2);
+		Object avalue = scenarioContext.getParamValueNullAsParamName(conditionLeftValue);
+		Object evalue = scenarioContext.getParamValueNullAsParamName(conditionRightValue);
 		ValueMatchOperator oper = ValueMatchOperator.valueOf2(operator);
 
 		ParamValue pv1 = ObjectUtil.convertObjectToParamValue(avalue);
@@ -56,7 +68,7 @@ public class SmartConditionManagementStepDefs {
 
 		ObjectUtil.fixValueTypesInParamValueObjects(pv1, oper, pv2);
 
-		ParamPath pPath = new ParamPath(variableName1, pv1.getValueTypeAsStr());
+		ParamPath pPath = new ParamPath(conditionLeftValue, pv1.getValueTypeAsStr());
 
 		ExpectedInfo eInfo = new ExpectedInfo();
 		eInfo.setEv(pv2.getV());
@@ -70,15 +82,28 @@ public class SmartConditionManagementStepDefs {
 		}
 	}
 	
+	/**
+	 * Used to set condition or start the conditional block, so that the below steps can run conditionally until the conditional block for this named condition is not end by the Step given below:
+	 * 
+	 *   And condition="condition-name"-End.
+	 * 
+	 * @param conditionName - the meaningful name of the condition.
+	 * @param conditionLeftValue - the left value before the operator. You can also specify variable name.
+	 * @param operator - the operator that can be used to match two values. For more details on operators please refer
+	 * 		{@link ValueMatchOperator} class.
+	 * @param conditionRightValue - the right value after the operator. You can also specify variable name.
+	 * @param textMatchMechanism - the text match mechanism that will be used to match the conditionRightValue with conditionLeftValue. 
+	 * 		For more detail on the text match mechanism please refer {@link TextMatchMechanism}.
+	 */
 	@When("condition={string}-Start> if [{string} {string} {string} and TextMatchCondition={string}] condition is true then execute the steps below.")
-	public void set_condition2(String conditionName, String variableName1, String operator, String variableName2, String textMatchMechanism) {
+	public void set_condition2(String conditionName, String conditionLeftValue, String operator, String conditionRightValue, String textMatchMechanism) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		Object avalue = scenarioContext.getParamValueNullAsParamName(variableName1);
-		Object evalue = scenarioContext.getParamValueNullAsParamName(variableName2);
+		Object avalue = scenarioContext.getParamValueNullAsParamName(conditionLeftValue);
+		Object evalue = scenarioContext.getParamValueNullAsParamName(conditionRightValue);
 		ValueMatchOperator oper = ValueMatchOperator.valueOf2(operator);
 
 		ParamValue pv1 = ObjectUtil.convertObjectToParamValue(avalue);
@@ -86,7 +111,7 @@ public class SmartConditionManagementStepDefs {
 
 		ObjectUtil.fixValueTypesInParamValueObjects(pv1, oper, pv2);
 
-		ParamPath pPath = new ParamPath(variableName1, pv1.getValueTypeAsStr());
+		ParamPath pPath = new ParamPath(conditionLeftValue, pv1.getValueTypeAsStr());
 
 		ExpectedInfo eInfo = new ExpectedInfo();
 		eInfo.setEv(pv2.getV());
@@ -101,6 +126,11 @@ public class SmartConditionManagementStepDefs {
 		}
 	}
 
+	/**
+	 * This step is used to end the named condition.
+	 * 
+	 * @param conditionName - the name of the condition that need to be end.
+	 */
 	@When("condition={string}-End.")
 	public void unset_condition(String conditionName) {
 		if(scenarioContext.isConditionSet(conditionName)) {

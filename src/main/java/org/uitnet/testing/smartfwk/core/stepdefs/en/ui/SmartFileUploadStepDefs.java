@@ -27,6 +27,7 @@ import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 import io.cucumber.java.en.When;
 
 /**
+ * Used to perform uploaded file operation using UI.
  * 
  * @author Madhav Krishna
  *
@@ -39,15 +40,14 @@ public class SmartFileUploadStepDefs {
 	}
 	
 	/**
-	 * Used to upload single / multiple files using page object.
+	 * Used to upload single / multiple files using specified page element.
 	 * 
 	 * @param files - relative path in JSON array format like
 	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
 	 * @param po - page object used to upload the files.
 	 */
 	@When("upload {string} file\\(s) using {string} page element.")
-	@When("upload {string} file\\(s) using {string} page object.")
-	public void upload_file_using_page_element_(String files, String po) {
+	public void upload_file_using_page_element(String files, String po) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -61,5 +61,17 @@ public class SmartFileUploadStepDefs {
 		PageObjectUtil.invokeValidatorMethod("uploadFiles", new Class<?>[] { List.class, Integer.TYPE },
 				new Object[] { fileList, poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
+	}
+	
+	/**
+	 * Used to upload single / multiple files using specified page object.
+	 * 
+	 * @param files - relative path in JSON array format like
+	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
+	 * @param po - page object used to upload the files.
+	 */
+	@When("upload {string} file\\(s) using {string} page object.")
+	public void upload_file_using_page_element_2(String files, String po) {
+		upload_file_using_page_element(files, po);
 	}
 }

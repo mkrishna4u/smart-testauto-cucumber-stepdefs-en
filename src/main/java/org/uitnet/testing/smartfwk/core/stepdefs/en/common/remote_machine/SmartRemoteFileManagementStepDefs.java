@@ -39,6 +39,18 @@ public class SmartRemoteFileManagementStepDefs {
 		this.scenarioContext = scenarioContext;
 	}
 
+	/**
+	 * Used to remove the expected file(s) from specified remote directory on the remote server machine.
+	 * 
+	 * @param remoteDirectory - the absolute remote directory path where the file(s) are present.
+	 * @param expectedFileName - the expected file names based on the FileNameMatchMechanism value that need to be deleted.
+	 * @param fileNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the remote directory.
+	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * @param appName - the name of the configured application.
+	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
+	 * 			file for the specific application to know the remote machine name.
+	 */
 	@When("remove expected file\\(s) [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] from remote machine [AppName={string}, RemoteMachineName:{string}].")
 	public void remove_expected_files_from_remote_machine(String remoteDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -51,6 +63,18 @@ public class SmartRemoteFileManagementStepDefs {
 		handler.deleteFiles(remoteDirectory, TextMatchMechanism.valueOf2(fileNameMatchMechanism), expectedFileName);
 	}
 	
+	/**
+	 * Used to download the expected files from the remote server machine to local test-results/downloads/ directory.
+	 * 
+	 * @param remoteDirectory - the absolute remote directory path where the file is present.
+	 * @param expectedFileName - the expected file names based on the FileNameMatchMechanism value that need to be downloaded.
+	 * @param fileNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the remote directory.
+	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * @param appName - the name of the configured application.
+	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
+	 * 			file for the specific application to know the remote machine name.
+	 */
 	@When("download expected remote file\\(s) [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] from remote machine [AppName={string}, RemoteMachineName:{string}].")
 	public void download_expected_files_from_remote_machine(String remoteDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -64,6 +88,19 @@ public class SmartRemoteFileManagementStepDefs {
 				Locations.getProjectRootDir() + "/test-results/downloads/");
 	}
 	
+	/**
+	 * Used to upload file(s) on the remote server machine from the local machine directory.
+	 * 
+	 * @param localDirectory - the relative local directory path with respect to project root directory.
+	 * @param expectedFileName - the expected file names based on the FileNameMatchMechanism value that need to be uploaded to remote server from local machine.
+	 * @param fileNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the local directory.
+	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * @param appName - the name of the configured application.
+	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
+	 * 			file for the specific application to know the remote machine name.
+	 * @param remoteDirectory - the absolute remote directory path where the file(s) will be uploaded.
+	 */
 	@When("upload local file\\(s) [LocalDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] on remote machine [AppName={string}, RemoteMachineName:{string}, RemoteDirectory={string}].")
 	public void upload_expected_files_on_remote_machine(String localDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName, String remoteDirectory) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -77,9 +114,22 @@ public class SmartRemoteFileManagementStepDefs {
 				remoteDirectory);
 	}
 	
-	@Then("verify that the expected file [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] "
-			+ "is uploaded on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
-	public void verify_that_the_expected_file_is_present_on_remote_machine(String remoteDirectory, String expectedFileName, 
+	/**
+	 * Used to verify whether the expected file(s) are uploaded on remote server machine.
+	 * 
+	 * @param remoteDirectory - the absolute remote directory path where the file(s) will be present after upload.
+	 * @param expectedFileName - the expected file names based on the FileNameMatchMechanism value are used for verification on remote server machine.
+	 * @param fileNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the remote directory.
+	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * @param appName - the name of the configured application.
+	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
+	 * 			file for the specific application to know the remote machine name.
+	 * @param maxTimeToWaitInSeconds - this is the maximum wait time to check whether all the expected file(s) are uploaded on remote server machine.
+	 */
+	@Then("verify that the expected files [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] "
+			+ "are uploaded on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_that_the_expected_files_are_present_on_remote_machine(String remoteDirectory, String expectedFileName, 
 			String fileNameMatchMechanism, String appName, String remoteMachineName, Integer maxTimeToWaitInSeconds) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -91,16 +141,42 @@ public class SmartRemoteFileManagementStepDefs {
 		handler.validateFileExists(remoteDirectory, TextMatchMechanism.valueOf2(fileNameMatchMechanism), expectedFileName, maxTimeToWaitInSeconds);
 	}
 	
-	@Then("verify that the expected file [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] "
-			+ "is present on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
-	public void verify_that_the_expected_file_is_present_on_remote_machine_1(String remoteDirectory, String expectedFileName, 
+	/**
+	 * Used to verify whether the expected file(s) are present on remote server machine.
+	 * 
+	 * @param remoteDirectory - the absolute remote directory path where the file(s) will be present.
+	 * @param expectedFileName - the expected file names based on the FileNameMatchMechanism value are used for verification on remote server machine.
+	 * @param fileNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the remote directory.
+	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * @param appName - the name of the configured application.
+	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
+	 * 			file for the specific application to know the remote machine name.
+	 * @param maxTimeToWaitInSeconds - this is the maximum wait time to check whether all the expected file(s) are present on remote server machine.
+	 */
+	@Then("verify that the expected files [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] "
+			+ "are present on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_that_the_expected_files_are_present_on_remote_machine_1(String remoteDirectory, String expectedFileName, 
 			String fileNameMatchMechanism, String appName, String remoteMachineName, Integer maxTimeToWaitInSeconds) {
-		verify_that_the_expected_file_is_present_on_remote_machine(remoteDirectory, expectedFileName, fileNameMatchMechanism, appName, remoteMachineName, maxTimeToWaitInSeconds);
+		verify_that_the_expected_files_are_present_on_remote_machine(remoteDirectory, expectedFileName, fileNameMatchMechanism, appName, remoteMachineName, maxTimeToWaitInSeconds);
 	}
 	
-	@Then("verify that the expected directory [RemoteDirectory={string}, ExpectedFolderName={string}, FolderNameMatchMechanism={string}] "
-			+ "is present on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
-	public void verify_that_the_expected_directory_is_present_on_remote_machine(String remoteDirectory, String expectedFolderName, 
+	/**
+	 * Used to verify whether the expected folders/directories are present on remote server machine.
+	 * 
+	 * @param remoteDirectory - the absolute remote base directory path where the expected directories will be present.
+	 * @param expectedFolderName - the expected folder names based on the FileNameMatchMechanism value are used for verification on remote server machine.
+	 * @param folderNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the remote directory.
+	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * @param appName - the name of the configured application.
+	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
+	 * 			file for the specific application to know the remote machine name.
+	 * @param maxTimeToWaitInSeconds
+	 */
+	@Then("verify that the expected directories [RemoteDirectory={string}, ExpectedFolderName={string}, FolderNameMatchMechanism={string}] "
+			+ "are present on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_that_the_expected_directory_are_present_on_remote_machine(String remoteDirectory, String expectedFolderName, 
 			String folderNameMatchMechanism, String appName, String remoteMachineName, Integer maxTimeToWaitInSeconds) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");

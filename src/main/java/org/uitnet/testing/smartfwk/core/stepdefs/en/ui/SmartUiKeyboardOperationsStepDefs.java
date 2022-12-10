@@ -50,13 +50,13 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 * 
 	 * ["CONTROL", "SHIFT", "A"]
 	 * 
-	 * It will always fire keydown on all keys other than last key. Also it will fire keypress event on last key.
+	 * It will always fire keydown on all keys other than last specified key. Also it will fire keypress event on last key.
 	 * If there is only one key then it will fire keypress event.
 	 * 
-	 * @see org.openqa.selenium.Keys enum for more information on key check .
+	 * Refer {@link Keys} enum for more information on key check .
 	 * 
 	 * @param keys - comma separated keys within square bracket.
-	 * @param po - page object
+	 * @param po - page object / page element.
 	 * @param operation - operation to perform
 	 * 
 	 */

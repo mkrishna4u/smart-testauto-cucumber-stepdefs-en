@@ -41,6 +41,11 @@ public class SmartLocalFileManagementStepDefs {
 		this.scenarioContext = scenarioContext;
 	}
 
+	/**
+	 * Used to remove specified file from the local downloads directory.
+	 * 
+	 * @param fileName - the relative file path (w.r.t. downloads/ directory) of the file to be deleted.
+	 */
 	@When("remove {string} file from the local downloads directory.")
 	public void remove_file_from_the_local_downloads_directory(String fileName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -51,6 +56,13 @@ public class SmartLocalFileManagementStepDefs {
 		LocalMachineFileSystem.deleteFiles(Locations.getProjectRootDir() + "/test-results/downloads", TextMatchMechanism.exactMatchWithExpectedValue, fileName);
 	}
 	
+	/**
+	 * Used to verify that the file with the specified extension is downloaded into local downloads directory.
+	 * 
+	 * @param fileName - the name of the file without extension.
+	 * @param fileExtension - the file extension.
+	 * @param maxTimeToWaitInSeconds - the maximum time to wait until file appear in downloads directory.
+	 */
 	@Then("verify that the {string} file with extension {string} is downloaded [MaxTimeToWaitInSeconds={int}].")
 	public void verify_that_the_file_with_extension_is_downloaded_maxtimetowaitinseconds(String fileName, String fileExtension, Integer maxTimeToWaitInSeconds) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -61,6 +73,13 @@ public class SmartLocalFileManagementStepDefs {
 		DownloadedFileValidator.validateBrowserFileDownloaded(fileName, fileExtension, false, maxTimeToWaitInSeconds);
 	}
 	
+	/**
+	 * Used to verify that the file with the specified extension is present in the local downloads directory.
+	 * 
+	 * @param fileName - the name of the file without extension.
+	 * @param fileExtension - the file extension.
+	 * @param maxTimeToWaitInSeconds - the maximum time to wait until file appear in downloads directory.
+	 */
 	@Then("verify that the {string} file with extension {string} is present in downloads directory [MaxTimeToWaitInSeconds={int}].")
 	public void verify_that_the_file_with_extension_is_downloaded_maxtimetowaitinseconds_1(String fileName, String fileExtension, Integer maxTimeToWaitInSeconds) {
 		verify_that_the_file_with_extension_is_downloaded_maxtimetowaitinseconds(fileName, fileExtension, maxTimeToWaitInSeconds);
@@ -73,7 +92,7 @@ public class SmartLocalFileManagementStepDefs {
 	 * @param keywordDelimiter - keyword delimiter to to identify multiple keywords in keywords text.
 	 * @param inOrder - valid values Yes, No. If yes then it will search keywords one after one. If No then it will search element in document but sequencing will not matter.
 	 * @param shouldPrint - Will print the contents of the file on console.
-	 * @param keywords - multiple keywords are separated by KeywordDelimiter.
+	 * @param keywords - multiple keywords are separated by keywordDelimiter.
 	 */
 	@Then("verify that the downloaded file {string} contains the following keywords [KeywordDelimiter={string}, InOrder={string}, ShouldPrint={string}]:")
 	public void verify_that_the_downloaded_file_contains_the_following_text(String fileNameWithExtension, String keywordDelimiter, String inOrder, String shouldPrint, DocString keywords) {

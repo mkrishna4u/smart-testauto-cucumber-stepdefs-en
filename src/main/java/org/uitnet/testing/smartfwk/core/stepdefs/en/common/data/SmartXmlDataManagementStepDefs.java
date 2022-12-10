@@ -27,6 +27,7 @@ import org.uitnet.testing.smartfwk.api.core.reader.XmlDocumentReader;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
 import org.uitnet.testing.smartfwk.core.validator.SmartDataValidator;
+import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
 import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
 import org.w3c.dom.Document;
@@ -50,6 +51,12 @@ public class SmartXmlDataManagementStepDefs {
 		this.scenarioContext = scenarioContext;
 	}
 	
+	/**
+	 * Used to read the XML file contents and store into new variable called XML Object variable.
+	 * 
+	 * @param xmlDataRelativeFilePath - the relative path of the XML file with respect to project root directory.
+	 * @param variableName - the name of the variable that stores the XML file contents.
+	 */
 	@When("read {string} XML file contents and store into {string} variable.")
 	public void read_xml_file_contents_and_store_into_variable(String xmlDataRelativeFilePath, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -61,6 +68,12 @@ public class SmartXmlDataManagementStepDefs {
 		scenarioContext.addParamValue(variableName, reader.getDocument());
 	}
 	
+	/**
+	 * Used to convert XML textual information into XML Object and store into variable to be referenced as XML Object variable.
+	 * 
+	 * @param xmlText - the plain XML text.
+	 * @param variableName - the name of the variable that stores the converted XML text.
+	 */
 	@When("convert {string} XML text into XML object and store into {string} variable.")
 	public void convert_xml_text_into_xml_object_and_store_into_variable(String xmlText, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -74,6 +87,12 @@ public class SmartXmlDataManagementStepDefs {
 		scenarioContext.addParamValue(variableName, reader.getDocument());
 	}
 	
+	/**
+	 * Used to convert textual info stored in xmlInputVariableName into XML object and the converted value is stored into a new variable.
+	 * 
+	 * @param xmlInputVariableName - the name of the variable that contains text in XML format.
+	 * @param variableName - the name of the variable that stores the converted data.
+	 */
 	@When("convert {string} variable contents into XML object and store into {string} variable.")
 	public void convert_variable_contents_into_xml_object_and_store_into_variable(String xmlInputVariableName, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -85,6 +104,12 @@ public class SmartXmlDataManagementStepDefs {
 		convert_xml_text_into_xml_object_and_store_into_variable(xmlInput, variableName);
 	}
 	
+	/**
+	 * Used to convert XML text specified as cucumber doc string into XML object and store the converted data into new variable.
+	 * 
+	 * @param variableName - the name of the variable that stores the converted data.
+	 * @param xmlText - cucumber doc string that contains the XML text.
+	 */
 	@When("convert the following XML text into XML object and store into {string} variable:")
 	public void convert_the_following_xml_text_into_xml_object_and_store_into_variable(String variableName, DocString xmlText) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -101,10 +126,11 @@ public class SmartXmlDataManagementStepDefs {
 	/**
 	 * Reads XML parameter value from XML object.
 	 * Note that the XML object information is read from 'variableName' variable.
-	 * @param xmlPath - for format please @see ParamPath class.
+	 * @param xmlPath - for format please {@link ParamPath} class.
 	 *     {path: "xpath-here", valueType: "string"}
-	 * @param xmlObjRefVariable - variable name where the XML object is read.
-	 * @param variableName - where the extracted info will be stored.
+	 *     For more details on XPATH, please refer {@link https://www.w3.org/TR/1999/REC-xpath-19991116/}
+	 * @param xmlObjRefVariable - the variable name from where the XML object is read.
+	 * @param variableName - the variable name where the extracted info will be stored.
 	 */
 	@When("read {string} parameter value from XML object [XMLObjRefVariable={string}] and store into {string} variable.")
 	public void read_parameter_value_from_xml_object_xml_obj_ref_variable_and_store_into_variable(String xmlPath, String xmlObjRefVariable, String variableName) {
@@ -134,8 +160,15 @@ public class SmartXmlDataManagementStepDefs {
 	 * For supported operators @see org.uitnet.testing.smartfwk.api.core.validator.ValueMatchOperator enum.
 	 * For expected information xml format please @see {@link ExpectedInfo}
 	 * 
-	 * @param xmlObjRefVariable - variable name where the XML object is stored.
-	 * @param xmlParamInfo - input parameter info for verification.
+	 * @param xmlObjRefVariable - the variable name where the XML object is stored.
+	 * @param xmlParamInfo - input datatable contains the parameters for verification in the format given below:
+	 *   | Parameter Path / XML Path                     | Operator           | Expected Information                                                                                               |
+	 *   | {path: "xpath", valueType: "string"}          | =                  | John Hopkins                                                                                                       |
+	 *   | {path: "xpath", valueType: "string-list"}     | contains           | {ev: ["Cable operator", "Accountant"], valueType: "string-list", inOrder: "yes", ignoreCase: "no", textMatchMechanism: "exactMatchWithExpectedValue"} |
+	 * 
+	 *    NOTE: Refer {@link https://www.w3.org/TR/1999/REC-xpath-19991116/} link to learn more on XML path.
+	 *    NOTE: Refer ){@link ValueMatchOperator} to know what type of operators supported.
+	 *    NOTE: For expected information JSON format please refer {@link ExpectedInfo}.
 	 */
 	@Then("verify the following parameters of XML object matches with the expected information as per the tabular info given below [XMLObjRefVariable={string}]:")
 	public void verify_the_following_parameters_of_xml_object_matches_with_the_expected_information_as_per_the_tabular_info_given_below_xml_obj_ref_variable(String xmlObjRefVariable, DataTable xmlParamInfo) {

@@ -37,11 +37,20 @@ public class SmartStepDefs {
 		this.scenarioContext = scenarioContext;
 	}
 	
+	/**
+	 * This method is called before each scenario.
+	 * 
+	 * @param scenario
+	 */
 	@Before
 	public void beforeScenario(Scenario scenario) {
 		this.scenarioContext.setScenario(scenario);
 	}
 
+	/**
+	 * This method is called after each scenario.
+	 * @param scenario
+	 */
 	@After
 	public void afterScenario(Scenario scenario) {
 		if(TestConfigManager.getInstance().getUseDefaultStepDefsHooks()) {
