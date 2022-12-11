@@ -47,7 +47,7 @@ public class SmartDatabaseManagementStepDefs {
 	}
 	
 	/**
-	 * Used to get first entry for the specified parameter from the specified entity using the specified query.
+	 * Used to get first entry of the specified parameter from the specified entity using the specified query.
 	 * And stores the retrieved data into new variable name. 
 	 * 
 	 * @param paramOrColumnName - the name of the parameter.
@@ -59,7 +59,7 @@ public class SmartDatabaseManagementStepDefs {
 	 */
 	@When("get first entry of {string} parameter from {string} entity using query below and store into {string} variable."
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
-	public void get_first_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
+	public void get_first_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -80,7 +80,7 @@ public class SmartDatabaseManagementStepDefs {
 	}
 	
 	/**
-	 * Used to get first entry for the specified parameter from the specified entity using the specified query.
+	 * Used to get first entry of the specified parameter from the specified entity using the specified query.
 	 * And stores the retrieved data into new variable name. 
 	 * 
 	 * @param paramOrColumnName - the name of the parameter.
@@ -92,13 +92,13 @@ public class SmartDatabaseManagementStepDefs {
 	 */
 	@When("get {string} from {string} entity using query below and store into {string} variable."
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
-	public void get_first_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_1(
+	public void get_first_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_1(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
-		get_first_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
+		get_first_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
 	}
 	
 	/**
-	 * Used to get first entry for the specified column from the specified table using the specified query.
+	 * Used to get first entry of the specified column from the specified table using the specified query.
 	 * And stores the retrieved data into new variable name. 
 	 * 
 	 * @param paramOrColumnName - the name of the column.
@@ -110,13 +110,13 @@ public class SmartDatabaseManagementStepDefs {
 	 */
 	@When("get first entry of {string} column from {string} table using query below and store into {string} variable."
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
-	public void get_first_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_2(
+	public void get_first_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_2(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
-		get_first_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
+		get_first_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
 	}
 	
 	/**
-	 * Used to get first entry for the specified column from the specified table using the specified query.
+	 * Used to get first entry of the specified column from the specified table using the specified query.
 	 * And stores the retrieved data into new variable name. 
 	 * 
 	 * @param paramOrColumnName - the name of the column.
@@ -128,13 +128,13 @@ public class SmartDatabaseManagementStepDefs {
 	 */
 	@When("get {string} from {string} table using query below and store into {string} variable."
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
-	public void get_first_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_3(
+	public void get_first_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_3(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
-		get_first_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
+		get_first_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
 	}
 	
 	/**
-	 * Used to get last entry for the specified parameter from the specified entity using the specified query.
+	 * Used to get last entry of the specified parameter from the specified entity using the specified query.
 	 * And stores the retrieved data into new variable name. 
 	 * 
 	 * @param paramOrColumnName - the name of the parameter.
@@ -146,7 +146,7 @@ public class SmartDatabaseManagementStepDefs {
 	 */
 	@When("get last entry of {string} parameter from {string} entity using query below and store into {string} variable."
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
-	public void get_last_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
+	public void get_last_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -173,7 +173,7 @@ public class SmartDatabaseManagementStepDefs {
 	}
 	
 	/**
-	 * Used to get last entry for the specified column from the specified table using the specified query.
+	 * Used to get last entry of the specified column from the specified table using the specified query.
 	 * And stores the retrieved data into new variable name. 
 	 * 
 	 * @param paramOrColumnName - the name of the column.
@@ -185,13 +185,13 @@ public class SmartDatabaseManagementStepDefs {
 	 */
 	@When("get last entry of {string} column from {string} table using query below and store into {string} variable."
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
-	public void get_last_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_1(
+	public void get_last_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_1(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
-		get_last_entry_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
+		get_last_entry_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
 	}
 	
 	/**
-	 * Used to get all entries for the specified parameter from the specified entity using the specified query.
+	 * Used to get all entries of the specified parameter from the specified entity using the specified query.
 	 * And stores the retrieved data into new variable name. 
 	 * 
 	 * @param paramOrColumnName - the name of the parameter.
@@ -203,7 +203,7 @@ public class SmartDatabaseManagementStepDefs {
 	 */
 	@When("get all entries of {string} parameter from {string} entity using query below and store into {string} variable."
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
-	public void get_all_entries_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
+	public void get_all_entries_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -224,7 +224,7 @@ public class SmartDatabaseManagementStepDefs {
 	}
 	
 	/**
-	 * Used to get all entries for the specified column from the specified table using the specified query.
+	 * Used to get all entries of the specified column from the specified table using the specified query.
 	 * And stores the retrieved data into new variable name. 
 	 * 
 	 * @param paramOrColumnName - the name of the column.
@@ -236,9 +236,9 @@ public class SmartDatabaseManagementStepDefs {
 	 */
 	@When("get all entries of {string} column from {string} table using query below and store into {string} variable."
 			+ " Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
-	public void get_all_entries_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_1(
+	public void get_all_entries_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name_1(
 			String paramOrColumnName, String tableOrEntityName, String variableName, String appName, String databaseProfileName, DocString query) {
-		get_all_entries_for_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
+		get_all_entries_of_parameter_from_entity_and_store_into_variable_app_name_db_profile_name(paramOrColumnName, tableOrEntityName, variableName, appName, databaseProfileName, query);
 	}
 	
 	/**
