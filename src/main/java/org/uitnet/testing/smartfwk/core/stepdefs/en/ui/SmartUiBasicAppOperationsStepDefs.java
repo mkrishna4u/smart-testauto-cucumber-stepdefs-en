@@ -53,6 +53,7 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 * @param appName - the configured application name
 	 * @param jsonDocument - the parameters can be specified in JSON format as given in 
 	 * 		test-config/apps-config/<app-name>/driver-configs/AppDriver.yaml file.
+	 * <blockquote><pre>
 	 * 		We do not have to specify all the parameters but whatever are needed to be changed in AppDriver.yaml file
 	 * 		just specify that parameters in JSON format. For example:
 	 * 		
@@ -65,6 +66,7 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 * 
 	 *   The above sample code will temporary change the driver config information to run that specific scenario based on
 	 *   updated information. System will use rest of the parameters as is from AppDriver.yaml file.
+	 *   </pre></blockquote>
 	 */
 	@Given("set the following app driver properties for [AppName={string}, WebBrowser={string}]:")
 	public void set_the_following_driver_properties_for_app_webbrowser(String appName, String browserType, DocString jsonDocument) {
@@ -84,6 +86,7 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 * @param appName - the configured application name.
 	 * @param jsonDocument - the parameters can be specified in JSON format as given in 
 	 * 		test-config/apps-config/<app-name>/driver-configs/AppDriver.yaml file.
+	 * <blockquote><pre>
 	 * 		We do not have to specify all the parameters but whatever are needed to be changed in AppDriver.yaml file
 	 * 		just specify that parameters in JSON format. For example:
 	 * 		
@@ -96,6 +99,7 @@ public class SmartUiBasicAppOperationsStepDefs {
 	 * 
 	 *   The above sample code will temporary change the driver config information to run that specific scenario based on
 	 *   updated information. System will use rest of the parameters as is from AppDriver.yaml file.
+	 * </pre></blockquote>
 	 */
 	@Given("set the following app driver properties for [AppName={string}]:")
 	public void set_the_following_driver_properties_for_app_webbrowser2(String appName, DocString jsonDocument) {
@@ -271,7 +275,7 @@ public class SmartUiBasicAppOperationsStepDefs {
 	/**
 	 * This is used to apply new user profile on the already activated/connected application.
 	 * This is called user profile switching. 
-	 * Note: Application must be connected before specifying this step.
+	 * <br>Note: Application must be connected before specifying this step.
 	 * 
 	 * @param userProfileName - the name of the user profile that can be activated on the 
 	 * 		already connection/activated application.
@@ -284,7 +288,7 @@ public class SmartUiBasicAppOperationsStepDefs {
 	/**
 	 * This is used to apply new user profile on the already activated/connected application.
 	 * This is called user profile switching. 
-	 * Note: Application must be connected before specifying this step.
+	 * <br>Note: Application must be connected before specifying this step.
 	 * 
 	 * @param userProfileName - the name of the user profile that can be activated on the 
 	 * 		already connection/activated application.

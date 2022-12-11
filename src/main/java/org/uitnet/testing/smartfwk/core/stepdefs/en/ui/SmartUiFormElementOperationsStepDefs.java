@@ -65,12 +65,14 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                            | 
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
 	 *       | myapp.XyzPO.poObject                                                  |
 	 *       
 	 *    Where: JSON Syntax for page object (Refer {@link PageObject}):
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page objects are visible on {string}:")
 	public void verify_that_the_following_page_elements_are_visible(String pageOrScreenName, DataTable dataTable) {
@@ -97,12 +99,14 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                            | 
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
 	 *       | myapp.XyzPO.poObject                                                  |
 	 *       
 	 *    Where: JSON Syntax for page object (Refer {@link PageObject}):
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page elements are visible on {string}:")
 	public void verify_that_the_following_page_elements_are_visible_1(String pageOrScreenName, DataTable dataTable) {
@@ -113,11 +117,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is visible on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *    
+	 * </pre></blockquote>   
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify {string} page element is visible on {string}.")
@@ -137,11 +142,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is visible on the screen.
 	 * 
 	 * @param po - Page Object can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *    
+	 * </pre></blockquote>   
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify {string} page object is visible on {string}.")
@@ -153,11 +159,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is visible on the screen.
 	 * 
 	 * @param po - Page object can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *    
+	 * </pre></blockquote>   
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page object is visible on {string}.")
@@ -169,11 +176,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is visible on the screen.
 	 * 
 	 * @param po - Page object can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *    
+	 * </pre></blockquote>   
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page element is visible on {string}.")
@@ -187,12 +195,14 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                            | 
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
 	 *       | myapp.XyzPO.poObject                                                  |
 	 *       
 	 *    Where: JSON Syntax for page element (Refer {@link PageObject}):
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page objects are hidden on {string}:")
 	public void verify_that_the_following_page_elements_are_hidden(String pageOrScreenName, DataTable dataTable) {
@@ -219,12 +229,14 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                             |
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}}  | 
 	 *       | myapp.XyzPO.poObject                                                   |
 	 *       
 	 *    Where: JSON Syntax for page element (Refer {@link PageObject}):
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page elements are hidden on {string}:")
 	public void verify_that_the_following_page_elements_are_hidden_1(String pageOrScreenName, DataTable dataTable) {
@@ -237,12 +249,14 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                             |
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}}  | 
 	 *       | myapp.XyzPO.poObject                                                   |
 	 *       
 	 *    Where: JSON Syntax for page element (Refer {@link PageObject}):
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page objects are not visible on {string}:")
 	public void verify_that_the_following_page_elements_are_hidden_2(String pageOrScreenName, DataTable dataTable) {
@@ -255,12 +269,14 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                             |
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}}  | 
 	 *       | myapp.XyzPO.poObject                                                   |
 	 *       
 	 *    Where: JSON Syntax for page element (Refer {@link PageObject}):
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page elements are not visible on {string}:")
 	public void verify_that_the_following_page_elements_are_hidden_3(String pageOrScreenName, DataTable dataTable) {
@@ -271,6 +287,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Retrieves the visibility of the specified page object / page element and store yes / no value into variable based on element visibility.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
@@ -278,6 +295,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     
 	 * @param variableName - name of the variable where system will store the visibility. For visible element it will store "yes" else
 	 * 			it will store "no".
+	 * </pre></blockquote>
 	 */
 	@Then("get visibility of {string} page element and store into {string} variable.")
 	public void get_visibility_of_page_element_and_store_into_variable(String po, String variableName) {
@@ -303,6 +321,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Retrieves the visibility of the specified page object / page element and store yes / no value into variable based on element visibility.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
@@ -310,6 +329,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *           
 	 * @param variableName - name of the variable where system will store the visibility. For visible element it will store "yes" else
 	 * 			it will store "no".
+	 * </pre></blockquote>
 	 */
 	@Then("get visibility of {string} page object and store into {string} variable.")
 	public void get_visibility_of_page_element_and_store_into_variable2(String po, String variableName) {
@@ -320,11 +340,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Retrieves the presence of the specified page object / page element and store yes / no value into variable based on element presence in DOM.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>     
 	 * @param variableName - name of the variable where system will store the presence. For present element it will store "yes" else
 	 * 			it will store "no".
 	 */
@@ -352,11 +373,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Retrieves the presence of the specified page object / page element and store yes / no value into variable based on element presence in DOM.
 	 * 
 	 * @param po  - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param variableName - name of the variable where system will store the presence. For present element it will store "yes" else
 	 * 			it will store "no".
 	 */
@@ -369,11 +391,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is hidden on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify {string} page object is hidden on {string}.")
@@ -393,11 +416,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is hidden on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify {string} page element is hidden on {string}.")
@@ -409,11 +433,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is hidden on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page object is hidden on {string}.")
@@ -425,11 +450,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is hidden on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page element is hidden on {string}.")
@@ -441,11 +467,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is not visible on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>   
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify {string} page object is not visible on {string}.")
@@ -457,11 +484,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is not visible on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify {string} page element is not visible on {string}.")
@@ -473,11 +501,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is not visible on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page object is not visible on {string}.")
@@ -489,11 +518,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is not visible on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page element is not visible on {string}.")
@@ -508,6 +538,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                            | 
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
 	 *       | myapp.XyzPO.poObject                                                  |
@@ -517,6 +548,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page objects are disabled on {string}:")
 	public void verify_that_the_following_page_elements_are_disabled(String pageOrScreenName, DataTable dataTable) {
@@ -543,6 +575,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                            | 
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
 	 *       | myapp.XyzPO.poObject                                                  |
@@ -552,6 +585,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page elements are disabled on {string}:")
 	public void verify_that_the_following_page_elements_are_disabled_1(String pageOrScreenName, DataTable dataTable) {
@@ -562,11 +596,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is disabled on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page object is disabled on {string}.")
@@ -586,11 +621,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is disabled on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page element is disabled on {string}.")
@@ -604,6 +640,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                            | 
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
 	 *       | myapp.XyzPO.poObject                                                  |
@@ -613,6 +650,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page objects are enabled on {string}:")
 	public void verify_that_the_following_page_elements_are_enabled(String pageOrScreenName, DataTable dataTable) {
@@ -639,6 +677,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param pageOrScreenName - meaningful name of page or screen.
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
+	 * <blockquote><pre>
 	 *       | Page Object / Page Element                                            | 
 	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
 	 *       | myapp.XyzPO.poObject                                                  |
@@ -648,6 +687,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the following page elements are enabled on {string}:")
 	public void verify_that_the_following_page_elements_are_enabled_1(String pageOrScreenName, DataTable dataTable) {
@@ -658,11 +698,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is enabled on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page element is enabled on {string}.")
@@ -682,11 +723,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify that the specified page object / page element is enabled on the screen.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
 	 */
 	@Then("verify that {string} page object is enabled on {string}.")
@@ -699,16 +741,19 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param textToType - the text to be typed.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param location - the location where the specified text to be typed. valid values: start, end, replace
 	 * 	If text is already existed in the control. 
-	 * 		A. location=start will append text in the beginning.
+	 * 	<blockquote><pre>
+	 *    	A. location=start will append text in the beginning.
 	 *      B. location=end will append text in the end.
 	 *      C. location=replace will replace the existing text.
+	 * </pre></blockquote>
 	 */
 	@When("type {string} text in {string} page object at {string} location.")
 	public void type_text_in_page_element(String textToType, String po, String location) {
@@ -730,16 +775,19 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param textToType - the text to be typed.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param location - the location where the specified text to be typed. valid values: start, end, replace
 	 * 	If text is already existed in the control. 
+	 * <blockquote><pre>
 	 * 		A. location=start will append text in the beginning.
 	 *      B. location=end will append text in the end.
 	 *      C. location=replace will replace the existing text.
+	 * </pre></blockquote>
 	 */
 	@When("type {string} text in {string} page element at {string} location.")
 	public void type_text_in_page_element_1(String textToType, String po, String location) {
@@ -751,16 +799,19 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param textToType - the text to be typed.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param location - the location where the specified text to be typed. valid values: start, end, replace
 	 * 	If text is already existed in the control. 
+	 * <blockquote><pre>
 	 * 		A. location=start will append text in the beginning.
 	 *      B. location=end will append text in the end.
 	 *      C. location=replace will replace the existing text.
+	 * </pre></blockquote>
 	 */
 	@When("type {string} text in {string} page object.")
 	public void type_text_in_page_element(String textToType, String po) {
@@ -783,10 +834,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param textToType - the text to be typed.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@When("type {string} text in {string} page element.")
 	public void type_text_in_page_element_1(String textToType, String po) {
@@ -798,11 +851,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * This step will always replace the existing text with the new text.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param textToType - the text to be typed.
 	 *
 	 */
@@ -827,11 +881,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * This step will always replace the existing text with the new text.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param textToType - the text to be typed.
 	 *
 	 */
@@ -846,14 +901,17 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * <tag-name>text-part</tag-name>  
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param expectedText - the expected text that need to be matched.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the text part of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_that_the_text_part_of_page_element_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
@@ -887,14 +945,17 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * <tag-name>text-part</tag-name>  
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 *  </pre></blockquote>     
 	 * @param expectedText - the expected text that need to be matched.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the text part of {string} page element matches {string} text where TextMatchMechanism={string}.")
 	public void verify_that_the_text_part_of_page_element_matches_text_where_textmatchmechanism_1(String po, String expectedText, String textMatchMechanism) {
@@ -907,14 +968,17 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param expectedText - the expected text that need to be matched.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that {string} attribute value of {string} page element matches {string} text where TextMatchMechanism={string}.")
 	public void verify_that_attribute_value_of_page_element_matches_text_where_textmatchmechanism(String attributeName, String po, String expectedText, String textMatchMechanism) {
@@ -944,20 +1008,25 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	/**
 	 * Used to verify the value of page object / page element that matches with the specified text using specified TextMatchMechanism.
+	 * <blockquote><pre>
 	 * In HTML DOM <input> tag is the one that generally has the value attribute (mostly hidden).
 	 * <input name="username"/>
 	 * <input type="text" name="username"/>
 	 * For the above DOM element we can get the value using this step. Generally it is called TextBox on UI element.
+	 * </pre></blockquote>
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param expectedText - the expected text that need to be matched.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the value of {string} page element matches {string} text where TextMatchMechanism={string}.")
 	public void verify_value_of_page_element_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
@@ -975,20 +1044,25 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	/**
 	 * Used to verify the value of page object / page element that matches with the specified text using specified TextMatchMechanism.
+	 * <blockquote><pre>
 	 * In HTML DOM <input> tag is the one that generally has the value attribute (mostly hidden).
 	 * <input name="username"/>
 	 * <input type="text" name="username"/>
 	 * For the above DOM element we can get the value using this step. Generally it is called TextBox on UI element.
+	 * </pre></blockquote>
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param expectedText - the expected text that need to be matched.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@Then("verify that the value of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_value_of_page_element_matches_text_where_textmatchmechanism_1(String po, String expectedText, String textMatchMechanism) {
@@ -999,11 +1073,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to retrieve the value of the input text specified by given page object / page element and store the value into the variable.
 	 *  
 	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
 	 */
 	@Then("get input text value of {string} page element and store into {string} variable.")
@@ -1026,11 +1101,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to retrieve the value of the input text specified by given page object / page element and store the value into variable.
 	 *  
 	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
 	 */
 	@Then("get input text value of {string} page object and store into {string} variable.")
@@ -1042,11 +1118,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to retrieve the value of each input text element specified by given page object / page element and store all the values into the variable.
 	 *  
 	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
 	 */
 	@SuppressWarnings("unchecked")
@@ -1087,11 +1164,12 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to retrieve the value of each input text element specified by given page object / page element and store all the values into the variable.
 	 *  
 	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
 	 */
 	@Then("get input text value of each element of {string} page object and store into {string} variable.")
@@ -1101,15 +1179,18 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	/**
 	 * Used to retrieve the text part of each element specified by given page object / page element and store all the values into the variable.
+	 * <blockquote><pre>
 	 * In HTML DOM the text part is the value between start tag and end tag.
 	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
 	 * 
 	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
 	 */
 	@SuppressWarnings("unchecked")
@@ -1148,15 +1229,18 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	/**
 	 * Used to retrieve the text part of each element specified by given page object / page element and store all the values into the variable.
+	 * <blockquote><pre>
 	 * In HTML DOM the text part is the value between start tag and end tag.
 	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
 	 * 
 	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
 	 */
 	@Then("get text part of each element of {string} page object and store into {string} variable.")
@@ -1166,17 +1250,20 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	/**
 	 * Used to retrieve the given attribute's value of each element specified by given page object / page element and store all the values into the variable.
+	 * <blockquote><pre>
 	 * In HTML DOM the attribute and its value is specified inside start tag.
 	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
 	 * Here attr1 and attr2 are attribute names.
+	 * </pre></blockquote>
 	 * 
 	 * @param attributeName - the attribute name.
 	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable that will store the .
 	 */
 	@SuppressWarnings("unchecked")
@@ -1216,16 +1303,20 @@ public class SmartUiFormElementOperationsStepDefs {
 	
 	/**
 	 * Used to retrieve the given attribute's value of each element specified by given page object / page element and store all the values into the variable.
+	 * <blockquote><pre>
 	 * In HTML DOM the attribute and its value is specified inside start tag.
 	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
 	 * Here attr1 and attr2 are attribute names.
+	 * </pre></blockquote>
 	 * 
 	 * @param attributeName - the attribute name.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 *       
 	 * @param variableName - the name of the variable that will store the .
 	 */
@@ -1238,18 +1329,24 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify the text part of each element specified by given page object / page element matches with 
 	 * the expected text using specified TextMatchMechanism.
 	 * 
+	 * <blockquote><pre>
 	 * In HTML DOM the text part is the value between start tag and end tag.
 	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 *       
 	 * @param expectedText - the expected text to be matched with each element's text part.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@SuppressWarnings("unchecked")
 	@Then("verify text part of each element of {string} page element matches {string} text where TextMatchMechanism={string}.")
@@ -1287,18 +1384,22 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify the text part of each element specified by given page object / page element matches with 
 	 * the expected text using specified TextMatchMechanism.
 	 * 
+	 * <blockquote><pre>
 	 * In HTML DOM the text part is the value between start tag and end tag.
 	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param expectedText - the expected text to be matched with each element's text part.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@Then("verify text part of each element of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_text_part_of_each_element_of_page_element_matches_text_where_textmatchmechanism_1(String po, String expectedText, String textMatchMechanism) {
@@ -1309,20 +1410,25 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to verify the attribute value of each element specified by given page object / page element matches with 
 	 * the expected text using specified TextMatchMechanism.
 	 * 
+	 * <blockquote><pre>
 	 * In HTML DOM the attribute and its value is specified inside start tag.
 	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
 	 * Here attr1 and attr2 are attribute names.
+	 * </pre></blockquote>
 	 * 
 	 * @param attributeName - the name of the attribute.
 	 * @param po - the page object / page element can be specified in two way:
-	 *     Direct way: myapp.XyzPO.poObject
+	 * <blockquote><pre>    Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 *       
 	 * @param expectedText - the expected text to be matched with each element's text part.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@SuppressWarnings("unchecked")
 	@Then("verify {string} attribute value of each element of {string} page element matches {string} text where TextMatchMechanism={string}.")
@@ -1359,21 +1465,26 @@ public class SmartUiFormElementOperationsStepDefs {
 	/**
 	 * Used to verify the attribute value of each element specified by given page object / page element matches with 
 	 * the expected text using specified TextMatchMechanism.
-	 * 
+	 * <blockquote><pre>
 	 * In HTML DOM the attribute and its value is specified inside start tag.
 	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
 	 * Here attr1 and attr2 are attribute names.
+	 * </pre></blockquote>
 	 * 
 	 * @param attributeName - the name of the attribute.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 *       
 	 * @param expectedText - the expected text to be matched with each element's text part.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
 	 */
 	@Then("verify {string} attribute value of each element of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_attribute_value_of_each_element_of_page_element_matches_text_where_textmatchmechanism_1(String attributeName, String po, String expectedText, String textMatchMechanism) {
@@ -1384,16 +1495,19 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to call validator method of page object / page element to perform a particular operation.
 	 * 
 	 * @param methodAsJson - Method signature example:
+	 * <blockquote><pre>
 	 * 		{name: "methodName", argsType: [Integer.TYPE, String.class], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
-	 *       
+	 * </pre></blockquote> 
+	 *      
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param operation - meaningful name of the operation.
 	 */
 	@When("call {string} validator method of {string} page object to {string}.")
@@ -1416,16 +1530,18 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to call validator method of page object / page element to perform a particular operation.
 	 * 
 	 * @param methodAsJson - Method signature example:
+	 * <blockquote><pre>
 	 * 		{name: "methodName", argsType: [Integer.TYPE, String.class], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
-	 *       
+	 * </pre></blockquote>      
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param operation - meaningful name of the operation.
 	 */
 	@When("call {string} validator method of {string} page element to {string}.")
@@ -1437,16 +1553,17 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to call validator method of page object / page element to perform a particular operation and store the the output (return value) into the variable..
 	 * 
 	 * @param methodAsJson - Method signature example:
+	 * <blockquote><pre>
 	 * 		{name: "methodName", argsType: [Integer.TYPE, String.class], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
-	 *       
+	 * </pre></blockquote>      
 	 * @param po - the page object / page element can be specified in two way:
-	 *     Direct way: myapp.XyzPO.poObject
+	 * <blockquote><pre>    Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param operation - meaningful name of the operation.
 	 * @param variableName - the variable name where the return info of validator method is saved.
 	 */
@@ -1472,16 +1589,18 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * Used to call validator method of page object / page element to perform a particular operation and store the the output (return value) into the variable..
 	 * 
 	 * @param methodAsJson - Method signature example:
+	 * <blockquote><pre>
 	 * 		{name: "methodName", argsType: [Integer.TYPE, String.class], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
-	 *       
+	 * </pre></blockquote>      
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param operation - meaningful name of the operation.
 	 * @param variableName - the variable name where the return info of validator method is saved.
 	 */
@@ -1496,6 +1615,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param pageOrScreenName - the meaningful name of the screen.
 	 * @param dataTable - the datatable that contains the page object / page element along with expected information in the format given below:
+	 * <blockquote><pre>
 	 * 		| Page Object / Page Element           | Operator      | Expected Information           |
 	 *      | {name: "myapp.SamplePO.Textbox_UserName"}  | contains      | David                          |
 	 *      | myapp.SamplePO.Textbox_Passsword           | =             | {ev: "test-password"}          |
@@ -1509,6 +1629,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       JSON way:  (Refer {@link PageObject}). Example:
 	 *         {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *       PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@Then("verify the selected value\\(s) of the following page objects on {string}:")
 	public void validate_the_selected_values_of_the_following_page_objects(String pageOrScreenName, DataTable dataTable) {
@@ -1543,6 +1664,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param pageOrScreenName - the meaningful name of the screen.
 	 * @param dataTable - the datatable that contains the page object / page element along with expected information in the format given below:
+	 * <blockquote><pre>
 	 * 		| Page Object / Page Element           | Operator      | Expected Information           |
 	 *      | {name: "myapp.SamplePO.TextBox_UserName"}  | contains      | David                          |
 	 *      | myapp.SamplePO.Textbox_Passsword           | =             | {ev: "test-password"}          |
@@ -1556,6 +1678,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       JSON way:  (Refer {@link PageObject}). Example:
 	 *         {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *       PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@Then("verify the selected value\\(s) of the following page elements on {string}:")
 	public void validate_the_selected_values_of_the_following_page_objects_1(String pageOrScreenName, DataTable dataTable) {
@@ -1567,6 +1690,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *
 	 * @param pageOrScreenName - the meaningful name of the screen.
 	 * @param dataTable - the datatable that contains the page object / page element along with it's input value in the format given below:
+	 * <blockquote><pre>
 	 *   | Page Object / Field Information            | Input value(s)                                                                             |
 	 *   | {name: "myapp.SamplePO.Textbox_UserName"}  | David                                                                                      |
 	 *   | myapp.SamplePO.Textbox_Passsword           | {value: "test-password"}                                                                   |
@@ -1583,6 +1707,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       JSON way:  (Refer {@link PageObject}). Example:
 	 *         {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *       PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@When("fill the following form fields value\\(s) present on {string}:")
 	public void fill_the_following_form_fields_value_present_on_page(String pageOrScreenName, DataTable dataTable) {
@@ -1615,6 +1740,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *
 	 * @param pageOrScreenName - the meaningful name of the screen.
 	 * @param dataTable - the datatable that contains the page object / page element along with it's input value in the format given below:
+	 * <blockquote><pre>
 	 *   | Page Object / Field Information            | Input value(s)                                                                             |
 	 *   | {name: "myapp.SamplePO.Textbox_UserName"}  | David                                                                                      |
 	 *   | myapp.SamplePO.Textbox_Passsword           | {value: "test-password"}                                                                   |
@@ -1631,6 +1757,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       JSON way:  (Refer {@link PageObject}). Example:
 	 *         {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *       PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
 	 */
 	@When("enter the following form fields information present on {string}:")
 	public void fill_the_following_form_fields_value_present_on_page_1(String pageOrScreenName, DataTable dataTable) {

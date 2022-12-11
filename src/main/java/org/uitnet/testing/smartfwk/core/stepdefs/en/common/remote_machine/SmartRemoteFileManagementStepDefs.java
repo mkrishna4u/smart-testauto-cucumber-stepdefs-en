@@ -74,8 +74,10 @@ public class SmartRemoteFileManagementStepDefs {
 	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
 	 * @param appName - the name of the configured application.
 	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * <blockquote><pre>
 	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
 	 * 			file for the specific application to know the remote machine name.
+	 * </pre></blockquote>
 	 */
 	@When("download expected remote file\\(s) [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] from remote machine [AppName={string}, RemoteMachineName:{string}].")
 	public void download_expected_files_from_remote_machine(String remoteDirectory, String expectedFileName, String fileNameMatchMechanism, String appName, String remoteMachineName) {
@@ -96,11 +98,15 @@ public class SmartRemoteFileManagementStepDefs {
 	 * @param localDirectory - the relative local directory path with respect to project root directory.
 	 * @param expectedFileName - the expected file names based on the FileNameMatchMechanism value that need to be uploaded to remote server from local machine.
 	 * @param fileNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the local directory.
+	 * <blockquote><pre>
 	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * </pre></blockquote>
 	 * @param appName - the name of the configured application.
 	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
-	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
+	 * <blockquote><pre>
+	 * 		Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
 	 * 			file for the specific application to know the remote machine name.
+	 * </pre></blockquote>
 	 * @param remoteDirectory - the absolute remote directory path where the file(s) will be uploaded.
 	 */
 	@When("upload local file\\(s) [LocalDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] on remote machine [AppName={string}, RemoteMachineName:{string}, RemoteDirectory={string}].")
@@ -122,11 +128,15 @@ public class SmartRemoteFileManagementStepDefs {
 	 * @param remoteDirectory - the absolute remote directory path where the file(s) will be present after upload.
 	 * @param expectedFileName - the expected file names based on the FileNameMatchMechanism value are used for verification on remote server machine.
 	 * @param fileNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the remote directory.
+	 * <blockquote><pre>
 	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * </pre></blockquote>
 	 * @param appName - the name of the configured application.
 	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * <blockquote><pre>
 	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
 	 * 			file for the specific application to know the remote machine name.
+	 * </pre></blockquote>
 	 * @param maxTimeToWaitInSeconds - this is the maximum wait time to check whether all the expected file(s) are uploaded on remote server machine.
 	 */
 	@Then("verify that the expected files [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] "
@@ -149,11 +159,15 @@ public class SmartRemoteFileManagementStepDefs {
 	 * @param remoteDirectory - the absolute remote directory path where the file(s) will be present.
 	 * @param expectedFileName - the expected file names based on the FileNameMatchMechanism value are used for verification on remote server machine.
 	 * @param fileNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the remote directory.
+	 * <blockquote><pre>
 	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * </pre></blockquote>
 	 * @param appName - the name of the configured application.
 	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * <blockquote><pre>
 	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
 	 * 			file for the specific application to know the remote machine name.
+	 * </pre></blockquote>
 	 * @param maxTimeToWaitInSeconds - this is the maximum wait time to check whether all the expected file(s) are present on remote server machine.
 	 */
 	@Then("verify that the expected files [RemoteDirectory={string}, ExpectedFileName={string}, FileNameMatchMechanism={string}] "
@@ -169,11 +183,15 @@ public class SmartRemoteFileManagementStepDefs {
 	 * @param remoteDirectory - the absolute remote base directory path where the expected directories will be present.
 	 * @param expectedFolderName - the expected folder names based on the FileNameMatchMechanism value are used for verification on remote server machine.
 	 * @param folderNameMatchMechanism - the expected file name match mechanism. It is used to match the files on the remote directory.
+	 * <blockquote><pre>
 	 * 		Please refer {@link TextMatchMechanism} to understand the value for fileNameMatchMechanism.
+	 * </pre></blockquote>
 	 * @param appName - the name of the configured application.
 	 * @param remoteMachineName - the name of the configured remote machine in the specified application. 
+	 * <blockquote><pre>
 	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
 	 * 			file for the specific application to know the remote machine name.
+	 * </pre></blockquote>
 	 * @param maxTimeToWaitInSeconds
 	 */
 	@Then("verify that the expected directories [RemoteDirectory={string}, ExpectedFolderName={string}, FolderNameMatchMechanism={string}] "

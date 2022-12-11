@@ -43,8 +43,9 @@ public class SmartConditionManagementStepDefs {
 
 	/**
 	 * Used to set condition or start the conditional block, so that the below steps can run conditionally until the conditional block for this named condition is not end by the Step given below:
-	 * 
+	 * <blockquote><pre>
 	 *   And condition="condition-name"-End.
+	 * </pre></blockquote>
 	 * 
 	 * @param conditionName - the meaningful name of the condition.
 	 * @param conditionLeftValue - the left value before the operator. You can also specify variable name.
@@ -84,8 +85,9 @@ public class SmartConditionManagementStepDefs {
 	
 	/**
 	 * Used to set condition or start the conditional block, so that the below steps can run conditionally until the conditional block for this named condition is not end by the Step given below:
-	 * 
+	 * <blockquote><pre>
 	 *   And condition="condition-name"-End.
+	 * </pre></blockquote>
 	 * 
 	 * @param conditionName - the meaningful name of the condition.
 	 * @param conditionLeftValue - the left value before the operator. You can also specify variable name.

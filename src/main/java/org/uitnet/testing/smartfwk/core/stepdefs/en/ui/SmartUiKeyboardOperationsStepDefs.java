@@ -32,8 +32,10 @@ import io.cucumber.java.en.When;
  * Lists step definitions related to keyboard commands on the UI page objects / page elements.
  * 
  * Example: 
+ * <blockquote><pre>
  *   > ["CONTROL", "A"] to select all text in a specified page object / page element.
  *   > ["CONTROL", "C"] to copy selected text in clipboard.
+ * </pre></blockquote>
  * 
  * @author Madhav Krishna
  *
@@ -50,6 +52,7 @@ public class SmartUiKeyboardOperationsStepDefs {
 
 	/**
 	 * Used to perform single / multiple keys operations. like copy, paste, tab and function key operations.
+	 * <blockquote><pre>
 	 * To specify multiple keys, format is given below:
 	 * 
 	 * ["CONTROL", "SHIFT", "A"]
@@ -58,14 +61,16 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 * If there is only one key then it will fire keypress event.
 	 * 
 	 * Refer {@link Keys} enum for more information on key name.
+	 * </pre></blockquote>
 	 * 
 	 * @param keys - comma separated keys within square bracket.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param operation - meaningful expected operation name.
 	 * 
 	 */
@@ -89,6 +94,7 @@ public class SmartUiKeyboardOperationsStepDefs {
 	
 	/**
 	 * Used to perform single / multiple keys operations. like copy, paste, tab and function key operations.
+	 * <blockquote><pre>
 	 * To specify multiple keys, format is given below:
 	 * 
 	 * ["CONTROL", "SHIFT", "A"]
@@ -97,14 +103,16 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 * If there is only one key then it will fire keypress event.
 	 * 
 	 * Refer {@link Keys} enum for more information on key name.
+	 * </pre></blockquote>
 	 * 
 	 * @param keys - comma separated keys within square bracket.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param operation - meaningful expected operation name.
 	 * 
 	 */
@@ -115,6 +123,7 @@ public class SmartUiKeyboardOperationsStepDefs {
 		
 	/**
 	 * Used to perform keys and mouse operations together like "CONTROL + click" etc.
+	 * <blockquote><pre>
 	 * To specify multiple keys, format is given below:
 	 * 
 	 * ["CONTROL", "SHIFT"]
@@ -124,15 +133,17 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 * Refer {@link Keys} enum for more information on key name.
 	 * 
 	 * NOTE: At the end of this step it will release all the keydown operations.
+	 * </pre></blockquote>
 	 * 
 	 * @param keys - comma separated keys within square bracket.
 	 * @param mouseEvent - supported mouseEvents: click, rightClick, doubleClick.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param operation - meaningful expected operation name.
 	 * 
 	 */
@@ -188,6 +199,7 @@ public class SmartUiKeyboardOperationsStepDefs {
 	
 	/**
 	 * Used to perform keys and mouse operations together like "CONTROL + click" etc.
+	 * <blockquote><pre>
 	 * To specify multiple keys, format is given below:
 	 * 
 	 * ["CONTROL", "SHIFT"]
@@ -197,15 +209,17 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 * Refer {@link Keys} enum for more information on key name.
 	 * 
 	 * NOTE: At the end of this step it will release all the keydown operations.
+	 * </pre></blockquote>
 	 * 
 	 * @param keys - comma separated keys within square bracket.
 	 * @param mouseEvent - supported mouseEvents: click, rightClick, doubleClick.
 	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param operation - meaningful expected operation name.
 	 * 
 	 */

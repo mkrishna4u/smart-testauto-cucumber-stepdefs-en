@@ -44,12 +44,14 @@ public class SmartDataGeneratorStepDefs {
 	 * @param variableName - used to store the generated data.
 	 * @param jsonInput - the doc string that contains JSON data as input to generate the text data. 
 	 *                     Syntax for this JSON input is given below:
+	 * <blockquote><pre>
 	 *   {length: 80, maxWordLength: 20, includeAlphabetsLower: true, includeAlphabetsUpper: true, 
 	 *   alphabetsLower: "abcdefghijklmnopqrstuvwxyz", alphabetsUpper: true, 
 	 *   alphabetsUpper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", includeNumbers: true, 
 	 *   numbers: "1234567890", includeSpecialCharacters: true, 
 	 *   specialCharacters: "`~!@#$%^&*()_-+={[]}\\|;:'\",<.>/?", includeNewLine: true, 
 	 *   includeWhiteSpaces: true, includeLeadingWhiteSpace: true, includeTrailingWhiteSpace: true}
+	 * </pre></blockquote>
 	 * 
 	 */
 	@When("auto generate {string} data based on the JSON input given below and store into {string} variable:")

@@ -45,11 +45,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * Used to perform touchpad tap (using single finger) operation on the specified page object / page element.
 	 * 
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 * @param holdDurationInMs - the duration in milliseconds to hold the touch.
 	 * @param actionName - meaningful expected action name.
 	 */
@@ -71,11 +72,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * Used to perform touchpad tap (using single finger) operation on the specified page object / page element.
 	 * 
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 * @param holdDurationInMs - the duration in milliseconds to hold the touch.
 	 * @param actionName - meaningful expected action name.
 	 */	
@@ -88,11 +90,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * Used to perform touchpad double tap (using single finger) operation on the specified page object / page element.
 	 * 
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 * @param pauseDurationInMs - the pause duration in milliseconds between the taps.
 	 * @param actionName - meaningful expected action name.
 	 */
@@ -114,11 +117,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * Used to perform touchpad double tap (using single finger) operation on the specified page object / page element.
 	 * 
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 * @param pauseDurationInMs - the pause duration in milliseconds between the taps.
 	 * @param actionName - meaningful expected action name.
 	 */
@@ -132,11 +136,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * 
 	 * @param nTimes - numeric value / the number times to perform tap.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 * @param pauseDurationInMs - the pause duration in milliseconds between the taps.
 	 * @param actionName - meaningful expected action name.
 	 */
@@ -159,11 +164,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * 
 	 * @param nTimes - numeric value / the number times to perform tap.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 * @param pauseDurationInMs - the pause duration in milliseconds between the taps.
 	 * @param actionName - meaningful expected action name.
 	 */
@@ -178,11 +184,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * @param pixels - the number of pixels to swipe up.
 	 * @param durationInMs - the duration in milliseconds that inform the system how long it should swipe.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 */
 	@When("swipe up {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_up_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
@@ -204,6 +211,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * @param pixels - the number of pixels to swipe up.
 	 * @param durationInMs - the duration in milliseconds that inform the system how long it should swipe.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
@@ -221,6 +229,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * @param pixels - the number of pixels to swipe up.
 	 * @param durationInMs - the duration in milliseconds that inform the system how long it should swipe.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
@@ -247,6 +256,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * @param pixels - the number of pixels to swipe up.
 	 * @param durationInMs - the duration in milliseconds that inform the system how long it should swipe.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
@@ -264,6 +274,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * @param pixels - the number of pixels to swipe up.
 	 * @param durationInMs - the duration in milliseconds that inform the system how long it should swipe.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
@@ -290,6 +301,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * @param pixels - the number of pixels to swipe up.
 	 * @param durationInMs - the duration in milliseconds that inform the system how long it should swipe.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
@@ -307,11 +319,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * @param pixels - the number of pixels to swipe up.
 	 * @param durationInMs - the duration in milliseconds that inform the system how long it should swipe.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 */
 	@When("swipe right {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_right_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
@@ -333,11 +346,12 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * @param pixels - the number of pixels to swipe up.
 	 * @param durationInMs - the duration in milliseconds that inform the system how long it should swipe.
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * 
+	 * </pre></blockquote>
 	 */
 	@When("swipe right {int} pixels in {int} milliseconds from {string} page element location.")
 	public void swipe_right_pixels_in_milliseconds_from_page_object_location_1(int pixels, int durationInMs, String pageObject) {

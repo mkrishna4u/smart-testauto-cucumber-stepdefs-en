@@ -43,8 +43,10 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	 * Used to switch to the new window by specifying the window handle name.
 	 * 
 	 * @param windowHandleName - the window handle name.
+	 * <blockquote><pre>
 	 *   NOTE: To get the window handle, we first have to run this step to get all available window 
 	 *         handles. Then you can use the specific window handle to switch to a particular window.
+	 *   </pre></blockquote>
 	 */
 	@When("switch to {string} window.")
 	public void switch_to_window(String windowHandleName) {
@@ -63,8 +65,10 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	 * window switching.
 	 * 
 	 * @param windowHandleName - the window handle name.
+	 * <blockquote><pre>
 	 *   NOTE: To get the window handle, we first have to run this step to get all available window 
 	 *         handles. Then you can use the specific window handle to switch to a particular window.
+	 *  </pre></blockquote>
 	 */
 	@When("focus {string} window.")
 	public void switch_to_window_1(String windowHandleName) {
@@ -90,9 +94,11 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	 * of the switched frame.
 	 * 
 	 * @param frameNameOrId - the ID or the name of the frame.
+	 * <blockquote><pre>
 	 *   NOTE: If we give frameNameOrId = "parent" then it will switch the driver pointer to parent frame.
 	 *   NOTE: If we give frameNameOrId = "INDEX:2" then it will switch the driver pointer to second frame.
 	 *   Else it will use the value to treat as ID or Name of the frame.
+	 *   </pre></blockquote>
 	 */
 	@When("switch to {string} frame.")
 	public void switch_to_frame(String frameNameOrId) {

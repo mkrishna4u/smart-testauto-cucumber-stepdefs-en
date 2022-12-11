@@ -156,16 +156,18 @@ public class SmartJsonDataManagementStepDefs {
 	 * Updates the JSON parameter's value into JSON object as per the tabular info provided by cucumber datatable.
 	 * First row is always considered as the header and data from second row onward is going to get read
 	 * and going to get applied into JSON object.
-	 * 
+	 * <blockquote><pre>
 	 * | Parameter Path / JSON Path                        | New Value                  |
 	 * | $.name                                            | <New name Here>            |
 	 * | { path: "$.jobTitles", valueType: "string-list" } | ["Accountant", "Operator"] |
 	 * 
 	 * 
 	 * NOTE-1: JSON object is stored into variable.
+	 * </pre></blockquote>
 	 * 
 	 * @param jsonObjRefVariable - the variable name where the JSON object is stored.
 	 * @param jsonParamInfo - cucumber data table in the format given below:
+	 * <blockquote><pre>
 	 * 		| Parameter Path / JSON Path                        | New Value                  |
 	 *      | $.name                                            | <New name Here>            |
 	 *      | { path: "$.jobTitles", valueType: "string-list" } | ["Accountant", "Operator"] |
@@ -174,7 +176,7 @@ public class SmartJsonDataManagementStepDefs {
 	 *      NOTE: New value can be of any type like: string, integer, long, double, float, string-list, numeric-list
 	 *      	  for more details on new value type please refer: {@link ParamValueType}. As per JSON syntax, multiple
 	 *            values can be specified within square brackets [].
-	 *      
+	 * </pre></blockquote>     
 	 */
 	@When("update the following parameters values into JSON object [JSONObjRefVariable={string}]:")
 	public void read_parameter_value_from_json_object_json_obj_ref_variable(String jsonObjRefVariable, DataTable jsonParamInfo) {
@@ -212,12 +214,15 @@ public class SmartJsonDataManagementStepDefs {
 	/**
 	 * Used to verify the parameter's values in JSON object. Reads information from the data table. Data table format is given below:
 	 * First row is always considered as the header and data from second row onward is going to get read and validated.
+	 * <blockquote><pre>
 	 * | Parameter/JSON Path        | Operator           | Expected Information                                                                                               |
 	 * | $.name                     | =                  | John Hopkins                                                                                                       |
 	 * | $.jobTitles                | contains           | {ev: ["Cable operator", "Accountant"], valueType: "string-list", inOrder: "yes", ignoreCase: "no", textMatchMechanism: "exactMatchWithExpectedValue"} |
+	 * </pre></blockquote>
 	 * 
 	 * @param jsonObjRefVariable - the variable name where the JSON object is stored.
 	 * @param jsonParamInfo - cucumber datatable variable that stores the input parameter info for verification in the syntax below:
+	 * <blockquote><pre>
 	 *   | Parameter/JSON Path        | Operator           | Expected Information                                                                                               |
 	 *   | $.name                     | =                  | John Hopkins                                                                                                       |
 	 *   | $.jobTitles                | contains           | {ev: ["Cable operator", "Accountant"], valueType: "string-list", inOrder: "yes", ignoreCase: "no", textMatchMechanism: "exactMatchWithExpectedValue"} |
@@ -225,6 +230,7 @@ public class SmartJsonDataManagementStepDefs {
 	 *   Refer {@link https://github.com/json-path/JsonPath} link to learn more on JSON path.
 	 *   For supported operators refer {@link ValueMatchOperator}.
 	 *   For expected information JSON format please refer {@link ExpectedInfo}.
+	 * </pre></blockquote>
 	 */
 	@Then("verify the following parameters of JSON object matches with the expected information as per the tabular info given below [JSONObjRefVariable={string}]:")
 	public void verify_the_following_parameters_of_json_object_matches_with_the_expected_information_as_per_the_tabular_info_given_below_json_obj_ref_variable(String jsonObjRefVariable, DataTable jsonParamInfo) {

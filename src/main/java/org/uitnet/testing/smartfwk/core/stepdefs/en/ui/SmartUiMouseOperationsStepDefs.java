@@ -45,11 +45,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform click operation on the specified page object / page element.
 	 * 
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click on {string} page object to {string}.")
@@ -68,11 +69,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform click operation on the specified page object / page element.
 	 * 
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click on {string} page element to {string}.")
@@ -89,11 +91,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform click operation on the specified page object / page element.
 	 * 
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click {string} page element to {string}.")
@@ -110,11 +113,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform click operation on the specified page object / page element.
 	 * 
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click {string} page object to {string}.")
@@ -126,11 +130,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform force click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("force click on {string} page object to {string}.")
@@ -149,11 +154,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform force click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("force click on {string} page element to {string}.")
@@ -165,11 +171,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform force click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("force click {string} page element to {string}.")
@@ -181,11 +188,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform force click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("force click {string} page object to {string}.")
@@ -197,11 +205,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform double click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("double click on {string} page object to {string}.")
@@ -220,11 +229,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform double click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("double click on {string} page element to {string}.")
@@ -236,11 +246,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform double click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("double click {string} page element to {string}.")
@@ -252,11 +263,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform double click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("double click {string} page object to {string}.")
@@ -268,11 +280,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform right click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("right click on {string} page object to {string}.")
@@ -291,11 +304,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform right click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("right click on {string} page element to {string}.")
@@ -307,11 +321,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform right click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("right click {string} page element to {string}.")
@@ -323,11 +338,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform right click operation on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("right click {string} page object to {string}.")
@@ -340,11 +356,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Generally it is used for drag and drop functionality.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click and hold on {string} page object to {string}.")
@@ -364,11 +381,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Generally it is used for drag and drop functionality.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click and hold on {string} page element to {string}.")
@@ -381,11 +399,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Generally it is used for drag and drop functionality.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click and hold {string} page element to {string}.")
@@ -398,11 +417,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Generally it is used for drag and drop functionality.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click and hold {string} page object to {string}.")
@@ -415,11 +435,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Generally it is used for drag and drop functionality.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("release hold click from {string} page object to {string}.")
@@ -440,11 +461,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Generally it is used for drag and drop functionality.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("release hold click from {string} page element to {string}.")
@@ -456,17 +478,19 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform drag and drop operations on the specified page object / page element.
 	 *
 	 * @param dragElemPageObject - the dragging element page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param dropElemPageObject - the dropping element page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 */
 	@When("drag {string} page element and drop on {string} page element.")
 	public void drag_and_drop_page_element(String dragElemPageObject, String dropElemPageObject) {
@@ -495,11 +519,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform mouse hoverover operations on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("mouse hoverover on {string} page object to {string}.")
@@ -519,11 +544,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform mouse hoverover operations on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("mouse hoverover on {string} page element to {string}.")
@@ -535,11 +561,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform mouse hoverover operations on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("mouse hoverover {string} page element to {string}.")
@@ -551,11 +578,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * Used to perform mouse hoverover operations on the specified page object / page element.
 	 *
 	 * @param pageObject - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *       
+	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("mouse hoverover {string} page object to {string}.")

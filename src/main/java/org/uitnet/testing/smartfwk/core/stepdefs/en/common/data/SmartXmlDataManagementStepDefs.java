@@ -129,6 +129,7 @@ public class SmartXmlDataManagementStepDefs {
 	 * @param xmlPath - for format please {@link ParamPath} class.
 	 *     {path: "xpath-here", valueType: "string"}
 	 *     For more details on XPATH, please refer {@link https://www.w3.org/TR/1999/REC-xpath-19991116/}
+	 *   </pre></blockquote>
 	 * @param xmlObjRefVariable - the variable name from where the XML object is read.
 	 * @param variableName - the variable name where the extracted info will be stored.
 	 */
@@ -153,15 +154,18 @@ public class SmartXmlDataManagementStepDefs {
 	/**
 	 * Used to verify the parameter's values in XML object. Reads information from the data table. Data table format is given below:
 	 * First row is always considered as header and data from second row onward is going to get read and validated.
+	 * <blockquote><pre>
 	 * | Parameter/XML Path                            | Operator           | Expected Information                                                                                               |
 	 * | {path: "xpath", valueType: "string"}          | =                  | John Hopkins                                                                                                       |
 	 * | {path: "xpath", valueType: "string-list"}     | contains           | {ev: ["Cable operator", "Accountant"], valueType: "string-list", inOrder: "yes", ignoreCase: "no", textMatchMechanism: "exactMatchWithExpectedValue"} |
 	 * 
 	 * For supported operators @see org.uitnet.testing.smartfwk.api.core.validator.ValueMatchOperator enum.
 	 * For expected information xml format please @see {@link ExpectedInfo}
+	 * </pre></blockquote>
 	 * 
 	 * @param xmlObjRefVariable - the variable name where the XML object is stored.
 	 * @param xmlParamInfo - input datatable contains the parameters for verification in the format given below:
+	 * <blockquote><pre>
 	 *   | Parameter Path / XML Path                     | Operator           | Expected Information                                                                                               |
 	 *   | {path: "xpath", valueType: "string"}          | =                  | John Hopkins                                                                                                       |
 	 *   | {path: "xpath", valueType: "string-list"}     | contains           | {ev: ["Cable operator", "Accountant"], valueType: "string-list", inOrder: "yes", ignoreCase: "no", textMatchMechanism: "exactMatchWithExpectedValue"} |
@@ -169,6 +173,7 @@ public class SmartXmlDataManagementStepDefs {
 	 *    NOTE: Refer {@link https://www.w3.org/TR/1999/REC-xpath-19991116/} link to learn more on XML path.
 	 *    NOTE: Refer ){@link ValueMatchOperator} to know what type of operators supported.
 	 *    NOTE: For expected information JSON format please refer {@link ExpectedInfo}.
+	 *  </pre></blockquote>
 	 */
 	@Then("verify the following parameters of XML object matches with the expected information as per the tabular info given below [XMLObjRefVariable={string}]:")
 	public void verify_the_following_parameters_of_xml_object_matches_with_the_expected_information_as_per_the_tabular_info_given_below_xml_obj_ref_variable(String xmlObjRefVariable, DataTable xmlParamInfo) {
