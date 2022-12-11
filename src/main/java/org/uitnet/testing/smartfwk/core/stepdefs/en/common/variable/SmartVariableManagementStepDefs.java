@@ -268,16 +268,16 @@ public class SmartVariableManagementStepDefs {
 	}
 	
 	/**
-	 * Used to convert the list variable value into plain text separated by the specified delimiter.
+	 * Used to convert the list variable value into plain text joined by the specified joiner.
 	 * And store into new variable.
 	 * 
 	 * @param variableName - the list variable name used to converts its contents into plain text.
-	 * @param separator - the separator used to append all items of the list.
+	 * @param joiner - the joiner used to join all items of the list.
 	 * @param newVariableName - the new variable name that stores the converted value.
 	 */
 	@SuppressWarnings("unchecked")
-	@When("convert {string} list variable value into plain text using separator={string} and store into {string} variable.")
-	public void convert_list_variable_value_into_plain_text_using_separator_and_store_into_variable(String variableName, String separator, String newVariableName) {
+	@When("convert {string} list variable value into plain text using joiner={string} and store into {string} variable.")
+	public void convert_list_variable_value_into_plain_text_using_joiner_and_store_into_variable(String variableName, String joiner, String newVariableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -290,7 +290,7 @@ public class SmartVariableManagementStepDefs {
 				if("".equals(str)) {
 					str = elem;
 				} else {
-					str = str + separator + elem;
+					str = str + joiner + elem;
 				}
 			}
 			scenarioContext.addParamValue(newVariableName, str);
@@ -299,18 +299,18 @@ public class SmartVariableManagementStepDefs {
 	
 	/**
 	 * Used to convert the list variable value into plain text by appending prefix and suffix to 
-	 * each item of the list. The value in plain text are separated by separator.
+	 * each item of the list. The value in plain text are joined by joiner.
 	 * 
 	 * @param variableName - the list variable name.
-	 * @param separator - the separated that will be used to append list items.
+	 * @param joiner - the joiner that will be used to join list items.
 	 * @param valuePrefix - prefix text that will be prepended to each item of the list.
 	 * @param valueSuffix - suffix text that will be appended to each item of the list.
 	 * @param newVariableName - the new variable name that stores the converted value.
 	 */
 	@SuppressWarnings("unchecked")
-	@When("convert {string} list variable value into plain text using separator={string}, valuePrefix={string}, valueSuffix={string} and store into {string} variable.")
-	public void convert_list_variable_value_into_plain_text_using_separator_valueprefix_valuesuffix_and_store_into_variable(
-			String variableName, String separator, 
+	@When("convert {string} list variable value into plain text using joiner={string}, valuePrefix={string}, valueSuffix={string} and store into {string} variable.")
+	public void convert_list_variable_value_into_plain_text_using_joiner_valueprefix_valuesuffix_and_store_into_variable(
+			String variableName, String joiner, 
 			String valuePrefix, String valueSuffix, String newVariableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -324,7 +324,7 @@ public class SmartVariableManagementStepDefs {
 				if("".equals(str)) {
 					str = (elem == null) ? elem : valuePrefix + elem + valueSuffix;
 				} else {
-					str = (elem == null) ? str + separator + elem : str + separator + valuePrefix + elem + valueSuffix;
+					str = (elem == null) ? str + joiner + elem : str + joiner + valuePrefix + elem + valueSuffix;
 				}
 			}
 			scenarioContext.addParamValue(newVariableName, str);
@@ -333,19 +333,19 @@ public class SmartVariableManagementStepDefs {
 	
 	/**
 	 * Used to convert the list variable value into plain text by appending prefix and suffix to 
-	 * each item of the list. The value in plain text are separated by separator. 
+	 * each item of the list. The value in plain text are joined by joiner. 
 	 * NOTE: If list variable is empty then it will return default value enclosed with provided prefix and suffix.
 	 * 
 	 * @param variableName - the list variable name.
-	 * @param separator - the separated that will be used to append list items.
+	 * @param joiner - the joiner that will be used to join list items.
 	 * @param valuePrefix - prefix text that will be prepended to each item of the list.
 	 * @param valueSuffix - suffix text that will be appended to each item of the list.
 	 * @param defaultValue - if list variable is empty then it will return default value enclosed with provided prefix and suffix.
 	 * @param newVariableName - the new variable name that stores the converted value.
 	 */
 	@SuppressWarnings("unchecked")
-	@When("convert {string} list variable value into plain text using separator={string}, valuePrefix={string}, valueSuffix={string}, default={string} and store into {string} variable.")
-	public void convert_list_variable_value_into_plain_text_using_separator_valueprefix_valuesuffix_default_and_store_into_variable(String variableName, String separator, 
+	@When("convert {string} list variable value into plain text using joiner={string}, valuePrefix={string}, valueSuffix={string}, default={string} and store into {string} variable.")
+	public void convert_list_variable_value_into_plain_text_using_separator_valueprefix_valuesuffix_default_and_store_into_variable(String variableName, String joiner, 
 			String valuePrefix, String valueSuffix, String defaultValue, String newVariableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -359,7 +359,7 @@ public class SmartVariableManagementStepDefs {
 				if("".equals(str)) {
 					str = (elem == null) ? elem : valuePrefix + elem + valueSuffix;
 				} else {
-					str = (elem == null) ? str + separator + elem : str + separator + valuePrefix + elem + valueSuffix;
+					str = (elem == null) ? str + joiner + elem : str + joiner + valuePrefix + elem + valueSuffix;
 				}
 			}
 			if(StringUtil.isEmptyAfterTrim(str)) {
