@@ -33,6 +33,7 @@ import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
 import org.uitnet.testing.smartfwk.ui.core.utils.DataMatchUtil;
+import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.ObjectUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.StringUtil;
 import org.uitnet.testing.smartfwk.validator.ParameterValidator;
@@ -428,34 +429,28 @@ public class SmartVariableManagementStepDefs {
 	 * @param variableName1 - the name of the variable.
 	 * @param operator - the operator used to verify the variable value with expected value.
 	 * 		For more details on operator, refer {@link ValueMatchOperator}
-	 * @param expectedValue - the expected value. The syntax is a JSON syntax:
-	 * 		{v: <value-here>, valueType: "string"}
+	 * @param expectedInfo - the expected info. The syntax is a JSON syntax:
+	 * 		{ev: <value-here>, valueType: "string", textMatchMechanism: "start-with-expected-value", n: 2, inOrder: "no", ignoreCase: "no"}
+	 *    For expected info, refer {@link ExpectedInfo}
 	 *    For valueType, refer {@link ParamValueType}
+	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
 	 *    Or we can directly specify value like:
 	 *    	"test value"
 	 * 
 	 */
 	@Then("verify valueOf\\({string}) variable {string} {string}.")
-	public void verify_valueof_variable1_op_expected_value(String variableName1, String operator, String expectedValue) { 
+	public void verify_valueof_variable1_op_expected_value(String variableName1, String operator, String expectedInfo) { 
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		Object avalue = scenarioContext.getParamValue(variableName1);
-		Object evalue = expectedValue;
-		ValueMatchOperator oper = ValueMatchOperator.valueOf2(operator);
-		
+		Object avalue = scenarioContext.getParamValue(variableName1);		
 		ParamValue pv1 = ObjectUtil.convertObjectToParamValue(avalue);
-		ParamValue pv2 = ObjectUtil.convertObjectToParamValue(evalue);
-		
-		ObjectUtil.fixValueTypesInParamValueObjects(pv1, oper, pv2);
 		
 		ParamPath pPath = new ParamPath(variableName1, pv1.getValueTypeAsStr());
 		
-		ExpectedInfo eInfo = new ExpectedInfo();
-		eInfo.setEv(pv2.getV());
-		eInfo.setValueType(pv2.getValueType().getType());
+		ExpectedInfo eInfo = JsonYamlUtil.parseExpectedInfo(expectedInfo);
 		
 		ParameterValidator.validateParamValueAsExpectedInfo(false, pPath, pv1.getV(), operator, eInfo);
 	}
