@@ -438,7 +438,7 @@ public class SmartVariableManagementStepDefs {
 	 *    	"test value"
 	 * 
 	 */
-	@Then("verify valueOf\\({string}) variable {string} {string}.")
+	@Then("verify value of {string} variable {string} {string}.")
 	public void verify_valueof_variable1_op_expected_value(String variableName1, String operator, String expectedInfo) { 
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -464,7 +464,7 @@ public class SmartVariableManagementStepDefs {
 	 * 		For more details on operator, refer {@link ValueMatchOperator}
 	 * @param variableName2 - the expected variable name that contains the value.
 	 */
-	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable.")
+	@Then("verify value of {string} variable {string} value of {string} variable.")
 	public void verify_valueof_variable1_op_valueof_variable2(String variableName1, String operator, String variableName2) { 
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -499,7 +499,7 @@ public class SmartVariableManagementStepDefs {
 	 * @param variableName2 - the expected variable name that contains the value.
 	 * @param extraInfo - extra info to provide to justification. 
 	 */
-	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable to {string}.")
+	@Then("verify value of {string} variable {string} value of {string} variable to {string}.")
 	public void verify_valueof_variable1_op_valueof_variable2_extrainfo(String variableName1, String operator, String variableName2, String extraInfo) { 
 		verify_valueof_variable1_op_valueof_variable2(variableName1, operator, variableName2);
 	}
@@ -516,7 +516,7 @@ public class SmartVariableManagementStepDefs {
 	 * @param textMatchMechanism - the text match mechanism used to verify the value in list items. 
 	 * 		For text match mechanism, refer {@link TextMatchMechanism} class.
 	 */
-	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable [TextMatchMechanism={string}].")
+	@Then("verify value of {string} variable {string} value of {string} variable [TextMatchMechanism={string}].")
 	public void verify_valueof_variable1_op_valueof_variable2_textmatchmechanism(String variableName1, String operator, String variableName2, String textMatchMechanism) { 
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -556,7 +556,7 @@ public class SmartVariableManagementStepDefs {
 	 * 		For text match mechanism, refer {@link TextMatchMechanism} class.
 	 * @param extraInfo - extra info to provide to justify the 
 	 */
-	@Then("verify valueOf\\({string}) variable {string} valueOf\\({string}) variable [TextMatchMechanism={string}] to {string}.")
+	@Then("verify value of {string} variable {string} value of {string} variable [TextMatchMechanism={string}] to {string}.")
 	public void verify_valueof_variable1_op_valueof_variable2_textmatchmechanism_extrainfo(String variableName1, String operator, String variableName2,
 			String textMatchMechanism, String extraInfo) { 
 		verify_valueof_variable1_op_valueof_variable2_textmatchmechanism(variableName1, operator, variableName2, textMatchMechanism);
@@ -639,7 +639,7 @@ public class SmartVariableManagementStepDefs {
 	 * 		valid values: yes, no
 	 */
 	@SuppressWarnings("unchecked")
-	@Then("split valueOf\\({string}) variable using {string} separator and store index\\({int}) into {string} variable [ShouldTrim={string}].")
+	@Then("split value of {string} variable using {string} separator and store index {int} into {string} variable [ShouldTrim={string}].")
 	public void split_valueof_variable_using_separator_and_store_index_into_variable(String variableName, String separator, int nthIndex,
 			String newVariableName, String shouldTrim) { 
 		if(!scenarioContext.isLastConditionSetToTrue()) {
