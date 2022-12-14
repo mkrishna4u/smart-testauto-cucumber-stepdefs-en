@@ -450,6 +450,7 @@ public class SmartVariableManagementStepDefs {
 		
 		ParamPath pPath = new ParamPath(variableName1, pv1.getValueTypeAsStr());
 		
+		expectedInfo = scenarioContext.applyParamsValueOnText(expectedInfo);
 		ExpectedInfo eInfo = JsonYamlUtil.parseExpectedInfo(expectedInfo);
 		
 		ParameterValidator.validateParamValueAsExpectedInfo(false, pPath, pv1.getV(), operator, eInfo);
