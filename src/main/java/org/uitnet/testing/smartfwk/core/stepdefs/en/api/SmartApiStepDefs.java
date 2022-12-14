@@ -698,7 +698,7 @@ public class SmartApiStepDefs {
 				textMatchMechanism = TextMatchMechanism.exactMatchWithExpectedValue.name();
 			}
 			
-			httpResponse.getValidator().validateExpectedHeaderValue(headerName, expectedValue, TextMatchMechanism.valueOf(textMatchMechanism));
+			httpResponse.getValidator().validateExpectedHeaderValue(headerName, expectedValue, TextMatchMechanism.valueOf2(textMatchMechanism));
 		}
 	}
 	
@@ -864,7 +864,7 @@ public class SmartApiStepDefs {
 			Assert.fail("Expected filename can not be empty.");
 		}
 		
-		httpResponse.getValidator().validateFileDownloaded(expectedFileName, TextMatchMechanism.valueOf(textMatchMechanism), deleteFile);
+		httpResponse.getValidator().validateFileDownloaded(expectedFileName, TextMatchMechanism.valueOf2(textMatchMechanism), deleteFile);
 	}
 	
 	/**

@@ -766,7 +766,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		String txt = scenarioContext.applyParamsValueOnText(textToType);
 		PageObjectUtil.invokeValidatorMethod("typeText",
 				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE },
-				new Object[] { txt, NewTextLocation.valueOf(location), poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				new Object[] { txt, NewTextLocation.valueOf2(location), poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
 	}
 	
@@ -929,7 +929,7 @@ public class SmartUiFormElementOperationsStepDefs {
 						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
 				
 				FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->text", elements.getText(), expectedText,
-						TextMatchMechanism.valueOf(textMatchMechanism));
+						TextMatchMechanism.valueOf2(textMatchMechanism));
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
 					throw th;
@@ -996,7 +996,7 @@ public class SmartUiFormElementOperationsStepDefs {
 						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
 				
 				FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->" + attributeName, elements.getAttribute(attributeName), expectedText,
-						TextMatchMechanism.valueOf(textMatchMechanism));
+						TextMatchMechanism.valueOf2(textMatchMechanism));
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
 					throw th;
@@ -1368,7 +1368,7 @@ public class SmartUiFormElementOperationsStepDefs {
 					for(WebElement elem : elements) {
 						String textValue = elem.getText();
 						FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->Text", textValue, expectedText,
-								TextMatchMechanism.valueOf(textMatchMechanism));
+								TextMatchMechanism.valueOf2(textMatchMechanism));
 					}
 				}
 			} catch (Throwable th) {
@@ -1449,7 +1449,7 @@ public class SmartUiFormElementOperationsStepDefs {
 					for(WebElement elem : elements) {
 						String textValue = elem.getAttribute(attributeName);
 						FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->" + attributeName, textValue, expectedText,
-								TextMatchMechanism.valueOf(textMatchMechanism));
+								TextMatchMechanism.valueOf2(textMatchMechanism));
 					}
 				}
 			} catch (Throwable th) {
