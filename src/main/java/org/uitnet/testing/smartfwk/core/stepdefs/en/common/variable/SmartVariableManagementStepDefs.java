@@ -100,7 +100,7 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
-		scenarioContext.log(variableName);
+		scenarioContext.log("" + scenarioContext.getParamValue(variableName));
 	}
 	
 	/**
