@@ -1249,6 +1249,71 @@ public class SmartUiFormElementOperationsStepDefs {
 	}
 	
 	/**
+	 * Used to retrieve the text part of specified page object / page element and store the value into the variable.
+	 * <blockquote><pre>
+	 * In HTML DOM the text part is the value between start tag and end tag.
+	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
+	 * 
+	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * @param variableName - the name of the variable.
+	 */
+	@Then("get text part of {string} page element and store into {string} variable.")
+	public void verify_text_part_of_page_element_and_store_into_variable(String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		String textValue = "";
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
+						"findElement", new Class<?>[]{int.class}, new Object[]{0}, poInfo, scenarioContext);
+				
+				if(element != null) {					
+					textValue = element.getText();
+				}
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+			}
+			scenarioContext.waitForSeconds(2);
+		}
+		
+		scenarioContext.addParamValue(variableName, textValue);
+	}
+	
+	/**
+	 * Used to retrieve the text part of specified page object / page element and store the value into the variable.
+	 * <blockquote><pre>
+	 * In HTML DOM the text part is the value between start tag and end tag.
+	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
+	 * 
+	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * @param variableName - the name of the variable.
+	 */
+	@Then("get text part of {string} page object and store into {string} variable.")
+	public void verify_text_part_of_page_object_and_store_into_variable(String po, String variableName) {
+		verify_text_part_of_page_element_and_store_into_variable(po, variableName);
+	}
+	
+	/**
 	 * Used to retrieve the given attribute's value of each element specified by given page object / page element and store all the values into the variable.
 	 * <blockquote><pre>
 	 * In HTML DOM the attribute and its value is specified inside start tag.
@@ -1323,6 +1388,76 @@ public class SmartUiFormElementOperationsStepDefs {
 	@Then("get {string} attribute value of each element of {string} page object and store into {string} variable.")
 	public void get_attribute_value_of_each_element_of_page_element_and_store_into_variable_1(String attributeName, String po, String variableName) {
 		get_attribute_value_of_each_element_of_page_element_and_store_into_variable(attributeName, po, variableName);
+	}
+	
+	/**
+	 * Used to retrieve the given attribute's value of specified page object / page element and store value into the variable.
+	 * <blockquote><pre>
+	 * In HTML DOM the attribute and its value is specified inside start tag.
+	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
+	 * Here attr1 and attr2 are attribute names.
+	 * </pre></blockquote>
+	 * 
+	 * @param attributeName - the attribute name.
+	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * @param variableName - the name of the variable that will store the .
+	 */
+	@Then("get {string} attribute value of {string} page element and store into {string} variable.")
+	public void get_attribute_value_of_page_element_and_store_into_variable(String attributeName, String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		String textValue = "";
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
+						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+				
+				if(element != null) {	
+					textValue = element.getAttribute(attributeName);
+				}
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+			}
+			scenarioContext.waitForSeconds(2);
+		}
+		
+		scenarioContext.addParamValue(variableName, textValue);
+		
+	}
+	
+	/**
+	 * Used to retrieve the given attribute's value of specified page object / page element and store value into the variable.
+	 * <blockquote><pre>
+	 * In HTML DOM the attribute and its value is specified inside start tag.
+	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
+	 * Here attr1 and attr2 are attribute names.
+	 * </pre></blockquote>
+	 * 
+	 * @param attributeName - the attribute name.
+	 * @param po- the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * @param variableName - the name of the variable that will store the .
+	 */
+	@Then("get {string} attribute value of {string} page object and store into {string} variable.")
+	public void get_attribute_value_of_page_object_and_store_into_variable(String attributeName, String po, String variableName) {
+		get_attribute_value_of_page_element_and_store_into_variable(attributeName, po, variableName);
 	}
 	
 	/**
@@ -1404,6 +1539,86 @@ public class SmartUiFormElementOperationsStepDefs {
 	@Then("verify text part of each element of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_text_part_of_each_element_of_page_element_matches_text_where_textmatchmechanism_1(String po, String expectedText, String textMatchMechanism) {
 		verify_text_part_of_each_element_of_page_element_matches_text_where_textmatchmechanism(po, expectedText, textMatchMechanism);
+	}
+	
+	/**
+	 * Used to verify the text part of specified page object / page element matches with 
+	 * the expected text using specified TextMatchMechanism.
+	 * 
+	 * <blockquote><pre>
+	 * In HTML DOM the text part is the value between start tag and end tag.
+	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
+	 *       
+	 * @param expectedText - the expected text to be matched with each element's text part.
+	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
+	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
+	 */
+	@Then("verify text part of {string} page element matches {string} text where TextMatchMechanism={string}.")
+	public void verify_text_part_of_page_element_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
+		
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
+						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+				
+				if(element != null) {					
+					String textValue = element.getText();
+					FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->Text", textValue, expectedText,
+							TextMatchMechanism.valueOf2(textMatchMechanism));
+				}
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+			}
+			scenarioContext.waitForSeconds(2);
+		}
+	}
+	
+	/**
+	 * Used to verify the text part of specified page object / page element matches with 
+	 * the expected text using specified TextMatchMechanism.
+	 * 
+	 * <blockquote><pre>
+	 * In HTML DOM the text part is the value between start tag and end tag.
+	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
+	 *       
+	 * @param expectedText - the expected text to be matched with each element's text part.
+	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
+	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
+	 */
+	@Then("verify text part of {string} page object matches {string} text where TextMatchMechanism={string}.")
+	public void verify_text_part_of_page_object_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
+		verify_text_part_of_page_element_matches_text_where_textmatchmechanism(po, expectedText, textMatchMechanism);
 	}
 	
 	/**
@@ -1489,6 +1704,88 @@ public class SmartUiFormElementOperationsStepDefs {
 	@Then("verify {string} attribute value of each element of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_attribute_value_of_each_element_of_page_element_matches_text_where_textmatchmechanism_1(String attributeName, String po, String expectedText, String textMatchMechanism) {
 		verify_attribute_value_of_each_element_of_page_element_matches_text_where_textmatchmechanism(attributeName, po, expectedText, textMatchMechanism);
+	}
+	
+	/**
+	 * Used to verify the attribute value of specified page object / page element matches with 
+	 * the expected text using specified TextMatchMechanism.
+	 * 
+	 * <blockquote><pre>
+	 * In HTML DOM the attribute and its value is specified inside start tag.
+	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
+	 * Here attr1 and attr2 are attribute names.
+	 * </pre></blockquote>
+	 * 
+	 * @param attributeName - the name of the attribute.
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>    Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
+	 *       
+	 * @param expectedText - the expected text to be matched with each element's text part.
+	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
+	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
+	 */
+	@Then("verify {string} attribute value of {string} page element matches {string} text where TextMatchMechanism={string}.")
+	public void verify_attribute_value_of_page_element_matches_text_where_textmatchmechanism(String attributeName, String po, String expectedText, String textMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
+						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+				
+				if(element != null) {	
+					String textValue = element.getAttribute(attributeName);
+					FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->" + attributeName, textValue, expectedText,
+							TextMatchMechanism.valueOf2(textMatchMechanism));
+				}
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+			}
+			scenarioContext.waitForSeconds(2);
+		}
+		
+	}
+	
+	/**
+	 * Used to verify the attribute value of specified page object / page element matches with 
+	 * the expected text using specified TextMatchMechanism.
+	 * 
+	 * <blockquote><pre>
+	 * In HTML DOM the attribute and its value is specified inside start tag.
+	 * <tag-name attr1="attr1 value" attr2="attr2 value">text-part</tag-name>  
+	 * Here attr1 and attr2 are attribute names.
+	 * </pre></blockquote>
+	 * 
+	 * @param attributeName - the name of the attribute.
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>    Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
+	 *       
+	 * @param expectedText - the expected text to be matched with each element's text part.
+	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
+	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
+	 */
+	@Then("verify {string} attribute value of {string} page object matches {string} text where TextMatchMechanism={string}.")
+	public void verify_attribute_value_of_page_object_matches_text_where_textmatchmechanism(String attributeName, String po, String expectedText, String textMatchMechanism) {
+		verify_attribute_value_of_page_element_matches_text_where_textmatchmechanism(attributeName, po, expectedText, textMatchMechanism);
 	}
 	
 	/**
