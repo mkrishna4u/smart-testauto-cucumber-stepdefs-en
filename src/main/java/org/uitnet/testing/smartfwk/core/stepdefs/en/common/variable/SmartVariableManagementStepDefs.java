@@ -758,4 +758,9 @@ public class SmartVariableManagementStepDefs {
 		String projectRootDir = Locations.getProjectRootDir();
 		scenarioContext.addParamValue(variableName, projectRootDir);
 	}
+	
+	@Then("get index {int} of {string} variable value and store into {string} variable.")
+	public void get_index_of_variable_value_and_store_into_variable(String nthIndex, String variableName, String newVariableName) {
+		
+	}
 }

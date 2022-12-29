@@ -90,4 +90,44 @@ public class SmartFileUploadStepDefs {
 	public void upload_file_using_page_element_2(String files, String po) {
 		upload_file_using_page_element(files, po);
 	}
+	
+	/**
+	 * Used to select single / multiple files using specified page element (using file dialog).
+	 * 
+	 * @param files - relative path in JSON array format like
+	 * <blockquote><pre>
+	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
+	 * </pre></blockquote>
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
+	 */
+	@When("select {string} file\\(s) using {string} page element.")
+	public void select_file_using_page_element(String files, String po) {
+		upload_file_using_page_element(files, po);
+	}
+	
+	/**
+	 * Used to select single / multiple files using specified page object (using file dialog).
+	 * 
+	 * @param files - relative path in JSON array format like
+	 * <blockquote><pre>
+	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
+	 * </pre></blockquote>
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>
+	 */
+	@When("select {string} file\\(s) using {string} page object.")
+	public void select_file_using_page_object(String files, String po) {
+		upload_file_using_page_element(files, po);
+	}
 }

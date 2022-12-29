@@ -739,7 +739,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	/**
 	 * Used to type the text at a particular location on the editable page object / page element like TextBox, TextArea elements.
 	 * 
-	 * @param textToType - the text to be typed.
+	 * @param inputValue - the text to be typed. This can be specified directly or in JSON format format.
+	 * 		Direct way: "this is sample text"
+	 *      JSON way: Refer {@link InputValue}. Example:
+	 *        {value: "This is sample text", action: "type", typeSpeedMspc: 100, typeAfterClick: true}
 	 * @param po - the page object / page element can be specified in two way:
 	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
@@ -756,24 +759,29 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 */
 	@When("type {string} text in {string} page object at {string} location.")
-	public void type_text_in_page_element(String textToType, String po, String location) {
+	public void type_text_in_page_element(String inputValue, String po, String location) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-		String txt = scenarioContext.applyParamsValueOnText(textToType);
+		inputValue = scenarioContext.applyParamsValueOnText(inputValue);
+		InputValue inputValueObj = JsonYamlUtil.parseInputValue(inputValue);
 		PageObjectUtil.invokeValidatorMethod("typeText",
-				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE },
-				new Object[] { txt, NewTextLocation.valueOf2(location), poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE, Boolean.TYPE,  Integer.TYPE},
+				new Object[] { inputValueObj.getValue(), NewTextLocation.valueOf2(location), inputValueObj.getTypeSpeedMspc(), 
+						inputValueObj.getTypeAfterClick(), poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
 	}
 	
 	/**
 	 * Used to type the text at a particular location on the editable page object / page element like TextBox, TextArea elements.
 	 * 
-	 * @param textToType - the text to be typed.
+	 * @param inputValue - the text to be typed. This can be specified directly or in JSON format format.
+	 * 		Direct way: "this is sample text"
+	 *      JSON way: Refer {@link InputValue}. Example:
+	 *        {value: "This is sample text", action: "type", typeSpeedMspc: 100, typeAfterClick: true}
 	 * @param po - the page object / page element can be specified in two way:
 	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
@@ -790,14 +798,17 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 */
 	@When("type {string} text in {string} page element at {string} location.")
-	public void type_text_in_page_element_1(String textToType, String po, String location) {
-		type_text_in_page_element(textToType, po);
+	public void type_text_in_page_element_1(String inputValue, String po, String location) {
+		type_text_in_page_element(inputValue, po);
 	}
 	
 	/**
 	 * Used to type the text at a particular location on the editable page object / page element like TextBox, TextArea elements.
 	 * 
-	 * @param textToType - the text to be typed.
+	 * @param inputValue - the text to be typed. This can be specified directly or in JSON format format.
+	 * 		Direct way: "this is sample text"
+	 *      JSON way: Refer {@link InputValue}. Example:
+	 *        {value: "This is sample text", action: "type", typeSpeedMspc: 100, typeAfterClick: true }
 	 * @param po - the page object / page element can be specified in two way:
 	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
@@ -805,34 +816,20 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>    
-	 * @param location - the location where the specified text to be typed. valid values: start, end, replace
-	 * 	If text is already existed in the control. 
-	 * <blockquote><pre>
-	 * 		A. location=start will append text in the beginning.
-	 *      B. location=end will append text in the end.
-	 *      C. location=replace will replace the existing text.
-	 * </pre></blockquote>
 	 */
 	@When("type {string} text in {string} page object.")
-	public void type_text_in_page_element(String textToType, String po) {
-		if(!scenarioContext.isLastConditionSetToTrue()) {
-			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
-			return;
-		}
-		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);		
-		String txt = scenarioContext.applyParamsValueOnText(textToType);
-		PageObjectUtil.invokeValidatorMethod("typeText",
-				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE },
-				new Object[] { txt, NewTextLocation.replace, poInfo.getMaxIterationsToLocateElements() }, poInfo,
-				scenarioContext);
+	public void type_text_in_page_element(String inputValue, String po) {
+		type_text_in_page_element(inputValue, po, "replace");
 	}
 	
 	/**
 	 * Used to type the text on the editable page object / page element like TextBox, TextArea elements.
 	 * This step will always replace the existing text with the new text.
 	 * 
-	 * @param textToType - the text to be typed.
+	 * @param inputValue - the text to be typed. This can be specified directly or in JSON format format.
+	 * 		Direct way: "this is sample text"
+	 *      JSON way: Refer {@link InputValue}. Example:
+	 *        {value: "This is sample text", action: "type", typeSpeedMspc: 100, typeAfterClick: true }
 	 * @param po - the page object / page element can be specified in two way:
 	 * <blockquote><pre>
 	 *     Direct way: myapp.XyzPO.poObject
@@ -842,8 +839,8 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 */
 	@When("type {string} text in {string} page element.")
-	public void type_text_in_page_element_1(String textToType, String po) {
-		type_text_in_page_element(textToType, po);
+	public void type_text_in_page_element_1(String inputValue, String po) {
+		type_text_in_page_element(inputValue, po);
 	}
 
 	/**
@@ -857,23 +854,15 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
-	 * @param textToType - the text to be typed.
+	 * @param inputValue - the text to be typed. This can be specified directly or in JSON format format.
+	 * 		Direct way: This is sample text
+	 *      JSON way: Refer {@link InputValue}. Example:
+	 *        {value: "This is sample text", action: "type", typeSpeedMspc: 100, typeAfterClick: true }
 	 *
 	 */
 	@When("type the following text in {string} page object:")
-	public void type_the_following_text_in_page_element(String po, DocString textToType) {
-		if(!scenarioContext.isLastConditionSetToTrue()) {
-			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
-			return;
-		}
-		
-		String txt = scenarioContext.applyParamsValueOnText(textToType.getContent());
-		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-		PageObjectUtil.invokeValidatorMethod("typeText",
-				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE }, new Object[] {
-						txt, NewTextLocation.replace, poInfo.getMaxIterationsToLocateElements() },
-				poInfo, scenarioContext);
+	public void type_the_following_text_in_page_element(String po, DocString inputValue) {
+		type_text_in_page_element(inputValue.getContent(), po);
 	}
 	
 	/**
@@ -887,7 +876,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
-	 * @param textToType - the text to be typed.
+	 * @param inputValue - the text to be typed. This can be specified directly or in JSON format format.
+	 * 		Direct way: This is sample text
+	 *      JSON way: Refer {@link InputValue}. Example:
+	 *        {value: "This is sample text", action: "type", typeSpeedMspc: 100, typeAfterClick: true }
 	 *
 	 */
 	@When("type the following text in {string} page element:")
@@ -2059,6 +2051,16 @@ public class SmartUiFormElementOperationsStepDefs {
 	@When("enter the following form fields information present on {string}:")
 	public void fill_the_following_form_fields_value_present_on_page_1(String pageOrScreenName, DataTable dataTable) {
 		fill_the_following_form_fields_value_present_on_page(pageOrScreenName, dataTable);
+	}
+	
+	@Then("get dropdown options of {string} page element and store into {string} variable.")
+	public void get_dropdown_options_of_page_element_and_store_into_variable(String po, String variableName) {
+		
+	}
+	
+	@Then("verify dropdown options of {string} page element {string} {string}.")
+	public void verify_dropdown_options_of_page_element(String po, String operator, String expectedInfo) {
+		
 	}
 	
 }
