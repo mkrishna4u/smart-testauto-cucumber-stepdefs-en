@@ -2184,7 +2184,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *    Or we can directly specify value like:
 	 *    	"test value"
 	 */
-	@Then("verify dropdown options of {string} page element {string} {string}.")
+	@Then("verify dropdown options of {string} page object {string} {string}.")
 	public void verify_dropdown_options_of_page_object(String po, String operator, String expectedInfo) {
 		verify_dropdown_options_of_page_element(po, operator, expectedInfo);
 	}
