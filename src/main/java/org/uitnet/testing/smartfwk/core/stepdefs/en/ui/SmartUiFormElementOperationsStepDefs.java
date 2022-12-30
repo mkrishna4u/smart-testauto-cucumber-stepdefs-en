@@ -28,6 +28,8 @@ import org.uitnet.testing.smartfwk.api.core.support.PageObjectInfo;
 import org.uitnet.testing.smartfwk.common.MethodSignature;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.InputValue;
+import org.uitnet.testing.smartfwk.core.validator.ParamPath;
+import org.uitnet.testing.smartfwk.core.validator.ParamValueType;
 import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
 import org.uitnet.testing.smartfwk.ui.core.objects.NewTextLocation;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
@@ -35,6 +37,7 @@ import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.WebElementUtil;
 import org.uitnet.testing.smartfwk.validator.FieldValidator;
+import org.uitnet.testing.smartfwk.validator.ParameterValidator;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.docstring.DocString;
@@ -292,10 +295,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *     
+	 * </pre></blockquote>    
 	 * @param variableName - name of the variable where system will store the visibility. For visible element it will store "yes" else
 	 * 			it will store "no".
-	 * </pre></blockquote>
+	 * 
 	 */
 	@Then("get visibility of {string} page element and store into {string} variable.")
 	public void get_visibility_of_page_element_and_store_into_variable(String po, String variableName) {
@@ -326,10 +329,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     JSON way:  (Refer {@link PageObject}). Example:
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *           
+	 *  </pre></blockquote>         
 	 * @param variableName - name of the variable where system will store the visibility. For visible element it will store "yes" else
 	 * 			it will store "no".
-	 * </pre></blockquote>
+	 * 
 	 */
 	@Then("get visibility of {string} page object and store into {string} variable.")
 	public void get_visibility_of_page_element_and_store_into_variable2(String po, String variableName) {
@@ -2053,14 +2056,137 @@ public class SmartUiFormElementOperationsStepDefs {
 		fill_the_following_form_fields_value_present_on_page(pageOrScreenName, dataTable);
 	}
 	
+	/**
+	 * Used to extract options value of the Combobox element and store the extracted options into specified variable.
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>    
+	 * @param variableName - the name of the variable which stored the extracted options.
+	 */
+	@SuppressWarnings("unchecked")
 	@Then("get dropdown options of {string} page element and store into {string} variable.")
 	public void get_dropdown_options_of_page_element_and_store_into_variable(String po, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
 		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		
+		List<String> list = new LinkedList<>();
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				list = (List<String>) PageObjectUtil.invokeValidatorMethod(
+						"getAvailableItems", new Class<?>[]{int.class}, new Object[]{0}, poInfo, scenarioContext);
+				
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+				scenarioContext.waitForSeconds(2);
+			}
+		}
+		
+		scenarioContext.addParamValue(variableName, list);
 	}
 	
+	/**
+	 * Used to extract options value of the Combobox page object and store the extracted options into specified variable.
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>    
+	 * @param variableName - the name of the variable which stored the extracted options.
+	 */
+	@Then("get dropdown options of {string} page object and store into {string} variable.")
+	public void get_dropdown_options_of_page_object_and_store_into_variable(String po, String variableName) {
+		get_dropdown_options_of_page_element_and_store_into_variable(po, variableName);
+	}
+	
+	/**
+	 * Used to verify the combobox page element dropdown options information with the expected information.
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>  
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param expectedInfo - the expected info. The syntax is a JSON syntax:
+	 * 		{ev: <value-here>, valueType: "string", textMatchMechanism: "start-with-expected-value", n: 2, inOrder: "no", ignoreCase: "no"}
+	 *    For expected info, refer {@link ExpectedInfo}
+	 *    For valueType, refer {@link ParamValueType}
+	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
+	 *    Or we can directly specify value like:
+	 *    	"test value"
+	 */
+	@SuppressWarnings("unchecked")
 	@Then("verify dropdown options of {string} page element {string} {string}.")
 	public void verify_dropdown_options_of_page_element(String po, String operator, String expectedInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
 		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		
+		List<String> list = new LinkedList<>();
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				list = (List<String>) PageObjectUtil.invokeValidatorMethod(
+						"getAvailableItems", new Class<?>[]{int.class}, new Object[]{0}, poInfo, scenarioContext);
+				
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+				scenarioContext.waitForSeconds(2);
+			}
+		}
+		
+		expectedInfo = scenarioContext.applyParamsValueOnText(expectedInfo);
+		ExpectedInfo eInfo = JsonYamlUtil.parseExpectedInfo(expectedInfo);
+		
+		ParamPath pPath = new ParamPath(poInfo.getPageObject().getName() + "-options", "string-list");
+		
+		ParameterValidator.validateParamValueAsExpectedInfo(true, pPath, list, operator, eInfo);
+	}
+	
+	/**
+	 * Used to verify the combobox page object dropdown options information with the expected information.
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>  
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param expectedInfo - the expected info. The syntax is a JSON syntax:
+	 * 		{ev: <value-here>, valueType: "string", textMatchMechanism: "start-with-expected-value", n: 2, inOrder: "no", ignoreCase: "no"}
+	 *    For expected info, refer {@link ExpectedInfo}
+	 *    For valueType, refer {@link ParamValueType}
+	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
+	 *    Or we can directly specify value like:
+	 *    	"test value"
+	 */
+	@Then("verify dropdown options of {string} page element {string} {string}.")
+	public void verify_dropdown_options_of_page_object(String po, String operator, String expectedInfo) {
+		verify_dropdown_options_of_page_element(po, operator, expectedInfo);
 	}
 	
 }
