@@ -90,7 +90,7 @@ public class SmartUiFormElementOperationsStepDefs {
 			row = rows.get(i);
 			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-			PageObjectUtil.invokeValidatorMethod("validateVisible", new Class<?>[] { Integer.TYPE },
+			PageObjectUtil.invokeValidatorMethod("validateVisible", new String[] { Integer.TYPE.getTypeName()},
 					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 					scenarioContext);
 		}
@@ -136,7 +136,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-		PageObjectUtil.invokeValidatorMethod("validateVisible", new Class<?>[] { Integer.TYPE },
+		PageObjectUtil.invokeValidatorMethod("validateVisible", new String[] { Integer.TYPE.getTypeName() },
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
 	}
@@ -220,7 +220,7 @@ public class SmartUiFormElementOperationsStepDefs {
 			row = rows.get(i);
 			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-			PageObjectUtil.invokeValidatorMethod("validateHidden", new Class<?>[] { Integer.TYPE },
+			PageObjectUtil.invokeValidatorMethod("validateHidden", new String[] { Integer.TYPE.getTypeName() },
 					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 					scenarioContext);
 		}
@@ -310,7 +310,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		Boolean visible = false;
 		try {
-			visible = (Boolean) PageObjectUtil.invokeValidatorMethod("isVisible", new Class<?>[] { Integer.TYPE },
+			visible = (Boolean) PageObjectUtil.invokeValidatorMethod("isVisible", new String[] { Integer.TYPE.getTypeName() },
 					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 					scenarioContext);
 		} catch(Throwable th) {
@@ -362,7 +362,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		Boolean visible = false;
 		try {
-			visible = (Boolean) PageObjectUtil.invokeValidatorMethod("isPresent", new Class<?>[] { Integer.TYPE },
+			visible = (Boolean) PageObjectUtil.invokeValidatorMethod("isPresent", new String[] { Integer.TYPE.getTypeName() },
 					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 					scenarioContext);
 		} catch(Throwable th) {
@@ -410,7 +410,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-		PageObjectUtil.invokeValidatorMethod("validateHidden", new Class<?>[] { Integer.TYPE },
+		PageObjectUtil.invokeValidatorMethod("validateHidden", new String[] { Integer.TYPE.getTypeName() },
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
 	}
@@ -566,7 +566,7 @@ public class SmartUiFormElementOperationsStepDefs {
 			row = rows.get(i);
 			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-			PageObjectUtil.invokeValidatorMethod("validateDisabled", new Class<?>[] { Integer.TYPE },
+			PageObjectUtil.invokeValidatorMethod("validateDisabled", new String[] { Integer.TYPE.getTypeName() },
 					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 					scenarioContext);
 		}
@@ -615,7 +615,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-		PageObjectUtil.invokeValidatorMethod("validateDisabled", new Class<?>[] { Integer.TYPE },
+		PageObjectUtil.invokeValidatorMethod("validateDisabled", new String[] { Integer.TYPE.getTypeName() },
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
 	}
@@ -668,7 +668,7 @@ public class SmartUiFormElementOperationsStepDefs {
 			row = rows.get(i);
 			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-			PageObjectUtil.invokeValidatorMethod("validateEnabled", new Class<?>[] { Integer.TYPE },
+			PageObjectUtil.invokeValidatorMethod("validateEnabled", new String[] { Integer.TYPE.getTypeName() },
 					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 					scenarioContext);
 		}
@@ -717,7 +717,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-		PageObjectUtil.invokeValidatorMethod("validateEnabled", new Class<?>[] { Integer.TYPE },
+		PageObjectUtil.invokeValidatorMethod("validateEnabled", new String[] { Integer.TYPE.getTypeName() },
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
 	}
@@ -772,7 +772,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		inputValue = scenarioContext.applyParamsValueOnText(inputValue);
 		InputValue inputValueObj = JsonYamlUtil.parseInputValue(inputValue);
 		PageObjectUtil.invokeValidatorMethod("typeText",
-				new Class<?>[] { String.class, NewTextLocation.class, Integer.TYPE, Boolean.TYPE,  Integer.TYPE},
+				new String[] { String.class.getTypeName(), NewTextLocation.class.getTypeName(), Integer.TYPE.getTypeName(), Boolean.TYPE.getTypeName(),  Integer.TYPE.getTypeName()},
 				new Object[] { inputValueObj.getValue(), NewTextLocation.valueOf2(location), inputValueObj.getTypeSpeedMspc(), 
 						inputValueObj.getTypeAfterClick(), poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
@@ -921,7 +921,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement elements = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
 				FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->text", elements.getText(), expectedText,
 						TextMatchMechanism.valueOf2(textMatchMechanism));
@@ -988,7 +988,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement elements = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
 				FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->" + attributeName, elements.getAttribute(attributeName), expectedText,
 						TextMatchMechanism.valueOf2(textMatchMechanism));
@@ -1034,7 +1034,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		expectedText = scenarioContext.applyParamsValueOnText(expectedText);
 		
 		PageObjectUtil.invokeValidatorMethod(
-				"validateValue", new Class<?>[]{String.class, TextMatchMechanism.class, int.class}, new Object[]{expectedText, textMatchMechanism, 1}, poInfo, scenarioContext);
+				"validateValue", new String[]{String.class.getTypeName(), TextMatchMechanism.class.getTypeName(), int.class.getTypeName()}, new Object[]{expectedText, textMatchMechanism, 1}, poInfo, scenarioContext);
 	}
 	
 	/**
@@ -1086,7 +1086,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
 		
 		WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-				"findElement", new Class<?>[]{int.class}, new Object[]{poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
+				"findElement", new String[]{int.class.getTypeName()}, new Object[]{poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		String textValue = WebElementUtil.getInputTextValue(scenarioContext.getActiveAppDriver(), element);
 		
 		scenarioContext.addParamValue(variableName, textValue);
@@ -1135,7 +1135,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new Class<?>[]{int.class}, new Object[]{0}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				list.clear();				
 				if(elements != null) {					
@@ -1202,7 +1202,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new Class<?>[]{int.class}, new Object[]{0}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				list.clear();
 				if(elements != null) {					
@@ -1271,7 +1271,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new Class<?>[]{int.class}, new Object[]{0}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				if(element != null) {					
 					textValue = element.getText();
@@ -1340,7 +1340,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
 				list.clear();
 				if(elements != null) {	
@@ -1415,7 +1415,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
 				if(element != null) {	
 					textValue = element.getAttribute(attributeName);
@@ -1492,7 +1492,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
 				if(elements != null) {					
 					for(WebElement elem : elements) {
@@ -1572,7 +1572,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
 				if(element != null) {					
 					String textValue = element.getText();
@@ -1653,7 +1653,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
 				if(elements != null) {	
 					for(WebElement elem : elements) {
@@ -1737,7 +1737,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new Class<?>[]{int.class}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
 				if(element != null) {	
 					String textValue = element.getAttribute(attributeName);
@@ -1788,7 +1788,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param methodAsJson - Method signature example:
 	 * <blockquote><pre>
-	 * 		{name: "methodName", argsType: [Integer.TYPE, String.class], argsValue: [15, "test string"]}
+	 * 		{name: "methodName", argsType: [Integer, String], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
 	 * </pre></blockquote> 
@@ -1823,7 +1823,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param methodAsJson - Method signature example:
 	 * <blockquote><pre>
-	 * 		{name: "methodName", argsType: [Integer.TYPE, String.class], argsValue: [15, "test string"]}
+	 * 		{name: "methodName", argsType: [Integer, String], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
 	 * </pre></blockquote>      
@@ -1846,7 +1846,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param methodAsJson - Method signature example:
 	 * <blockquote><pre>
-	 * 		{name: "methodName", argsType: [Integer.TYPE, String.class], argsValue: [15, "test string"]}
+	 * 		{name: "methodName", argsType: [Integer, String], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
 	 * </pre></blockquote>      
@@ -1882,7 +1882,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param methodAsJson - Method signature example:
 	 * <blockquote><pre>
-	 * 		{name: "methodName", argsType: [Integer.TYPE, String.class], argsValue: [15, "test string"]}
+	 * 		{name: "methodName", argsType: [Integer, String], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
 	 * </pre></blockquote>      
@@ -2082,7 +2082,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				list = (List<String>) PageObjectUtil.invokeValidatorMethod(
-						"getAvailableItems", new Class<?>[]{int.class}, new Object[]{0}, poInfo, scenarioContext);
+						"getAvailableItems", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -2146,7 +2146,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				list = (List<String>) PageObjectUtil.invokeValidatorMethod(
-						"getAvailableItems", new Class<?>[]{int.class}, new Object[]{0}, poInfo, scenarioContext);
+						"getAvailableItems", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {

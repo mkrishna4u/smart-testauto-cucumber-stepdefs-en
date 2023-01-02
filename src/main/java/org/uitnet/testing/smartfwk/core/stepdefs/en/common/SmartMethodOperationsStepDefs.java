@@ -82,18 +82,21 @@ public class SmartMethodOperationsStepDefs {
 				m = ObjectUtil.findClassMethod(clazz, methodInfo.getMethodName(), methodInfo.getArgsValue().size());
 			} else {
 				m = ObjectUtil.findClassMethod(clazz, methodInfo.getMethodName(), 
-						methodInfo.getArgsType().toArray(new Class<?>[methodInfo.getArgsType().size()]));
+						methodInfo.getArgsType().toArray(new String[methodInfo.getArgsType().size()]));
 			}
 			
 			if(StringUtil.isEmptyAfterTrim(variableName)) {
 				if(methodInfo.getArgsValue().size() > 0) {
-					m.invoke(object, methodInfo.getArgsValue().toArray(new Object[methodInfo.getArgsValue().size()]));
+					Object[] valueArr = methodInfo.getArgsValue().toArray(new Object[methodInfo.getArgsValue().size()]);
+					ObjectUtil.invokeMethod(object, m, valueArr);
 				} else {
 					m.invoke(object);
 				}
 			} else {
+				Object[] valueArr = methodInfo.getArgsValue().toArray(new Object[methodInfo.getArgsValue().size()]);
+					
 				Object returnV = methodInfo.getArgsValue().size() > 0 ? 
-						m.invoke(object, methodInfo.getArgsValue().toArray(new Object[methodInfo.getArgsValue().size()])) : m.invoke(object);
+						ObjectUtil.invokeMethod(object, m, valueArr) : m.invoke(object);
 				scenarioContext.addParamValue(variableName, returnV);
 			}
 		} catch(Exception e) {

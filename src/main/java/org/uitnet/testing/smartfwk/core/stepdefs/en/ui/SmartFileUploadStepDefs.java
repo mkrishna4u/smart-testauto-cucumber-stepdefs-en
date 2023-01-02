@@ -68,7 +68,7 @@ public class SmartFileUploadStepDefs {
 		JsonDocumentReader jsonReader = new JsonDocumentReader(files, false);
 		List<String> fileList = jsonReader.readValuesAsList("$");
 		
-		PageObjectUtil.invokeValidatorMethod("selectFiles", new Class<?>[] { ItemList.class, Integer.TYPE },
+		PageObjectUtil.invokeValidatorMethod("selectFiles", new String[] { ItemList.class.getTypeName(), Integer.TYPE.getTypeName() },
 				new Object[] { new ItemList<>(fileList), poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
 	}

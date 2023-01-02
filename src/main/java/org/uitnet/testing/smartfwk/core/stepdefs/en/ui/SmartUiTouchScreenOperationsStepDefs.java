@@ -62,7 +62,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 		TouchActionsUtil.tapOnElement(scenarioContext.getActiveAppDriver().getWebDriver(), webElem, holdDurationInMs);
@@ -107,7 +107,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 		TouchActionsUtil.doubleTapOnElement(scenarioContext.getActiveAppDriver().getWebDriver(), webElem, pauseDurationInMs);
@@ -153,7 +153,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 		TouchActionsUtil.nTapsOnElement(scenarioContext.getActiveAppDriver().getWebDriver(), webElem, nTimes, pauseDurationInMs);
@@ -199,7 +199,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 		TouchActionsUtil.swipeUpFromElement(scenarioContext.getActiveAppDriver().getWebDriver(), webElem, pixels, durationInMs);
@@ -244,7 +244,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 		TouchActionsUtil.swipeDownFromElement(scenarioContext.getActiveAppDriver().getWebDriver(), webElem, pixels, durationInMs);
@@ -289,7 +289,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 		TouchActionsUtil.swipeLeftFromElement(scenarioContext.getActiveAppDriver().getWebDriver(), webElem, pixels, durationInMs);
@@ -334,7 +334,7 @@ public class SmartUiTouchScreenOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement webElem =  (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 		TouchActionsUtil.swipeRightFromElement(scenarioContext.getActiveAppDriver().getWebDriver(), webElem, pixels, durationInMs);

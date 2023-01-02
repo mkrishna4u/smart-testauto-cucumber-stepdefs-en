@@ -61,7 +61,7 @@ public class SmartUiMouseOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("click", new Class<?>[] {Integer.TYPE}, 
+		PageObjectUtil.invokeValidatorMethod("click", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
@@ -146,7 +146,7 @@ public class SmartUiMouseOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("forceClick", new Class<?>[] {Integer.TYPE}, 
+		PageObjectUtil.invokeValidatorMethod("forceClick", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
@@ -221,7 +221,7 @@ public class SmartUiMouseOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("doubleClick", new Class<?>[] {Integer.TYPE}, 
+		PageObjectUtil.invokeValidatorMethod("doubleClick", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
@@ -296,7 +296,7 @@ public class SmartUiMouseOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("rightClick", new Class<?>[] {Integer.TYPE}, 
+		PageObjectUtil.invokeValidatorMethod("rightClick", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
@@ -372,7 +372,7 @@ public class SmartUiMouseOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("clickAndHold", new Class<?>[] {Integer.TYPE}, 
+		PageObjectUtil.invokeValidatorMethod("clickAndHold", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 	}
 	
@@ -451,7 +451,7 @@ public class SmartUiMouseOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("release", new Class<?>[] {Integer.TYPE}, 
+		PageObjectUtil.invokeValidatorMethod("release", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 				scenarioContext);
 	}
@@ -504,11 +504,11 @@ public class SmartUiMouseOperationsStepDefs {
 		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(dragElemPageObject);
 		PageObjectInfo targetPoInfo = PageObjectUtil.getPageObjectInfo(dropElemPageObject);
 		
-		WebElement sourceElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement sourceElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] { sourcePoInfo.getMaxIterationsToLocateElements() }, sourcePoInfo,
 				scenarioContext);
 		
-		WebElement targetElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new Class<?>[] {Integer.TYPE}, 
+		WebElement targetElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] { targetPoInfo.getMaxIterationsToLocateElements() }, targetPoInfo,
 				scenarioContext);
 		
@@ -535,7 +535,7 @@ public class SmartUiMouseOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("mouseHoverOver", new Class<?>[] {Integer.TYPE}, 
+		PageObjectUtil.invokeValidatorMethod("mouseHoverOver", new String[] {Integer.TYPE.getTypeName()}, 
 				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 	}

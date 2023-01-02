@@ -86,7 +86,7 @@ public class SmartUiKeyboardOperationsStepDefs {
 		JsonDocumentReader jsonReader = new JsonDocumentReader(keys, false);
 		List<String> keyList = jsonReader.readValuesAsList("$");
 		String[] keysChord = PageObjectUtil.prepareKeysChord(keyList);
-		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", new Class<?>[] {},
+		DOMObjectValidator domObjectValidator = (DOMObjectValidator) PageObjectUtil.invokeValidatorMethod("getDOMObjectValidator", new String[] {},
 				new Object[] { }, poInfo, scenarioContext);
 		
 		domObjectValidator.sendKeys(poInfo.getMaxIterationsToLocateElements(), Keys.chord(keysChord));
@@ -166,17 +166,17 @@ public class SmartUiKeyboardOperationsStepDefs {
 				if(selKey == null) { continue; }
 				if(i == (keyList.size() - 1)) {
 					//keydown event
-					PageObjectUtil.invokeValidatorMethod("performKeyDown", new Class<?>[] { Keys.class, Integer.TYPE },
+					PageObjectUtil.invokeValidatorMethod("performKeyDown", new String[] { Keys.class.getTypeName(), Integer.TYPE.getTypeName() },
 						new Object[] { selKey, poInfo.getMaxIterationsToLocateElements() }, poInfo,
 						scenarioContext);
 					
 					// mouse event
-					PageObjectUtil.invokeValidatorMethod(mouseEvent, new Class<?>[] { Integer.TYPE },
+					PageObjectUtil.invokeValidatorMethod(mouseEvent, new String[] { Integer.TYPE.getTypeName() },
 							new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
 							scenarioContext);
 				} else {
 					//keydown event
-					PageObjectUtil.invokeValidatorMethod("performKeyDown", new Class<?>[] { Keys.class, Integer.TYPE },
+					PageObjectUtil.invokeValidatorMethod("performKeyDown", new String[] { Keys.class.getTypeName(), Integer.TYPE.getTypeName() },
 						new Object[] { selKey, poInfo.getMaxIterationsToLocateElements() }, poInfo,
 						scenarioContext);
 				}
@@ -187,7 +187,7 @@ public class SmartUiKeyboardOperationsStepDefs {
 					Keys selKey = PageObjectUtil.findSeleniumKeysByName(key);
 					if(selKey == null) { continue; }
 					if(j < (keyList.size() - 1)) {
-						PageObjectUtil.invokeValidatorMethod("performKeyUp", new Class<?>[] { Keys.class, Integer.TYPE },
+						PageObjectUtil.invokeValidatorMethod("performKeyUp", new String[] { Keys.class.getTypeName(), Integer.TYPE.getTypeName() },
 							new Object[] { selKey, poInfo.getMaxIterationsToLocateElements() }, poInfo,
 							scenarioContext);
 					} 

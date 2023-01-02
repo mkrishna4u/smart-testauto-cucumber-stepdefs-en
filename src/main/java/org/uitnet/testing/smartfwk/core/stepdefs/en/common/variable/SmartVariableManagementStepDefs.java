@@ -24,7 +24,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.testng.Assert;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
+import org.uitnet.testing.smartfwk.api.core.reader.JsonDocumentReader;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
 import org.uitnet.testing.smartfwk.core.validator.ParamValue;
@@ -86,6 +88,33 @@ public class SmartVariableManagementStepDefs {
 		
 		List<Object> list = new LinkedList<>();
 		scenarioContext.addParamValue(variableName, list);		
+	}
+	
+	/**
+	 * Used to store the value specified into a particular variable.
+	 * This will also apply variables's value.
+	 * 
+	 * @param value - the value to be stored into a variable. Format:
+	 * 		Direct way: "this is sample value"
+	 * 		JSON way: {value: "this is sample value"}
+	 * 			Array data format: {value: ["hello", "dear"]}
+	 *      To set numeric value use JSON way as given below:
+	 *        {value: 34.6}
+	 * @param variableName
+	 */
+	@When("store {string} value into {string} variable.")
+	public void set_value_into_variable(String value, String variableName) {
+		value = scenarioContext.applyParamsValueOnText(value);
+		
+		if(StringUtil.isEmptyAfterTrim(value)) {
+			scenarioContext.addParamValue(variableName, value);
+		} else if(value.trim().startsWith("{") && value.trim().endsWith("}")){
+			JsonDocumentReader r = new JsonDocumentReader(value, false);
+			Object obj = r.getDocumentContext().read("$.value");
+			scenarioContext.addParamValue(variableName, obj);
+		} else {
+			scenarioContext.addParamValue(variableName, value);
+		}
 	}
 	
 	/**
@@ -759,8 +788,66 @@ public class SmartVariableManagementStepDefs {
 		scenarioContext.addParamValue(variableName, projectRootDir);
 	}
 	
+	/**
+	 * Used to return the Cucumber scenario context into a specified variable.
+	 * 
+	 * @param variableName - the variable name that store the cucumber scenario context.
+	 */
+	@Then("get the cucumber scenario context and store into {string} variable.")
+	public void get_the_scenario_context_and_store_into_variable(String variableName) {
+		scenarioContext.addParamValue(variableName, scenarioContext);
+	}
+	
+	/**
+	 * Used to return the value at a particular index from the specified input variable.
+	 * 
+	 * @param nthIndex - the nth index to retrieve the value from variable. Index starts from 0.
+	 * @param variableName - input variable name.
+	 * @param newVariableName - the name of the variable that stores the extracted value.
+	 */
+	@SuppressWarnings("unchecked")
 	@Then("get index {int} of {string} variable value and store into {string} variable.")
-	public void get_index_of_variable_value_and_store_into_variable(String nthIndex, String variableName, String newVariableName) {
+	public void get_index_of_variable_value_and_store_into_variable(int nthIndex, String variableName, String newVariableName) {
+		Object v1 = scenarioContext.getParamValue(variableName);
+		Object nthIndexValue = null;
+		if(v1 instanceof List) {
+			List<Object> list = (List<Object>) v1;
+			if(list != null && nthIndex >= 0 && nthIndex < list.size()) {
+				nthIndexValue = list.get(nthIndex);
+			} else {
+				Assert.fail("Index " + nthIndex + " is not available. Actual list size: " + (list == null ? 0 : list.size()));
+			}
+		} else if(v1 instanceof Set) {
+			Set<Object> set = (Set<Object>) v1;
+			if(set != null && nthIndex >= 0 && nthIndex < set.size()) {
+				for(Object elem : set) {
+					if(nthIndex == 0) {
+						nthIndexValue = elem;
+						break;
+					}
+					
+					nthIndex--;
+				}
+			} else {
+				Assert.fail("Index " + nthIndex + " is not available. Actual set size: " + (set == null ? 0 : set.size()));
+			}
+		} else if(v1 != null && v1.getClass().isArray()) {
+			Object[] arr = (Object[]) v1;
+			if(arr != null && nthIndex >= 0 && nthIndex < arr.length) {
+				nthIndexValue = arr[nthIndex];
+			} else {
+				Assert.fail("Index " + nthIndex + " is not available. Actual array size: " + (arr == null ? 0 : arr.length));
+			}
+		} else {
+			String str = (v1 == null ? null : "" + v1);
+			
+			if(str != null && nthIndex >= 0 && nthIndex < str.length()) {
+				nthIndexValue = "" + str.charAt(nthIndex);
+			} else {
+				Assert.fail("Index " + nthIndex + " is not available. Actual string length: " + (str == null ? 0 : str.length()));
+			}
+		}
 		
+		scenarioContext.addParamValue(newVariableName, nthIndexValue);
 	}
 }
