@@ -925,6 +925,7 @@ public class SmartUiFormElementOperationsStepDefs {
 				
 				FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->text", elements.getText(), expectedText,
 						TextMatchMechanism.valueOf2(textMatchMechanism));
+				break;
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
 					throw th;
@@ -992,6 +993,7 @@ public class SmartUiFormElementOperationsStepDefs {
 				
 				FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->" + attributeName, elements.getAttribute(attributeName), expectedText,
 						TextMatchMechanism.valueOf2(textMatchMechanism));
+				break;
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
 					throw th;
@@ -1143,6 +1145,7 @@ public class SmartUiFormElementOperationsStepDefs {
 						String textValue = WebElementUtil.getInputTextValue(scenarioContext.getActiveAppDriver(), elem);
 						list.add(textValue);
 					}
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -1210,6 +1213,7 @@ public class SmartUiFormElementOperationsStepDefs {
 						String textValue = elem.getText();
 						list.add(textValue);
 					}
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -1275,6 +1279,7 @@ public class SmartUiFormElementOperationsStepDefs {
 				
 				if(element != null) {					
 					textValue = element.getText();
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -1348,6 +1353,7 @@ public class SmartUiFormElementOperationsStepDefs {
 						String textValue = elem.getAttribute(attributeName);
 						list.add(textValue);
 					}
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -1419,6 +1425,7 @@ public class SmartUiFormElementOperationsStepDefs {
 				
 				if(element != null) {	
 					textValue = element.getAttribute(attributeName);
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -1500,6 +1507,7 @@ public class SmartUiFormElementOperationsStepDefs {
 						FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->Text", textValue, expectedText,
 								TextMatchMechanism.valueOf2(textMatchMechanism));
 					}
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -1578,6 +1586,7 @@ public class SmartUiFormElementOperationsStepDefs {
 					String textValue = element.getText();
 					FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->Text", textValue, expectedText,
 							TextMatchMechanism.valueOf2(textMatchMechanism));
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -1661,6 +1670,7 @@ public class SmartUiFormElementOperationsStepDefs {
 						FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->" + attributeName, textValue, expectedText,
 								TextMatchMechanism.valueOf2(textMatchMechanism));
 					}
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -1743,6 +1753,7 @@ public class SmartUiFormElementOperationsStepDefs {
 					String textValue = element.getAttribute(attributeName);
 					FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->" + attributeName, textValue, expectedText,
 							TextMatchMechanism.valueOf2(textMatchMechanism));
+					break;
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
@@ -2083,7 +2094,7 @@ public class SmartUiFormElementOperationsStepDefs {
 			try {
 				list = (List<String>) PageObjectUtil.invokeValidatorMethod(
 						"getAvailableItems", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
-				
+				break;
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
 					throw th;
@@ -2147,7 +2158,7 @@ public class SmartUiFormElementOperationsStepDefs {
 			try {
 				list = (List<String>) PageObjectUtil.invokeValidatorMethod(
 						"getAvailableItems", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
-				
+				break;
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
 					throw th;
