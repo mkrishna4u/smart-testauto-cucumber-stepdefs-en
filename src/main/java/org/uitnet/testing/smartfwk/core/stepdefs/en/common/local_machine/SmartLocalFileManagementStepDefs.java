@@ -151,7 +151,7 @@ public class SmartLocalFileManagementStepDefs {
 	 * @param fileNameWithExtension - relative file path to process.
 	 * @param keywordDelimiter - keyword delimiter to to identify multiple keywords in keywords text.
 	 * @param inOrder - valid values Yes, No. If yes then it will search keywords one after one. If No then it will search element in document but sequencing will not matter.
-	 * @param shouldPrint - Will print the contents of the file on console.
+	 * @param shouldPrint - Will print the contents of the file on console. Valid values: Yes, No
 	 * @param keywords - multiple keywords are separated by keywordDelimiter.
 	 */
 	@Then("verify that the downloaded file {string} contains the following keywords [KeywordDelimiter={string}, InOrder={string}, ShouldPrint={string}]:")
