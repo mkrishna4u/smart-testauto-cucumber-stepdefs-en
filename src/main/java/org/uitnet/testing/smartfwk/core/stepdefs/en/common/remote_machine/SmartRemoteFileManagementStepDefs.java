@@ -60,6 +60,9 @@ public class SmartRemoteFileManagementStepDefs {
 			return;
 		}
 		
+		remoteDirectory = scenarioContext.applyParamsValueOnText(remoteDirectory);
+		expectedFileName = scenarioContext.applyParamsValueOnText(expectedFileName);
+		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
 		handler.deleteFiles(remoteDirectory, TextMatchMechanism.valueOf2(fileNameMatchMechanism), expectedFileName);
@@ -85,6 +88,9 @@ public class SmartRemoteFileManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		remoteDirectory = scenarioContext.applyParamsValueOnText(remoteDirectory);
+		expectedFileName = scenarioContext.applyParamsValueOnText(expectedFileName);
 		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
@@ -115,6 +121,10 @@ public class SmartRemoteFileManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		localDirectory = scenarioContext.applyParamsValueOnText(localDirectory);
+		expectedFileName = scenarioContext.applyParamsValueOnText(expectedFileName);
+		remoteDirectory = scenarioContext.applyParamsValueOnText(remoteDirectory);
 		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
@@ -147,6 +157,9 @@ public class SmartRemoteFileManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		expectedFileName = scenarioContext.applyParamsValueOnText(expectedFileName);
+		remoteDirectory = scenarioContext.applyParamsValueOnText(remoteDirectory);
 		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
@@ -202,6 +215,9 @@ public class SmartRemoteFileManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		expectedFolderName = scenarioContext.applyParamsValueOnText(expectedFolderName);
+		remoteDirectory = scenarioContext.applyParamsValueOnText(remoteDirectory);
 		
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);

@@ -58,6 +58,8 @@ public class SmartLocalFileManagementStepDefs {
 			return;
 		}
 		
+		fileName = scenarioContext.applyParamsValueOnText(fileName);
+		
 		LocalMachineFileSystem.deleteFiles(Locations.getProjectRootDir() + "/test-results/downloads", TextMatchMechanism.exactMatchWithExpectedValue, fileName);
 	}
 	
@@ -75,6 +77,8 @@ public class SmartLocalFileManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		fileNamePrefix = scenarioContext.applyParamsValueOnText(fileNamePrefix);
 		
 		LocalMachineFileSystem.deleteFiles(Locations.getProjectRootDir() + "/test-results/downloads", 
 				TextMatchMechanism.valueOf2(fileNameMatchMechanism), fileNamePrefix, fileExtension);
@@ -95,6 +99,8 @@ public class SmartLocalFileManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		fileNamePrefix = scenarioContext.applyParamsValueOnText(fileNamePrefix);
 		
 		List<String> files = LocalMachineFileSystem.listFiles(Locations.getProjectRootDir() + "/test-results/downloads", 
 				TextMatchMechanism.valueOf2(fileNameMatchMechanism), fileNamePrefix, fileExtension);
@@ -121,6 +127,8 @@ public class SmartLocalFileManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		fileName = scenarioContext.applyParamsValueOnText(fileName);
 		
 		DownloadedFileValidator.validateBrowserFileDownloaded(fileName, fileExtension, false, maxTimeToWaitInSeconds);
 	}
@@ -152,6 +160,8 @@ public class SmartLocalFileManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		fileNameWithExtension = scenarioContext.applyParamsValueOnText(fileNameWithExtension);
 		
 		FileContentsValidator fcValidator = new FileContentsValidator(Locations.getProjectRootDir() + "/test-results/downloads/" + fileNameWithExtension, 
 	    		"Yes".equalsIgnoreCase(shouldPrint));	    
