@@ -109,6 +109,7 @@ public class SmartLocalFileManagementStepDefs {
 		if(files != null && files.size() > 0) {
 			Collections.sort(files);
 			latestFileName = files.get(files.size() - 1);
+			latestFileName = latestFileName.substring(latestFileName.lastIndexOf(File.separator) + 1);
 		}
 		scenarioContext.addParamValue(variableName, latestFileName);
 	}
