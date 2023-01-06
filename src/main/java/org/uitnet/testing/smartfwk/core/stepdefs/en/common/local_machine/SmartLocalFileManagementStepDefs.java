@@ -17,6 +17,10 @@
  */
 package org.uitnet.testing.smartfwk.core.stepdefs.en.common.local_machine;
 
+import java.io.File;
+import java.util.Collections;
+import java.util.List;
+
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.local_machine.LocalMachineFileSystem;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
@@ -43,7 +47,7 @@ public class SmartLocalFileManagementStepDefs {
 	}
 
 	/**
-	 * Used to remove specified file from the local downloads directory.
+	 * Used to remove specified file from the local downloads directory (test-results/downloads).
 	 * 
 	 * @param fileName - the relative file path (w.r.t. downloads/ directory) of the file to be deleted.
 	 */
@@ -55,6 +59,53 @@ public class SmartLocalFileManagementStepDefs {
 		}
 		
 		LocalMachineFileSystem.deleteFiles(Locations.getProjectRootDir() + "/test-results/downloads", TextMatchMechanism.exactMatchWithExpectedValue, fileName);
+	}
+	
+	/**
+	 * Used to delete files from the test-results/downloads directory based on the specified condition like FileNamePrefix, FileExtension and FileNameMatchMechanism.
+	 * 
+	 * @param fileNamePrefix - the file name prefix
+	 * @param fileExtension - the file extension. like .xlsx, .csv etc.
+	 * @param fileNameMatchMechanism - file name match mechanism to match with fileNamePrefix.
+	 * 		For more details on fileNameMatchMechanism please refer {@link TextMatchMechanism}.
+	 */
+	@When("remove files from the local downloads directory where [FileNamePrefix:{string}, FileExtension:{string}, FileNameMatchMechanism:{string}].")
+	public void remove_files_from_the_local_downloads_directory_where(String fileNamePrefix, String fileExtension, String fileNameMatchMechanism) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		LocalMachineFileSystem.deleteFiles(Locations.getProjectRootDir() + "/test-results/downloads", 
+				TextMatchMechanism.valueOf2(fileNameMatchMechanism), fileNamePrefix, fileExtension);
+	}
+	
+	/**
+	 * Used to find the latest file from the test-results/downloads directory based on the file matching criteria like FileNamePrefix, FileExtension and FileNameMatchingMechanism.
+	 * 
+	 * @param fileNamePrefix - the file name prefix
+	 * @param fileExtension - the file extension. like .xlsx, .csv etc.
+	 * @param fileNameMatchMechanism - file name match mechanism to match with fileNamePrefix.
+	 * 		For more details on fileNameMatchMechanism please refer {@link TextMatchMechanism}.
+	 * @param variableName - the name of the variable that contains the filename along with its extension.
+	 */
+	@Then("find latest filename from local downloads directory that matches with [FileNamePrefix:{string}, FileExtension:{string}, FileNameMatchMechanism:{string}] and store into {string} variable.")
+	public void get_exact_file_name_from_local_downloads_directory_that_matches_with_and_store_into_variable(String fileNamePrefix, String fileExtension, String fileNameMatchMechanism, String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		List<String> files = LocalMachineFileSystem.listFiles(Locations.getProjectRootDir() + "/test-results/downloads", 
+				TextMatchMechanism.valueOf2(fileNameMatchMechanism), fileNamePrefix, fileExtension);
+		
+		String latestFileName = "NOT-FOUND";
+		if(files != null && files.size() > 0) {
+			Collections.sort(files);
+			latestFileName = files.get(files.size() - 1);
+			latestFileName = latestFileName.substring(latestFileName.lastIndexOf(File.separator + 1));
+		}
+		scenarioContext.addParamValue(variableName, latestFileName);
 	}
 	
 	/**

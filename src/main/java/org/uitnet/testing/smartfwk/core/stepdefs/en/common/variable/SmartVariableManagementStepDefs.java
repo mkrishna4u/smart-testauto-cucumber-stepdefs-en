@@ -795,6 +795,11 @@ public class SmartVariableManagementStepDefs {
 	 */
 	@Then("get the cucumber scenario context and store into {string} variable.")
 	public void get_the_scenario_context_and_store_into_variable(String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		scenarioContext.addParamValue(variableName, scenarioContext);
 	}
 	
@@ -808,6 +813,11 @@ public class SmartVariableManagementStepDefs {
 	@SuppressWarnings("unchecked")
 	@Then("get index {int} of {string} variable value and store into {string} variable.")
 	public void get_index_of_variable_value_and_store_into_variable(int nthIndex, String variableName, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
 		Object v1 = scenarioContext.getParamValue(variableName);
 		Object nthIndexValue = null;
 		if(v1 instanceof List) {
@@ -849,5 +859,109 @@ public class SmartVariableManagementStepDefs {
 		}
 		
 		scenarioContext.addParamValue(newVariableName, nthIndexValue);
+	}
+	
+	/**
+	 * Used to extract substring (based on start index and end index) from the variable value and store into a new variable.
+	 * 
+	 * @param startIndex - the start index. Index starts from 0.
+	 * @param maxChars - the maximum number of characters to extract from the start index.
+	 * @param variableName - the input variable that hold the value.
+	 * @param newVariableName - the new variable name in which the extracted value will be stored.
+	 */
+	@SuppressWarnings("unchecked")
+	@Then("get substring [StartIndex={int}, MaxChars={int}] from the value of {string} variable and store into {string} variable.")
+	public void get_substring_based_on_index_from_the_value_of_variable_and_store_into_variable(int startIndex, int maxChars, String variableName, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		Object value = scenarioContext.getParamValue(variableName);
+		if(value == null) {
+			return;
+		}
+		
+		String substr = null;
+		if(value instanceof List) {
+			List<Object> elems = (List<Object>) value;
+			List<String> newList = new LinkedList<>();
+			for(Object elem : elems) {
+				substr = StringUtil.substring("" + elem, startIndex, maxChars);
+				newList.add(substr);
+			}
+			scenarioContext.addParamValue(newVariableName, newList);
+		} else if(value instanceof Set) {
+			Set<Object> elems = (Set<Object>) value;
+			List<String> newList = new LinkedList<>();
+			for(Object elem : elems) {
+				substr = StringUtil.substring("" + elem, startIndex, maxChars);
+				newList.add(substr);
+			}
+			scenarioContext.addParamValue(newVariableName, newList);
+		} else if(value.getClass().isArray()) {
+			Object[] elems = (Object[]) value;
+			List<String> newList = new LinkedList<>();
+			for(Object elem : elems) {
+				substr = StringUtil.substring("" + elem, startIndex, maxChars);
+				newList.add(substr);
+			}
+			scenarioContext.addParamValue(newVariableName, newList);
+		} else {
+			substr = StringUtil.substring("" + value, startIndex, maxChars);
+			scenarioContext.addParamValue(newVariableName, substr);
+		}
+	}
+	
+	/**
+	 * Used to extract substring (between start token and end token) from the variable value and store into a new variable.
+	 *  
+	 * @param startToken - the start token.
+	 * @param endToken - the end token.
+	 * @param variableName - the input variable that hold the value.
+	 * @param newVariableName - the new variable name in which the extracted value will be stored.
+	 */
+	@SuppressWarnings("unchecked")
+	@Then("get substring [StartToken={string}, EndToken={string}] from the value of {string} variable and store into {string} variable.")
+	public void get_substring_based_on_token_from_the_value_of_variable_and_store_into_variable(String startToken, String endToken, String variableName, String newVariableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		Object value = scenarioContext.getParamValue(variableName);
+		if(value == null) {
+			return;
+		}
+		
+		String substr = null;
+		if(value instanceof List) {
+			List<Object> elems = (List<Object>) value;
+			List<String> newList = new LinkedList<>();
+			for(Object elem : elems) {
+				substr = StringUtil.substring("" + elem, startToken, endToken);
+				newList.add(substr);
+			}
+			scenarioContext.addParamValue(newVariableName, newList);
+		} else if(value instanceof Set) {
+			Set<Object> elems = (Set<Object>) value;
+			List<String> newList = new LinkedList<>();
+			for(Object elem : elems) {
+				substr = StringUtil.substring("" + elem, startToken, endToken);
+				newList.add(substr);
+			}
+			scenarioContext.addParamValue(newVariableName, newList);
+		} else if(value.getClass().isArray()) {
+			Object[] elems = (Object[]) value;
+			List<String> newList = new LinkedList<>();
+			for(Object elem : elems) {
+				substr = StringUtil.substring("" + elem, startToken, endToken);
+				newList.add(substr);
+			}
+			scenarioContext.addParamValue(newVariableName, newList);
+		} else {
+			substr = StringUtil.substring("" + value, startToken, endToken);
+			scenarioContext.addParamValue(newVariableName, substr);
+		}
 	}
 }

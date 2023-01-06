@@ -1626,6 +1626,188 @@ public class SmartUiFormElementOperationsStepDefs {
 	}
 	
 	/**
+	 * Used to verify the text part of the page element with the expected information using specified operator.
+	 * 
+	 * <blockquote><pre>
+	 * In HTML DOM the text part is the value between start tag and end tag.
+	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>  
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param expectedInfo - the expected info. The syntax is a JSON syntax:
+	 * 		{ev: <value-here>, valueType: "string", textMatchMechanism: "start-with-expected-value", n: 2, inOrder: "no", ignoreCase: "no"}
+	 *    For expected info, refer {@link ExpectedInfo}
+	 *    For valueType, refer {@link ParamValueType}
+	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
+	 *    Or we can directly specify value like:
+	 *    	"test value"
+	 */
+	@Then("verify text part of {string} page element {string} {string}.")
+	public void verify_text_part_of_page_element(String po, String operator, String expectedInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+				
+				if(element != null) {					
+					String textValue = element.getText();
+					ExpectedInfo eInfo = JsonYamlUtil.parseExpectedInfo(expectedInfo);
+					
+					ParamPath pPath = new ParamPath(poInfo.getPageObject().getName() + "-Text", "string");
+					
+					ParameterValidator.validateParamValueAsExpectedInfo(true, pPath, textValue, operator, eInfo);
+					
+					break;
+				}
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+				scenarioContext.waitForSeconds(2);
+			}
+		}
+	}
+	
+	/**
+	 * Used to verify the text part of the page object with the expected information using specified operator.
+	 * 
+	 * <blockquote><pre>
+	 * In HTML DOM the text part is the value between start tag and end tag.
+	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>  
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param expectedInfo - the expected info. The syntax is a JSON syntax:
+	 * 		{ev: <value-here>, valueType: "string", textMatchMechanism: "start-with-expected-value", n: 2, inOrder: "no", ignoreCase: "no"}
+	 *    For expected info, refer {@link ExpectedInfo}
+	 *    For valueType, refer {@link ParamValueType}
+	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
+	 *    Or we can directly specify value like:
+	 *    	"test value"
+	 */
+	@Then("verify text part of {string} page object {string} {string}.")
+	public void verify_text_part_of_page_object(String po, String operator, String expectedInfo) {
+		verify_text_part_of_page_element(po, operator, expectedInfo);
+	}
+	
+	/**
+	 * Used to verify the text part of each element specified by page element with the expected information using specified operator.
+	 * 
+	 * <blockquote><pre>
+	 * In HTML DOM the text part is the value between start tag and end tag.
+	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>  
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param expectedInfo - the expected info. The syntax is a JSON syntax:
+	 * 		{ev: <value-here>, valueType: "string", textMatchMechanism: "start-with-expected-value", n: 2, inOrder: "no", ignoreCase: "no"}
+	 *    For expected info, refer {@link ExpectedInfo}
+	 *    For valueType, refer {@link ParamValueType}
+	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
+	 *    Or we can directly specify value like:
+	 *    	"test value"
+	 */
+	@SuppressWarnings("unchecked")
+	@Then("verify text part of each element of {string} page element {string} {string}.")
+	public void verify_text_part_of_each_element_of_page_element(String po, String operator, String expectedInfo) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+				
+				if(elements != null) {	
+					List<String> elems = new LinkedList<>();
+					for(WebElement elem : elements) {
+						String textValue = elem.getText();
+						elems.add(textValue);
+					}
+					
+					ExpectedInfo eInfo = JsonYamlUtil.parseExpectedInfo(expectedInfo);
+					
+					ParamPath pPath = new ParamPath(poInfo.getPageObject().getName() + "-Text", "string-list");
+					
+					ParameterValidator.validateParamValueAsExpectedInfo(true, pPath, elems, operator, eInfo);
+					
+					break;
+				}
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+				scenarioContext.waitForSeconds(2);
+			}
+		}
+	}
+	
+	/**
+	 * Used to verify the text part of each element specified by page object with the expected information using specified operator.
+	 * 
+	 * <blockquote><pre>
+	 * In HTML DOM the text part is the value between start tag and end tag.
+	 * <tag-name>text-part</tag-name>  
+	 * </pre></blockquote>
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>  
+	 * @param operator - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param expectedInfo - the expected info. The syntax is a JSON syntax:
+	 * 		{ev: <value-here>, valueType: "string", textMatchMechanism: "start-with-expected-value", n: 2, inOrder: "no", ignoreCase: "no"}
+	 *    For expected info, refer {@link ExpectedInfo}
+	 *    For valueType, refer {@link ParamValueType}
+	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
+	 *    Or we can directly specify value like:
+	 *    	"test value"
+	 */
+	@Then("verify text part of each element of {string} page object {string} {string}.")
+	public void verify_text_part_of_each_element_of_page_object(String po, String operator, String expectedInfo) {
+		verify_text_part_of_each_element_of_page_element(po, operator, expectedInfo);
+	}
+	
+	/**
 	 * Used to verify the attribute value of each element specified by given page object / page element matches with 
 	 * the expected text using specified TextMatchMechanism.
 	 * 
