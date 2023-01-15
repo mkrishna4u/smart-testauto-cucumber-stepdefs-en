@@ -51,7 +51,7 @@ public class SmartMethodOperationsStepDefs {
 	 * @param variableName - the variable name in which the output of the method will be stored.
 	 * @param method - the method can be specified in JSON format as given below:
 	 * <blockquote><pre>
-	 *   {className: "qualified-class-name", methodName: "method-name", argsType: [int.class, List.class, String.class],
+	 *   {className: "qualified-class-name", methodName: "method-name", argsType: [int, List, String],
 	 *   	argsValue: [1, [2,4,5], "text here"], isStatic: true/false}
 	 *   
 	 *   NOTE-1: Method arguments value type could be as specified in {@link ParamValueType} link.

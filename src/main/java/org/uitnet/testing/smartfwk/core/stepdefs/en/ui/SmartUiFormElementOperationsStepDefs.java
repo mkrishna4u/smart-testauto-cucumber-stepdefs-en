@@ -1981,7 +1981,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param methodAsJson - Method signature example:
 	 * <blockquote><pre>
-	 * 		{name: "methodName", argsType: [Integer, String], argsValue: [15, "test string"]}
+	 * 		{name: "methodName", argsType: [int, String], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
 	 * </pre></blockquote> 
@@ -2016,7 +2016,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param methodAsJson - Method signature example:
 	 * <blockquote><pre>
-	 * 		{name: "methodName", argsType: [Integer, String], argsValue: [15, "test string"]}
+	 * 		{name: "methodName", argsType: [int, String], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
 	 * </pre></blockquote>      
@@ -2039,7 +2039,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param methodAsJson - Method signature example:
 	 * <blockquote><pre>
-	 * 		{name: "methodName", argsType: [Integer, String], argsValue: [15, "test string"]}
+	 * 		{name: "methodName", argsType: [int, String], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
 	 * </pre></blockquote>      
@@ -2075,7 +2075,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * 
 	 * @param methodAsJson - Method signature example:
 	 * <blockquote><pre>
-	 * 		{name: "methodName", argsType: [Integer, String], argsValue: [15, "test string"]}
+	 * 		{name: "methodName", argsType: [int, String], argsValue: [15, "test string"]}
 	 *      
 	 *      We can call any method of validator class that is associated with the specified page object / page element (po).
 	 * </pre></blockquote>      
