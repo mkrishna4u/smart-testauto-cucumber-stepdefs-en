@@ -32,6 +32,7 @@ import org.uitnet.testing.smartfwk.core.validator.SmartDataValidator;
 import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
 import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
+import org.uitnet.testing.smartfwk.ui.core.utils.StringUtil;
 
 import com.jayway.jsonpath.DocumentContext;
 
@@ -142,6 +143,8 @@ public class SmartJsonDataManagementStepDefs {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
+		
+		jsonPath = scenarioContext.applyParamsValueOnText(jsonPath);
 		
 		Object jsonObjContext = scenarioContext.getParamValue(jsonObjRefVariable);
 		Assert.assertNotNull(jsonObjContext, "'" +jsonObjRefVariable + "' variable does not have JSON object. Found null.");
@@ -260,5 +263,140 @@ public class SmartJsonDataManagementStepDefs {
 			// verify the actual value against the expected value.
 			SmartDataValidator.validateJsonOrYamlData(jsonObj, jsonPath, oper, expectedInfo);
 		}
+	}
+	
+	/**
+	 * Used to add JSON info at a particular JSON path.
+	 *
+	 * @param jsonPath - path where to add specified json info.
+	 * @param jsonObjRefVariable - reference variable that hold JSON object.
+	 * @param jsonInfo - the JSON info that need to be added in jsonObjRefVariable at the specified jsonPath.
+	 */
+	@Then("add the following JSON info on {string} JSON path of JSON object [JSONObjRefVariable={string}]:")
+	public void add_the_following_json_info_on_json_path_of_json_object(String jsonPath, String jsonObjRefVariable, DocString jsonInfo) {
+	   if(!scenarioContext.isLastConditionSetToTrue()) {
+	      scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+	      return;
+	   }
+
+	   String jsonInfoStr = jsonInfo.getContent();
+	   if(StringUtil.isEmptyAfterTrim(jsonInfoStr)) {
+	      return;
+	   }
+
+	   jsonInfoStr = scenarioContext.applyParamsValueOnText(jsonInfoStr);
+
+	   Object jsonObjContext = scenarioContext.getParamValue(jsonObjRefVariable);
+	   Assert.assertNotNull(jsonObjContext, "'" +jsonObjRefVariable + "' variable does not have JSON object. Found null.");
+	   assertTrue(jsonObjContext instanceof DocumentContext, "'" +jsonObjRefVariable + "' variable is not a JSON object. It should be the instance of DocumentContext class.");
+
+	   DocumentContext jsonObj = (DocumentContext) jsonObjContext;
+
+	   jsonPath = scenarioContext.applyParamsValueOnText(jsonPath);
+	   JsonDocumentReader jsonInfoReader = new JsonDocumentReader(jsonInfoStr, false);
+	   Object obj = jsonInfoReader.getDocumentContext().read("$");
+
+	   jsonObj.add(jsonPath, obj);
+	   scenarioContext.addParamValue(jsonObjRefVariable, jsonObj);
+	}
+	
+	/**
+	 * Used to delete JSON info at a particular JSON path.
+	 *
+	 *
+	 */
+	
+	/**
+	 * Used to delete JSON info at a particular JSON path.
+	 * 
+	 * @param jsonObjRefVariable - the variable name that holds JSON object.
+	 * @param jsonPaths - the input data table that holds jsonPath information to be deleted in the format given below:
+	 * 	Sample table:
+	 *  | JSON Path                       |
+	 *  | $.users[1]                      |
+	 *  | $.departments[?(@type == 'HR')] |
+	 */
+	@Then("delete the following JSON paths from JSON object [JSONObjRefVariable={string}]:")
+	public void delete_the_following_json_paths_from_json_object(String jsonObjRefVariable, DataTable jsonPaths) {
+	   if(!scenarioContext.isLastConditionSetToTrue()) {
+	      scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+	      return;
+	   }
+	   
+	   Object jsonObjContext = scenarioContext.getParamValue(jsonObjRefVariable);
+	   Assert.assertNotNull(jsonObjContext, "'" +jsonObjRefVariable + "' variable does not have JSON object. Found null.");
+	   assertTrue(jsonObjContext instanceof DocumentContext, "'" +jsonObjRefVariable + "' variable is not a JSON object. It should be the instance of DocumentContext class.");
+
+	   DocumentContext jsonObj = (DocumentContext) jsonObjContext;
+
+	   List<List<String>> rows = jsonPaths.asLists();
+	   
+	   String jsonPath;
+	   List<String> row;
+	   for(int i = 1; i < rows.size(); i++) {
+		   row = rows.get(i);
+		   jsonPath = row.get(0);
+		   jsonPath = scenarioContext.applyParamsValueOnText(jsonPath);
+		   
+		   jsonObj.delete(jsonPath);
+	   }
+	   
+	   scenarioContext.addParamValue(jsonObjRefVariable, jsonObj);
+	}
+	
+	/**
+	 * Used to update JSON document on a specified path and for a specific key.
+	 * 
+	 * @param jsonPath - the JSON path to be updated.
+	 * @param key - the key name for that the value to be updated (that is present on jsonPath). 
+	 * @param jsonObjRefVariable - the variable name that holds JSON object.
+	 * @param value - value to be updated for the key.
+	 */
+	@Then("update {string} JSON path for {string} key in JSON object [JSONObjRefVariable={string}] with the following value:")
+	public void update_json_path_for_key_in_json_object_with_the_following_value(String jsonPath, String key, String jsonObjRefVariable, DocString newValue) {
+	   if(!scenarioContext.isLastConditionSetToTrue()) {
+	      scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+	      return;
+	   }
+	   
+	   jsonPath = scenarioContext.applyParamsValueOnText(jsonPath);
+	   key = scenarioContext.applyParamsValueOnText(key);
+	   
+	   Object jsonObjContext = scenarioContext.getParamValue(jsonObjRefVariable);
+	   Assert.assertNotNull(jsonObjContext, "'" +jsonObjRefVariable + "' variable does not have JSON object. Found null.");
+	   assertTrue(jsonObjContext instanceof DocumentContext, "'" +jsonObjRefVariable + "' variable is not a JSON object. It should be the instance of DocumentContext class.");
+
+	   DocumentContext jsonObj = (DocumentContext) jsonObjContext;
+	   
+	   
+	   String value = newValue.getContent();
+	   value = scenarioContext.applyParamsValueOnText(value);
+	   jsonObj.put(jsonPath, key, value);
+	   
+	   scenarioContext.addParamValue(jsonObjRefVariable, jsonObj);	   
+	}
+	
+	/**
+	 * Used to print JSON object contents.
+	 * 
+	 * @param jsonObjRefVariable - the variable name that holds JSON object.
+	 */
+	@Then("print JSON object [JSONObjRefVariable={string}].")
+	public void print_json_object(String jsonObjRefVariable) {
+		if (!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\""
+					+ scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+
+		Object jsonObjContext = scenarioContext.getParamValue(jsonObjRefVariable);
+
+		if (jsonObjContext == null) {
+			scenarioContext.log(null);
+			return;
+		}
+		
+		DocumentContext jsonObj = (DocumentContext) jsonObjContext;
+		scenarioContext.log(jsonObj.jsonString());
 	}
 }
