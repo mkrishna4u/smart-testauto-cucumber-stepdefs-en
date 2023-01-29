@@ -301,23 +301,17 @@ public class SmartJsonDataManagementStepDefs {
 	}
 	
 	/**
-	 * Used to delete JSON info at a particular JSON path.
-	 *
-	 *
-	 */
-	
-	/**
-	 * Used to delete JSON info at a particular JSON path.
+	 * Used to remove JSON info at a particular JSON path.
 	 * 
 	 * @param jsonObjRefVariable - the variable name that holds JSON object.
-	 * @param jsonPaths - the input data table that holds jsonPath information to be deleted in the format given below:
+	 * @param jsonPaths - the input data table that holds jsonPath information to be removed in the format given below:
 	 * 	Sample table:
 	 *  | JSON Path                       |
 	 *  | $.users[1]                      |
 	 *  | $.departments[?(@type == 'HR')] |
 	 */
-	@Then("delete the following JSON paths from JSON object [JSONObjRefVariable={string}]:")
-	public void delete_the_following_json_paths_from_json_object(String jsonObjRefVariable, DataTable jsonPaths) {
+	@Then("remove the following JSON paths from JSON object [JSONObjRefVariable={string}]:")
+	public void remove_the_following_json_paths_from_json_object(String jsonObjRefVariable, DataTable jsonPaths) {
 	   if(!scenarioContext.isLastConditionSetToTrue()) {
 	      scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 	      return;
@@ -347,13 +341,13 @@ public class SmartJsonDataManagementStepDefs {
 	/**
 	 * Used to update JSON document on a specified path and for a specific key.
 	 * 
-	 * @param jsonPath - the JSON path to be updated.
 	 * @param key - the key name for that the value to be updated (that is present on jsonPath). 
+	 * @param jsonPath - the JSON path to be updated.
 	 * @param jsonObjRefVariable - the variable name that holds JSON object.
 	 * @param value - value to be updated for the key.
 	 */
-	@Then("update {string} JSON path for {string} key in JSON object [JSONObjRefVariable={string}] with the following value:")
-	public void update_json_path_for_key_in_json_object_with_the_following_value(String jsonPath, String key, String jsonObjRefVariable, DocString newValue) {
+	@Then("update {string} key of {string} JSON path in JSON object [JSONObjRefVariable={string}] with the following value:")
+	public void update_key_of_json_path_in_json_object_with_the_following_value(String key, String jsonPath, String jsonObjRefVariable, DocString newValue) {
 	   if(!scenarioContext.isLastConditionSetToTrue()) {
 	      scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 	      return;
