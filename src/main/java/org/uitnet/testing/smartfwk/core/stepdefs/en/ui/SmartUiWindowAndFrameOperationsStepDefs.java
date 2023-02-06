@@ -158,7 +158,7 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		}
 		
 		WebDriver webDriver = scenarioContext.getActiveAppDriver().getWebDriver();
-		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 1 : (maxTimeToWaitInSeconds / 2);
+		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 0 : (maxTimeToWaitInSeconds / 2);
 		
 		for(int i = 0; i <= maxIters; i++) {	
 			try {
@@ -201,7 +201,7 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		}
 		
 		WebDriver webDriver = scenarioContext.getActiveAppDriver().getWebDriver();
-		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 1 : (maxTimeToWaitInSeconds / 2);
+		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 0 : (maxTimeToWaitInSeconds / 2);
 		
 		for(int i = 0; i <= maxIters; i++) {	
 			try {
@@ -244,7 +244,7 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		WebDriver webDriver = scenarioContext.getActiveAppDriver().getWebDriver();
 		String text2 = text.getContent();
 		text2 = scenarioContext.applyParamsValueOnText(text2);
-		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 1 : (maxTimeToWaitInSeconds / 2);
+		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 0 : (maxTimeToWaitInSeconds / 2);
 		
 		for(int i = 0; i <= maxIters; i++) {	
 			try {
