@@ -1664,7 +1664,7 @@ public class SmartUiFormElementOperationsStepDefs {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
 						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
 				
-				if(element != null) {					
+				if(element != null) {
 					String textValue = element.getText();
 					ExpectedInfo eInfo = JsonYamlUtil.parseExpectedInfo(expectedInfo);
 					

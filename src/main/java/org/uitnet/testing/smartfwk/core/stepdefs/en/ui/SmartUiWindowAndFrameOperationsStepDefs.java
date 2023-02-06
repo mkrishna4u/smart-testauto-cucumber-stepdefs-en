@@ -19,8 +19,19 @@ package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 
 import java.util.Set;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
+import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
+import org.uitnet.testing.smartfwk.core.validator.ParamPath;
+import org.uitnet.testing.smartfwk.core.validator.ParamValueType;
+import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
+import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
+import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
+import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
+import org.uitnet.testing.smartfwk.validator.ParameterValidator;
 
+import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.When;
 
 /**
@@ -131,6 +142,129 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		}
 		
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().frame(frameNumber);
+	}
+	
+	/**
+	 * Used to close the web browser window alert by clicking on OK or Cancel button.
+	 * 
+	 * @param buttonName - the name of the button to be clicked. Valid values: OK, Cancel
+	 * @param  maxTimeToWaitInSeconds - max time to wait in seconds to perform this operation successfully.
+	 */
+	@When("click on {string} button to close the alert dialog [MaxTimeToWaitInSeconds={int}].")
+	public void click_on_cancel_button_to_close_the_alert(String buttonName, int maxTimeToWaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		WebDriver webDriver = scenarioContext.getActiveAppDriver().getWebDriver();
+		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 1 : (maxTimeToWaitInSeconds / 2);
+		
+		for(int i = 0; i <= maxIters; i++) {	
+			try {
+				if("OK".equalsIgnoreCase(buttonName)) {
+					webDriver.switchTo().alert().accept();
+				} else if("Cancel".equalsIgnoreCase(buttonName)) {
+					webDriver.switchTo().alert().dismiss();
+				}
+				break;
+			} catch (Throwable th) {
+				if (i == maxIters) {
+					throw th;
+				}
+				scenarioContext.waitForSeconds(2);
+			} finally {
+				webDriver.switchTo().defaultContent();	
+			}
+		}	
+	}
+	
+	/**
+	 * Used to verify the contents of the alert dialog.
+	 * 
+	 * @param operator -  - the operator used to verify the variable value with expected variable value.
+	 * 		For more details on operator, refer {@link ValueMatchOperator}
+	 * @param expectedInfo - the expected info. The syntax is a JSON syntax:
+	 * 		{ev: <value-here>, valueType: "string", textMatchMechanism: "start-with-expected-value", n: 2, inOrder: "no", ignoreCase: "no"}
+	 *    For expected info, refer {@link ExpectedInfo}
+	 *    For valueType, refer {@link ParamValueType}
+	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
+	 *    Or we can directly specify value like:
+	 *    	"test value"
+	 * @param  maxTimeToWaitInSeconds - max time to wait in seconds to perform this operation successfully.
+	 */
+	@When("verify the alert dialog message {string} {string} [MaxTimeToWaitInSeconds={int}].")
+	public void verify_the_alert_dialog_message_where(String operator, String expectedInfo, int maxTimeToWaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		WebDriver webDriver = scenarioContext.getActiveAppDriver().getWebDriver();
+		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 1 : (maxTimeToWaitInSeconds / 2);
+		
+		for(int i = 0; i <= maxIters; i++) {	
+			try {
+				String textValue = webDriver.switchTo().alert().getText();
+				ExpectedInfo eInfo = JsonYamlUtil.parseExpectedInfo(expectedInfo);
+				
+				ParamPath pPath = new ParamPath("Alert-Text", "string");
+				
+				ParameterValidator.validateParamValueAsExpectedInfo(true, pPath, textValue, operator, eInfo);
+				
+				break;
+			} catch (Throwable th) {
+				if (i == maxIters) {
+					throw th;
+				}
+				scenarioContext.waitForSeconds(2);
+			} finally {
+				webDriver.switchTo().defaultContent();	
+			}
+		}
+		
+	}
+	
+	/**
+	 * Used to enter the text on the prompt / alert window.
+	 * 
+	 * @param buttonName - the name of the button to be clicked after entering the text.
+	 * 		Valid values: OK, Cancel
+	 * 
+	 * @param text - the text that to be entered on prompt/alert dialog.
+	 * @param  maxTimeToWaitInSeconds - max time to wait in seconds to perform this operation successfully.
+	 */
+	@When("enter the following text on alert dialog and click on {string} button [MaxTimeToWaitInSeconds={int}]:")
+	public void verify_the_alert_dialog_message_where(String buttonName, int maxTimeToWaitInSeconds, DocString text) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		WebDriver webDriver = scenarioContext.getActiveAppDriver().getWebDriver();
+		String text2 = text.getContent();
+		text2 = scenarioContext.applyParamsValueOnText(text2);
+		int maxIters = (maxTimeToWaitInSeconds / 2 < 1) ? 1 : (maxTimeToWaitInSeconds / 2);
+		
+		for(int i = 0; i <= maxIters; i++) {	
+			try {
+				webDriver.switchTo().alert().sendKeys(text2);
+				if("OK".equalsIgnoreCase(buttonName)) {
+					webDriver.switchTo().alert().accept();
+				} else if("Cancel".equalsIgnoreCase(buttonName)) {
+					webDriver.switchTo().alert().dismiss();
+				}
+				
+				break;
+			} catch (Throwable th) {
+				if (i == maxIters) {
+					throw th;
+				}
+				scenarioContext.waitForSeconds(2);
+			} finally {
+				webDriver.switchTo().defaultContent();	
+			}
+		}
 	}
 
 }
