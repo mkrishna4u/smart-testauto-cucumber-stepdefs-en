@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
@@ -145,7 +146,7 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to close the web browser window alert by clicking on OK or Cancel button.
+	 * Used to close the web browser window alert by clicking on OK, Reload, "Leave page", "Stay on page" or Cancel button.
 	 * 
 	 * @param buttonName - the name of the button to be clicked. Valid values: OK, Cancel
 	 * @param  maxTimeToWaitInSeconds - max time to wait in seconds to perform this operation successfully.
@@ -162,10 +163,12 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		
 		for(int i = 0; i <= maxIters; i++) {	
 			try {
-				if("OK".equalsIgnoreCase(buttonName)) {
+				if("OK".equalsIgnoreCase(buttonName) || "Reload".equalsIgnoreCase(buttonName) || "Leave page".equalsIgnoreCase(buttonName)) {
 					webDriver.switchTo().alert().accept();
-				} else if("Cancel".equalsIgnoreCase(buttonName)) {
+				} else if("Cancel".equalsIgnoreCase(buttonName) || "Stay on page".equalsIgnoreCase(buttonName)) {
 					webDriver.switchTo().alert().dismiss();
+				} else {
+					Assert.fail("'" + buttonName + "' button is not supported.");
 				}
 				break;
 			} catch (Throwable th) {
@@ -173,8 +176,6 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 					throw th;
 				}
 				scenarioContext.waitForSeconds(2);
-			} finally {
-				webDriver.switchTo().defaultContent();	
 			}
 		}	
 	}
@@ -218,8 +219,6 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 					throw th;
 				}
 				scenarioContext.waitForSeconds(2);
-			} finally {
-				webDriver.switchTo().defaultContent();	
 			}
 		}
 		
@@ -253,6 +252,8 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 					webDriver.switchTo().alert().accept();
 				} else if("Cancel".equalsIgnoreCase(buttonName)) {
 					webDriver.switchTo().alert().dismiss();
+				} else {
+					Assert.fail("'" + buttonName + "' button is not supported.");
 				}
 				
 				break;
@@ -261,8 +262,6 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 					throw th;
 				}
 				scenarioContext.waitForSeconds(2);
-			} finally {
-				webDriver.switchTo().defaultContent();	
 			}
 		}
 	}

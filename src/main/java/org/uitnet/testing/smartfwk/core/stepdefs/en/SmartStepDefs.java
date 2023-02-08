@@ -55,10 +55,7 @@ public class SmartStepDefs {
 	@After
 	public void afterScenario(Scenario scenario) {
 		if(TestConfigManager.getInstance().getUseDefaultStepDefsHooks()) {
-			if(scenarioContext.isUiScenario()) {
-				scenarioContext.captureScreenshotWithScenarioStatus("scenario-" + scenario.getStatus());
-			}
-			scenarioContext.close();
+			scenarioContext.close(true);
 		}
 	}
 }

@@ -273,6 +273,34 @@ public class SmartUiBasicAppOperationsStepDefs {
 	}
 	
 	/**
+	 * Used to logout active user from the active application.
+	 */
+	@When("logout active user.")
+	public void logout_active_user() {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		scenarioContext.getActiveAppConnector().logoutAndNoQuit();
+	}
+	
+	/**
+	 * Used to logout active user from the specified application.
+	 * 
+	 * @param appName - the name of the application.
+	 */
+	@When("logout active user from {string} application.")
+	public void logout_active_user_from_app(String appName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		scenarioContext.getAppConnector(appName).logoutAndNoQuit();
+	}
+	
+	/**
 	 * This is used to apply new user profile on the already activated/connected application.
 	 * This is called user profile switching. 
 	 * <br>Note: Application must be connected before specifying this step.
