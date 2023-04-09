@@ -20,7 +20,10 @@ package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.api.core.reader.JsonDocumentReader;
 import org.uitnet.testing.smartfwk.api.core.support.PageObject;
@@ -31,6 +34,8 @@ import org.uitnet.testing.smartfwk.core.validator.InputValue;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
 import org.uitnet.testing.smartfwk.core.validator.ParamValueType;
 import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
+import org.uitnet.testing.smartfwk.ui.core.appdriver.SmartAppDriver;
+import org.uitnet.testing.smartfwk.ui.core.commons.AreaCoordinates;
 import org.uitnet.testing.smartfwk.ui.core.objects.NewTextLocation;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
 import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
@@ -60,6 +65,151 @@ public class SmartUiFormElementOperationsStepDefs {
 	 */
 	public SmartUiFormElementOperationsStepDefs(SmartCucumberScenarioContext scenarioContext) {
 		this.scenarioContext = scenarioContext;
+	}
+	
+	/**
+	 * Used to verify the web page title value.
+	 * 
+	 * @param titleName - the expected title name.
+	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
+	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
+	 * @param maxTimeTowaitInSeconds - the max time to wait in seconds to locate the element.
+	 */
+	@Then("verify the web page title is {string} [TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_the_web_page_title_is(String titleName, String textMatchMechanism, Integer maxTimeTowaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		String text = scenarioContext.getActiveAppDriver().getWebDriver().getTitle();
+		
+		TextMatchMechanism matchMechanism = TextMatchMechanism.valueOf2(textMatchMechanism);
+		FieldValidator.validateFieldValueAsExpectedValue("Web page title", text, titleName, matchMechanism);
+	}
+	
+	/**
+	 * Used to verify the current URL value.
+	 * 
+	 * @param url - the expected URL.
+	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
+	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
+	 * @param maxTimeTowaitInSeconds - the max time to wait in seconds to locate the element.
+	 */
+	@Then("verify the web page current URL is {string} [TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_the_web_page_current_URL_is(String titleName, String textMatchMechanism, Integer maxTimeTowaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		String text = scenarioContext.getActiveAppDriver().getWebDriver().getCurrentUrl();
+		
+		TextMatchMechanism matchMechanism = TextMatchMechanism.valueOf2(textMatchMechanism);
+		FieldValidator.validateFieldValueAsExpectedValue("Web page current URL", text, titleName, matchMechanism);
+	}
+	
+	/**
+	 * Used to verify the focused element information by verifying one of its attribute value.
+	 * 
+	 * @param elementName - the name of the expected element.
+	 * @param attributeName - the name of the attribute for the expected element.
+	 * @param attributeValue - the value of the attribute specified in argument attributeName.
+	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
+	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
+	 * @param maxTimeTowaitInSeconds - the max time to wait in seconds to locate the element.
+	 */
+	@Then("verify the focused element has the following information [ElementName={string}, AttributeName={string}, AttributeValue={string}, TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_the_focused_element_has_the_following_information(String elementName, String attributeName, String attributeValue, String textMatchMechanism, int maxTimeToWaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		int maxIterationsToLocateElements = maxTimeToWaitInSeconds <= 4 ? 2 : maxTimeToWaitInSeconds / 2;
+		String actualElemName = "";
+		String actualTextValue = "";
+		try {
+			SmartAppDriver appDriver = scenarioContext.getActiveAppDriver();
+			for (int i = 0; i <= maxIterationsToLocateElements; i++) {
+				try {
+					WebElement elem = appDriver.getWebDriver().switchTo().activeElement();
+					if(elem == null) {
+						Assert.fail("Focused/active element is not found.");
+					}
+					
+					actualElemName = elem.getTagName();
+					FieldValidator.validateFieldValueAsExpectedValue("Focused/active element name", actualElemName, elementName, TextMatchMechanism.exactMatchWithExpectedValue);
+					
+					actualTextValue = elem.getAttribute(attributeName);
+					TextMatchMechanism matchMechanism = TextMatchMechanism.valueOf2(textMatchMechanism);
+					FieldValidator.validateFieldValueAsExpectedValue("Focused/active element attribute value", actualTextValue, attributeValue, matchMechanism);
+				} catch (Throwable th) {
+					if (i == maxIterationsToLocateElements) {
+						throw th;
+					}
+				}
+				appDriver.waitForSeconds(2);
+			}
+		} catch (Throwable th) {
+			Assert.fail("Failed to verify focused element (Name: " + actualElemName + ") attribute value[" +attributeName +"=" + attributeValue + "]. Actual value: " + actualTextValue + ".", th);
+		}
+		
+	}
+	
+	/**
+	 * Used to verify the focused element information by verifying the element text value.
+	 * 
+	 * @param elementName - the name of the expected element.
+	 * @param textValue - the text part value of the element.
+	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
+	 * <blockquote><pre>
+	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
+	 * </pre></blockquote>
+	 * @param maxTimeTowaitInSeconds - the max time to wait in seconds to locate the element.
+	 */
+	@Then("verify the focused element has the following information [ElementName={string}, TextValue={string}, TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_the_focused_element_has_the_following_information(String elementName, String textValue, String textMatchMechanism, int maxTimeToWaitInSeconds) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		int maxIterationsToLocateElements = maxTimeToWaitInSeconds <= 4 ? 2 : maxTimeToWaitInSeconds / 2;
+		String actualElemName = "";
+		String actualTextValue = "";
+		try {
+			SmartAppDriver appDriver = scenarioContext.getActiveAppDriver();
+			for (int i = 0; i <= maxIterationsToLocateElements; i++) {
+				try {
+					WebElement elem = appDriver.getWebDriver().switchTo().activeElement();
+					if(elem == null) {
+						Assert.fail("Focused/active element is not found.");
+					}
+					
+					actualElemName = elem.getTagName();
+					FieldValidator.validateFieldValueAsExpectedValue("Focused/active element name", actualElemName, elementName, TextMatchMechanism.exactMatchWithExpectedValue);
+					
+					actualTextValue = elem.getText();
+					TextMatchMechanism matchMechanism = TextMatchMechanism.valueOf2(textMatchMechanism);
+					FieldValidator.validateFieldValueAsExpectedValue("Focused/active element text value", actualTextValue, textValue, matchMechanism);
+				} catch (Throwable th) {
+					if (i == maxIterationsToLocateElements) {
+						throw th;
+					}
+				}
+				appDriver.waitForSeconds(2);
+			}
+		} catch (Throwable th) {
+			Assert.fail("Failed to verify focused element (Name: " + actualElemName + ") text value=" + textValue + ". Actual value: " + actualTextValue + ".", th);
+		}
+		
 	}
 
 	/**
@@ -921,7 +1071,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement elements = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->text", elements.getText(), expectedText,
 						TextMatchMechanism.valueOf2(textMatchMechanism));
@@ -989,7 +1139,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement elements = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				FieldValidator.validateFieldValueAsExpectedValue(poInfo.getPageObject().getName() + "->" + attributeName, elements.getAttribute(attributeName), expectedText,
 						TextMatchMechanism.valueOf2(textMatchMechanism));
@@ -1345,7 +1495,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				list.clear();
 				if(elements != null) {	
@@ -1421,7 +1571,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				if(element != null) {	
 					textValue = element.getAttribute(attributeName);
@@ -1499,7 +1649,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				if(elements != null) {					
 					for(WebElement elem : elements) {
@@ -1580,7 +1730,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				if(element != null) {					
 					String textValue = element.getText();
@@ -1662,7 +1812,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				if(element != null) {
 					String textValue = element.getText();
@@ -1751,7 +1901,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				if(elements != null) {	
 					List<String> elems = new LinkedList<>();
@@ -1844,7 +1994,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				List<WebElement> elements = (List<WebElement>) PageObjectUtil.invokeValidatorMethod(
-						"findElements", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElements", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				if(elements != null) {	
 					for(WebElement elem : elements) {
@@ -1929,7 +2079,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
-						"findElement", new String[]{int.class.getTypeName()}, new Object[]{1}, poInfo, scenarioContext);
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
 				
 				if(element != null) {	
 					String textValue = element.getAttribute(attributeName);
@@ -2382,4 +2532,160 @@ public class SmartUiFormElementOperationsStepDefs {
 		verify_dropdown_options_of_page_element(po, operator, expectedInfo);
 	}
 	
+	/**
+	 * Used to verify whether the specified page element/ page object is within the specified coordinates.
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>  
+	 * @param x1 - coordinate x1.
+	 * @param y1 - coordinate y1.
+	 * @param x2 - coordinate x2.
+	 * @param y2 - coordinate y2.
+	 */
+	@Then("verify {string} page element is within [x1={int}, y1={int}, x2={int}, y2={int}] coordinates.")
+	public void verify_page_element_is_within_coordinates(String po, int x1, int y1, int x2, int y2) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
+			try {
+				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
+						"findElement", new String[]{int.class.getTypeName()}, new Object[]{0}, poInfo, scenarioContext);
+				Rectangle rect = element.getRect();
+				
+				if(!(rect.x >= x1 && rect.y >= y1 &&  (rect.x + rect.getWidth()) <= x2 && (rect.y + rect.getHeight()) <= y2)) {
+					Assert.fail("Element is not within the specified coordinates [x1=" + x1 + ", y1=" + y1 + ", x2=" + x2 + ", y2=" + y2 + "]."
+							+ " Actual Coordinates: [x1=" + rect.x + ", y1=" + rect.y + ", x2=" + (rect.x  + rect.width) 
+							+ ", y2=" + (rect.y + rect.height) + "].");
+				}
+				
+				break;
+			} catch (Throwable th) {
+				if (i == poInfo.getMaxIterationsToLocateElements()) {
+					throw th;
+				}
+			}
+			scenarioContext.waitForSeconds(2);
+		}
+	}
+	
+	/**
+	 * Used to verify whether the specified page element/ page object is within the specified coordinates.
+	 * This will take the configured screen size for the application.
+	 * 
+	 * @param po - the page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>  
+	 * @param x1 - coordinate x1.
+	 * @param y1 - coordinate y1.
+	 * @param x2 - coordinate x2.
+	 * @param y2 - coordinate y2.
+	 */
+	@Then("verify {string} page object is within [x1={int}, y1={int}, x2={int}, y2={int}] coordinates.")
+	public void verify_page_object_is_within_coordinates(String po, int x1, int y1, int x2, int y2) {
+		verify_page_element_is_within_coordinates(po, x1, y1, x2, y2);
+	}
+	
+	/**
+	 * Used to verify the location of the page elements/objects. System will automatically
+	 * resize the web browser based on the specified screen size then after it will check the page element
+	 * location within the specified surrounding area. Refer the argument details for more information.
+	 *
+	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
+	 * column header. example below: 
+	 * <blockquote><pre>
+	 *       | Screen Size | Page Element / Page Object | Surrounding Area Coordinates     |
+	 *       | 800 x 600   | myapp.XyzPO.poObject1      | {x1: 0, y1: 0, x2: 500, y2: 500} |
+	 * 
+	 *    Where: 
+	 *    1. Screen Size is in the format 'width x height'
+	 *    2. JSON Syntax for page object (Refer {@link PageObject}):
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *    3. Surrounding Area Coordinates are the area specified by top left point (x1, y1) and bottom right point (x2, y2) within which
+	 *    	 the element is expected to be present. All values should be in pixels. NOTE: Screen top left first point is (0, 0).
+	 * </pre></blockquote>
+	 * 
+	 */
+	@Then("verify the location of the page elements on the screen:")
+	public void verify_the_location_of_the_page_elements_on_the_screen(DataTable dataTable) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		List<List<String>> rows = dataTable.asLists();
+		List<String> row;
+		String screenSize;
+		String po;
+		String coordinatesAsStr;
+		PageObjectInfo poInfo;
+		AreaCoordinates coordinates;
+		Dimension origWindowSize = scenarioContext.getActiveAppDriver().getWebDriver().manage().window().getSize();
+		try {
+			String lastScreenSize = "";
+			for(int i = 1; i < rows.size(); i++) {
+				row = rows.get(i);
+				screenSize = row.get(0);
+				po = row.get(1);
+				coordinatesAsStr = row.get(2);
+						
+				if(!lastScreenSize.equals(screenSize)) {
+					lastScreenSize = screenSize;
+					String[] ssWH = screenSize.split("x");
+					scenarioContext.getActiveAppDriver().getWebDriver().manage().window()
+					.setSize(new Dimension(Integer.valueOf(ssWH[0].trim()), Integer.valueOf(ssWH[1].trim())));
+				}
+				
+				poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+				JsonDocumentReader r = new JsonDocumentReader(coordinatesAsStr, false);
+				coordinates = r.readValueAsObject("$", AreaCoordinates.class);
+				
+				PageObjectUtil.invokeValidatorMethod(
+						"validateElementPresentWithinArea", new String[]{AreaCoordinates.class.getTypeName(), int.class.getTypeName()}, 
+						new Object[]{coordinates, poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
+			}
+		} finally {
+			scenarioContext.getActiveAppDriver().getWebDriver().manage().window()
+			.setSize(new Dimension(origWindowSize.width, origWindowSize.height));
+		}
+		
+	}
+	
+	/**
+	 * Used to verify the location of the page elements/objects. System will automatically
+	 * resize the web browser based on the specified screen size then after it will check the page element
+	 * location within the specified surrounding area. Refer the argument details for more information.
+	 *
+	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
+	 * column header. example below: 
+	 * <blockquote><pre>
+	 *       | Screen Size | Page Element / Page Object | Surrounding Area Coordinates     |
+	 *       | 800 x 600   | myapp.XyzPO.poObject1      | {x1: 0, y1: 0, x2: 500, y2: 500} |
+	 * 
+	 *    Where: 
+	 *    1. Screen Size is in the format 'width x height'
+	 *    2. JSON Syntax for page object (Refer {@link PageObject}):
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *    3. Surrounding Area Coordinates are the area specified by top left point (x1, y1) and bottom right point (x2, y2) within which
+	 *    	 the element is expected to be present. All values should be in pixels. NOTE: Screen top left first point is (0, 0).
+	 * </pre></blockquote>
+	 * 
+	 */
+	@Then("verify the location of the page objects on the screen:")
+	public void verify_the_location_of_the_page_objects_on__the_screen(DataTable dataTable) {
+		verify_the_location_of_the_page_elements_on_the_screen(dataTable);
+	}
+
 }

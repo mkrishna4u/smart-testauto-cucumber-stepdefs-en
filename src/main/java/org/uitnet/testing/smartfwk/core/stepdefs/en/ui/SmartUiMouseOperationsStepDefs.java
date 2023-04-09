@@ -20,6 +20,7 @@ package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 import org.openqa.selenium.WebElement;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.api.core.support.PageObjectInfo;
+import org.uitnet.testing.smartfwk.api.core.support.ScrollbarType;
 import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.PageScrollUtil;
 
@@ -589,6 +590,110 @@ public class SmartUiMouseOperationsStepDefs {
 	@When("mouse hoverover {string} page object to {string}.")
 	public void mouse_hoverover_on_page_element_3(String pageObject, String actionName) {
 		mouse_hoverover_on_page_element(pageObject, actionName);
+	}
+	
+	/**
+	 * Used to set the horizontal scrollbar thumb position to N pixels right from the left most location.
+	 * 
+	 * @param distanceInPixels - distance in pixel where the scrolling pointer is set. distance should be always positive number
+	 * 		and relative to the scrollbar start location. 
+	 * 
+	 * @param scrollbarPageObject- the scrollbar page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * 
+	 */
+	@When("set horizontal scrollbar thumb position to {int} pixels away from left [ScrollbarPageElement={string}].")
+	public void set_horizontal_scrollbar_thumb_position_to_pixel_away_from_left(int distanceInPixels, String scrollbarPageObject) {
+		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
+		
+		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] { sourcePoInfo.getMaxIterationsToLocateElements() }, sourcePoInfo,
+				scenarioContext);
+		
+		PageScrollUtil.setScrollbarThumbgripLocation(scenarioContext.getActiveAppDriver(), elem, ScrollbarType.HORIZONTAL, distanceInPixels);
+	}
+	
+	/**
+	 * Used to set the horizontal scrollbar thumb position to N percent right from the left most location. Valid values are 0.0 to 100.0.
+	 * 
+	 * @param distanceInPercentage - distance in percentage where the scrolling pointer is set. distance should be always positive number
+	 * 		and relative to the scrollbar start location. valid values are 0.0 to 100.0
+	 * 
+	 * @param scrollbarPageObject- the scrollbar page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * 
+	 */
+	@When("set horizontal scrollbar thumb position to {double} percent away from left [ScrollbarPageElement={string}].")
+	public void set_horizontal_scrollbar_thumb_position_to_percent_away_from_left(double distanceInPercentage, String scrollbarPageObject) {
+		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
+		
+		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] { sourcePoInfo.getMaxIterationsToLocateElements() }, sourcePoInfo,
+				scenarioContext);
+		
+		PageScrollUtil.setScrollbarThumbgripLocation(scenarioContext.getActiveAppDriver(), elem, ScrollbarType.HORIZONTAL, distanceInPercentage);
+	}
+	
+	/**
+	 * Used to set the vertical scrollbar thumb position to N pixels down from the top most location.
+	 * 
+	 * @param distanceInPixels - distance in pixel where the scrolling pointer is set. distance should be always positive number
+	 * 		and relative to the scrollbar start location. 
+	 * 
+	 * @param scrollbarPageObject- the scrollbar page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * 
+	 */
+	@When("set vertical scrollbar thumb position to {int} pixels away from top [ScrollbarPageElement={string}].")
+	public void set_vertical_scrollbar_thumb_position_to_pixel_away_from_top(int distanceInPixels, String scrollbarPageObject) {
+		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
+		
+		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] { sourcePoInfo.getMaxIterationsToLocateElements() }, sourcePoInfo,
+				scenarioContext);
+		
+		PageScrollUtil.setScrollbarThumbgripLocation(scenarioContext.getActiveAppDriver(), elem, ScrollbarType.VERTICAL, distanceInPixels);
+	}
+	
+	/**
+	 * Used to set the vertical scrollbar thumb position to N percent down from the top most location. Valid values are 0.0 to 100.0.
+	 * 
+	 * @param distanceInPercentage - distance in percentage where the scrolling pointer is set. distance should be always positive number
+	 * 		and relative to the scrollbar start location. valid values are 0.0 to 100.0
+	 * 
+	 * @param scrollbarPageObject- the scrollbar page object / page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * 
+	 */
+	@When("set vertical scrollbar thumb position to {double} percent away from top [ScrollbarPageElement={string}].")
+	public void set_vertical_scrollbar_thumb_position_to_percent_away_from_top(double distanceInPercentage, String scrollbarPageObject) {
+		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
+		
+		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] { sourcePoInfo.getMaxIterationsToLocateElements() }, sourcePoInfo,
+				scenarioContext);
+		
+		PageScrollUtil.setScrollbarThumbgripLocation(scenarioContext.getActiveAppDriver(), elem, ScrollbarType.VERTICAL, distanceInPercentage);
 	}
 
 }
