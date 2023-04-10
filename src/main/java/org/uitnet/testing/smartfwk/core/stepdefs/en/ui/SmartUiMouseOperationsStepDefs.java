@@ -607,8 +607,8 @@ public class SmartUiMouseOperationsStepDefs {
 	 * </pre></blockquote>      
 	 * 
 	 */
-	@When("set horizontal scrollbar thumb position to {int} pixels away from left [ScrollbarPageElement={string}].")
-	public void set_horizontal_scrollbar_thumb_position_to_pixel_away_from_left(int distanceInPixels, String scrollbarPageObject) {
+	@When("set horizontal scrollbar thumb position {int} pixels away from left [ScrollbarPageElement={string}].")
+	public void set_horizontal_scrollbar_thumb_position_pixel_away_from_left(int distanceInPixels, String scrollbarPageObject) {
 		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
 		
 		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
@@ -633,8 +633,8 @@ public class SmartUiMouseOperationsStepDefs {
 	 * </pre></blockquote>      
 	 * 
 	 */
-	@When("set horizontal scrollbar thumb position to {double} percent away from left [ScrollbarPageElement={string}].")
-	public void set_horizontal_scrollbar_thumb_position_to_percent_away_from_left(double distanceInPercentage, String scrollbarPageObject) {
+	@When("set horizontal scrollbar thumb position {double} percent away from left [ScrollbarPageElement={string}].")
+	public void set_horizontal_scrollbar_thumb_position_percent_away_from_left(double distanceInPercentage, String scrollbarPageObject) {
 		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
 		
 		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
@@ -659,8 +659,8 @@ public class SmartUiMouseOperationsStepDefs {
 	 * </pre></blockquote>      
 	 * 
 	 */
-	@When("set vertical scrollbar thumb position to {int} pixels away from top [ScrollbarPageElement={string}].")
-	public void set_vertical_scrollbar_thumb_position_to_pixel_away_from_top(int distanceInPixels, String scrollbarPageObject) {
+	@When("set vertical scrollbar thumb position {int} pixels away from top [ScrollbarPageElement={string}].")
+	public void set_vertical_scrollbar_thumb_position_pixel_away_from_top(int distanceInPixels, String scrollbarPageObject) {
 		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
 		
 		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
@@ -685,8 +685,8 @@ public class SmartUiMouseOperationsStepDefs {
 	 * </pre></blockquote>      
 	 * 
 	 */
-	@When("set vertical scrollbar thumb position to {double} percent away from top [ScrollbarPageElement={string}].")
-	public void set_vertical_scrollbar_thumb_position_to_percent_away_from_top(double distanceInPercentage, String scrollbarPageObject) {
+	@When("set vertical scrollbar thumb position {double} percent away from top [ScrollbarPageElement={string}].")
+	public void set_vertical_scrollbar_thumb_position_percent_away_from_top(double distanceInPercentage, String scrollbarPageObject) {
 		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
 		
 		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 

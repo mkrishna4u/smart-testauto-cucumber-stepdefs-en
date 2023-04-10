@@ -77,8 +77,8 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 * @param maxTimeTowaitInSeconds - the max time to wait in seconds to locate the element.
 	 */
-	@Then("verify the web page title is {string} [TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
-	public void verify_the_web_page_title_is(String titleName, String textMatchMechanism, Integer maxTimeTowaitInSeconds) {
+	@Then("verify the web page title is {string} with [TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_the_web_page_title_is_with(String titleName, String textMatchMechanism, Integer maxTimeTowaitInSeconds) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -91,7 +91,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to verify the current URL value.
+	 * Used to verify the current active URL value.
 	 * 
 	 * @param url - the expected URL.
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
@@ -100,8 +100,8 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 * @param maxTimeTowaitInSeconds - the max time to wait in seconds to locate the element.
 	 */
-	@Then("verify the web page current URL is {string} [TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
-	public void verify_the_web_page_current_URL_is(String titleName, String textMatchMechanism, Integer maxTimeTowaitInSeconds) {
+	@Then("verify the web page current URL is {string} with [TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
+	public void verify_the_web_page_current_URL_is_with(String titleName, String textMatchMechanism, Integer maxTimeTowaitInSeconds) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -125,7 +125,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 * @param maxTimeTowaitInSeconds - the max time to wait in seconds to locate the element.
 	 */
-	@Then("verify the focused element has the following information [ElementName={string}, AttributeName={string}, AttributeValue={string}, TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
+	@Then("verify the focused element has the following information [ElementName={string}, AttributeName={string}, AttributeValue={string}] with [TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
 	public void verify_the_focused_element_has_the_following_information(String elementName, String attributeName, String attributeValue, String textMatchMechanism, int maxTimeToWaitInSeconds) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -174,7 +174,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 * @param maxTimeTowaitInSeconds - the max time to wait in seconds to locate the element.
 	 */
-	@Then("verify the focused element has the following information [ElementName={string}, TextValue={string}, TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
+	@Then("verify the focused element has the following information [ElementName={string}, TextValue={string}] with [TextMatchMechanism={string}, MaxTimeToWaitInSeconds={int}].")
 	public void verify_the_focused_element_has_the_following_information(String elementName, String textValue, String textMatchMechanism, int maxTimeToWaitInSeconds) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
