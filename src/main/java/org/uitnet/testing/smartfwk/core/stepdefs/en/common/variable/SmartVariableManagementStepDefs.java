@@ -17,16 +17,12 @@
  */
 package org.uitnet.testing.smartfwk.core.stepdefs.en.common.variable;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TimeZone;
 
 import org.testng.Assert;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
@@ -967,34 +963,6 @@ public class SmartVariableManagementStepDefs {
 			substr = StringUtil.substring("" + value, startToken, endToken);
 			scenarioContext.addParamValue(newVariableName, substr);
 		}
-	}
-	
-	/**
-	 * Used to return the system timestamp (data and time) in a specific format and in the specified TimeZone.
-	 * 
-	 * @param timestampFormat - the timestamp format like "MM/dd/yyyy HH:mm:ss Z"
-	 * 		For more details on timestamp format, please refer {@link SimpleDateFormat}
-	 * @param timeZone - the time zone in for we want to get the timestamp.
-	 * @param variableName - the variable name that store the timestamp.
-	 */
-	@Then("get the local system timestamp in {string} format using [TimeZone={string}] and store into {string} variable.")
-	public void get_the_local_system_timestamp_in_format_and_store_into_variable(String timestampFormat, String timeZone, String variableName) {
-		if(!scenarioContext.isLastConditionSetToTrue()) {
-			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
-			return;
-		}
-		
-		timestampFormat = scenarioContext.applyParamsValueOnText(timestampFormat);
-		timeZone = scenarioContext.applyParamsValueOnText(timeZone);
-		
-		TimeZone tzone = TimeZone.getTimeZone(timeZone);
-		Date date = Calendar.getInstance(tzone).getTime();
-		SimpleDateFormat sdf = new SimpleDateFormat(timestampFormat);
-		sdf.setTimeZone(tzone);
-		String formattedDate = sdf.format(date);
-		
-		scenarioContext.addParamValue(variableName, formattedDate);
-		
 	}
 	
 }
