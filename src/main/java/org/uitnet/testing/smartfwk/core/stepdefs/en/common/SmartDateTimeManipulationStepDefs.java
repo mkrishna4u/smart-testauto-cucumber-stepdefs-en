@@ -37,10 +37,10 @@ import io.cucumber.java.en.When;
  * @author Madhav Krishna
  *
  */
-public class SmartDateTimeStepDefs {
+public class SmartDateTimeManipulationStepDefs {
 	private SmartCucumberScenarioContext scenarioContext;
 
-	public SmartDateTimeStepDefs(SmartCucumberScenarioContext scenarioContext) {
+	public SmartDateTimeManipulationStepDefs(SmartCucumberScenarioContext scenarioContext) {
 		this.scenarioContext = scenarioContext;
 	}
 
