@@ -146,6 +146,7 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		prefix = scenarioContext.applyParamsValueOnText(prefix);
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			List<String> list2 = new LinkedList<>();
@@ -171,6 +172,7 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		prefix = scenarioContext.applyParamsValueOnText(prefix);
 		String str = scenarioContext.getParamValueAsString(variableName);
 		if(str != null) {
 			
@@ -192,6 +194,7 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		suffix = scenarioContext.applyParamsValueOnText(suffix);
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			List<String> list2 = new LinkedList<>();
@@ -217,6 +220,7 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		suffix = scenarioContext.applyParamsValueOnText(suffix);
 		String str = scenarioContext.getParamValueAsString(variableName);
 		if(str != null) {
 			scenarioContext.addParamValue(variableName, str + suffix);
@@ -238,6 +242,8 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		prefix = scenarioContext.applyParamsValueOnText(prefix);
+		suffix = scenarioContext.applyParamsValueOnText(suffix);
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			List<String> list2 = new LinkedList<>();
@@ -347,6 +353,9 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		joiner = scenarioContext.applyParamsValueOnText(joiner);
+		valuePrefix = scenarioContext.applyParamsValueOnText(valuePrefix);
+		valueSuffix = scenarioContext.applyParamsValueOnText(valueSuffix);
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			String str = "";
@@ -382,6 +391,10 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		joiner = scenarioContext.applyParamsValueOnText(joiner);
+		valuePrefix = scenarioContext.applyParamsValueOnText(valuePrefix);
+		valueSuffix = scenarioContext.applyParamsValueOnText(valueSuffix);
+		defaultValue = scenarioContext.applyParamsValueOnText(defaultValue);
 		List<String> list = (List<String>) scenarioContext.getParamValue(variableName);
 		if(list != null) {
 			String str = "";
@@ -500,6 +513,7 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		operator = scenarioContext.applyParamsValueOnText(operator);
 		Object avalue = scenarioContext.getParamValue(variableName1);
 		Object evalue = scenarioContext.getParamValue(variableName2);
 		ValueMatchOperator oper = ValueMatchOperator.valueOf2(operator);
@@ -552,6 +566,7 @@ public class SmartVariableManagementStepDefs {
 			return;
 		}
 		
+		operator = scenarioContext.applyParamsValueOnText(operator);
 		Object avalue = scenarioContext.getParamValue(variableName1);
 		Object evalue = scenarioContext.getParamValue(variableName2);
 		ValueMatchOperator oper = ValueMatchOperator.valueOf2(operator);
