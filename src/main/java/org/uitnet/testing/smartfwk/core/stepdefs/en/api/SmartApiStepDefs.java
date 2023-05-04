@@ -776,7 +776,7 @@ public class SmartApiStepDefs {
 	 */
 	@SuppressWarnings("unchecked")
 	@When("make HTTP PUT request by setting {string} JSON object on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
-			+ "using [UserProfile={string}] with header info [Accept={string}] and variable info [ReqVar={string}, RespVar={string}].")
+			+ "using [UserProfile={string}] with header info [RequestHeaderReferenceVariable={string}] and variable info [ReqVar={string}, RespVar={string}].")
 	public void make_http_put_request_by_setting_json_object_on_using_req_header_ref_variable(String jsonObjVariableName, String appName,
 			String targetServer, String targetURL, String userProfile, String requestHeaderReferenceVariable, String requestVariableName, String responseVariableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
