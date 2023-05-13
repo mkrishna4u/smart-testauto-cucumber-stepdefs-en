@@ -17,13 +17,18 @@
  */
 package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
+import org.uitnet.testing.smartfwk.api.core.reader.JsonDocumentReader;
+import org.uitnet.testing.smartfwk.api.core.support.PageObject;
 import org.uitnet.testing.smartfwk.api.core.support.PageObjectInfo;
 import org.uitnet.testing.smartfwk.api.core.support.ScrollbarType;
 import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.PageScrollUtil;
 
+import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.When;
 
 /**
@@ -200,6 +205,61 @@ public class SmartUiMouseOperationsStepDefs {
 	@When("force click {string} page object to {string}.")
 	public void force_click_on_page_element_3(String pageObject, String actionName) {
 		force_click_on_page_element(pageObject, actionName);
+	}
+	
+	/**
+	 * Used to perform click operation on the specified page objects / page elements.
+	 * 
+	 * @param actionName - meaningful expected action name.
+	 * @param pageObjects - a document string contains multiple page objects in an JSON array in the format given below:
+	 * 
+	 * 	['{name: 'myapp.XyzPO.poObject', maxTimeToWaitInSeconds: 6}', 'myapp.XyzPO.poObject1', 'myapp.XyzPO.poObject2']
+	 * 
+	 *   Each page object / page element can be specified in two way:
+	 *   <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *   </pre></blockquote>      
+	 * 
+	 */
+	@When("click on the following page elements to {string}:")
+	public void click_on_the_following_page_elements(String actionName, DocString pageObjects) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		String pageObjectsAsStr = pageObjects.getContent();
+		JsonDocumentReader jsonReader = new JsonDocumentReader(pageObjectsAsStr, true);
+		List<String> poList = jsonReader.readValuesAsList("$");
+		
+		for(String po : poList) {
+			click_on_page_element(po, actionName);
+		}
+	}
+	
+	/**
+	 * Used to perform click operation on the specified page objects / page elements.
+	 * 
+	 * @param actionName - meaningful expected action name.
+	 * @param pageObjects - a document string contains multiple page objects in an JSON array in the format given below:
+	 * 
+	 * 	['{name: 'myapp.XyzPO.poObject', maxTimeToWaitInSeconds: 6}', 'myapp.XyzPO.poObject1', 'myapp.XyzPO.poObject2']
+	 * 
+	 *   Each page object / page element can be specified in two way:
+	 *   <blockquote><pre>
+	 *     Direct way: myapp.XyzPO.poObject
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *   </pre></blockquote>      
+	 * 
+	 */
+	@When("click on the following page objects to {string}:")
+	public void click_on_the_following_page_objects(String actionName, DocString pageObjects) {
+		click_on_the_following_page_elements(actionName, pageObjects);
 	}
 	
 	/**

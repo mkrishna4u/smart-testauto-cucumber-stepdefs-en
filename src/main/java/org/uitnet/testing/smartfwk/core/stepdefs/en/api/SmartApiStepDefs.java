@@ -287,6 +287,8 @@ public class SmartApiStepDefs {
 	 *      | SampleFile.pdf | SampleFile.pdf     | application/pdf      | yes                   | test-data/uploads/Sample.pdf                                 |
 	 *      | SampleFile2.pdf| SampleFile2.pdf    | application/pdf      | no                    | test-data/uploads/Sample2.pdf                                |
 	 *       </pre></blockquote>
+	 *       
+	 *       Where "Apply Variable" column value denotes whether you would like to apply variable's information in file contents or not. Valid values are: yes, no
 	 */
 	@When("make HTTP PUT request to upload the following files on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
 			+ "using [UserProfile={string}] with header info [ContentType={string}, Accept={string}] "
@@ -361,6 +363,8 @@ public class SmartApiStepDefs {
 	 *      | SampleFile.pdf | SampleFile.pdf     | application/pdf      | yes                   | test-data/uploads/Sample.pdf                                 |
 	 *      | SampleFile2.pdf| SampleFile2.pdf    | application/pdf      | no                    | test-data/uploads/Sample2.pdf                                |
 	 *       </pre></blockquote>
+	 *       
+	 *      Where "Apply Variable" column value denotes whether you would like to apply variable's information in file contents or not. Valid values are: yes, no
 	 */
 	@SuppressWarnings("unchecked")
 	@When("make HTTP PUT request to upload the following files on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
@@ -433,11 +437,13 @@ public class SmartApiStepDefs {
 	 * @param requestVariableName - the variable name that stores the HTTPRequest information.
 	 * @param responseVariableName - the variable name that stores the HTTPResponse information.
 	 * @param filesDetails - the cucumber data table to specify uploading file details in the format given below:
-	 * <blockquote><pre>
+	 *   <blockquote><pre>
 	 * 		| Part Name      | File Name          | Content Type         | Apply Variables       | Relative File Path (Relative to project directory)           |
 	 *      | SampleFile.pdf | SampleFile.pdf     | application/pdf      | yes                   | test-data/uploads/Sample.pdf                                 |
 	 *      | SampleFile2.pdf| SampleFile2.pdf    | application/pdf      | no                    | test-data/uploads/Sample2.pdf                                |
-	 * </pre></blockquote>
+	 *   </pre></blockquote>
+	 * 
+	 *   Where "Apply Variable" column value denotes whether you would like to apply variable's information in file contents or not. Valid values are: yes, no
 	 */
 	@When("make HTTP POST request to upload the following files on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
 			+ "using [UserProfile={string}] with header info [ContentType={string}, Accept={string}] "
@@ -507,11 +513,13 @@ public class SmartApiStepDefs {
 	 * @param requestVariableName - the variable name that stores the HTTPRequest information.
 	 * @param responseVariableName - the variable name that stores the HTTPResponse information.
 	 * @param filesDetails - the cucumber data table to specify uploading file details in the format given below:
-	 * <blockquote><pre>
+	 *   <blockquote><pre>
 	 * 		| Part Name      | File Name          | Content Type         | Apply Variables       | Relative File Path (Relative to project directory)           |
 	 *      | SampleFile.pdf | SampleFile.pdf     | application/pdf      | yes                   | test-data/uploads/Sample.pdf                                 |
 	 *      | SampleFile2.pdf| SampleFile2.pdf    | application/pdf      | no                    | test-data/uploads/Sample2.pdf                                |
-	 * </pre></blockquote>
+	 *   </pre></blockquote>
+	 * 
+	 *   Where "Apply Variable" column value denotes whether you would like to apply variable's information in file contents or not. Valid values are: yes, no
 	 */
 	@SuppressWarnings("unchecked")
 	@When("make HTTP POST request to upload the following files on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
@@ -1278,11 +1286,16 @@ public class SmartApiStepDefs {
 	 * 
 	 * @param responseVariableName - the variable name that stores the HTTPResponse information.
 	 * @param expectedHeaderInfo - the expected header information in HTTP response in the format given below (specified as DataTable in Cucumber):
-	 * <blockquote><pre>
-	 * 	| Header Name         | Expected Value            | Text Match Mechanism          |
-	 *  | Content-Type        | application/json          | icExactMatchWithExpectedValue |
-	 *  | Access-Token        | tttttttt                  | exactMatchWithExpectedValue   |
-	 * </pre></blockquote>
+	 *   <blockquote><pre>
+	 * 	  | Header Name         | Expected Value            | Text Match Mechanism          |
+	 *    | Content-Type        | application/json          | icExactMatchWithExpectedValue |
+	 *    | Access-Token        | tttttttt                  | exactMatchWithExpectedValue   |
+	 *   </pre></blockquote>
+	 *   
+	 *   Where:
+	 *   	Expected Value: It is a string value
+	 *   	Text Match Mechanism: the text match mechanism used to verify the header actual value with expected value.
+	 *   			For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 */
 	@Then("verify {string} HTTP response contains following header information:")
 	public void verify_http_response_variable_contains_http_status_code(String responseVariableName, DataTable expectedHeaderInfo) {
@@ -1316,9 +1329,9 @@ public class SmartApiStepDefs {
 	 * 
 	 * @param httpResponseVariableName - the variable name that stores the HTTPResponse information.
 	 * @param keywordsInfo - the keywords that need to verified in HTTP response body. The syntax for expecting keywords is given below:
-	 * <blockquote><pre>
+	 *   <blockquote><pre>
 	 *  		{ keywords: ["1", "2"], inOrder: yes/no }
-	 * </pre></blockquote>
+	 *   </pre></blockquote>
 	 */
 	@Then("verify body of {string} HTTP response contains following keywords in its contents:")
 	public void verify_body_of_http_response_contains_following_keywords_in_its_contents(String httpResponseVariableName, DocString keywordsInfo) {
@@ -1359,6 +1372,7 @@ public class SmartApiStepDefs {
 	 *   For more info on JSON Path, please refer @see (@link https://github.com/json-path/JsonPath}
 	 *   For more details on Operators, please refer @see {@link ValueMatchOperator} enum.
 	 *   For more details on Expected Information please refer @see {@link ExpectedInfo} class.
+	 *   For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 * </pre></blockquote>
 	 */
 	@Then("verify {string} HTTP response contains JSON data with the following expected params information:")
@@ -1447,11 +1461,13 @@ public class SmartApiStepDefs {
 	 * 
 	 * @param httpResponseVariableName - the variable name that stores the HTTPResponse information.
 	 * @param expectedFileInfo - the expected file name of the downloaded file. File is downloaded into test-results/downloads directory. 
-	 * <blockquote><pre>
-	 * 	 Syntax for specifying the expected file information is given below:
+	 *  <blockquote><pre>
+	 * 	  Syntax for specifying the expected file information is given below:
 	 * 
-	 *   {expectedFileName: "Sample.pdf", textMatchMechanism: "startsWithExpectedValue", deleteFile: true/false}
-	 * </pre></blockquote>
+	 *    {expectedFileName: "Sample.pdf", textMatchMechanism: "startsWithExpectedValue", deleteFile: true/false}
+	 *  </pre></blockquote>
+	 *  
+	 *    For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 */
 	@Then("verify downloaded file as part of {string} HTTP response contains following expected name:")
 	public void verify_downloaded_file_as_part_of_http_response_contains_following_expected_name(String httpResponseVariableName, DocString expectedFileInfo) {
