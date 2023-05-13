@@ -2266,7 +2266,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
 	 */
-	@Then("verify the selected value\\(s) of the following page objects on {string}:")
+	@Then("verify the selected values of the following page objects on {string}:")
 	public void validate_the_selected_values_of_the_following_page_objects(String pageOrScreenName, DataTable dataTable) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -2315,7 +2315,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
 	 */
-	@Then("verify the selected value\\(s) of the following page elements on {string}:")
+	@Then("verify the selected values of the following page elements on {string}:")
 	public void validate_the_selected_values_of_the_following_page_objects_1(String pageOrScreenName, DataTable dataTable) {
 		validate_the_selected_values_of_the_following_page_objects(pageOrScreenName, dataTable);
 	}
