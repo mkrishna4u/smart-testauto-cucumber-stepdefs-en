@@ -2344,7 +2344,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
 	 */
-	@When("fill the following form fields value\\(s) present on {string}:")
+	@When("fill the following form fields values present on {string}:")
 	public void fill_the_following_form_fields_value_present_on_page(String pageOrScreenName, DataTable dataTable) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
