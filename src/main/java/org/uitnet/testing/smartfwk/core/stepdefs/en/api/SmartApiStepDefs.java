@@ -1093,7 +1093,7 @@ public class SmartApiStepDefs {
 		httpRequest.setResponseContentType(accept);
 
 		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
-		HttpResponse httpResponse = scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile).httpGet(targetURL, accept, null, null);
+		HttpResponse httpResponse = scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile).httpGet(targetURL, httpRequest.getHeaders(), null, null);
 		scenarioContext.addParamValue(responseVariableName, httpResponse);
 	}
 	
@@ -1123,7 +1123,7 @@ public class SmartApiStepDefs {
 
 		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
 		HttpResponse httpResponse = scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile)
-				.httpGet(targetURL, httpRequest.getHeader("Accept"), null, null);
+				.httpGet(targetURL, httpRequest.getHeaders(), null, null);
 		scenarioContext.addParamValue(responseVariableName, httpResponse);
 	}
 	
@@ -1150,7 +1150,7 @@ public class SmartApiStepDefs {
 
 		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
 		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
-		HttpResponse httpResponse = handler.httpDelete(targetURL, accept, null, null);
+		HttpResponse httpResponse = handler.httpDelete(targetURL, httpRequest.getHeaders(), null, null);
 		scenarioContext.addParamValue(responseVariableName, httpResponse);
 	}
 	
@@ -1180,7 +1180,7 @@ public class SmartApiStepDefs {
 
 		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
 		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
-		HttpResponse httpResponse = handler.httpDelete(targetURL, httpRequest.getHeader("Accept"), null, null);
+		HttpResponse httpResponse = handler.httpDelete(targetURL, httpRequest.getHeaders(), null, null);
 		scenarioContext.addParamValue(responseVariableName, httpResponse);
 	}
 	
@@ -1209,7 +1209,7 @@ public class SmartApiStepDefs {
 
 		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
 		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
-		HttpResponse httpResponse = handler.httpHead(targetURL, null, null);
+		HttpResponse httpResponse = handler.httpHead(targetURL, httpRequest.getHeaders(), null, null);
 		scenarioContext.addParamValue(responseVariableName, httpResponse);
 	}
 	
@@ -1239,7 +1239,7 @@ public class SmartApiStepDefs {
 
 		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
 		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
-		HttpResponse httpResponse = handler.httpHead(targetURL, null, null);
+		HttpResponse httpResponse = handler.httpHead(targetURL, httpRequest.getHeaders(), null, null);
 		scenarioContext.addParamValue(responseVariableName, httpResponse);
 	}
 	
