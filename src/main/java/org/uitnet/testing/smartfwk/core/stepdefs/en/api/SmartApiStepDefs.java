@@ -72,7 +72,7 @@ public class SmartApiStepDefs {
 	 * @param variableName - the name of the variable that stores the parameter's information.
 	 * @param headerParameters - the data table to specify the parameters information in the format given below:
 	 * 	| Parameter Name | Parameter Value  |
-	 *  | Content Type   | application/json |
+	 *  | Content-Type   | application/json |
 	 *  | Accept         | application/json |
 	 *  
 	 *  Where parameter name and parameter values are pure string data.
