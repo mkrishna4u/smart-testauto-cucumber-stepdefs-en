@@ -23,6 +23,7 @@ import java.util.List;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.SmartRegistry;
 import org.uitnet.testing.smartfwk.database.AbstractDatabaseActionHandler;
+import org.uitnet.testing.smartfwk.ui.core.utils.StringUtil;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.TypeRef;
@@ -292,7 +293,7 @@ public class SmartDatabaseManagementStepDefs {
 	 * @param tableOrEntityName - the name of the entity.
 	 * @param appName - the name of the configured application.
 	 * @param databaseProfileName - the name of the database profile name (that is configured in the system).
-	 * @param query - query to retrieve the information.
+	 * @param query - query to update the information. Multiple queries can be separated using separator: ${new;}
 	 */
 	@When("update {string} entity data using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void update_entity_data_using_query_below_app_name_database_profile_name(
@@ -309,7 +310,12 @@ public class SmartDatabaseManagementStepDefs {
 
 		AbstractDatabaseActionHandler dbActionHandler = SmartRegistry.getDatabaseManager()
 				.getDatabaseActionHandler(appName, databaseProfileName);
-		dbActionHandler.updateData(tableOrEntityName, queryTxt);
+		
+		String[] queries = queryTxt.split("\\$\\{new;}");
+		for(String q : queries) {
+			if(StringUtil.isEmptyAfterTrim(q)) { continue; }
+			dbActionHandler.updateData(tableOrEntityName, q);
+		}
 	}
 	
 	/**
@@ -318,7 +324,7 @@ public class SmartDatabaseManagementStepDefs {
 	 * @param tableOrEntityName - the name of the table.
 	 * @param appName - the name of the configured application.
 	 * @param databaseProfileName - the name of the database profile name (that is configured in the system).
-	 * @param query - query to retrieve the information.
+	 * @param query - query to update the information. Multiple queries can be separated using separator: ${new;}
 	 */
 	@When("update {string} table data using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void update_entity_data_using_query_below_app_name_database_profile_name_1(
@@ -332,7 +338,7 @@ public class SmartDatabaseManagementStepDefs {
 	 * @param tableOrEntityName - the name of the entity.
 	 * @param appName - the name of the configured application.
 	 * @param databaseProfileName - the name of the database profile name (that is configured in the system).
-	 * @param query - query to retrieve the information.
+	 * @param query - query to delete the information. Multiple queries can be separated using separator: ${new;}
 	 */
 	@When("delete {string} entity data using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void delete_entity_data_using_query_below_app_name_database_profile_name(
@@ -349,7 +355,12 @@ public class SmartDatabaseManagementStepDefs {
 
 		AbstractDatabaseActionHandler dbActionHandler = SmartRegistry.getDatabaseManager()
 				.getDatabaseActionHandler(appName, databaseProfileName);
-		dbActionHandler.deleteData(tableOrEntityName, queryTxt);
+		
+		String[] queries = queryTxt.split("\\$\\{new;}");
+		for(String q : queries) {
+			if(StringUtil.isEmptyAfterTrim(q)) { continue; }
+			dbActionHandler.deleteData(tableOrEntityName, q);
+		}
 	}
 	
 	/**
@@ -358,7 +369,7 @@ public class SmartDatabaseManagementStepDefs {
 	 * @param tableOrEntityName - the name of the table.
 	 * @param appName - the name of the configured application.
 	 * @param databaseProfileName - the name of the database profile name (that is configured in the system).
-	 * @param query - query to retrieve the information.
+	 * @param query - query to delete the information. Multiple queries can be separated using separator: ${new;}
 	 */
 	@When("delete {string} table data using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void delete_entity_data_using_query_below_app_name_database_profile_name_1(
@@ -372,7 +383,7 @@ public class SmartDatabaseManagementStepDefs {
 	 * @param tableOrEntityName - the name of the entity.
 	 * @param appName - the name of the configured application.
 	 * @param databaseProfileName - the name of the database profile name (that is configured in the system).
-	 * @param query - query to retrieve the information.
+	 * @param query - query to insert the information. Multiple queries can be separated using separator: ${new;}
 	 */
 	@When("insert new data into {string} entity using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void insert_new_data_into_entity_using_query_below_app_name_database_profile_name(
@@ -389,7 +400,13 @@ public class SmartDatabaseManagementStepDefs {
 
 		AbstractDatabaseActionHandler dbActionHandler = SmartRegistry.getDatabaseManager()
 				.getDatabaseActionHandler(appName, databaseProfileName);
-		dbActionHandler.insertData(tableOrEntityName, queryTxt);
+		
+		String[] queries = queryTxt.split("\\$\\{new;}");
+		for(String q : queries) {
+			if(StringUtil.isEmptyAfterTrim(q)) { continue; }
+			dbActionHandler.insertData(tableOrEntityName, q);
+		}
+		
 	}
 	
 	/**
@@ -398,7 +415,7 @@ public class SmartDatabaseManagementStepDefs {
 	 * @param tableOrEntityName - the name of the table.
 	 * @param appName - the name of the configured application.
 	 * @param databaseProfileName - the name of the database profile name (that is configured in the system).
-	 * @param query - query to retrieve the information.
+	 * @param query - query to insert the information. Multiple queries can be separated using separator: ${new;}
 	 */
 	@When("insert new data into {string} table using query below. Target DB Info [AppName={string}, DatabaseProfileName={string}]:")
 	public void insert_new_data_into_entity_using_query_below_app_name_database_profile_name_1(
