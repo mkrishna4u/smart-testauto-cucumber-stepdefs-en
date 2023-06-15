@@ -1367,7 +1367,7 @@ public class SmartUiFormElementOperationsStepDefs {
 				}
 			} catch (Throwable th) {
 				if (i == poInfo.getMaxIterationsToLocateElements()) {
-					throw th;
+					break;
 				}
 			}
 			scenarioContext.waitForSeconds(2);
