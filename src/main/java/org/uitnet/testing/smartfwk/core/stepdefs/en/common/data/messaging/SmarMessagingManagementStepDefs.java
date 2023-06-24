@@ -24,9 +24,12 @@ import org.testng.Assert;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.SmartRegistry;
 import org.uitnet.testing.smartfwk.api.core.support.MessageBucketSequenceNumberGenerator;
+import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.SmartDataValidator;
+import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
 import org.uitnet.testing.smartfwk.messaging.AbstractMessageHandler;
 import org.uitnet.testing.smartfwk.messaging.MessageContentType;
+import org.uitnet.testing.smartfwk.messaging.MessageInfo;
 
 import com.jayway.jsonpath.DocumentContext;
 
@@ -166,15 +169,116 @@ public class SmarMessagingManagementStepDefs {
 		DocumentContext recordedMessagesContext = messageHandler.getRecordedMessagesAsJsonObject(bucketId);
 		scenarioContext.addParamValue(variableName, recordedMessagesContext);
 	}
+	
+	/**
+	 * Used to verify the number of messages inside the message bucket meets the expected value.
+	 * 
+	 * @param messageHandlerName - the name of the message handler.
+	 * @param bucketVariableReference - the name of the bucket variable that stores the collected message.
+	 * 		NOTE: this variable is created when we use step to start message collection.
+	 * @param operator - the operator to verify the actual value with expected value. 
+	 * 		Valid operators: =, !=, >, >=, <, <=
+	 * @param expectedSize - the expected number of messages in the bucket.
+	 * @param maxTimeToWaitInSeconds - the time to wait until actual size meets the expected size.
+	 */
+	@Then("verify the size of [MessageHandler={string}, BucketVariableRef={string}] message bucket {string} {int} [MaxTimeToWaitInSeconds={int}].")
+	public void verify_the_bucket(String messageHandlerName,
+			String bucketVariableReference, String operator, int expectedSize, Integer maxTimeToWaitInSeconds) {
+		if (!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\""
+					+ scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		String bucketId = scenarioContext.getParamValueAsString(bucketVariableReference);
+		if (bucketId == null) {
+			Assert.fail("Message collector not started for '" + bucketVariableReference + "' bucket. "
+					+ "To start message collection to store messages into bucket, please use 'start message collection from...' step.");
+		}
+
+		AbstractMessageHandler messageHandler = SmartRegistry.getMessageHandlerManager()
+				.getMessageHandler(messageHandlerName);
+
+		int numIterations = (maxTimeToWaitInSeconds == 0 || maxTimeToWaitInSeconds <= 2) ? 1
+				: maxTimeToWaitInSeconds / 2;
+
+		DocumentContext recordedMessagesContext;
+		ValueMatchOperator op = ValueMatchOperator.valueOf2(operator);
+		
+		for (int i = 1; i <= numIterations; i++) {
+			try {
+				recordedMessagesContext = messageHandler.getRecordedMessagesAsJsonObject(bucketId);
+				int actualSize = recordedMessagesContext.read("$.length()");
+				switch(op) {
+				case EQUAL_TO: {
+					if(actualSize != expectedSize) {
+						Assert.fail("Actual size (" + actualSize + ") should be same as expected size (" + expectedSize + ").");
+					}
+					break;
+				}
+				case NOT_EQUAL_TO: {
+					if(actualSize == expectedSize) {
+						Assert.fail("Actual size (" + actualSize + ") should not be same as expected size (" + expectedSize + ").");
+					}
+					break;
+				}
+				case GREATER_THAN: {
+					if(actualSize <= expectedSize) {
+						Assert.fail("Actual size (" + actualSize + ") should be greter than the expected size (" + expectedSize + ").");
+					}
+					break;
+				}
+				case GREATER_THAN_EQUAL_TO: {
+					if(actualSize < expectedSize) {
+						Assert.fail("Actual size (" + actualSize + ") should be greater than or equal to the expected size (" + expectedSize + ").");
+					}
+					break;
+				}
+				case LESS_THAN: {
+					if(actualSize >= expectedSize) {
+						Assert.fail("Actual size (" + actualSize + ") should be less than the expected size (" + expectedSize + ").");
+					}
+					break;
+				}
+				case LESS_THAN_EQUAL_TO: {
+					if(actualSize > expectedSize) {
+						Assert.fail("Actual size (" + actualSize + ") should be less than or equal to the expected size (" + expectedSize + ").");
+					}
+					break;
+				}
+				default:
+					Assert.fail("Operatoe '" + op.getOperator() + "' is not supported.");
+					break;
+				}
+			} catch (Throwable th) {
+				if (i == numIterations) {
+					Assert.fail("Failed to meet all expected crietrias. Reason: " + th.getMessage());
+				} else {
+					scenarioContext.waitForSeconds(2);
+				}
+			}
+		}
+		
+	}
 
 	/**
 	 * Used to verify the contents of the message bucket until all the criteria are met. If any criteria is failed then 
 	 * it will retry every 2 seconds until the the timeout happened.
 	 * 
-	 * @param messageHandlerName
-	 * @param bucketVariableReference
-	 * @param maxTimeToWaitInSeconds
-	 * @param expectedCriterias
+	 * @param messageHandlerName - the name of the configured message handler.
+	 * @param bucketVariableReference - the name of the bucket variable that stores the collected message.
+	 * @param maxTimeToWaitInSeconds - the time to wait until all expected criteria meet the expectations.
+	 * @param expectedCriterias - Criteria that must be meet. Criteria can be specified in Data Table format as given below:
+	 *  <blockquote><pre>
+	 *   | Parameter/JSON Path        | Operator           | Expected Information  |
+	 *   | $.[*].message              | contains           | Hello World!!         |
+	 *   
+	 *   Refer {@link https://github.com/json-path/JsonPath} link to learn more on JSON path. 
+	 *   	Consider {@link MessageInfo} class as record in JSON array. JSON path should be prepared on array of {@link MessageInfo} class.
+	 *   For supported operators refer {@link ValueMatchOperator}.
+	 *   For expected information JSON format please refer {@link ExpectedInfo}.
+	 * </pre></blockquote>
+	 * 		
 	 */
 	@Then("verify [MessageHandler={string}, BucketVariableRef={string}] message bucket meets the following criteria [MaxTimeToWaitInSeconds={int}]:")
 	public void verify_message_bucket_meets_the_following_criteria(String messageHandlerName,

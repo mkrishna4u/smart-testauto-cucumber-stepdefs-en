@@ -17,8 +17,10 @@
  */
 package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Rectangle;
@@ -2533,7 +2535,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to verify whether the specified page element/ page object is within the specified coordinates.
+	 * Used to verify whether the specified page element/ page object location is within the specified rectangular area.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
 	 * <blockquote><pre>
@@ -2547,8 +2549,8 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param x2 - coordinate x2.
 	 * @param y2 - coordinate y2.
 	 */
-	@Then("verify {string} page element is within [x1={int}, y1={int}, x2={int}, y2={int}] coordinates.")
-	public void verify_page_element_is_within_coordinates(String po, int x1, int y1, int x2, int y2) {
+	@Then("verify the location of {string} page element is within [x1={int}, y1={int}, x2={int}, y2={int}] rectangular area.")
+	public void verify_page_element_is_within_rectangular_area(String po, int x1, int y1, int x2, int y2) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -2578,7 +2580,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to verify whether the specified page element/ page object is within the specified coordinates.
+	 * Used to verify whether the specified page element/ page object location is within the specified rectangular area.
 	 * This will take the configured screen size for the application.
 	 * 
 	 * @param po - the page object / page element can be specified in two way:
@@ -2593,15 +2595,15 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param x2 - coordinate x2.
 	 * @param y2 - coordinate y2.
 	 */
-	@Then("verify {string} page object is within [x1={int}, y1={int}, x2={int}, y2={int}] coordinates.")
-	public void verify_page_object_is_within_coordinates(String po, int x1, int y1, int x2, int y2) {
-		verify_page_element_is_within_coordinates(po, x1, y1, x2, y2);
+	@Then("verify location of {string} page object is within [x1={int}, y1={int}, x2={int}, y2={int}] rectangular area.")
+	public void verify_page_object_is_within_rectangular_area(String po, int x1, int y1, int x2, int y2) {
+		verify_page_element_is_within_rectangular_area(po, x1, y1, x2, y2);
 	}
 	
 	/**
 	 * Used to verify the location of the page elements/objects. System will automatically
 	 * resize the web browser based on the specified screen size then after it will check the page element
-	 * location within the specified surrounding area. Refer the argument details for more information.
+	 * location within the specified surrounding rectangular area. Refer the argument details for more information.
 	 *
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
@@ -2618,7 +2620,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 * 
 	 */
-	@Then("verify the location of the page elements on the screen:")
+	@Then("verify the location of the following page elements on the screen:")
 	public void verify_the_location_of_the_page_elements_on_the_screen(DataTable dataTable) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
@@ -2635,6 +2637,7 @@ public class SmartUiFormElementOperationsStepDefs {
 		Dimension origWindowSize = scenarioContext.getActiveAppDriver().getWebDriver().manage().window().getSize();
 		try {
 			String lastScreenSize = "";
+			Map<String, String> poErrorMap = new LinkedHashMap<>();
 			for(int i = 1; i < rows.size(); i++) {
 				row = rows.get(i);
 				screenSize = row.get(0);
@@ -2642,19 +2645,31 @@ public class SmartUiFormElementOperationsStepDefs {
 				coordinatesAsStr = row.get(2);
 						
 				if(!lastScreenSize.equals(screenSize)) {
-					lastScreenSize = screenSize;
+					lastScreenSize = screenSize.toLowerCase();
 					String[] ssWH = screenSize.split("x");
 					scenarioContext.getActiveAppDriver().getWebDriver().manage().window()
 					.setSize(new Dimension(Integer.valueOf(ssWH[0].trim()), Integer.valueOf(ssWH[1].trim())));
 				}
 				
-				poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
-				JsonDocumentReader r = new JsonDocumentReader(coordinatesAsStr, false);
-				coordinates = r.readValueAsObject("$", AreaCoordinates.class);
+				try {
+					poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+					JsonDocumentReader r = new JsonDocumentReader(coordinatesAsStr, false);
+					coordinates = r.readValueAsObject("$", AreaCoordinates.class);
 				
-				PageObjectUtil.invokeValidatorMethod(
+					PageObjectUtil.invokeValidatorMethod(
 						"validateElementPresentWithinArea", new String[]{AreaCoordinates.class.getTypeName(), int.class.getTypeName()}, 
 						new Object[]{coordinates, poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
+				} catch(Throwable th) {
+					poErrorMap.put(po, th.getMessage());
+				}
+			}
+			
+			if(poErrorMap.size() > 0) {
+				String failedMessage = "ERRORS: \n  ";
+				for(Map.Entry<String, String> entry : poErrorMap.entrySet()) {
+					failedMessage = failedMessage + entry.getKey() +  " :> " + entry.getValue() + "\n\n  ";
+				}
+				Assert.fail(failedMessage);
 			}
 		} finally {
 			scenarioContext.getActiveAppDriver().getWebDriver().manage().window()
@@ -2666,7 +2681,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	/**
 	 * Used to verify the location of the page elements/objects. System will automatically
 	 * resize the web browser based on the specified screen size then after it will check the page element
-	 * location within the specified surrounding area. Refer the argument details for more information.
+	 * location within the specified surrounding rectangular area. Refer the argument details for more information.
 	 *
 	 * @param dataTable - Data table will have the following columns, first row will be ignored due to
 	 * column header. example below: 
@@ -2683,7 +2698,7 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 * 
 	 */
-	@Then("verify the location of the page objects on the screen:")
+	@Then("verify the location of the following page objects on the screen:")
 	public void verify_the_location_of_the_page_objects_on__the_screen(DataTable dataTable) {
 		verify_the_location_of_the_page_elements_on_the_screen(dataTable);
 	}

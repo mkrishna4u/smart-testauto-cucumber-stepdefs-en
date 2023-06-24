@@ -20,7 +20,6 @@ package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
@@ -29,7 +28,6 @@ import org.uitnet.testing.smartfwk.core.validator.ParamValueType;
 import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
 import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
-import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 import org.uitnet.testing.smartfwk.validator.ParameterValidator;
 
 import io.cucumber.docstring.DocString;
