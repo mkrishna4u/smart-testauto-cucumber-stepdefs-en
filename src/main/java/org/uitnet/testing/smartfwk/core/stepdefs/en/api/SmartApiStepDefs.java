@@ -35,6 +35,7 @@ import org.uitnet.testing.smartfwk.api.core.support.HttpResponse;
 import org.uitnet.testing.smartfwk.api.core.support.MultipartData;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
+import org.uitnet.testing.smartfwk.core.validator.ParamValueType;
 import org.uitnet.testing.smartfwk.core.validator.SmartDataValidator;
 import org.uitnet.testing.smartfwk.core.validator.ValueMatchOperator;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
@@ -1370,6 +1371,10 @@ public class SmartApiStepDefs {
 	 *   | $.jobTitles                | contains           | {ev: ["Cable operator", "Accountant"], valueType: "string-list", inOrder: "yes", ignoreCase: "no", textMatchMechanism: "exactMatchWithExpectedValue"} |
 	 * 	
 	 *   For more info on JSON Path, please refer @see (@link https://github.com/json-path/JsonPath}
+	 *   	JSON Way to specify JSON Path:
+	 *   		{path: "$.myParam", valueType: "string"}
+	 *      For more details on JSON Path parameter, please refer {@link ParamPath} class.
+	 *      For more details n valueType, please refer {@link ParamValueType} enum.
 	 *   For more details on Operators, please refer @see {@link ValueMatchOperator} enum.
 	 *   For more details on Expected Information please refer @see {@link ExpectedInfo} class.
 	 *   For text match mechanism valid values, refer {@link TextMatchMechanism} class.

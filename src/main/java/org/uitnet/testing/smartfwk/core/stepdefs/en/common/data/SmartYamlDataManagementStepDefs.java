@@ -173,6 +173,10 @@ public class SmartYamlDataManagementStepDefs {
 	 *      | { path: "$.jobTitles", valueType: "string-list" } | ["Accountant", "Operator"] |
 	 *      
 	 *      NOTE: Refer {@link https://github.com/json-path/JsonPath} link to learn more on YAML/JSON path.
+	 *      	JSON Way to specify JSON Path:
+	 *   			{path: "$.myParam", valueType: "string"}
+	 *          For more details on JSON Path parameter, please refer {@link ParamPath} class.
+	 *          For more details n valueType, please refer {@link ParamValueType} enum.
 	 *      NOTE: New value can be of any type like: string, integer, long, double, float, string-list, numeric-list
 	 *      	  for more details on new value type please refer: {@link ParamValueType}. As per JSON syntax, multiple
 	 *            values can be specified within square brackets [].
@@ -228,6 +232,10 @@ public class SmartYamlDataManagementStepDefs {
 	 *   | $.jobTitles                | contains           | {ev: ["Cable operator", "Accountant"], valueType: "string-list", inOrder: "yes", ignoreCase: "no", textMatchMechanism: "exactMatchWithExpectedValue"} |
 	 * 
 	 *   Refer {@link https://github.com/json-path/JsonPath} link to learn more on YAML path.
+	 *   	    JSON Way to specify JSON Path:
+	 *   			{path: "$.myParam", valueType: "string"}
+	 *          For more details on JSON Path parameter, please refer {@link ParamPath} class.
+	 *          For more details n valueType, please refer {@link ParamValueType} enum.
 	 *   For supported operators {@link ValueMatchOperator} enum.
 	 *   For expected information JSON format please refer {@link ExpectedInfo}.
 	 * </pre></blockquote>

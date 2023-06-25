@@ -2557,6 +2557,8 @@ public class SmartUiFormElementOperationsStepDefs {
 		}
 		
 		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		Dimension origWindowSize = scenarioContext.getActiveAppDriver().getWebDriver().manage().window().getSize();
+		String screenSize = origWindowSize.getWidth() + " x " + origWindowSize.getHeight();
 		for(int i = 0; i <= poInfo.getMaxIterationsToLocateElements(); i++) {	
 			try {
 				WebElement element = (WebElement) PageObjectUtil.invokeValidatorMethod(
@@ -2564,9 +2566,9 @@ public class SmartUiFormElementOperationsStepDefs {
 				Rectangle rect = element.getRect();
 				
 				if(!(rect.x >= x1 && rect.y >= y1 &&  (rect.x + rect.getWidth()) <= x2 && (rect.y + rect.getHeight()) <= y2)) {
-					Assert.fail("Element is not within the specified coordinates [x1=" + x1 + ", y1=" + y1 + ", x2=" + x2 + ", y2=" + y2 + "]."
-							+ " Actual Coordinates: [x1=" + rect.x + ", y1=" + rect.y + ", x2=" + (rect.x  + rect.width) 
-							+ ", y2=" + (rect.y + rect.height) + "].");
+					Assert.fail("Screen Size [" + screenSize + "'] :> " + "Element is not within the specified coordinates {x1: " + x1 + ", y1: " + y1 + ", x2: " + x2 + ", y2: " + y2 + "}."
+							+ " Actual Coordinates: {x1: " + rect.x + ", y1:" + rect.y + ", x2:" + (rect.x  + rect.width) 
+							+ ", y2:" + (rect.y + rect.height) + "}.");
 				}
 				
 				break;
@@ -2660,7 +2662,7 @@ public class SmartUiFormElementOperationsStepDefs {
 						"validateElementPresentWithinArea", new String[]{AreaCoordinates.class.getTypeName(), int.class.getTypeName()}, 
 						new Object[]{coordinates, poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
 				} catch(Throwable th) {
-					poErrorMap.put(po, th.getMessage());
+					poErrorMap.put(po, "Screen Size [" + screenSize + "'] :> " + th.getMessage());
 				}
 			}
 			
