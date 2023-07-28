@@ -48,8 +48,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String varValue = scenarioContext.getParamValueAsString(variableName);
-		String incBy = scenarioContext.getParamValueAsString(incrementBy);
+		String varValue = "" + scenarioContext.getParamValueNullAsParamName(variableName);
+		String incBy = "" + scenarioContext.getParamValueNullAsParamName(incrementBy);
 		Object result = MathUtil.add(varValue, incBy);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -67,8 +67,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String varValue = scenarioContext.getParamValueAsString(variableName);
-		String decBy = scenarioContext.getParamValueAsString(decrementBy);
+		String varValue = "" + scenarioContext.getParamValueNullAsParamName(variableName);
+		String decBy = "" + scenarioContext.getParamValueNullAsParamName(decrementBy);
 		Object result = MathUtil.substract(varValue, decBy);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -88,8 +88,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue = scenarioContext.getParamValueAsString(number);
-		String powerValue = scenarioContext.getParamValueAsString(power);
+		String numValue = "" + scenarioContext.getParamValueNullAsParamName(number);
+		String powerValue = "" + scenarioContext.getParamValueNullAsParamName(power);
 		Object result = MathUtil.power(numValue, powerValue);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -108,7 +108,7 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue = scenarioContext.getParamValueAsString(number);
+		String numValue = "" + scenarioContext.getParamValueNullAsParamName(number);
 		Object result = MathUtil.abs(numValue);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -128,8 +128,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue1 = scenarioContext.getParamValueAsString(number1);
-		String numValue2 = scenarioContext.getParamValueAsString(number2);
+		String numValue1 = "" + scenarioContext.getParamValueNullAsParamName(number1);
+		String numValue2 = "" + scenarioContext.getParamValueNullAsParamName(number2);
 		Object result = MathUtil.modulus(numValue1, numValue2);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -149,8 +149,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue1 = scenarioContext.getParamValueAsString(number1);
-		String numValue2 = scenarioContext.getParamValueAsString(number2);
+		String numValue1 = "" + scenarioContext.getParamValueNullAsParamName(number1);
+		String numValue2 = "" + scenarioContext.getParamValueNullAsParamName(number2);
 		Object result = MathUtil.add(numValue1, numValue2);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -170,8 +170,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue1 = scenarioContext.getParamValueAsString(number1);
-		String numValue2 = scenarioContext.getParamValueAsString(subtrahend);
+		String numValue1 = "" + scenarioContext.getParamValueNullAsParamName(number1);
+		String numValue2 = "" + scenarioContext.getParamValueNullAsParamName(subtrahend);
 		Object result = MathUtil.substract(numValue1, numValue2);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -191,8 +191,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue1 = scenarioContext.getParamValueAsString(number1);
-		String numValue2 = scenarioContext.getParamValueAsString(number2);
+		String numValue1 = "" + scenarioContext.getParamValueNullAsParamName(number1);
+		String numValue2 = "" + scenarioContext.getParamValueNullAsParamName(number2);
 		Object result = MathUtil.multiply(numValue1, numValue2);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -212,8 +212,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue1 = scenarioContext.getParamValueAsString(number1);
-		String numValue2 = scenarioContext.getParamValueAsString(divisor);
+		String numValue1 = "" + scenarioContext.getParamValueNullAsParamName(number1);
+		String numValue2 = "" + scenarioContext.getParamValueNullAsParamName(divisor);
 		Object result = MathUtil.divide(numValue1, numValue2);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -233,8 +233,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue1 = scenarioContext.getParamValueAsString(number1);
-		String numValue2 = scenarioContext.getParamValueAsString(number2);
+		String numValue1 = "" + scenarioContext.getParamValueNullAsParamName(number1);
+		String numValue2 = "" + scenarioContext.getParamValueNullAsParamName(number2);
 		Object result = MathUtil.min(numValue1, numValue2);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -254,8 +254,8 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue1 = scenarioContext.getParamValueAsString(number1);
-		String numValue2 = scenarioContext.getParamValueAsString(number2);
+		String numValue1 = "" + scenarioContext.getParamValueNullAsParamName(number1);
+		String numValue2 = "" + scenarioContext.getParamValueNullAsParamName(number2);
 		Object result = MathUtil.max(numValue1, numValue2);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -274,7 +274,7 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue = scenarioContext.getParamValueAsString(number);
+		String numValue = "" + scenarioContext.getParamValueNullAsParamName(number);
 		Object result = MathUtil.floor(numValue);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -293,7 +293,7 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue = scenarioContext.getParamValueAsString(number);
+		String numValue = "" + scenarioContext.getParamValueNullAsParamName(number);
 		Object result = MathUtil.ceil(numValue);
 		scenarioContext.addParamValue(variableName, result);
 	}
@@ -312,7 +312,7 @@ public class SmartMathOperationsStepDefs {
 			return;
 		}
 		
-		String numValue = scenarioContext.getParamValueAsString(number);
+		String numValue = "" + scenarioContext.getParamValueNullAsParamName(number);
 		Object result = MathUtil.negate(numValue);
 		scenarioContext.addParamValue(variableName, result);
 	}
