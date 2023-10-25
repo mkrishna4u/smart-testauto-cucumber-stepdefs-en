@@ -1,4 +1,4 @@
-# smart-testauto-cucumber-stepdefs-en (English)
+# smart-testauto-cucumber-stepdefs-en (English) - For Smart Test Auto Studio (STAS)
 This is a plugin project for STAS (Smart TestAuto Studio) (URL: https://github.com/mkrishna4u/smart-testauto-framework) to support standard cucumber steps definitions in English version.
 
 # Documentation
