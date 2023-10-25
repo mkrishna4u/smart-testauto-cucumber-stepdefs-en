@@ -24,6 +24,7 @@ import org.uitnet.testing.smartfwk.remote_machine.SmartRemoteMachineManager;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
 
+import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -205,7 +206,7 @@ public class SmartRemoteFileManagementStepDefs {
 	 * 			Refer <b>test-config/apps-config/<app-name>/remote-machines-config/RemoteMachinesConfig.yaml</b> 
 	 * 			file for the specific application to know the remote machine name.
 	 * </pre></blockquote>
-	 * @param maxTimeToWaitInSeconds
+	 * @param maxTimeToWaitInSeconds - the max time to wait in seconds until condition is true.
 	 */
 	@Then("verify that the expected directories [RemoteDirectory={string}, ExpectedFolderName={string}, FolderNameMatchMechanism={string}] "
 			+ "are present on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}].")
@@ -222,5 +223,31 @@ public class SmartRemoteFileManagementStepDefs {
 		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
 		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
 		handler.validateFolderExists(remoteDirectory, TextMatchMechanism.valueOf2(folderNameMatchMechanism), expectedFolderName, maxTimeToWaitInSeconds);
+	}
+	
+	/**
+	 * Used to execute the command on the remote machine and the result is stored into a variable.
+	 * 
+	 * @param appName - the name of the configured application.
+	 * @param remoteMachineName - the name of the configured remote machine on which command will be executed.
+	 * @param maxTimeToWaitInSeconds - this is the maximum wait time in seconds until the command returns the value.
+	 * @param variableName - the name of the variable that stores the command output.
+	 * @param command
+	 */
+	@Then("execute the following command on remote machine [AppName={string}, RemoteMachineName:{string}, MaxTimeToWaitInSeconds={int}] and store result into {string} variable:")
+	public void execute_the_fillowing_command_on_remote_machine(String appName, String remoteMachineName, Integer maxTimeToWaitInSeconds, String variableName, DocString command) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		String commandAsStr = command.getContent();
+		
+		commandAsStr = scenarioContext.applyParamsValueOnText(commandAsStr);
+		
+		RemoteMachineManager remoteMachineMgr = SmartRemoteMachineManager.getInstance();
+		AbstractRemoteMachineActionHandler handler = remoteMachineMgr.getActionHandler(appName, remoteMachineName);
+		String result = handler.executeCommand(commandAsStr);
+		scenarioContext.addParamValue(variableName, result);
 	}
 }
