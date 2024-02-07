@@ -19,6 +19,7 @@ package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 
 import org.testng.Assert;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
+import org.uitnet.testing.smartfwk.ui.core.AbstractAppConnector;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
 import org.uitnet.testing.smartfwk.ui.core.config.WebBrowserType;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
@@ -297,7 +298,10 @@ public class SmartUiBasicAppOperationsStepDefs {
 			return;
 		}
 		
-		scenarioContext.getAppConnector(appName).logoutAndNoQuit();
+		AbstractAppConnector appConnector = scenarioContext.getAppConnector(appName);
+		if(appConnector != null) {
+			appConnector.logoutAndNoQuit();
+		}
 	}
 	
 	/**
