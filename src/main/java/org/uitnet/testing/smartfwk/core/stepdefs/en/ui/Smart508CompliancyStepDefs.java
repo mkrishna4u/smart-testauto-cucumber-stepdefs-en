@@ -88,14 +88,14 @@ public class Smart508CompliancyStepDefs {
 			PageObjectInfo poInfoNext = PageObjectUtil.getPageObjectInfo(poNext, scenarioContext);
 			
 			if(i == 1) {
-				PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence.class.getTypeName(), CharSequence.class.getTypeName() },
-						new Object[] { poInfoNext.getMaxIterationsToLocateElements(), Keys.LEFT_SHIFT, Keys.TAB }, poInfoNext,
+				PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence[].class.getTypeName() },
+						new Object[] { poInfoNext.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.LEFT_SHIFT, Keys.TAB} }, poInfoNext,
 						scenarioContext);
 				scenarioContext.waitForMilliSeconds(focusSwitchIntervalInMillis);
 			}
 			
-			PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence.class.getTypeName() },
-					new Object[] { poInfo.getMaxIterationsToLocateElements(), Keys.TAB }, poInfo,
+			PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence[].class.getTypeName() },
+					new Object[] { poInfo.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.TAB} }, poInfo,
 					scenarioContext);
 			scenarioContext.waitForMilliSeconds(focusSwitchIntervalInMillis);
 			
@@ -124,8 +124,8 @@ public class Smart508CompliancyStepDefs {
 			String poNext = rowNext.get(0); // Page object
 			PageObjectInfo poInfoNext = PageObjectUtil.getPageObjectInfo(poNext, scenarioContext);
 			
-			PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence.class.getTypeName(), CharSequence.class.getTypeName() },
-					new Object[] { poInfo.getMaxIterationsToLocateElements(), Keys.LEFT_SHIFT, Keys.TAB }, poInfo,
+			PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence[].class.getTypeName() },
+					new Object[] { poInfo.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.LEFT_SHIFT, Keys.TAB} }, poInfo,
 					scenarioContext);
 			scenarioContext.waitForMilliSeconds(focusSwitchIntervalInMillis);
 			
