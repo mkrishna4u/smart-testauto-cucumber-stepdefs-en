@@ -107,7 +107,7 @@ public class Smart508CompliancyStepDefs {
 						new Object[] { poInfoNext.getMaxIterationsToLocateElements() }, poInfoNext,
 						scenarioContext);
 				Assert.assertEquals("tagName="+elem.getTagName(), "tagName="+nextElem.getTagName(), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
-				Assert.assertEquals("id="+elem.getAttribute("id"), "id"+nextElem.getAttribute("id"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
+				Assert.assertEquals("id="+elem.getAttribute("id"), "id="+nextElem.getAttribute("id"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
 				Assert.assertEquals("name="+elem.getAttribute("name"), "name="+nextElem.getAttribute("name"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
 				Assert.assertEquals("css="+elem.getAttribute("css"), "css="+nextElem.getAttribute("css"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
 				Assert.assertEquals("style="+elem.getAttribute("style"), "style="+nextElem.getAttribute("style"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
