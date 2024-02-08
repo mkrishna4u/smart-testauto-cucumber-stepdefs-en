@@ -106,16 +106,16 @@ public class Smart508CompliancyStepDefs {
 				WebElement nextElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] { Integer.TYPE.getTypeName() },
 						new Object[] { poInfoNext.getMaxIterationsToLocateElements() }, poInfoNext,
 						scenarioContext);
-				Assert.assertEquals(elem.getTagName(), nextElem.getTagName(), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
-				Assert.assertEquals(elem.getAttribute("id"), nextElem.getAttribute("id"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
-				Assert.assertEquals(elem.getAttribute("name"), nextElem.getAttribute("name"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
-				Assert.assertEquals(elem.getAttribute("css"), nextElem.getAttribute("css"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
-				Assert.assertEquals(elem.getAttribute("style"), nextElem.getAttribute("style"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
-				Assert.assertEquals(elem.getText(), nextElem.getText(), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
+				Assert.assertEquals("tagName="+elem.getTagName(), "tagName="+nextElem.getTagName(), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
+				Assert.assertEquals("id="+elem.getAttribute("id"), "id"+nextElem.getAttribute("id"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
+				Assert.assertEquals("name="+elem.getAttribute("name"), "name="+nextElem.getAttribute("name"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
+				Assert.assertEquals("css="+elem.getAttribute("css"), "css="+nextElem.getAttribute("css"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
+				Assert.assertEquals("style="+elem.getAttribute("style"), "style="+nextElem.getAttribute("style"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
+				Assert.assertEquals("text="+elem.getText(), "text="+nextElem.getText(), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
 			}
 		}
 		
-		for (int i = rows.size() - 1; i > 2; i--) {
+		for (int i = rows.size() - 1; i > 1; i--) {
 			row = rows.get(i);
 			String po = row.get(0); // Page object
 			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
