@@ -7,4 +7,4 @@ Please refer the following document to understand the STAS standard cucumber ste
 
  
 # License
-Apache License, 2.0
+Apache License, 2.0; Copyright &copy; Madhav Krishna & Contributors
