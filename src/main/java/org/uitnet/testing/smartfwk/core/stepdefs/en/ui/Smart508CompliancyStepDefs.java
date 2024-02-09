@@ -17,6 +17,7 @@
  */
 package org.uitnet.testing.smartfwk.core.stepdefs.en.ui;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.Keys;
@@ -26,6 +27,8 @@ import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.api.core.support.PageObject;
 import org.uitnet.testing.smartfwk.api.core.support.PageObjectInfo;
 import org.uitnet.testing.smartfwk.ui.core.appdriver.SmartAppDriver;
+import org.uitnet.testing.smartfwk.ui.core.utils.ColorContrastUtil;
+import org.uitnet.testing.smartfwk.ui.core.utils.FontUtil;
 import org.uitnet.testing.smartfwk.ui.core.utils.PageObjectUtil;
 
 import io.cucumber.datatable.DataTable;
@@ -146,5 +149,74 @@ public class Smart508CompliancyStepDefs {
 		}
 	}
 	
-	
+	/**
+	 * Used to verify the color contrast ratio for the page elements that are specified in the data table.
+	 * 
+	 * Note 1: For 508 compliancy, it is recommended to have color contrast ratio 4.5 (where minFontWeight=400 and minFontSize=0.875 rem).
+	 * Note 2: For 508 compliancy, it is recommended to have color contrast ratio 3 (where minFontWeight=500 and minFontSize=1 rem).
+	 * Note 2: For 508 compliancy, it is recommended to have color contrast ratio 7 (where minFontWeight=200 and minFontSize=0.875 rem). 
+	 * 
+	 * @param minContrastRatio - minimum color contrast ratio which is equal to (foregroundColor/backgroundColor).
+	 * @param minFontWeight - the minimum font weight for the page element for which this color contrast ratio is valid. 
+	 * @param minFontSize - the minimum font size for the page element for which this color contrast ratio is valid.
+	 * @param pageOrSectionName - the meaningful name of the page or section name where the page elements are present.
+	 * @param dataTable - the data table that contains the page elements for which the color contrast ratio is going to get verified.
+	 * 		Format of the datatable is given below:
+	 * <blockquote><pre>
+	 *       | Page Object / Page Element                                            | 
+	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
+	 *       | myapp.XyzPO.poObject                                                  |
+	 *       
+	 *    Where: JSON Syntax for page object (Refer {@link PageObject}):
+	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 * </pre></blockquote>
+	 */
+	@Then("verify color contrast ratio [expected minContrastRatio={double} for minFontWeight={int} and minFontSize={double} rem] for the following page elements present on {string}:")
+	public void verify_color_contrast_ratio_for_page_elements(double minContrastRatio, int minFontWeight, double minFontSize, String pageOrSectionName, DataTable dataTable) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+			
+		List<List<String>> rows = dataTable.asLists();
+		
+		List<String> row = null;
+		WebElement webElem = null;
+		List<String> invalidRows = new LinkedList<String>();
+		for (int i = 1; i < rows.size(); i++) {
+			row = rows.get(i);
+			String po = row.get(0); // Page object
+			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+			
+			
+			webElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] { Integer.TYPE.getTypeName() },
+					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+					scenarioContext);
+			
+			String fgColor = webElem.getCssValue("color");
+			String bgColor = webElem.getCssValue("background-color");
+			int fontWeight = Integer.parseInt(webElem.getCssValue("font-weight"));
+			double fontSizeInREM = FontUtil.computeFontSizeInREM(webElem.getCssValue("font-size"));
+			
+			double actualContrastRatio = ColorContrastUtil.calcContrastRatio(fgColor, bgColor);
+			
+			if(fontWeight >= minFontWeight && fontSizeInREM >= minFontSize) {				
+				if(actualContrastRatio >= minContrastRatio) {
+					// do nothing
+				} else {
+					invalidRows.add("{row: " + (i+1) + ", Ratio: " + actualContrastRatio + ", FontWeight: " + fontWeight + ", fontSize: " + fontSizeInREM + "}");
+				}
+			} else {
+				invalidRows.add("{row: " + (i+1) + ", Ratio: " + actualContrastRatio + ", FontWeight: " + fontWeight + ", fontSize: " + fontSizeInREM + "}");
+			}
+			
+			System.out.println("{row: " + (i+1) + ", Ratio: " + actualContrastRatio + ", FontWeight: " + fontWeight + ", fontSize: " + fontSizeInREM + "}");
+		}
+		
+		if(invalidRows.size() > 0) {
+			Assert.fail("Color contrast ratio (ForegroundColor/BackgroundColor) for the page elements presents on the following rows is invalid: \n"
+					+ invalidRows + "\n   Expected minimum color contrast ratio is " + minContrastRatio + ".");
+		}
+				
+	}	
 }
