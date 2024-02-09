@@ -55,10 +55,20 @@ public class SmartStepDefs {
 	 */
 	@After
 	public void afterScenario(Scenario scenario) {
-		SmartCucumberScenarioHooksExecuter.getInstance().executeAfterScenarioHooks(scenarioContext);
-		
 		if(TestConfigManager.getInstance().getUseDefaultStepDefsHooks()) {
-			scenarioContext.close(true);
+			try {
+				if(scenarioContext.isUiScenario()) {
+					scenarioContext.captureScreenshotWithScenarioStatus("scenario-" + scenario.getStatus());
+				}		
+				
+				SmartCucumberScenarioHooksExecuter.getInstance().executeAfterScenarioHooks(scenarioContext);
+			} catch(Throwable th) { 
+				if(scenarioContext.isUiScenario()) {
+					scenarioContext.captureScreenshotWithScenarioStatus("scenario-" + scenario.getStatus());
+				}
+			} finally {			
+				scenarioContext.close(false);
+			}
 		}
 	}
 }
