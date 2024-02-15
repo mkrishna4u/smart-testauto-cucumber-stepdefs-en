@@ -429,7 +429,7 @@ public class SmartApiStepDefs {
 	 * for Part type are 'file', 'text' 
 	 * <blockquote><pre>
 	 * | Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
-	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |
 	 * | Part1Data      | text        | text             | yes/no          | contents here                 |
 	 * </pre></blockquote>
 	 * 
@@ -445,7 +445,7 @@ public class SmartApiStepDefs {
 	 * @param partsDetails - the cucumber data table to specify multi parts details in the format given below:
 	 *   <blockquote><pre>
 	 * 		| Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
-	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |
 	 *      | Part1Data      | text        | text             | yes/no          | contents here                 |
 	 *   </pre></blockquote>
 	 * 
@@ -522,7 +522,7 @@ public class SmartApiStepDefs {
 	 * for Part type are 'file', 'text' 
 	 * <blockquote><pre>
 	 * | Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
-	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |
 	 * | Part1Data      | text        | text             | yes/no          | contents here                 |
 	 * </pre></blockquote>
 	 * 
@@ -538,7 +538,7 @@ public class SmartApiStepDefs {
 	 * @param partsDetails - the cucumber data table to specify multi parts details in the format given below:
 	 *   <blockquote><pre>
 	 * 		| Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
-	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |
 	 *      | Part1Data      | text        | text             | yes/no          | contents here                 |
 	 *   </pre></blockquote>
 	 * 
@@ -615,7 +615,7 @@ public class SmartApiStepDefs {
 	 * for Part type are 'file', 'text' 
 	 * <blockquote><pre>
 	 * | Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
-	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |
 	 * | Part1Data      | text        | text             | yes/no          | contents here                 |
 	 * </pre></blockquote>
 	 * 
@@ -631,7 +631,7 @@ public class SmartApiStepDefs {
 	 * @param partsDetails - the cucumber data table to specify multi parts details in the format given below:
 	 *   <blockquote><pre>
 	 * 		| Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
-	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |
 	 *      | Part1Data      | text        | text             | yes/no          | contents here                 |
 	 *   </pre></blockquote>
 	 * 
@@ -706,7 +706,7 @@ public class SmartApiStepDefs {
 	 * for Part type are 'file', 'text' 
 	 * <blockquote><pre>
 	 * | Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
-	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |
 	 * | Part1Data      | text        | text             | yes/no          | contents here                 |
 	 * </pre></blockquote>
 	 * 
@@ -722,7 +722,7 @@ public class SmartApiStepDefs {
 	 * @param partsDetails - the cucumber data table to specify multi parts details in the format given below:
 	 *   <blockquote><pre>
 	 * 		| Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
-	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |
 	 *      | Part1Data      | text        | text             | yes/no          | contents here                 |
 	 *   </pre></blockquote>
 	 * 
