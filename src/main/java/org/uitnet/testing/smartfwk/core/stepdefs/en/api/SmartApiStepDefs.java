@@ -29,10 +29,12 @@ import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.api.core.AbstractApiActionHandler;
 import org.uitnet.testing.smartfwk.api.core.reader.JsonDocumentReader;
 import org.uitnet.testing.smartfwk.api.core.reader.XmlDocumentReader;
-import org.uitnet.testing.smartfwk.api.core.support.HttpMultipartRequest;
+import org.uitnet.testing.smartfwk.api.core.support.HttpMultipartFileRequest;
+import org.uitnet.testing.smartfwk.api.core.support.HttpMultipartFormRequest;
 import org.uitnet.testing.smartfwk.api.core.support.HttpRequest;
 import org.uitnet.testing.smartfwk.api.core.support.HttpResponse;
-import org.uitnet.testing.smartfwk.api.core.support.MultipartData;
+import org.uitnet.testing.smartfwk.api.core.support.MultipartFileRecord;
+import org.uitnet.testing.smartfwk.api.core.support.MultipartFormRecord;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
 import org.uitnet.testing.smartfwk.core.validator.ParamPath;
 import org.uitnet.testing.smartfwk.core.validator.ParamValueType;
@@ -302,14 +304,14 @@ public class SmartApiStepDefs {
 			return;
 		}
 		
-		HttpMultipartRequest httpRequest = new HttpMultipartRequest();
+		HttpMultipartFileRequest httpRequest = new HttpMultipartFileRequest();
 		httpRequest.setContentType(contentType);
 		httpRequest.setResponseContentType(accept);
 		
 		List<List<String>> rows = filesDetails.asLists();
 		List<String> row;
 		String partName, fileName, fileContentType, applyVariables, filePath;
-		MultipartData multipartInfo;
+		MultipartFileRecord multipartInfo;
 		for(int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
 			partName = row.get(0);
@@ -327,9 +329,9 @@ public class SmartApiStepDefs {
 					Assert.fail("Failed to read '" + filePath + "' file.", e);
 				}
 				fileContents = scenarioContext.applyParamsValueOnText(fileContents);
-				multipartInfo = new MultipartData(partName, fileName, fileContentType, fileContents.getBytes());
+				multipartInfo = new MultipartFileRecord(partName, fileName, fileContentType, fileContents.getBytes());
 			} else {
-				multipartInfo = new MultipartData(partName, fileName, fileContentType, filePath);
+				multipartInfo = new MultipartFileRecord(partName, fileName, fileContentType, filePath);
 			}
 			
 			httpRequest.addPart(multipartInfo);
@@ -380,14 +382,14 @@ public class SmartApiStepDefs {
 		}
 		
 		
-		HttpMultipartRequest httpRequest = new HttpMultipartRequest();
+		HttpMultipartFileRequest httpRequest = new HttpMultipartFileRequest();
 		Map<String, String> params = (Map<String, String>) scenarioContext.getParamValue(requestHeaderReferenceVariable);
 		httpRequest.getHeaders().putAll(params);
 		
 		List<List<String>> rows = filesDetails.asLists();
 		List<String> row;
 		String partName, fileName, fileContentType, applyVariables, filePath;
-		MultipartData multipartInfo;
+		MultipartFileRecord multipartInfo;
 		for(int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
 			partName = row.get(0);
@@ -405,9 +407,9 @@ public class SmartApiStepDefs {
 					Assert.fail("Failed to read '" + filePath + "' file.", e);
 				}
 				fileContents = scenarioContext.applyParamsValueOnText(fileContents);
-				multipartInfo = new MultipartData(partName, fileName, fileContentType, fileContents.getBytes());
+				multipartInfo = new MultipartFileRecord(partName, fileName, fileContentType, fileContents.getBytes());
 			} else {
-				multipartInfo = new MultipartData(partName, fileName, fileContentType, filePath);
+				multipartInfo = new MultipartFileRecord(partName, fileName, fileContentType, filePath);
 			}
 			
 			httpRequest.addPart(multipartInfo);
@@ -418,6 +420,374 @@ public class SmartApiStepDefs {
 		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
 		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
 		HttpResponse httpResponse = handler.httpUploadFormFiles(targetURL, httpRequest, null, null, true);
+		
+		scenarioContext.addParamValue(responseVariableName, httpResponse);
+	}
+	
+	/**
+	 * Used to send multipart form data on target server. Parts could be a textual data or file. Valid values
+	 * for Part type are 'file', 'text' 
+	 * <blockquote><pre>
+	 * | Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
+	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 * | Part1Data      | text        | text             | yes/no          | contents here                 |
+	 * </pre></blockquote>
+	 * 
+	 * NOTE: For this Content-Type header field value will always be "multipart/form-data".
+	 * 
+	 * @param appName - the configured application name.
+	 * @param targetServer - it is an API Target Server Name that is configured in ApiConfig.yaml file.
+	 * @param targetURL - the target URL where to make HTTP POST API call.
+	 * @param userProfile - the name of the user profile that is configured in AppConfig.yaml file that will be used to login on target server.
+	 * @param requestHeaderReferenceVariable - request header reference variable that contains HTTP request header parameter information.
+	 * @param requestVariableName - the variable name that stores the HTTPRequest information.
+	 * @param responseVariableName - the variable name that stores the HTTPResponse information.
+	 * @param partsDetails - the cucumber data table to specify multi parts details in the format given below:
+	 *   <blockquote><pre>
+	 * 		| Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
+	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 *      | Part1Data      | text        | text             | yes/no          | contents here                 |
+	 *   </pre></blockquote>
+	 * 
+	 *   Where "Apply Variable" column value denotes whether you would like to apply variable's information in the contents or file contents. Valid values are: yes, no
+	 */
+	@SuppressWarnings("unchecked")
+	@When("make HTTP POST request to send multipart form data on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
+			+ "using [UserProfile={string}] with header info [RequestHeaderReferenceVariable={string}] "
+			+ "and variable info [ReqVar={string}, RespVar={string}]:")
+	public void make_http_post_put_request_to_send_multipart_form_data_with_custom_header1(String appName,
+			String targetServer, String targetURL, String userProfile, String requestHeaderReferenceVariable, 
+			String requestVariableName, String responseVariableName, DataTable filesDetails) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		HttpMultipartFormRequest httpRequest = new HttpMultipartFormRequest();
+		Map<String, String> params = (Map<String, String>) scenarioContext.getParamValue(requestHeaderReferenceVariable);
+		httpRequest.setContentType("multipart/form-data");
+		httpRequest.getHeaders().putAll(params);
+		
+		List<List<String>> rows = filesDetails.asLists();
+		List<String> row;
+		String partName, partType, contentType, applyVariables, contents;
+		MultipartFormRecord multipartRecord = null;
+		for(int i = 1; i < rows.size(); i++) {
+			row = rows.get(i);
+			partName = row.get(0);
+			partType = row.get(1);
+			contentType = row.get(2);
+			applyVariables = row.get(3);
+			contents = Locations.getProjectRootDir() + File.separator + row.get(4);
+			
+			if("file".equalsIgnoreCase(partType)) {
+				File f = new File(contents);
+				String fileContents = null;
+				try {
+					fileContents = Files.readString(f.toPath());
+				} catch (IOException e) {
+					Assert.fail("Failed to read '" + contents + "' file.", e);
+				}
+				if(fileContents != null) {
+					if("yes".equalsIgnoreCase(applyVariables)) {
+						fileContents = scenarioContext.applyParamsValueOnText(fileContents);
+					}
+					multipartRecord = new MultipartFormRecord(partName, partType, contentType, fileContents.getBytes());
+				} else {
+					multipartRecord = new MultipartFormRecord(partName, partType, contentType, null);
+				}
+			} else if("text".equalsIgnoreCase(partType)) {
+				if("yes".equalsIgnoreCase(applyVariables)) {
+					contents = scenarioContext.applyParamsValueOnText(contents);
+				}
+				multipartRecord = new MultipartFormRecord(partName, partType, contentType, contents.getBytes());
+			} else {
+				Assert.fail("Part type '" + partType + "' is not supported.");
+			}
+			
+			httpRequest.addPart(multipartRecord);
+		}
+		
+		scenarioContext.addParamValue(requestVariableName, httpRequest);
+
+		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
+		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
+		HttpResponse httpResponse = handler.httpUploadMultipartFormData(targetURL, httpRequest, null, null, false);
+		
+		scenarioContext.addParamValue(responseVariableName, httpResponse);
+	}
+	
+	/**
+	 * Used to send multipart form data on target server. Parts could be a textual data or file. Valid values
+	 * for Part type are 'file', 'text' 
+	 * <blockquote><pre>
+	 * | Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
+	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 * | Part1Data      | text        | text             | yes/no          | contents here                 |
+	 * </pre></blockquote>
+	 * 
+	 * NOTE: For this Content-Type header field value will always be "multipart/form-data".
+	 * 
+	 * @param appName - the configured application name.
+	 * @param targetServer - it is an API Target Server Name that is configured in ApiConfig.yaml file.
+	 * @param targetURL - the target URL where to make HTTP POST API call.
+	 * @param userProfile - the name of the user profile that is configured in AppConfig.yaml file that will be used to login on target server.
+	 * @param requestHeaderReferenceVariable - request header reference variable that contains HTTP request header parameter information.
+	 * @param requestVariableName - the variable name that stores the HTTPRequest information.
+	 * @param responseVariableName - the variable name that stores the HTTPResponse information.
+	 * @param partsDetails - the cucumber data table to specify multi parts details in the format given below:
+	 *   <blockquote><pre>
+	 * 		| Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
+	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 *      | Part1Data      | text        | text             | yes/no          | contents here                 |
+	 *   </pre></blockquote>
+	 * 
+	 *   Where "Apply Variable" column value denotes whether you would like to apply variable's information in the contents or file contents. Valid values are: yes, no
+	 */
+	@SuppressWarnings("unchecked")
+	@When("make HTTP PUT request to send multipart form data on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
+			+ "using [UserProfile={string}] with header info [RequestHeaderReferenceVariable={string}] "
+			+ "and variable info [ReqVar={string}, RespVar={string}]:")
+	public void make_http_post_put_request_to_send_multipart_form_data_with_custom_header2(String appName,
+			String targetServer, String targetURL, String userProfile, String requestHeaderReferenceVariable, 
+			String requestVariableName, String responseVariableName, DataTable filesDetails) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		HttpMultipartFormRequest httpRequest = new HttpMultipartFormRequest();
+		Map<String, String> params = (Map<String, String>) scenarioContext.getParamValue(requestHeaderReferenceVariable);
+		httpRequest.setContentType("multipart/form-data");
+		httpRequest.getHeaders().putAll(params);
+		
+		List<List<String>> rows = filesDetails.asLists();
+		List<String> row;
+		String partName, partType, contentType, applyVariables, contents;
+		MultipartFormRecord multipartRecord = null;
+		for(int i = 1; i < rows.size(); i++) {
+			row = rows.get(i);
+			partName = row.get(0);
+			partType = row.get(1);
+			contentType = row.get(2);
+			applyVariables = row.get(3);
+			contents = Locations.getProjectRootDir() + File.separator + row.get(4);
+			
+			if("file".equalsIgnoreCase(partType)) {
+				File f = new File(contents);
+				String fileContents = null;
+				try {
+					fileContents = Files.readString(f.toPath());
+				} catch (IOException e) {
+					Assert.fail("Failed to read '" + contents + "' file.", e);
+				}
+				if(fileContents != null) {
+					if("yes".equalsIgnoreCase(applyVariables)) {
+						fileContents = scenarioContext.applyParamsValueOnText(fileContents);
+					}
+					multipartRecord = new MultipartFormRecord(partName, partType, contentType, fileContents.getBytes());
+				} else {
+					multipartRecord = new MultipartFormRecord(partName, partType, contentType, null);
+				}
+			} else if("text".equalsIgnoreCase(partType)) {
+				if("yes".equalsIgnoreCase(applyVariables)) {
+					contents = scenarioContext.applyParamsValueOnText(contents);
+				}
+				multipartRecord = new MultipartFormRecord(partName, partType, contentType, contents.getBytes());
+			} else {
+				Assert.fail("Part type '" + partType + "' is not supported.");
+			}
+			
+			httpRequest.addPart(multipartRecord);
+		}
+		
+		scenarioContext.addParamValue(requestVariableName, httpRequest);
+
+		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
+		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
+		HttpResponse httpResponse = handler.httpUploadMultipartFormData(targetURL, httpRequest, null, null, true);
+		
+		scenarioContext.addParamValue(responseVariableName, httpResponse);
+	}
+	
+	/**
+	 * Used to send multipart form data on target server. Parts could be a textual data or file. Valid values
+	 * for Part type are 'file', 'text' 
+	 * <blockquote><pre>
+	 * | Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
+	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 * | Part1Data      | text        | text             | yes/no          | contents here                 |
+	 * </pre></blockquote>
+	 * 
+	 * NOTE: For this Content-Type header field value will always be "multipart/form-data".
+	 * 
+	 * @param appName - the configured application name.
+	 * @param targetServer - it is an API Target Server Name that is configured in ApiConfig.yaml file.
+	 * @param targetURL - the target URL where to make HTTP POST API call.
+	 * @param userProfile - the name of the user profile that is configured in AppConfig.yaml file that will be used to login on target server.
+	 * @param accept - the content type / MediaType expected in HTTP response body.
+	 * @param requestVariableName - the variable name that stores the HTTPRequest information.
+	 * @param responseVariableName - the variable name that stores the HTTPResponse information.
+	 * @param partsDetails - the cucumber data table to specify multi parts details in the format given below:
+	 *   <blockquote><pre>
+	 * 		| Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
+	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 *      | Part1Data      | text        | text             | yes/no          | contents here                 |
+	 *   </pre></blockquote>
+	 * 
+	 *   Where "Apply Variable" column value denotes whether you would like to apply variable's information in the contents or file contents. Valid values are: yes, no
+	 */
+	@When("make HTTP POST request to send multipart form data on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
+			+ "using [UserProfile={string}] with header info [Accept={string}] "
+			+ "and variable info [ReqVar={string}, RespVar={string}]:")
+	public void make_http_post_put_request_to_send_multipart_form_data1(String appName,
+			String targetServer, String targetURL, String userProfile, String accept, 
+			String requestVariableName, String responseVariableName, DataTable filesDetails) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		HttpMultipartFormRequest httpRequest = new HttpMultipartFormRequest();
+		httpRequest.setContentType("multipart/form-data");
+		httpRequest.setResponseContentType(accept);
+		
+		List<List<String>> rows = filesDetails.asLists();
+		List<String> row;
+		String partName, partType, contentType, applyVariables, contents;
+		MultipartFormRecord multipartRecord = null;
+		for(int i = 1; i < rows.size(); i++) {
+			row = rows.get(i);
+			partName = row.get(0);
+			partType = row.get(1);
+			contentType = row.get(2);
+			applyVariables = row.get(3);
+			contents = Locations.getProjectRootDir() + File.separator + row.get(4);
+			
+			if("file".equalsIgnoreCase(partType)) {
+				File f = new File(contents);
+				String fileContents = null;
+				try {
+					fileContents = Files.readString(f.toPath());
+				} catch (IOException e) {
+					Assert.fail("Failed to read '" + contents + "' file.", e);
+				}
+				if(fileContents != null) {
+					if("yes".equalsIgnoreCase(applyVariables)) {
+						fileContents = scenarioContext.applyParamsValueOnText(fileContents);
+					}
+					multipartRecord = new MultipartFormRecord(partName, partType, contentType, fileContents.getBytes());
+				} else {
+					multipartRecord = new MultipartFormRecord(partName, partType, contentType, null);
+				}
+			} else if("text".equalsIgnoreCase(partType)) {
+				if("yes".equalsIgnoreCase(applyVariables)) {
+					contents = scenarioContext.applyParamsValueOnText(contents);
+				}
+				multipartRecord = new MultipartFormRecord(partName, partType, contentType, contents.getBytes());
+			} else {
+				Assert.fail("Part type '" + partType + "' is not supported.");
+			}
+			
+			httpRequest.addPart(multipartRecord);
+		}
+		
+		scenarioContext.addParamValue(requestVariableName, httpRequest);
+
+		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
+		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
+		HttpResponse httpResponse = handler.httpUploadMultipartFormData(targetURL, httpRequest, null, null, false);
+		
+		scenarioContext.addParamValue(responseVariableName, httpResponse);
+	}
+	
+	/**
+	 * Used to send multipart form data on target server. Parts could be a textual data or file. Valid values
+	 * for Part type are 'file', 'text' 
+	 * <blockquote><pre>
+	 * | Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
+	 * | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 * | Part1Data      | text        | text             | yes/no          | contents here                 |
+	 * </pre></blockquote>
+	 * 
+	 * NOTE: For this Content-Type header field value will always be "multipart/form-data".
+	 * 
+	 * @param appName - the configured application name.
+	 * @param targetServer - it is an API Target Server Name that is configured in ApiConfig.yaml file.
+	 * @param targetURL - the target URL where to make HTTP POST API call.
+	 * @param userProfile - the name of the user profile that is configured in AppConfig.yaml file that will be used to login on target server.
+	 * @param accept - the content type / MediaType expected in HTTP response body.
+	 * @param requestVariableName - the variable name that stores the HTTPRequest information.
+	 * @param responseVariableName - the variable name that stores the HTTPResponse information.
+	 * @param partsDetails - the cucumber data table to specify multi parts details in the format given below:
+	 *   <blockquote><pre>
+	 * 		| Part Name      | Part Type   | Content Type     | Apply Variables | Contents / File Path          |
+	 *      | SampleFile.pdf | file        | application/pdf  | yes/no          | test-data/uploads/Sample1.pdf |                       |
+	 *      | Part1Data      | text        | text             | yes/no          | contents here                 |
+	 *   </pre></blockquote>
+	 * 
+	 *   Where "Apply Variable" column value denotes whether you would like to apply variable's information in the contents or file contents. Valid values are: yes, no
+	 */
+	@When("make HTTP PUT request to send multipart form data on target server [AppName={string}, TargetServer={string}, TargetURL={string}] "
+			+ "using [UserProfile={string}] with header info [Accept={string}] "
+			+ "and variable info [ReqVar={string}, RespVar={string}]:")
+	public void make_http_post_put_request_to_send_multipart_form_data2(String appName,
+			String targetServer, String targetURL, String userProfile, String accept, 
+			String requestVariableName, String responseVariableName, DataTable filesDetails) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		HttpMultipartFormRequest httpRequest = new HttpMultipartFormRequest();
+		httpRequest.setContentType("multipart/form-data");
+		httpRequest.setResponseContentType(accept);
+		
+		List<List<String>> rows = filesDetails.asLists();
+		List<String> row;
+		String partName, partType, contentType, applyVariables, contents;
+		MultipartFormRecord multipartRecord = null;
+		for(int i = 1; i < rows.size(); i++) {
+			row = rows.get(i);
+			partName = row.get(0);
+			partType = row.get(1);
+			contentType = row.get(2);
+			applyVariables = row.get(3);
+			contents = Locations.getProjectRootDir() + File.separator + row.get(4);
+			
+			if("file".equalsIgnoreCase(partType)) {
+				File f = new File(contents);
+				String fileContents = null;
+				try {
+					fileContents = Files.readString(f.toPath());
+				} catch (IOException e) {
+					Assert.fail("Failed to read '" + contents + "' file.", e);
+				}
+				if(fileContents != null) {
+					if("yes".equalsIgnoreCase(applyVariables)) {
+						fileContents = scenarioContext.applyParamsValueOnText(fileContents);
+					}
+					multipartRecord = new MultipartFormRecord(partName, partType, contentType, fileContents.getBytes());
+				} else {
+					multipartRecord = new MultipartFormRecord(partName, partType, contentType, null);
+				}
+			} else if("text".equalsIgnoreCase(partType)) {
+				if("yes".equalsIgnoreCase(applyVariables)) {
+					contents = scenarioContext.applyParamsValueOnText(contents);
+				}
+				multipartRecord = new MultipartFormRecord(partName, partType, contentType, contents.getBytes());
+			} else {
+				Assert.fail("Part type '" + partType + "' is not supported.");
+			}
+			
+			httpRequest.addPart(multipartRecord);
+		}
+		
+		scenarioContext.addParamValue(requestVariableName, httpRequest);
+
+		targetURL = scenarioContext.applyParamsValueOnText(targetURL);
+		AbstractApiActionHandler handler =  scenarioContext.getApiTestManager().getActionHandler(appName, targetServer, userProfile);
+		HttpResponse httpResponse = handler.httpUploadMultipartFormData(targetURL, httpRequest, null, null, true);
 		
 		scenarioContext.addParamValue(responseVariableName, httpResponse);
 	}
@@ -457,14 +827,14 @@ public class SmartApiStepDefs {
 			return;
 		}
 		
-		HttpMultipartRequest httpRequest = new HttpMultipartRequest();
+		HttpMultipartFileRequest httpRequest = new HttpMultipartFileRequest();
 		httpRequest.setContentType(contentType);
 		httpRequest.setResponseContentType(accept);
 		
 		List<List<String>> rows = filesDetails.asLists();
 		List<String> row;
 		String partName, fileName, fileContentType, applyVariables, filePath;
-		MultipartData multipartInfo;
+		MultipartFileRecord multipartInfo;
 		for(int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
 			partName = row.get(0);
@@ -482,9 +852,9 @@ public class SmartApiStepDefs {
 					Assert.fail("Failed to read '" + filePath + "' file.", e);
 				}
 				fileContents = scenarioContext.applyParamsValueOnText(fileContents);
-				multipartInfo = new MultipartData(partName, fileName, fileContentType, fileContents.getBytes());
+				multipartInfo = new MultipartFileRecord(partName, fileName, fileContentType, fileContents.getBytes());
 			} else {
-				multipartInfo = new MultipartData(partName, fileName, fileContentType, filePath);
+				multipartInfo = new MultipartFileRecord(partName, fileName, fileContentType, filePath);
 			}
 			
 			httpRequest.addPart(multipartInfo);
@@ -534,14 +904,14 @@ public class SmartApiStepDefs {
 			return;
 		}
 		
-		HttpMultipartRequest httpRequest = new HttpMultipartRequest();
+		HttpMultipartFileRequest httpRequest = new HttpMultipartFileRequest();
 		Map<String, String> params = (Map<String, String>) scenarioContext.getParamValue(requestHeaderReferenceVariable);
 		httpRequest.getHeaders().putAll(params);
 		
 		List<List<String>> rows = filesDetails.asLists();
 		List<String> row;
 		String partName, fileName, fileContentType, applyVariables, filePath;
-		MultipartData multipartInfo;
+		MultipartFileRecord multipartInfo;
 		for(int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
 			partName = row.get(0);
@@ -559,9 +929,9 @@ public class SmartApiStepDefs {
 					Assert.fail("Failed to read '" + filePath + "' file.", e);
 				}
 				fileContents = scenarioContext.applyParamsValueOnText(fileContents);
-				multipartInfo = new MultipartData(partName, fileName, fileContentType, fileContents.getBytes());
+				multipartInfo = new MultipartFileRecord(partName, fileName, fileContentType, fileContents.getBytes());
 			} else {
-				multipartInfo = new MultipartData(partName, fileName, fileContentType, filePath);
+				multipartInfo = new MultipartFileRecord(partName, fileName, fileContentType, filePath);
 			}
 			
 			httpRequest.addPart(multipartInfo);
