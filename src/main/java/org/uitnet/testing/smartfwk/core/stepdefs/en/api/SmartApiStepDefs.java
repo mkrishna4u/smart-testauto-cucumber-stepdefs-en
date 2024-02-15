@@ -478,9 +478,9 @@ public class SmartApiStepDefs {
 			partType = row.get(1);
 			contentType = row.get(2);
 			applyVariables = row.get(3);
-			contents = Locations.getProjectRootDir() + File.separator + row.get(4);
 			
 			if("file".equalsIgnoreCase(partType)) {
+				contents = Locations.getProjectRootDir() + File.separator + row.get(4);
 				File f = new File(contents);
 				String fileContents = null;
 				try {
@@ -497,6 +497,7 @@ public class SmartApiStepDefs {
 					multipartRecord = new MultipartFormRecord(partName, partType, contentType, null);
 				}
 			} else if("text".equalsIgnoreCase(partType)) {
+				contents = row.get(4);
 				if("yes".equalsIgnoreCase(applyVariables)) {
 					contents = scenarioContext.applyParamsValueOnText(contents);
 				}
@@ -571,9 +572,9 @@ public class SmartApiStepDefs {
 			partType = row.get(1);
 			contentType = row.get(2);
 			applyVariables = row.get(3);
-			contents = Locations.getProjectRootDir() + File.separator + row.get(4);
 			
 			if("file".equalsIgnoreCase(partType)) {
+				contents = Locations.getProjectRootDir() + File.separator + row.get(4);
 				File f = new File(contents);
 				String fileContents = null;
 				try {
@@ -590,6 +591,7 @@ public class SmartApiStepDefs {
 					multipartRecord = new MultipartFormRecord(partName, partType, contentType, null);
 				}
 			} else if("text".equalsIgnoreCase(partType)) {
+				contents = row.get(4);
 				if("yes".equalsIgnoreCase(applyVariables)) {
 					contents = scenarioContext.applyParamsValueOnText(contents);
 				}
@@ -662,9 +664,9 @@ public class SmartApiStepDefs {
 			partType = row.get(1);
 			contentType = row.get(2);
 			applyVariables = row.get(3);
-			contents = Locations.getProjectRootDir() + File.separator + row.get(4);
-			
+						
 			if("file".equalsIgnoreCase(partType)) {
+				contents = Locations.getProjectRootDir() + File.separator + row.get(4);
 				File f = new File(contents);
 				String fileContents = null;
 				try {
@@ -681,6 +683,7 @@ public class SmartApiStepDefs {
 					multipartRecord = new MultipartFormRecord(partName, partType, contentType, null);
 				}
 			} else if("text".equalsIgnoreCase(partType)) {
+				contents = row.get(4);
 				if("yes".equalsIgnoreCase(applyVariables)) {
 					contents = scenarioContext.applyParamsValueOnText(contents);
 				}
@@ -753,9 +756,9 @@ public class SmartApiStepDefs {
 			partType = row.get(1);
 			contentType = row.get(2);
 			applyVariables = row.get(3);
-			contents = Locations.getProjectRootDir() + File.separator + row.get(4);
-			
+						
 			if("file".equalsIgnoreCase(partType)) {
+				contents = Locations.getProjectRootDir() + File.separator + row.get(4);
 				File f = new File(contents);
 				String fileContents = null;
 				try {
@@ -772,6 +775,7 @@ public class SmartApiStepDefs {
 					multipartRecord = new MultipartFormRecord(partName, partType, contentType, null);
 				}
 			} else if("text".equalsIgnoreCase(partType)) {
+				contents = row.get(4);
 				if("yes".equalsIgnoreCase(applyVariables)) {
 					contents = scenarioContext.applyParamsValueOnText(contents);
 				}
