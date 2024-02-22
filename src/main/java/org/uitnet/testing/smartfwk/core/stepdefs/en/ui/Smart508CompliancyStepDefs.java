@@ -204,13 +204,12 @@ public class Smart508CompliancyStepDefs {
 				if(actualContrastRatio >= minContrastRatio) {
 					// do nothing
 				} else {
-					invalidRows.add("{row: " + (i+1) + ", Ratio: " + actualContrastRatio + ", FontWeight: " + fontWeight + ", fontSize: " + fontSizeInREM + "}");
+					invalidRows.add("{row: " + (i+1) + ", ratio: " + actualContrastRatio + ", fontWeight: " + fontWeight + ", fontSize: " + fontSizeInREM + "}");
 				}
 			} else {
-				invalidRows.add("{row: " + (i+1) + ", Ratio: " + actualContrastRatio + ", FontWeight: " + fontWeight + ", fontSize: " + fontSizeInREM + "}");
+				invalidRows.add("{row: " + (i+1) + ", ratio: " + actualContrastRatio + ", fontWeight: " + fontWeight + ", fontSize: " + fontSizeInREM + "}");
 			}
 			
-			System.out.println("{row: " + (i+1) + ", Ratio: " + actualContrastRatio + ", FontWeight: " + fontWeight + ", fontSize: " + fontSizeInREM + "}");
 		}
 		
 		if(invalidRows.size() > 0) {
