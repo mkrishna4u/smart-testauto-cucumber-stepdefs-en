@@ -39,23 +39,23 @@ public class SmartScenarioHooksStepDefs {
 
 	/**
 	 * Used to call scenario hook / method as pre-condition or any time within the scenario so that this method can be used to
-	 * perform certain tasks at the time of call. The hook should be defined under src/main/java/scenario_hooks/ directory. 
+	 * perform certain tasks at the time of call. The hook should be defined under src/main/java/scenario_hooks/<AppName>/ directory. 
 	 * The hook path is given below.
 	 * 
 	 * 		<AppName>.<ClassName>.<MethodName>
 	 * 
 	 * @param method - the qualified name of the method. the format will be as given below:
 	 * 		<AppName>.<ClassName>.<MethodName>
-	 * 		NOTE: All the registration classes should be present in src/main/java/scenario_hooks/ directory.
+	 * 		NOTE: All the registration classes should be present in src/main/java/scenario_hooks/<AppName>/ directory.
 	 * 			Method signature will be as given below:
-	 * 				public static methodName(SmartCucumberScenarioContext scenarioContext, String data) {
+	 * 				public static void methodName(SmartCucumberScenarioContext scenarioContext, String data) {
 	 * 					// code here
 	 * 				}
 	 * 
 	 * 		Example: myApp.UserCleanup.removeUser
 	 * 
 	 * @param actionName - the meaningful action name.
-	 * @param methodData - the data that would be required in registered data. It is going to pass as string to method.
+	 * @param methodData - the data that would be required in registered hook. It is going to pass as string to method.
 	 * 		
 	 */
 	@Given("call {string} scenario hook to {string} using the data given below:")
@@ -75,20 +75,20 @@ public class SmartScenarioHooksStepDefs {
 	 * Used to register the hook / method in scenario / scenario outline as post-condition so that this method can be used to
 	 * perform certain tasks after the execution of the scenario. Generally method can be
 	 * registered anywhere in the scenario. But it is recommended to register methods in the beginning of the 
-	 * scenario / scenario outline.
+	 * scenario / scenario outline or any appropriate place.
 	 * 
 	 * @param method - the name of the method. the format will be as given below:
 	 * 		<AppName>.<ClassName>.<MethodName>
-	 * 		NOTE: All the registration classes should be present in src/main/java/register/ directory.
+	 * 		NOTE: All the registration classes should be present in src/main/java/scenario_hooks/<AppName>/ directory.
 	 * 			Method signature will be as given below:
-	 * 				public static methodName(SmartCucumberScenarioContext scenarioContext, String data) {
+	 * 				public static void methodName(SmartCucumberScenarioContext scenarioContext, String data) {
 	 * 					// code here
 	 * 				}
 	 * 
 	 * 		Example: myApp.UserCleanup.removeUser
 	 * 
 	 * @param actionName - the meaningful action name.
-	 * @param methodData - the data that would be required in registered data. It is going to pass as string to method.
+	 * @param methodData - the data that would be required in registered hook. It is going to pass as string to method.
 	 * 		The registered method should use this data to perform the action.
 	 */
 	@Given("register {string} after scenario hook to {string} using the data given below:")
