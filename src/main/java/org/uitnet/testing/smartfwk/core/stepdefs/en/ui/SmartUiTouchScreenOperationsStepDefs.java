@@ -53,7 +53,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * </pre></blockquote>
 	 * @param holdDurationInMs - the duration in milliseconds to hold the touch.
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "tap on {string} page element for {int} milliseconds to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("tap on {string} page object for {int} milliseconds to {string}.")
 	public void tap_on_page_element_for_milliseconds_to(String pageObject, int holdDurationInMs, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -98,7 +102,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * </pre></blockquote>
 	 * @param pauseDurationInMs - the pause duration in milliseconds between the taps.
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "double tap on {string} page element using {int} milliseconds as pause duration to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("double tap on {string} page object using {int} milliseconds as pause duration to {string}.")
 	public void double_tap_on_page_element_using_milliseconds_as_pause_duration_to(String pageObject, int pauseDurationInMs, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -144,7 +152,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 * </pre></blockquote>
 	 * @param pauseDurationInMs - the pause duration in milliseconds between the taps.
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "tap {int} times on {string} page element using {int} milliseconds as pause duration to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("tap {int} times on {string} page object using {int} milliseconds as pause duration to {string}.")
 	public void tap_n_times_on_page_element_using_milliseconds_as_pause_duration_to(int nTimes, String pageObject, int pauseDurationInMs, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -190,7 +202,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "swipe up {int} pixels in {int} milliseconds from {string} page element location." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("swipe up {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_up_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -235,7 +251,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * 
+	 * 
+	 * @deprecated use "swipe down {int} pixels in {int} milliseconds from {string} page element location." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("swipe down {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_down_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -280,7 +300,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * 
+	 * 
+	 * @deprecated use "swipe left {int} pixels in {int} milliseconds from {string} page element location." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("swipe left {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_left_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -325,7 +349,11 @@ public class SmartUiTouchScreenOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "swipe right {int} pixels in {int} milliseconds from {string} page element location." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("swipe right {int} pixels in {int} milliseconds from {string} page object location.")
 	public void swipe_right_pixels_in_milliseconds_from_page_object_location(int pixels, int durationInMs, String pageObject) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {

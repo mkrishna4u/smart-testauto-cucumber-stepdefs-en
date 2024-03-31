@@ -58,7 +58,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "click on {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("click on {string} page object to {string}.")
 	public void click_on_page_element(String pageObject, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -126,7 +130,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "click {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("click {string} page object to {string}.")
 	public void click_on_page_element_3(String pageObject, String actionName) {
 		click_on_page_element(pageObject, actionName);
@@ -143,7 +151,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "force click on {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("force click on {string} page object to {string}.")
 	public void force_click_on_page_element(String pageObject, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -201,7 +213,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "force click {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("force click {string} page object to {string}.")
 	public void force_click_on_page_element_3(String pageObject, String actionName) {
 		force_click_on_page_element(pageObject, actionName);
@@ -256,7 +272,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 *   </pre></blockquote>      
 	 * 
+	 * 
+	 * @deprecated use "click on the following page elements to {string}:" test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("click on the following page objects to {string}:")
 	public void click_on_the_following_page_objects(String actionName, DocString pageObjects) {
 		click_on_the_following_page_elements(actionName, pageObjects);
@@ -273,7 +293,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "double click on {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("double click on {string} page object to {string}.")
 	public void double_click_on_page_element(String pageObject, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -331,7 +355,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "double click {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("double click {string} page object to {string}.")
 	public void double_click_on_page_element_3(String pageObject, String actionName) {
 		double_click_on_page_element(pageObject, actionName);
@@ -348,7 +376,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "right click on {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("right click on {string} page object to {string}.")
 	public void right_click_on_page_element(String pageObject, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -406,7 +438,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "right click {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("right click {string} page object to {string}.")
 	public void right_click_on_page_element_3(String pageObject, String actionName) {
 		right_click_on_page_element(pageObject, actionName);
@@ -424,7 +460,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "click and hold on {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("click and hold on {string} page object to {string}.")
 	public void click_and_hold_on_page_element(String pageObject, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -485,7 +525,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "click and hold {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("click and hold {string} page object to {string}.")
 	public void click_and_hold_on_page_element_3(String pageObject, String actionName) {
 		click_and_hold_on_page_element(pageObject, actionName);
@@ -503,7 +547,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "release hold click from {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("release hold click from {string} page object to {string}.")
 	public void release_hold_click_from_page_element(String pageObject, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -587,7 +635,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "mouse hoverover on {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("mouse hoverover on {string} page object to {string}.")
 	public void mouse_hoverover_on_page_element(String pageObject, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -646,7 +698,11 @@ public class SmartUiMouseOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
+	 * 
+	 * @deprecated use "mouse hoverover {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("mouse hoverover {string} page object to {string}.")
 	public void mouse_hoverover_on_page_element_3(String pageObject, String actionName) {
 		mouse_hoverover_on_page_element(pageObject, actionName);

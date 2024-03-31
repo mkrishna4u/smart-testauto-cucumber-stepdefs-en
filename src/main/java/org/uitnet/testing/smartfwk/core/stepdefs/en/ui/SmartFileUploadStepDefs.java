@@ -87,7 +87,11 @@ public class SmartFileUploadStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "upload {string} files using {string} page element." test step.
+	 *
 	 */
+	@Deprecated
 	@When("upload {string} files using {string} page object.")
 	public void upload_files_using_page_element_2(String files, String po) {
 		upload_files_using_page_element(files, po);
@@ -127,7 +131,10 @@ public class SmartFileUploadStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "select {string} files using {string} page element." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("select {string} files using {string} page object.")
 	public void select_files_using_page_object(String files, String po) {
 		upload_files_using_page_element(files, po);
@@ -165,7 +172,10 @@ public class SmartFileUploadStepDefs {
 	 * <blockquote><pre>
 	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "select the following files using {string} page element:" test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("select the following files using {string} page object:")
 	public void select_the_following_files_using_page_object(String po, DocString files) {
 		upload_files_using_page_element(files.getContent(), po);

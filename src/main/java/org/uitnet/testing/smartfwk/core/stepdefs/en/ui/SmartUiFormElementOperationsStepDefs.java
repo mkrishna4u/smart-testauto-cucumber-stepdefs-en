@@ -304,7 +304,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>   
 	 * @param pageOrScreenName - the name of the page or screen.
+	 * 
+	 * @deprecated use "verify {string} page element is visible on {string}." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify {string} page object is visible on {string}.")
 	public void verify_that_the_page_element_is_visible_1(String po, String pageOrScreenName) {
 		verify_that_the_page_element_is_visible(po, pageOrScreenName);
@@ -321,7 +324,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>   
 	 * @param pageOrScreenName - the name of the page or screen.
+	 * 
+	 * @deprecated use "verify that {string} page element is visible on {string}." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that {string} page object is visible on {string}.")
 	public void verify_that_the_page_element_is_visible_2(String po, String pageOrScreenName) {
 		verify_that_the_page_element_is_visible(po, pageOrScreenName);
@@ -358,7 +364,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *    Where: JSON Syntax for page element (Refer {@link PageObject}):
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify that the following page elements are hidden on {string}:" test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that the following page objects are hidden on {string}:")
 	public void verify_that_the_following_page_elements_are_hidden(String pageOrScreenName, DataTable dataTable) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -412,7 +421,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *    Where: JSON Syntax for page element (Refer {@link PageObject}):
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify that the following page elements are not visible on {string}:" test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that the following page objects are not visible on {string}:")
 	public void verify_that_the_following_page_elements_are_hidden_2(String pageOrScreenName, DataTable dataTable) {
 		verify_that_the_following_page_elements_are_hidden(pageOrScreenName, dataTable);
@@ -485,7 +497,9 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param variableName - name of the variable where system will store the visibility. For visible element it will store "yes" else
 	 * 			it will store "no".
 	 * 
+	 * @deprecated use "get visibility of {string} page element and store into {string} variable." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get visibility of {string} page object and store into {string} variable.")
 	public void get_visibility_of_page_element_and_store_into_variable2(String po, String variableName) {
 		get_visibility_of_page_element_and_store_into_variable(po, variableName);
@@ -536,7 +550,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>    
 	 * @param variableName - name of the variable where system will store the presence. For present element it will store "yes" else
 	 * 			it will store "no".
+	 * 
+	 * @deprecated use "get presence of {string} page element and store into {string} variable." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get presence of {string} page object and store into {string} variable.")
 	public void check_presence_of_page_element_and_store_into_variable2(String po, String variableName) {
 		get_presence_of_page_element_and_store_into_variable(po, variableName);
@@ -553,7 +570,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
+	 * 
+	 * @deprecated use "verify {string} page element is hidden on {string}." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify {string} page object is hidden on {string}.")
 	public void verify_that_the_page_element_is_hidden(String po, String pageOrScreenName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -595,7 +615,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
+	 * 
+	 * @deprecated use "verify that {string} page element is hidden on {string}." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that {string} page object is hidden on {string}.")
 	public void verify_that_the_page_element_is_hidden_2(String po, String pageOrScreenName) {
 		verify_that_the_page_element_is_hidden(po, pageOrScreenName);
@@ -629,7 +652,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>   
 	 * @param pageOrScreenName - the name of the page or screen.
+	 * 
+	 * @deprecated use "verify {string} page element is not visible on {string}." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify {string} page object is not visible on {string}.")
 	public void verify_that_the_page_element_is_hidden_4(String po, String pageOrScreenName) {
 		verify_that_the_page_element_is_hidden(po, pageOrScreenName);
@@ -663,7 +689,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
+	 * 
+	 * @deprecated use "verify that {string} page element is not visible on {string}." test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that {string} page object is not visible on {string}.")
 	public void verify_that_the_page_element_is_hidden_6(String po, String pageOrScreenName) {
 		verify_that_the_page_element_is_hidden(po, pageOrScreenName);
@@ -704,7 +733,10 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify that the following page elements are disabled on {string}:" test step.
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that the following page objects are disabled on {string}:")
 	public void verify_that_the_following_page_elements_are_disabled(String pageOrScreenName, DataTable dataTable) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -758,7 +790,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
+	 * 
+	 * @deprecated use "verify that {string} page element is disabled on {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that {string} page object is disabled on {string}.")
 	public void verify_that_the_page_element_is_disabled(String po, String pageOrScreenName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -806,7 +842,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify that the following page elements are enabled on {string}:" test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that the following page objects are enabled on {string}:")
 	public void verify_that_the_following_page_elements_are_enabled(String pageOrScreenName, DataTable dataTable) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -885,7 +925,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>    
 	 * @param pageOrScreenName - the name of the page or screen.
+	 * 
+	 * @deprecated use "verify that {string} page element is enabled on {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that {string} page object is enabled on {string}.")
 	public void verify_that_the_page_element_is_enabled_1(String po, String pageOrScreenName) {
 		verify_that_the_page_element_is_enabled(po, pageOrScreenName);
@@ -912,7 +956,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *      B. location=end will append text in the end.
 	 *      C. location=replace will replace the existing text.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "type {string} text in {string} page element at {string} location." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("type {string} text in {string} page object at {string} location.")
 	public void type_text_in_page_element(String inputValue, String po, String location) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -971,7 +1019,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>    
+	 * 
+	 * @deprecated use "type {string} text in {string} page element." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("type {string} text in {string} page object.")
 	public void type_text_in_page_element(String inputValue, String po) {
 		type_text_in_page_element(inputValue, po, "replace");
@@ -1014,7 +1066,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *      JSON way: Refer {@link InputValue}. Example:
 	 *        {value: "This is sample text", action: "type", typeSpeedMspc: 100, typeAfterClick: true }
 	 *
+ 	 * 
+	 * @deprecated use "type the following text in {string} page element:" test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("type the following text in {string} page object:")
 	public void type_the_following_text_in_page_element(String po, DocString inputValue) {
 		type_text_in_page_element(inputValue.getContent(), po);
@@ -1059,7 +1115,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify that the text part of {string} page element matches {string} text where TextMatchMechanism={string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that the text part of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_that_the_text_part_of_page_element_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -1212,7 +1272,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify that the value of {string} page element matches {string} text where TextMatchMechanism={string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify that the value of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_value_of_page_element_matches_text_where_textmatchmechanism_1(String po, String expectedText, String textMatchMechanism) {
 		verify_value_of_page_element_matches_text_where_textmatchmechanism(po, expectedText, textMatchMechanism);
@@ -1257,7 +1321,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
+	 * 
+	 * @deprecated use "get input text value of {string} page element and store into {string} variable." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get input text value of {string} page object and store into {string} variable.")
 	public void get_input_text_value_of_page_element_and_store_into_variable_1(String po, String variableName) {
 		get_input_text_value_of_page_element_and_store_into_variable(po, variableName);
@@ -1321,7 +1389,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
+	 * 
+	 * @deprecated use "get input text value of each element of {string} page element and store into {string} variable." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get input text value of each element of {string} page object and store into {string} variable.")
 	public void get_input_text_value_of_each_element_of_page_element_and_store_into_variable_1(String po, String variableName) {
 		get_input_text_value_of_each_element_of_page_element_and_store_into_variable(po, variableName);
@@ -1393,7 +1465,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
+	 * 
+	 * @deprecated use "get text part of each element of {string} page element and store into {string} variable." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get text part of each element of {string} page object and store into {string} variable.")
 	public void verify_text_part_of_each_element_of_page_element_and_store_into_variable_1(String po, String variableName) {
 		verify_text_part_of_each_element_of_page_element_and_store_into_variable(po, variableName);
@@ -1459,7 +1535,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable.
+	 * 
+	 * @deprecated use "get text part of {string} page element and store into {string} variable." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get text part of {string} page object and store into {string} variable.")
 	public void verify_text_part_of_page_object_and_store_into_variable(String po, String variableName) {
 		verify_text_part_of_page_element_and_store_into_variable(po, variableName);
@@ -1537,7 +1617,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>
 	 *       
 	 * @param variableName - the name of the variable that will store the .
+	 * 
+	 * @deprecated use "get {string} attribute value of each element of {string} page element and store into {string} variable." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get {string} attribute value of each element of {string} page object and store into {string} variable.")
 	public void get_attribute_value_of_each_element_of_page_element_and_store_into_variable_1(String attributeName, String po, String variableName) {
 		get_attribute_value_of_each_element_of_page_element_and_store_into_variable(attributeName, po, variableName);
@@ -1608,7 +1692,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param variableName - the name of the variable that will store the .
+	 * 
+	 * @deprecated use "get {string} attribute value of {string} page element and store into {string} variable." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get {string} attribute value of {string} page object and store into {string} variable.")
 	public void get_attribute_value_of_page_object_and_store_into_variable(String attributeName, String po, String variableName) {
 		get_attribute_value_of_page_element_and_store_into_variable(attributeName, po, variableName);
@@ -1690,7 +1778,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param textMatchMechanism - the text match mechanism used to verify the actual value with expected value. 
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify text part of each element of {string} page element matches {string} text where TextMatchMechanism={string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify text part of each element of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_text_part_of_each_element_of_page_element_matches_text_where_textmatchmechanism_1(String po, String expectedText, String textMatchMechanism) {
 		verify_text_part_of_each_element_of_page_element_matches_text_where_textmatchmechanism(po, expectedText, textMatchMechanism);
@@ -1771,7 +1863,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify text part of {string} page element matches {string} text where TextMatchMechanism={string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify text part of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_text_part_of_page_object_matches_text_where_textmatchmechanism(String po, String expectedText, String textMatchMechanism) {
 		verify_text_part_of_page_element_matches_text_where_textmatchmechanism(po, expectedText, textMatchMechanism);
@@ -1859,7 +1955,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
 	 *    Or we can directly specify value like:
 	 *    	"test value"
+	 * 
+	 * @deprecated use "verify text part of {string} page element {string} {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify text part of {string} page object {string} {string}.")
 	public void verify_text_part_of_page_object(String po, String operator, String expectedInfo) {
 		verify_text_part_of_page_element(po, operator, expectedInfo);
@@ -1953,7 +2053,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
 	 *    Or we can directly specify value like:
 	 *    	"test value"
+	 * 
+	 * @deprecated use "verify text part of each element of {string} page element {string} {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify text part of each element of {string} page object {string} {string}.")
 	public void verify_text_part_of_each_element_of_page_object(String po, String operator, String expectedInfo) {
 		verify_text_part_of_each_element_of_page_element(po, operator, expectedInfo);
@@ -2039,7 +2143,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify {string} attribute value of each element of {string} page element matches {string} text where TextMatchMechanism={string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify {string} attribute value of each element of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_attribute_value_of_each_element_of_page_element_matches_text_where_textmatchmechanism_1(String attributeName, String po, String expectedText, String textMatchMechanism) {
 		verify_attribute_value_of_each_element_of_page_element_matches_text_where_textmatchmechanism(attributeName, po, expectedText, textMatchMechanism);
@@ -2122,7 +2230,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * <blockquote><pre>
 	 * 		For text match mechanism valid values, refer {@link TextMatchMechanism} class.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify {string} attribute value of {string} page element matches {string} text where TextMatchMechanism={string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify {string} attribute value of {string} page object matches {string} text where TextMatchMechanism={string}.")
 	public void verify_attribute_value_of_page_object_matches_text_where_textmatchmechanism(String attributeName, String po, String expectedText, String textMatchMechanism) {
 		verify_attribute_value_of_page_element_matches_text_where_textmatchmechanism(attributeName, po, expectedText, textMatchMechanism);
@@ -2146,7 +2258,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param operation - meaningful name of the operation.
+	 * 
+	 * @deprecated use "call {string} validator method of {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("call {string} validator method of {string} page object to {string}.")
 	public void call_validator_method_of_page_object_to(String methodAsJson, String po, String operation) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -2203,7 +2319,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * </pre></blockquote>      
 	 * @param operation - meaningful name of the operation.
 	 * @param variableName - the variable name where the return info of validator method is saved.
+	 * 
+	 * @deprecated use "call {string} validator method of {string} page element to {string} and store output to {string} variable." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("call {string} validator method of {string} page object to {string} and store output to {string} variable.")
 	public void call_validator_method_of_page_object_to_and_store_output_to_variable(String methodsAsJson, String po, String operation, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -2267,7 +2387,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *         {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 *       PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
+	 * 
+	 * @deprecated use "verify the selected values of the following page elements on {string}:" test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify the selected values of the following page objects on {string}:")
 	public void validate_the_selected_values_of_the_following_page_objects(String pageOrScreenName, DataTable dataTable) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
@@ -2451,7 +2575,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *     PO classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>    
 	 * @param variableName - the name of the variable which stored the extracted options.
+	 * 
+	 * @deprecated use "get dropdown options of {string} page element and store into {string} variable." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("get dropdown options of {string} page object and store into {string} variable.")
 	public void get_dropdown_options_of_page_object_and_store_into_variable(String po, String variableName) {
 		get_dropdown_options_of_page_element_and_store_into_variable(po, variableName);
@@ -2528,7 +2656,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *    For textMatchMechanism, refer {@link TextMatchMechanism}
 	 *    Or we can directly specify value like:
 	 *    	"test value"
+	 * 
+	 * @deprecated use "verify dropdown options of {string} page element {string} {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify dropdown options of {string} page object {string} {string}.")
 	public void verify_dropdown_options_of_page_object(String po, String operator, String expectedInfo) {
 		verify_dropdown_options_of_page_element(po, operator, expectedInfo);
@@ -2596,7 +2728,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 * @param y1 - coordinate y1.
 	 * @param x2 - coordinate x2.
 	 * @param y2 - coordinate y2.
+	 * 
+	 * @deprecated use "verify the location of {string} page element is within [x1={int}, y1={int}, x2={int}, y2={int}] rectangular area." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify location of {string} page object is within [x1={int}, y1={int}, x2={int}, y2={int}] rectangular area.")
 	public void verify_page_object_is_within_rectangular_area(String po, int x1, int y1, int x2, int y2) {
 		verify_page_element_is_within_rectangular_area(po, x1, y1, x2, y2);
@@ -2699,7 +2835,11 @@ public class SmartUiFormElementOperationsStepDefs {
 	 *    	 the element is expected to be present. All values should be in pixels. NOTE: Screen top left first point is (0, 0).
 	 * </pre></blockquote>
 	 * 
+	 * 
+	 * @deprecated use "verify the location of the following page elements on the screen:" test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@Then("verify the location of the following page objects on the screen:")
 	public void verify_the_location_of_the_page_objects_on__the_screen(DataTable dataTable) {
 		verify_the_location_of_the_page_elements_on_the_screen(dataTable);

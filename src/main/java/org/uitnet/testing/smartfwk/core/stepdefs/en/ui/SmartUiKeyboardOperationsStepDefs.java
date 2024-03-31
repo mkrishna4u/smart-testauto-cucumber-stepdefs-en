@@ -115,7 +115,11 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 * </pre></blockquote>      
 	 * @param operation - meaningful expected operation name.
 	 * 
+	 * 
+	 * @deprecated use "use {string} keys on {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("use {string} keys on {string} page object to {string}.")
 	public void use_keys_on_page_object_to_perform_operation_1(String keys, String po, String operation) {
 		use_keys_on_page_object_to_perform_operation(keys, po, operation);
@@ -222,7 +226,11 @@ public class SmartUiKeyboardOperationsStepDefs {
 	 * </pre></blockquote>      
 	 * @param operation - meaningful expected operation name.
 	 * 
+	 * 
+	 * @deprecated use "use {string} keys and {string} mouse event together on {string} page element to {string}." test step.
+	 * 
 	 */
+	@Deprecated(since = "6.1.4", forRemoval = true)
 	@When("use {string} keys and {string} mouse event together on {string} page object to {string}.")
 	public void use_keys_and_mouse_event_together_on_page_object_to_1(String keys, String mouseEvent, String po, String operation) {
 		use_keys_and_mouse_event_together_on_page_object_to(keys, mouseEvent, po, operation);
