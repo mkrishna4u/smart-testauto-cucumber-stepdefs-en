@@ -91,7 +91,7 @@ public class SmartFileUploadStepDefs {
 	 * @deprecated use "upload {string} files using {string} page element." test step.
 	 *
 	 */
-	@Deprecated
+	@Deprecated(since = "6.1.4", forRemoval = true)	
 	@When("upload {string} files using {string} page object.")
 	public void upload_files_using_page_element_2(String files, String po) {
 		upload_files_using_page_element(files, po);
