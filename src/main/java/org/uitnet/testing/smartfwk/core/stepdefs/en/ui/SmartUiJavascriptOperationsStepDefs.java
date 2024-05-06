@@ -44,22 +44,22 @@ public class SmartUiJavascriptOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to set javascript parameter value to specific value for page element / page object.
+	 * Used to set javascript parameter value to specific value for page element.
 	 * This will work only for web application that runs on Web Browser.
 	 * 
 	 * @param paramName - name of the parameter name of the element that is going to get identified using javascript mechanism.
 	 * @param paramValue - parameter value in string. If value is string then enclose in single quote (') else keep as as without single quote.
-	 * @param po - the page object / page element can be specified in two way:
+	 * @param pe - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>  
 	 * @param actionName - meaningful action name.
 	 */
 	@When("set {string} javascript parameter value to {string} for {string} page element to {string}.")
-	public void set_javascript_parameter_value_to_page_element_to(String paramName, String paramValue, String po, String actionName) {
+	public void set_javascript_parameter_value_to_page_element_to(String paramName, String paramValue, String pe, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -68,10 +68,10 @@ public class SmartUiJavascriptOperationsStepDefs {
 		paramName = scenarioContext.applyParamsValueOnText(paramName);
 		paramValue = scenarioContext.applyParamsValueOnText(paramValue);
 		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pe, scenarioContext);
 		
 		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				new Object[] { peInfo.getMaxIterationsToLocateElements() }, peInfo,
 				scenarioContext);
 		
 		PageObjectUtil.setJavascriptParamValueOfElement(scenarioContext.getActiveAppDriver(), 
@@ -79,23 +79,23 @@ public class SmartUiJavascriptOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to execute javascript function of the specified page element / page object.
+	 * Used to execute javascript function of the specified page element.
 	 * This will work only for web application that runs on Web Browser.
 	 * 
 	 * @param functionWithArgs - the function name along with argument details like:
 	 * 		- scroll({top: 100, left: 100, behavior: 'smooth'})
 	 *      - focus()
-	 * @param po - the page object / page element can be specified in two way:
+	 * @param pe - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>  
 	 * @param actionName - meaningful action name.
 	 */
 	@When("execute {string} javascript function of {string} page element to {string}.")
-	public void execute_javascript_function_of_page_element_to(String functionWithArgs, String po, String actionName) {
+	public void execute_javascript_function_of_page_element_to(String functionWithArgs, String pe, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -103,10 +103,10 @@ public class SmartUiJavascriptOperationsStepDefs {
 		
 		functionWithArgs = scenarioContext.applyParamsValueOnText(functionWithArgs);
 		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pe, scenarioContext);
 		
 		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				new Object[] { peInfo.getMaxIterationsToLocateElements() }, peInfo,
 				scenarioContext);
 		
 		PageObjectUtil.executeJavascriptFunctionOfElement(scenarioContext.getActiveAppDriver(), 
@@ -114,25 +114,25 @@ public class SmartUiJavascriptOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to execute javascript function of the specified page element / page object and stores the returned 
+	 * Used to execute javascript function of the specified page element and stores the returned 
 	 * output of the method into a specified variable.
 	 * This will work only for web application that runs on Web Browser.
 	 * 
 	 * @param functionWithArgs - the function name along with argument details like:
 	 * 		- scroll({top: 100, left: 100, behavior: 'smooth'})
 	 *      - focus()
-	 * @param po - the page object / page element can be specified in two way:
+	 * @param pe - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>  
 	 * @param actionName - meaningful action name.
 	 * @param variableName - the name of the variable where the return of the method is going to get stored.
 	 */
 	@When("execute {string} javascript function of {string} page element to {string} and store returned value into {string} variable.")
-	public void execute_javascript_function_of_page_element_to(String functionWithArgs, String po, String actionName, String variableName) {
+	public void execute_javascript_function_of_page_element_to(String functionWithArgs, String pe, String actionName, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -140,10 +140,10 @@ public class SmartUiJavascriptOperationsStepDefs {
 		
 		functionWithArgs = scenarioContext.applyParamsValueOnText(functionWithArgs);
 		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pe, scenarioContext);
 		
 		WebElement elem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				new Object[] { peInfo.getMaxIterationsToLocateElements() }, peInfo,
 				scenarioContext);
 		
 		Object obj = PageObjectUtil.executeJavascriptFunctionOfElement(scenarioContext.getActiveAppDriver(), 

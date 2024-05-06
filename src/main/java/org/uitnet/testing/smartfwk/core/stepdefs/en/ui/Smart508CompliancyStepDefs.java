@@ -57,12 +57,12 @@ public class Smart508CompliancyStepDefs {
 	 * @param dataTable - the datatable that contains the page elements. In this table order of the elements matter.
 	 * 		Format of the datatable is given below:
 	 * <blockquote><pre>
-	 *       | Page Object / Page Element                                            | 
-	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
-	 *       | myapp.XyzPO.poObject                                                  |
+	 *       | Page Element                                                               | 
+	 *       | {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {}} | 
+	 *       | myapp.XyzPage.pageElement                                                  |
 	 *       
-	 *    Where: JSON Syntax for page object (Refer {@link PageObject}):
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *    Where: JSON Syntax for page element (Refer {@link PageObject}):
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 * </pre></blockquote>
 	 * 
 	 */
@@ -83,22 +83,22 @@ public class Smart508CompliancyStepDefs {
 		List<String> rowNext = null;
 		for (int i = 1; i < rows.size() - 1; i++) {
 			row = rows.get(i);
-			String po = row.get(0); // Page object
-			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+			String pe = row.get(0); // Page element
+			PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pe, scenarioContext);
 			
 			rowNext = rows.get(i+1);
-			String poNext = rowNext.get(0); // Page object
-			PageObjectInfo poInfoNext = PageObjectUtil.getPageObjectInfo(poNext, scenarioContext);
+			String peNext = rowNext.get(0); // Page element
+			PageObjectInfo peInfoNext = PageObjectUtil.getPageObjectInfo(peNext, scenarioContext);
 			
 			if(i == 1) {
 				PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence[].class.getTypeName() },
-						new Object[] { poInfoNext.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.LEFT_SHIFT, Keys.TAB} }, poInfoNext,
+						new Object[] { peInfoNext.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.LEFT_SHIFT, Keys.TAB} }, peInfoNext,
 						scenarioContext);
 				scenarioContext.waitForMilliSeconds(focusSwitchIntervalInMillis);
 			}
 			
 			PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence[].class.getTypeName() },
-					new Object[] { poInfo.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.TAB} }, poInfo,
+					new Object[] { peInfo.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.TAB} }, peInfo,
 					scenarioContext);
 			scenarioContext.waitForMilliSeconds(focusSwitchIntervalInMillis);
 			
@@ -107,7 +107,7 @@ public class Smart508CompliancyStepDefs {
 				Assert.fail("Tab key pressed at page element present in row " + (i+1) + ". Next focused/active element is not found.");
 			} else {
 				WebElement nextElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] { Integer.TYPE.getTypeName() },
-						new Object[] { poInfoNext.getMaxIterationsToLocateElements() }, poInfoNext,
+						new Object[] { peInfoNext.getMaxIterationsToLocateElements() }, peInfoNext,
 						scenarioContext);
 				Assert.assertEquals("tagName="+elem.getTagName(), "tagName="+nextElem.getTagName(), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
 				Assert.assertEquals("id="+elem.getAttribute("id"), "id="+nextElem.getAttribute("id"), "Page element at row " + (i + 1) + " is not the next focused element after tab key pressed on row " + (i) + " element.");
@@ -120,15 +120,15 @@ public class Smart508CompliancyStepDefs {
 		
 		for (int i = rows.size() - 1; i > 1; i--) {
 			row = rows.get(i);
-			String po = row.get(0); // Page object
-			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+			String pe = row.get(0); // Page element
+			PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pe, scenarioContext);
 			
 			rowNext = rows.get(i-1);
-			String poNext = rowNext.get(0); // Page object
-			PageObjectInfo poInfoNext = PageObjectUtil.getPageObjectInfo(poNext, scenarioContext);
+			String peNext = rowNext.get(0); // Page element
+			PageObjectInfo peInfoNext = PageObjectUtil.getPageObjectInfo(peNext, scenarioContext);
 			
 			PageObjectUtil.invokeValidatorMethod("sendCommandKeys", new String[] { Integer.TYPE.getTypeName(), CharSequence[].class.getTypeName() },
-					new Object[] { poInfo.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.LEFT_SHIFT, Keys.TAB} }, poInfo,
+					new Object[] { peInfo.getMaxIterationsToLocateElements(), new CharSequence[] {Keys.LEFT_SHIFT, Keys.TAB} }, peInfo,
 					scenarioContext);
 			scenarioContext.waitForMilliSeconds(focusSwitchIntervalInMillis);
 			
@@ -137,7 +137,7 @@ public class Smart508CompliancyStepDefs {
 				Assert.fail("Shift+Tab key pressed at page element present in row " + (i) + ". Previous focused/active element is not found.");
 			} else {
 				WebElement nextElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] { Integer.TYPE.getTypeName() },
-						new Object[] { poInfoNext.getMaxIterationsToLocateElements() }, poInfoNext,
+						new Object[] { peInfoNext.getMaxIterationsToLocateElements() }, peInfoNext,
 						scenarioContext);
 				Assert.assertEquals(elem.getTagName(), nextElem.getTagName(), "Page element at row " + (i-1) + " is not the previous focused element after shift+tab key is pressed on row " + (i) + " element.");
 				Assert.assertEquals(elem.getAttribute("id"), nextElem.getAttribute("id"), "Page element at row " + (i-1) + " is not the previous focused element after shift+tab key is pressed on row " + (i) + " element.");
@@ -163,12 +163,12 @@ public class Smart508CompliancyStepDefs {
 	 * @param dataTable - the data table that contains the page elements for which the color contrast ratio is going to get verified.
 	 * 		Format of the datatable is given below:
 	 * <blockquote><pre>
-	 *       | Page Object / Page Element                                            | 
-	 *       | {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {}} | 
-	 *       | myapp.XyzPO.poObject                                                  |
+	 *       | Page Element                                                               | 
+	 *       | {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {}} | 
+	 *       | myapp.XyzPage.pageElement                                                  |
 	 *       
-	 *    Where: JSON Syntax for page object (Refer {@link PageObject}):
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *    Where: JSON Syntax for page element (Refer {@link PageObject}):
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
 	 * </pre></blockquote>
 	 */
 	@Then("verify color contrast ratio [expected minContrastRatio={double} for minFontWeight={int} and minFontSize={double} rem] for the following page elements present on {string}:")
@@ -185,12 +185,12 @@ public class Smart508CompliancyStepDefs {
 		List<String> invalidRows = new LinkedList<String>();
 		for (int i = 1; i < rows.size(); i++) {
 			row = rows.get(i);
-			String po = row.get(0); // Page object
-			PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po, scenarioContext);
+			String pe = row.get(0); // Page element
+			PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pe, scenarioContext);
 			
 			
 			webElem = (WebElement) PageObjectUtil.invokeValidatorMethod("findElement", new String[] { Integer.TYPE.getTypeName() },
-					new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
+					new Object[] { peInfo.getMaxIterationsToLocateElements() }, peInfo,
 					scenarioContext);
 			
 			String fgColor = webElem.getCssValue("color");

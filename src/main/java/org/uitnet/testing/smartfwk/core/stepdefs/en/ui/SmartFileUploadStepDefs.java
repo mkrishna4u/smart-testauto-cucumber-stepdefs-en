@@ -48,55 +48,31 @@ public class SmartFileUploadStepDefs {
 	 * <blockquote><pre>
 	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
 	 * </pre></blockquote>
-	 * @param po - the page object / page element can be specified in two way:
+	 * @param pe - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
 	 */
 	@When("upload {string} files using {string} page element.")
-	public void upload_files_using_page_element(String files, String po) {
+	public void upload_files_using_page_element(String files, String pe) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(po);
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pe);
 		
 		JsonDocumentReader jsonReader = new JsonDocumentReader(files, false);
 		List<String> fileList = jsonReader.readValuesAsList("$");
 		
 		PageObjectUtil.invokeValidatorMethod("selectFiles", new String[] { ItemList.class.getTypeName(), Integer.TYPE.getTypeName() },
-				new Object[] { new ItemList<>(fileList), poInfo.getMaxIterationsToLocateElements() }, poInfo,
+				new Object[] { new ItemList<>(fileList), peInfo.getMaxIterationsToLocateElements() }, peInfo,
 				scenarioContext);
 	}
-	
-	/**
-	 * Used to upload single / multiple files using specified page object.
-	 * 
-	 * @param files - relative path in JSON array format like
-	 * <blockquote><pre>
-	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
-	 * </pre></blockquote>
-	 * @param po - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>
-	 * 
-	 * @deprecated use "upload {string} files using {string} page element." test step.
-	 *
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)	
-	@When("upload {string} files using {string} page object.")
-	public void upload_files_using_page_element_2(String files, String po) {
-		upload_files_using_page_element(files, po);
-	}
-	
+			
 	/**
 	 * Used to select single / multiple files using specified page element (using file dialog).
 	 * 
@@ -104,50 +80,27 @@ public class SmartFileUploadStepDefs {
 	 * <blockquote><pre>
 	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
 	 * </pre></blockquote>
-	 * @param po - the page object / page element can be specified in two way:
+	 * @param pe - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
 	 */
 	@When("select {string} files using {string} page element.")
-	public void select_files_using_page_element(String files, String po) {
-		upload_files_using_page_element(files, po);
+	public void select_files_using_page_element(String files, String pe) {
+		upload_files_using_page_element(files, pe);
 	}
-	
-	/**
-	 * Used to select single / multiple files using specified page object (using file dialog).
-	 * 
-	 * @param files - relative path in JSON array format like
-	 * <blockquote><pre>
-	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
-	 * </pre></blockquote>
-	 * @param po - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>
-	 * 
-	 * @deprecated use "select {string} files using {string} page element." test step.
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("select {string} files using {string} page object.")
-	public void select_files_using_page_object(String files, String po) {
-		upload_files_using_page_element(files, po);
-	}
-	
+			
 	/**
 	 * Used to select single / multiple files using specified page element (using file dialog).
-	 * @param po - the page object / page element can be specified in two way:
+	 * @param pe - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>
 	 * @param files - DocString that contains relative paths in JSON array format like
 	 * <blockquote><pre>
@@ -155,29 +108,8 @@ public class SmartFileUploadStepDefs {
 	 * </pre></blockquote>
 	 */
 	@When("select the following files using {string} page element:")
-	public void select_the_following_files_using_page_element(String po, DocString files) {
-		upload_files_using_page_element(files.getContent(), po);
+	public void select_the_following_files_using_page_element(String pe, DocString files) {
+		upload_files_using_page_element(files.getContent(), pe);
 	}
-	
-	/**
-	 * Used to select single / multiple files using specified page object (using file dialog).
-	 * @param po - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>
-	 * @param files - DocString that contains relative paths in JSON array format like
-	 * <blockquote><pre>
-	 * 		["test-data/uploads/sample1.pdf", "test-data/uploads/sample2.pdf"]
-	 * </pre></blockquote>
-	 * 
-	 * @deprecated use "select the following files using {string} page element:" test step.
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("select the following files using {string} page object:")
-	public void select_the_following_files_using_page_object(String po, DocString files) {
-		upload_files_using_page_element(files.getContent(), po);
-	}
+		
 }

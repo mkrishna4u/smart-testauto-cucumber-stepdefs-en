@@ -100,7 +100,7 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	}
 
 	/**
-	 * Used to switch to different frame of the DOM. So that web driver can access the page object / page elements
+	 * Used to switch to different frame of the DOM. So that web driver can access the page elements
 	 * of the switched frame.
 	 * 
 	 * @param frameNameOrId - the ID or the name of the frame.
@@ -128,7 +128,7 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	}
 
 	/**
-	 * Used to switch to different frame of the DOM by specifying the index value. So that web driver can access the page object / page elements
+	 * Used to switch to different frame of the DOM by specifying the index value. So that web driver can access the page elements
 	 * of the switched frame.
 	 * 
 	 * @param frameNumber - the frame index in the page.

@@ -48,557 +48,292 @@ public class SmartUiMouseOperationsStepDefs {
 	}
 
 	/**
-	 * Used to perform click operation on the specified page object / page element.
+	 * Used to perform click operation on the specified page element.
 	 * 
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "click on {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("click on {string} page object to {string}.")
-	public void click_on_page_element(String pageObject, String actionName) {
-		if(!scenarioContext.isLastConditionSetToTrue()) {
-			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
-			return;
-		}
-		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("click", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
-	}
-	
-	/**
-	 * Used to perform click operation on the specified page object / page element.
-	 * 
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click on {string} page element to {string}.")
-	public void click_on_page_element_1(String pageObject, String actionName) {
+	public void click_on_page_element(String pageElement, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		click_on_page_element(pageObject, actionName);
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pageElement);
+		PageObjectUtil.invokeValidatorMethod("click", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] {peInfo.getMaxIterationsToLocateElements()}, peInfo, scenarioContext);
 	}
 	
 	/**
-	 * Used to perform click operation on the specified page object / page element.
+	 * Used to perform click operation on the specified page element.
 	 * 
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click {string} page element to {string}.")
-	public void click_on_page_element_2(String pageObject, String actionName) {
+	public void click_on_page_element_2(String pageElement, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		click_on_page_element(pageObject, actionName);
+		click_on_page_element(pageElement, actionName);
 	}
-	
-	/**
-	 * Used to perform click operation on the specified page object / page element.
-	 * 
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "click {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("click {string} page object to {string}.")
-	public void click_on_page_element_3(String pageObject, String actionName) {
-		click_on_page_element(pageObject, actionName);
-	}
-	
-	/**
-	 * Used to perform force click operation on the specified page object / page element.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "force click on {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("force click on {string} page object to {string}.")
-	public void force_click_on_page_element(String pageObject, String actionName) {
-		if(!scenarioContext.isLastConditionSetToTrue()) {
-			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
-			return;
-		}
 		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("forceClick", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
-	}
-	
 	/**
-	 * Used to perform force click operation on the specified page object / page element.
+	 * Used to perform force click operation on the specified page element.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("force click on {string} page element to {string}.")
-	public void force_click_on_page_element_1(String pageObject, String actionName) {
-		force_click_on_page_element(pageObject, actionName);
+	public void force_click_on_page_element(String pageElement, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pageElement);
+		PageObjectUtil.invokeValidatorMethod("forceClick", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] {peInfo.getMaxIterationsToLocateElements()}, peInfo, scenarioContext);
 	}
 	
 	/**
-	 * Used to perform force click operation on the specified page object / page element.
+	 * Used to perform force click operation on the specified page element.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("force click {string} page element to {string}.")
-	public void force_click_on_page_element_2(String pageObject, String actionName) {
-		force_click_on_page_element(pageObject, actionName);
+	public void force_click_on_page_element_2(String pageElement, String actionName) {
+		force_click_on_page_element(pageElement, actionName);
 	}
 	
 	/**
-	 * Used to perform force click operation on the specified page object / page element.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "force click {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("force click {string} page object to {string}.")
-	public void force_click_on_page_element_3(String pageObject, String actionName) {
-		force_click_on_page_element(pageObject, actionName);
-	}
-	
-	/**
-	 * Used to perform click operation on the specified page objects / page elements.
+	 * Used to perform click operation on the specified page elements.
 	 * 
 	 * @param actionName - meaningful expected action name.
-	 * @param pageObjects - a document string contains multiple page objects in an JSON array in the format given below:
+	 * @param pageElements - a document string contains multiple page elements in an JSON array in the format given below:
 	 * 
-	 * 	['{name: 'myapp.XyzPO.poObject', maxTimeToWaitInSeconds: 6}', 'myapp.XyzPO.poObject1', 'myapp.XyzPO.poObject2']
+	 * 	['{name: 'myapp.XyzPage.pageElement', maxTimeToWaitInSeconds: 6}', 'myapp.XyzPage.pageElement1', 'myapp.XyzPage.pageElement2']
 	 * 
-	 *   Each page object / page element can be specified in two way:
+	 *   Each page element can be specified in two way:
 	 *   <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 *   </pre></blockquote>      
 	 * 
 	 */
 	@When("click on the following page elements to {string}:")
-	public void click_on_the_following_page_elements(String actionName, DocString pageObjects) {
+	public void click_on_the_following_page_elements(String actionName, DocString pageElements) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		String pageObjectsAsStr = pageObjects.getContent();
-		JsonDocumentReader jsonReader = new JsonDocumentReader(pageObjectsAsStr, true);
-		List<String> poList = jsonReader.readValuesAsList("$");
+		String pageElementsAsStr = pageElements.getContent();
+		JsonDocumentReader jsonReader = new JsonDocumentReader(pageElementsAsStr, true);
+		List<String> peList = jsonReader.readValuesAsList("$");
 		
-		for(String po : poList) {
-			click_on_page_element(po, actionName);
+		for(String pe : peList) {
+			click_on_page_element(pe, actionName);
 		}
 	}
 	
 	/**
-	 * Used to perform click operation on the specified page objects / page elements.
-	 * 
-	 * @param actionName - meaningful expected action name.
-	 * @param pageObjects - a document string contains multiple page objects in an JSON array in the format given below:
-	 * 
-	 * 	['{name: 'myapp.XyzPO.poObject', maxTimeToWaitInSeconds: 6}', 'myapp.XyzPO.poObject1', 'myapp.XyzPO.poObject2']
-	 * 
-	 *   Each page object / page element can be specified in two way:
-	 *   <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 *   </pre></blockquote>      
-	 * 
-	 * 
-	 * @deprecated use "click on the following page elements to {string}:" test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("click on the following page objects to {string}:")
-	public void click_on_the_following_page_objects(String actionName, DocString pageObjects) {
-		click_on_the_following_page_elements(actionName, pageObjects);
-	}
-	
-	/**
-	 * Used to perform double click operation on the specified page object / page element.
+	 * Used to perform double click operation on the specified page element.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "double click on {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("double click on {string} page object to {string}.")
-	public void double_click_on_page_element(String pageObject, String actionName) {
-		if(!scenarioContext.isLastConditionSetToTrue()) {
-			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
-			return;
-		}
-		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("doubleClick", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
-	}
-	
-	/**
-	 * Used to perform double click operation on the specified page object / page element.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("double click on {string} page element to {string}.")
-	public void double_click_on_page_element_1(String pageObject, String actionName) {
-		double_click_on_page_element(pageObject, actionName);
+	public void double_click_on_page_element(String pageElement, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pageElement);
+		PageObjectUtil.invokeValidatorMethod("doubleClick", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] {peInfo.getMaxIterationsToLocateElements()}, peInfo, scenarioContext);
 	}
 	
 	/**
-	 * Used to perform double click operation on the specified page object / page element.
+	 * Used to perform double click operation on the specified page element.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("double click {string} page element to {string}.")
-	public void double_click_on_page_element_2(String pageObject, String actionName) {
-		double_click_on_page_element(pageObject, actionName);
+	public void double_click_on_page_element_2(String pageElement, String actionName) {
+		double_click_on_page_element(pageElement, actionName);
 	}
 	
 	/**
-	 * Used to perform double click operation on the specified page object / page element.
+	 * Used to perform right click operation on the specified page element.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "double click {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("double click {string} page object to {string}.")
-	public void double_click_on_page_element_3(String pageObject, String actionName) {
-		double_click_on_page_element(pageObject, actionName);
-	}
-	
-	/**
-	 * Used to perform right click operation on the specified page object / page element.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "right click on {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("right click on {string} page object to {string}.")
-	public void right_click_on_page_element(String pageObject, String actionName) {
-		if(!scenarioContext.isLastConditionSetToTrue()) {
-			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
-			return;
-		}
-		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("rightClick", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
-	}
-	
-	/**
-	 * Used to perform right click operation on the specified page object / page element.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("right click on {string} page element to {string}.")
-	public void right_click_on_page_element_1(String pageObject, String actionName) {
-		right_click_on_page_element(pageObject, actionName);
+	public void right_click_on_page_element(String pageElement, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pageElement);
+		PageObjectUtil.invokeValidatorMethod("rightClick", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] {peInfo.getMaxIterationsToLocateElements()}, peInfo, scenarioContext);
 	}
 	
 	/**
-	 * Used to perform right click operation on the specified page object / page element.
+	 * Used to perform right click operation on the specified page element.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("right click {string} page element to {string}.")
-	public void right_click_on_page_element_2(String pageObject, String actionName) {
-		right_click_on_page_element(pageObject, actionName);
+	public void right_click_on_page_element_2(String pageElement, String actionName) {
+		right_click_on_page_element(pageElement, actionName);
 	}
-	
-	/**
-	 * Used to perform right click operation on the specified page object / page element.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "right click {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("right click {string} page object to {string}.")
-	public void right_click_on_page_element_3(String pageObject, String actionName) {
-		right_click_on_page_element(pageObject, actionName);
-	}
-	
-	/**
-	 * Used to perform click and hold operation on the specified page object / page element.
-	 * Generally it is used for drag and drop functionality.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "click and hold on {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("click and hold on {string} page object to {string}.")
-	public void click_and_hold_on_page_element(String pageObject, String actionName) {
-		if(!scenarioContext.isLastConditionSetToTrue()) {
-			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
-			return;
-		}
 		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("clickAndHold", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
-	}
-	
 	/**
-	 * Used to perform click and hold operation on the specified page object / page element.
+	 * Used to perform click and hold operation on the specified page element.
 	 * Generally it is used for drag and drop functionality.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("click and hold on {string} page element to {string}.")
-	public void click_and_hold_on_page_element_1(String pageObject, String actionName) {
-		click_and_hold_on_page_element(pageObject, actionName);
-	}
-	
-	/**
-	 * Used to perform click and hold operation on the specified page object / page element.
-	 * Generally it is used for drag and drop functionality.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 */
-	@When("click and hold {string} page element to {string}.")
-	public void click_and_hold_on_page_element_2(String pageObject, String actionName) {
-		click_and_hold_on_page_element(pageObject, actionName);
-	}
-	
-	/**
-	 * Used to perform click and hold operation on the specified page object / page element.
-	 * Generally it is used for drag and drop functionality.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "click and hold {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("click and hold {string} page object to {string}.")
-	public void click_and_hold_on_page_element_3(String pageObject, String actionName) {
-		click_and_hold_on_page_element(pageObject, actionName);
-	}
-	
-	/**
-	 * Used to perform mouse release operation on the specified page object / page element.
-	 * Generally it is used for drag and drop functionality.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "release hold click from {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("release hold click from {string} page object to {string}.")
-	public void release_hold_click_from_page_element(String pageObject, String actionName) {
+	public void click_and_hold_on_page_element(String pageElement, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
-		PageObjectUtil.invokeValidatorMethod("release", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] { poInfo.getMaxIterationsToLocateElements() }, poInfo,
-				scenarioContext);
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pageElement);
+		PageObjectUtil.invokeValidatorMethod("clickAndHold", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] {peInfo.getMaxIterationsToLocateElements()}, peInfo, scenarioContext);
 	}
 	
 	/**
-	 * Used to perform mouse release operation on the specified page object / page element.
+	 * Used to perform click and hold operation on the specified page element.
 	 * Generally it is used for drag and drop functionality.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
+	 * </pre></blockquote>      
+	 * @param actionName - meaningful expected action name.
+	 */
+	@When("click and hold {string} page element to {string}.")
+	public void click_and_hold_on_page_element_2(String pageElement, String actionName) {
+		click_and_hold_on_page_element(pageElement, actionName);
+	}
+		
+	/**
+	 * Used to perform mouse release operation on the specified page element.
+	 * Generally it is used for drag and drop functionality.
+	 *
+	 * @param pageElement - the page element can be specified in two way:
+	 * <blockquote><pre>
+	 *     Direct way: myapp.XyzPage.pageElement
+	 *     JSON way:  (Refer {@link PageObject}). Example:
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("release hold click from {string} page element to {string}.")
-	public void release_hold_click_from_page_element_1(String pageObject, String actionName) {
-		release_hold_click_from_page_element(pageObject, actionName);
+	public void release_hold_click_from_page_element(String pageElement, String actionName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pageElement);
+		PageObjectUtil.invokeValidatorMethod("release", new String[] {Integer.TYPE.getTypeName()}, 
+				new Object[] { peInfo.getMaxIterationsToLocateElements() }, peInfo,
+				scenarioContext);
 	}
 	
 	/**
-	 * Used to perform drag and drop operations on the specified page object / page element.
+	 * Used to perform drag and drop operations on the specified page element.
 	 *
-	 * @param dragElemPageObject - the dragging element page object / page element can be specified in two way:
+	 * @param dragElemPageObject - the dragging element page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
-	 * @param dropElemPageObject - the dropping element page object / page element can be specified in two way:
+	 * @param dropElemPageObject - the dropping element page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 */
 	@When("drag {string} page element and drop on {string} page element.")
@@ -625,105 +360,63 @@ public class SmartUiMouseOperationsStepDefs {
 	}
 	
 	/**
-	 * Used to perform mouse hoverover operations on the specified page object / page element.
+	 * Used to perform mouse hoverover operations on the specified page element.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "mouse hoverover on {string} page element to {string}." test step.
-	 * 
 	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("mouse hoverover on {string} page object to {string}.")
-	public void mouse_hoverover_on_page_element(String pageObject, String actionName) {
+	@When("mouse hoverover on {string} page element to {string}.")
+	public void mouse_hoverover_on_page_element(String pageElement, String actionName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
 		}
 		
-		PageObjectInfo poInfo = PageObjectUtil.getPageObjectInfo(pageObject);
+		PageObjectInfo peInfo = PageObjectUtil.getPageObjectInfo(pageElement);
 		PageObjectUtil.invokeValidatorMethod("mouseHoverOver", new String[] {Integer.TYPE.getTypeName()}, 
-				new Object[] {poInfo.getMaxIterationsToLocateElements()}, poInfo, scenarioContext);
+				new Object[] {peInfo.getMaxIterationsToLocateElements()}, peInfo, scenarioContext);
 		scenarioContext.waitForSeconds(1);
 	}
 	
 	/**
-	 * Used to perform mouse hoverover operations on the specified page object / page element.
+	 * Used to perform mouse hoverover operations on the specified page element.
 	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
+	 * @param pageElement - the page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 */
-	@When("mouse hoverover on {string} page element to {string}.")
-	public void mouse_hoverover_on_page_element_1(String pageObject, String actionName) {
-		mouse_hoverover_on_page_element(pageObject, actionName);
-	}
-	
-	/**
-	 * Used to perform mouse hoverover operations on the specified page object / page element.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * @param actionName - meaningful expected action name.
 	 */
 	@When("mouse hoverover {string} page element to {string}.")
-	public void mouse_hoverover_on_page_element_2(String pageObject, String actionName) {
-		mouse_hoverover_on_page_element(pageObject, actionName);
+	public void mouse_hoverover_on_page_element_2(String pageElement, String actionName) {
+		mouse_hoverover_on_page_element(pageElement, actionName);
 	}
-	
-	/**
-	 * Used to perform mouse hoverover operations on the specified page object / page element.
-	 *
-	 * @param pageObject - the page object / page element can be specified in two way:
-	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
-	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
-	 * </pre></blockquote>      
-	 * @param actionName - meaningful expected action name.
-	 * 
-	 * @deprecated use "mouse hoverover {string} page element to {string}." test step.
-	 * 
-	 */
-	@Deprecated(since = "6.1.4", forRemoval = true)
-	@When("mouse hoverover {string} page object to {string}.")
-	public void mouse_hoverover_on_page_element_3(String pageObject, String actionName) {
-		mouse_hoverover_on_page_element(pageObject, actionName);
-	}
-	
+		
 	/**
 	 * Used to set the horizontal scrollbar thumb position to N pixels right from the left most location.
 	 * 
 	 * @param distanceInPixels - distance in pixel where the scrolling pointer is set. distance should be always positive number
 	 * 		and relative to the scrollbar start location. 
 	 * 
-	 * @param scrollbarPageObject- the scrollbar page object / page element can be specified in two way:
+	 * @param scrollbarPageObject- the scrollbar page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * 
 	 */
-	@When("set horizontal scrollbar thumb position {int} pixels away from left [ScrollbarPageElement={string}].")
+	@When("set horizontal scrollbar thumb pesition {int} pixels away from left [ScrollbarPageElement={string}].")
 	public void set_horizontal_scrollbar_thumb_position_pixel_away_from_left(int distanceInPixels, String scrollbarPageObject) {
 		PageObjectInfo sourcePoInfo = PageObjectUtil.getPageObjectInfo(scrollbarPageObject);
 		
@@ -740,12 +433,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * @param distanceInPercentage - distance in percentage where the scrolling pointer is set. distance should be always positive number
 	 * 		and relative to the scrollbar start location. valid values are 0.0 to 100.0
 	 * 
-	 * @param scrollbarPageObject- the scrollbar page object / page element can be specified in two way:
+	 * @param scrollbarPageObject- the scrollbar page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * 
 	 */
@@ -766,12 +459,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * @param distanceInPixels - distance in pixel where the scrolling pointer is set. distance should be always positive number
 	 * 		and relative to the scrollbar start location. 
 	 * 
-	 * @param scrollbarPageObject- the scrollbar page object / page element can be specified in two way:
+	 * @param scrollbarPageObject- the scrollbar page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * 
 	 */
@@ -792,12 +485,12 @@ public class SmartUiMouseOperationsStepDefs {
 	 * @param distanceInPercentage - distance in percentage where the scrolling pointer is set. distance should be always positive number
 	 * 		and relative to the scrollbar start location. valid values are 0.0 to 100.0
 	 * 
-	 * @param scrollbarPageObject- the scrollbar page object / page element can be specified in two way:
+	 * @param scrollbarPageObject- the scrollbar page element can be specified in two way:
 	 * <blockquote><pre>
-	 *     Direct way: myapp.XyzPO.poObject
+	 *     Direct way: myapp.XyzPage.pageElement
 	 *     JSON way:  (Refer {@link PageObject}). Example:
-	 *       {name: "myapp.XyzPO.poObject", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
-	 *     PO classes are present in ./src/main/page_objects/ directory.
+	 *       {name: "myapp.XyzPage.pageElement", maxTimeToWaitInSeconds: 6, params: {param1: "param1Value", param2: "param2Value"}}
+	 *     Page element classes are present in ./src/main/page_objects/ directory.
 	 * </pre></blockquote>      
 	 * 
 	 */
