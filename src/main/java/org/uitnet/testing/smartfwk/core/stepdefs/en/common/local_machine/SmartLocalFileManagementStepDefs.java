@@ -47,12 +47,12 @@ public class SmartLocalFileManagementStepDefs {
 	}
 
 	/**
-	 * Used to remove specified file from the local downloads directory (test-results/downloads).
+	 * Used to permanently delete specified file from the local downloads directory (test-results/downloads).
 	 * 
 	 * @param fileName - the relative file path (w.r.t. downloads/ directory) of the file to be deleted.
 	 */
-	@When("remove {string} file from the local downloads directory.")
-	public void remove_file_from_the_local_downloads_directory(String fileName) {
+	@When("delete {string} file from the local downloads directory.")
+	public void delete_file_from_the_local_downloads_directory(String fileName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -64,15 +64,34 @@ public class SmartLocalFileManagementStepDefs {
 	}
 	
 	/**
-	 * Used to delete files from the test-results/downloads directory based on the specified condition like FileNamePrefix, FileExtension and FileNameMatchMechanism.
+	 * Used to permanently delete specified file from the specified directory on the local filesystem.
+	 * 
+	 * @param fileName - the relative file path (w.r.t. downloads/ directory) of the file to be deleted.
+	 * @param localDirectory - the absolute path of the local directory from where the file need to be deleted.
+	 */
+	@When("delete {string} file from the following local directory:")
+	public void delete_file_from_the_following_local_directory(String fileName, DocString localDirectory) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		fileName = scenarioContext.applyParamsValueOnText(fileName);
+		String localDirectoryPath = scenarioContext.applyParamsValueOnText(localDirectory.getContent().trim());
+		
+		LocalMachineFileSystem.deleteFiles(localDirectoryPath, TextMatchMechanism.exactMatchWithExpectedValue, fileName);
+	}
+	
+	/**
+	 * Used to permanently delete files from the test-results/downloads directory based on the specified condition like FileNamePrefix, FileExtension and FileNameMatchMechanism.
 	 * 
 	 * @param fileNamePrefix - the file name prefix
 	 * @param fileExtension - the file extension. like .xlsx, .csv etc.
 	 * @param fileNameMatchMechanism - file name match mechanism to match with fileNamePrefix.
 	 * 		For more details on fileNameMatchMechanism please refer {@link TextMatchMechanism}.
 	 */
-	@When("remove files from the local downloads directory where [FileNamePrefix:{string}, FileExtension:{string}, FileNameMatchMechanism:{string}].")
-	public void remove_files_from_the_local_downloads_directory_where(String fileNamePrefix, String fileExtension, String fileNameMatchMechanism) {
+	@When("delete files from the local downloads directory where [FileNamePrefix:{string}, FileExtension:{string}, FileNameMatchMechanism:{string}].")
+	public void delete_files_from_the_local_downloads_directory_where(String fileNamePrefix, String fileExtension, String fileNameMatchMechanism) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -81,6 +100,29 @@ public class SmartLocalFileManagementStepDefs {
 		fileNamePrefix = scenarioContext.applyParamsValueOnText(fileNamePrefix);
 		
 		LocalMachineFileSystem.deleteFiles(Locations.getProjectRootDir() + "/test-results/downloads", 
+				TextMatchMechanism.valueOf2(fileNameMatchMechanism), fileNamePrefix, fileExtension);
+	}
+	
+	/**
+	 * Used to permanently delete files from the specified local directory based on the specified condition like FileNamePrefix, FileExtension and FileNameMatchMechanism.
+	 * 
+	 * @param fileNamePrefix - the file name prefix
+	 * @param fileExtension - the file extension. like .xlsx, .csv etc.
+	 * @param fileNameMatchMechanism - file name match mechanism to match with fileNamePrefix.
+	 * 		For more details on fileNameMatchMechanism please refer {@link TextMatchMechanism}.
+	 * @param localDirectory - the absolute path of the local directory from where the files need to be deleted.
+	 */
+	@When("delete files from the following local directory where [FileNamePrefix:{string}, FileExtension:{string}, FileNameMatchMechanism:{string}]:")
+	public void delete_files_from_the_following_local_directory_where(String fileNamePrefix, String fileExtension, String fileNameMatchMechanism, DocString localDirectory) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		fileNamePrefix = scenarioContext.applyParamsValueOnText(fileNamePrefix);
+		String localDirectoryPath = scenarioContext.applyParamsValueOnText(localDirectory.getContent().trim());
+		
+		LocalMachineFileSystem.deleteFiles(localDirectoryPath, 
 				TextMatchMechanism.valueOf2(fileNameMatchMechanism), fileNamePrefix, fileExtension);
 	}
 	
@@ -94,7 +136,7 @@ public class SmartLocalFileManagementStepDefs {
 	 * @param variableName - the name of the variable that contains the filename along with its extension.
 	 */
 	@Then("find latest filename from local downloads directory that matches with [FileNamePrefix:{string}, FileExtension:{string}, FileNameMatchMechanism:{string}] and store into {string} variable.")
-	public void get_exact_file_name_from_local_downloads_directory_that_matches_with_and_store_into_variable(String fileNamePrefix, String fileExtension, String fileNameMatchMechanism, String variableName) {
+	public void find_latest_filename_from_local_downloads_directory_that_matches_with_and_store_into_variable(String fileNamePrefix, String fileExtension, String fileNameMatchMechanism, String variableName) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
 			return;
@@ -103,6 +145,38 @@ public class SmartLocalFileManagementStepDefs {
 		fileNamePrefix = scenarioContext.applyParamsValueOnText(fileNamePrefix);
 		
 		List<String> files = LocalMachineFileSystem.listFiles(Locations.getProjectRootDir() + "/test-results/downloads", 
+				TextMatchMechanism.valueOf2(fileNameMatchMechanism), fileNamePrefix, fileExtension);
+		
+		String latestFileName = "NOT-FOUND";
+		if(files != null && files.size() > 0) {
+			Collections.sort(files);
+			latestFileName = files.get(files.size() - 1);
+			latestFileName = latestFileName.substring(latestFileName.lastIndexOf(File.separator) + 1);
+		}
+		scenarioContext.addParamValue(variableName, latestFileName);
+	}
+	
+	/**
+	 * Used to find the latest file from the specified local directory based on the file matching criteria like FileNamePrefix, FileExtension and FileNameMatchingMechanism.
+	 * 
+	 * @param fileNamePrefix - the file name prefix
+	 * @param fileExtension - the file extension. like .xlsx, .csv etc.
+	 * @param fileNameMatchMechanism - file name match mechanism to match with fileNamePrefix.
+	 * 		For more details on fileNameMatchMechanism please refer {@link TextMatchMechanism}.
+	 * @param variableName - the name of the variable that contains the filename along with its extension.
+	 * @param localDirectory - the absolute path of the directory to search files in it.
+	 */
+	@Then("find latest filename from the following local directory that matches with [FileNamePrefix:{string}, FileExtension:{string}, FileNameMatchMechanism:{string}] and store into {string} variable:")
+	public void find_latest_filename_from_the_following_local_directory_that_matches_with_and_store_into_variable(String fileNamePrefix, String fileExtension, String fileNameMatchMechanism, String variableName, DocString localDirectory) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		fileNamePrefix = scenarioContext.applyParamsValueOnText(fileNamePrefix);
+		String localDirectoryPath = scenarioContext.applyParamsValueOnText(localDirectory.getContent().trim());
+		
+		List<String> files = LocalMachineFileSystem.listFiles(localDirectoryPath, 
 				TextMatchMechanism.valueOf2(fileNameMatchMechanism), fileNamePrefix, fileExtension);
 		
 		String latestFileName = "NOT-FOUND";
@@ -164,6 +238,40 @@ public class SmartLocalFileManagementStepDefs {
 		fileNameWithExtension = scenarioContext.applyParamsValueOnText(fileNameWithExtension);
 		
 		FileContentsValidator fcValidator = new FileContentsValidator(Locations.getProjectRootDir() + "/test-results/downloads/" + fileNameWithExtension, 
+	    		"Yes".equalsIgnoreCase(shouldPrint));	    
+	    
+	    String txt = scenarioContext.applyParamsValueOnText(keywords.getContent());
+	    String[] arr = txt.split(keywordDelimiter);
+	    for(int i = 0; i < arr.length; i++) {
+	    	arr[i] = StringUtil.trimNullAsEmpty(arr[i]);
+	    }
+	    
+	    if("Yes".equalsIgnoreCase(inOrder)) {
+	    	fcValidator.validateAllKeywordsPresentInOrder(arr);
+	    } else {
+	    	fcValidator.validateAllKeywordsPresent(arr);
+	    }
+	}
+	
+	/**
+	 * Used to validate the file contents that present in a specified directory.
+	 * 
+	 * @param absoluteFilePath - absolute file path.
+	 * @param keywordDelimiter - keyword delimiter to to identify multiple keywords in keywords text.
+	 * @param inOrder - valid values Yes, No. If yes then it will search keywords one after one. If No then it will search element in document but sequencing will not matter.
+	 * @param shouldPrint - Will print the contents of the file on console. Valid values: Yes, No
+	 * @param keywords - multiple keywords are separated by keywordDelimiter.
+	 */
+	@Then("verify the contents of {string} file that contains the following keywords [KeywordDelimiter={string}, InOrder={string}, ShouldPrint={string}]:")
+	public void verify_the_contents_of_the_file_that_contains_the_following_text(String absoluteFilePath, String keywordDelimiter, String inOrder, String shouldPrint, DocString keywords) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		absoluteFilePath = scenarioContext.applyParamsValueOnText(absoluteFilePath);
+		
+		FileContentsValidator fcValidator = new FileContentsValidator(absoluteFilePath, 
 	    		"Yes".equalsIgnoreCase(shouldPrint));	    
 	    
 	    String txt = scenarioContext.applyParamsValueOnText(keywords.getContent());
