@@ -22,12 +22,17 @@ import java.util.Collections;
 import java.util.List;
 
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
+import org.uitnet.testing.smartfwk.api.core.reader.JsonDocumentReader;
+import org.uitnet.testing.smartfwk.common.command.SmartCommandExecuter;
+import org.uitnet.testing.smartfwk.common.command.SyncCommandResult;
 import org.uitnet.testing.smartfwk.local_machine.LocalMachineFileSystem;
 import org.uitnet.testing.smartfwk.ui.core.commons.Locations;
 import org.uitnet.testing.smartfwk.ui.core.objects.validator.mechanisms.TextMatchMechanism;
 import org.uitnet.testing.smartfwk.ui.core.utils.StringUtil;
 import org.uitnet.testing.smartfwk.validator.DownloadedFileValidator;
 import org.uitnet.testing.smartfwk.validator.FileContentsValidator;
+
+import com.jayway.jsonpath.DocumentContext;
 
 import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.Then;
@@ -285,5 +290,52 @@ public class SmartLocalFileManagementStepDefs {
 	    } else {
 	    	fcValidator.validateAllKeywordsPresent(arr);
 	    }
+	}
+
+	/**
+	 * Used to execute the system command locally and stores the result / output into specified variable.
+	 * 
+	 * @param actionName - the meaningful name of the action.
+	 * @param variableName - the name of the variable that stores the command output. It stores the whole output as JSON object.
+	 * @param commandInfoAsJson - input command in the following JSON format (Format with sample data):
+	 * 		{
+	 * 			baseDirectory: "/home/test1/",			
+	 * 			shellInfo: ["sh", "-c"],		
+	 * 			commandName: "ls",
+	 * 			commandArgs: ["-l"],
+	 * 			timeoutInSeconds: 300
+	 *      } 
+	 * 
+	 * NOTE: The content of the output variable will be in the following JSON format (For more detail please refer {@link SyncCommandResult}
+	 * 	{
+	 *    cmdName: "",
+	 *    process: {},
+	 *    exitStatus: true / false,
+	 *    outputData: "",
+	 *    errorData: "",
+	 *    exceptions: ["", ""]
+	 *  }
+	 *  
+	 *  Accordingly, you can prepare JSON path to verify its contents using JSON validation test steps.
+	 */
+	@When("execute the following system command locally to {string} and store the result into {string} variable:")
+	public void execute_following_system_command_locally(String actionName, String variableName, DocString commandInfoAsJson) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		String commandJson = commandInfoAsJson.getContent();
+		commandJson = scenarioContext.applyParamsValueOnText(commandJson);
+		
+		JsonDocumentReader jsonReader = new JsonDocumentReader(commandJson, false);
+		SmartInputCommand cmd = jsonReader.readValueAsObject("$", SmartInputCommand.class);
+		
+		SyncCommandResult result = SmartCommandExecuter.executeSync(cmd.getShellInfo(), cmd.getTimeoutInSeconds(), 
+				cmd.getBaseDirectory(), cmd.getCommandName(), cmd.getCommandArgs());
+		
+		JsonDocumentReader jsonReader2 = new JsonDocumentReader();
+		DocumentContext jsonCtx = jsonReader2.prepareDocumentContext(result);
+		scenarioContext.addParamValue(variableName, jsonCtx);
 	}
 }
