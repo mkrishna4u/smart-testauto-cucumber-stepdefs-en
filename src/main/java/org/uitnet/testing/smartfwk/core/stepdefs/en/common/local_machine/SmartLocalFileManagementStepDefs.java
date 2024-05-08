@@ -293,7 +293,8 @@ public class SmartLocalFileManagementStepDefs {
 	}
 
 	/**
-	 * Used to execute the system command locally and stores the result / output into specified variable.
+	 * Used to execute the system command locally and stores the result / output into specified variable. Output 
+	 * is stored as JSON object and that can be verified using JSON Object verification test step.
 	 * 
 	 * @param actionName - the meaningful name of the action.
 	 * @param variableName - the name of the variable that stores the command output. It stores the whole output as JSON object.
@@ -305,7 +306,9 @@ public class SmartLocalFileManagementStepDefs {
 	 * 			commandArgs: ["-l"],
 	 * 			timeoutInSeconds: 300
 	 *      } 
-	 * 
+	 * NOTE: baseDirectory is the directory in which the command will be executed.
+	 * NOTE: When shellInfo is null or empty ([]) then system will automatically determine the shell information based on local platform.
+	 * NOTE: when timeoutInSeconds value is null then it uses the value 300 seconds. Value 0 means indefinite wait until command is executed successfully.
 	 * NOTE: The content of the output variable will be in the following JSON format (For more detail please refer {@link SyncCommandResult}
 	 * 	{
 	 *    cmdName: "",
@@ -318,7 +321,7 @@ public class SmartLocalFileManagementStepDefs {
 	 *  
 	 *  Accordingly, you can prepare JSON path to verify its contents using JSON validation test steps.
 	 */
-	@When("execute the following system command locally to {string} and store the result into {string} variable:")
+	@When("execute the following system command locally to {string} and store the result into {string} JSON variable:")
 	public void execute_following_system_command_locally(String actionName, String variableName, DocString commandInfoAsJson) {
 		if(!scenarioContext.isLastConditionSetToTrue()) {
 			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
