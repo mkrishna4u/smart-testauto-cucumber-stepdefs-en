@@ -31,6 +31,7 @@ import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
 import org.uitnet.testing.smartfwk.validator.ParameterValidator;
 
 import io.cucumber.docstring.DocString;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 /**
@@ -52,7 +53,7 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	/**
 	 * Used to switch to the new window by specifying the window handle name.
 	 * 
-	 * @param windowHandleName - the window handle name.
+	 * @param windowHandleName - the window handle name or the variable name that holds window handle name.
 	 * <blockquote><pre>
 	 *   NOTE: To get the window handle, we first have to run this step to get all available window 
 	 *         handles. Then you can use the specific window handle to switch to a particular window.
@@ -65,9 +66,50 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 			return;
 		}
 		
+		String windowHandleName2 = scenarioContext.getParamValueAsString(windowHandleName);
 		Set<String> windowHandles = scenarioContext.getActiveAppDriver().getWebDriver().getWindowHandles();
 		scenarioContext.log("AVAILABLE WINDOW HANDLE NAMES: " + windowHandles);
-		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().window(windowHandleName);
+		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().window(windowHandleName2);
+	}
+	
+	/**
+	 * Used to switch back to the previously opened window by specifying the window handle name.
+	 * 
+	 * @param windowHandleName - the window handle name or the variable name that holds window handle name.
+	 * <blockquote><pre>
+	 *   NOTE: To get the window handle, we first have to run this step to get all available window 
+	 *         handles. Then you can use the specific window handle to switch to a particular window.
+	 *   </pre></blockquote>
+	 */
+	@When("switch back to {string} window.")
+	public void switch_back_to_window(String windowHandleName) {
+		switch_to_window(windowHandleName);
+	}
+	
+	/**
+	 * Used to switch to newly opened window and store the newly opened window handle into a variable.
+	 *
+	 * @param variableName - the name of the variable which will store the window handle.
+	 */
+	@When("switch to newly opened window and store the window handle into {string} variable.")
+	public void switch_to_newly_opened_window_and_store(String variableName) {
+		if(!scenarioContext.isLastConditionSetToTrue()) {
+			scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+			return;
+		}
+		
+		Set<String> winHandles = scenarioContext.getActiveAppDriver().getWebDriver().getWindowHandles();
+	    if(winHandles != null && !winHandles.isEmpty()) {
+	       String latestHandle = null;
+	       for(String handle : winHandles) {
+	          latestHandle = handle;
+	       }
+	       scenarioContext.log("Newly opened window handle: " + latestHandle);
+	       scenarioContext.addParamValue(variableName, latestHandle);
+	       scenarioContext.getActiveAppDriver().getWebDriver().switchTo().window(latestHandle);
+	    } else {
+	       Assert.fail("No window handle found to switch to.");
+	    }
 	}
 	
 	/**
@@ -84,6 +126,39 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 	public void switch_to_window_1(String windowHandleName) {
 		switch_to_window(windowHandleName);
 	}
+	
+	/**
+	 * Used to retrieve the currently active window handle and stores this into variable for future use.
+	 * 
+	 * @param variableName - the name of the variable which will store the currently active window handle.
+	 */
+	@Then("get currently active window handle and store into {string} variable.")
+	public void get_currently_active_window_handle_and_store_into_variable(String variableName) {
+	    if(!scenarioContext.isLastConditionSetToTrue()) {
+	       scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+	       return;
+	    }
+	    String winHandle = scenarioContext.getActiveAppDriver().getWebDriver().getWindowHandle();
+	    scenarioContext.addParamValue(variableName, winHandle);
+	}
+	
+	/**
+	 * Used to close the window using window handle.
+	 * 
+	 * @param windowHandleName - the name of the window handle associated with window.
+	 */
+	@Then("close window where [WindowHandleName={string}].")
+	public void close_window_where_window_handle(String windowHandleName) {
+	    if(!scenarioContext.isLastConditionSetToTrue()) {
+	       scenarioContext.log("This step is not executed due to false value of condition=\"" + scenarioContext.getLastConditionName() + "\".");
+	       return;
+	    }
+
+	    String windowHandle = scenarioContext.getParamValueAsString(windowHandleName);
+	    if(windowHandle != null) {
+	       scenarioContext.getActiveAppDriver().getWebDriver().switchTo().window(windowHandle).close();
+	    }
+	}
 
 	/**
 	 * Used to default setting of the web driver. In this case if you already switched to different window 
@@ -98,12 +173,12 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		
 		scenarioContext.getActiveAppDriver().getWebDriver().switchTo().defaultContent();
 	}
-
+	
 	/**
 	 * Used to switch to different frame of the DOM. So that web driver can access the page elements
 	 * of the switched frame.
 	 * 
-	 * @param frameNameOrId - the ID or the name of the frame.
+	 * @param frameNameOrId - the ID or the name of the frame or the variable name that hold frame information.
 	 * <blockquote><pre>
 	 *   NOTE: If we give frameNameOrId = "parent" then it will switch the driver pointer to parent frame.
 	 *   NOTE: If we give frameNameOrId = "INDEX:2" then it will switch the driver pointer to second frame.
@@ -117,13 +192,15 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 			return;
 		}
 		
-		if ("parent".equals(frameNameOrId)) {
+		String frameNameOrId2 = scenarioContext.getParamValueAsString(frameNameOrId);
+		
+		if ("parent".equals(frameNameOrId2)) {
 			scenarioContext.getActiveAppDriver().getWebDriver().switchTo().parentFrame();
-		} else if (frameNameOrId.startsWith("INDEX:")) {
+		} else if (frameNameOrId2.startsWith("INDEX:")) {
 			scenarioContext.getActiveAppDriver().getWebDriver().switchTo()
-					.frame(Integer.valueOf(frameNameOrId.substring("INDEX:".length(), frameNameOrId.length()).trim()));
+					.frame(Integer.valueOf(frameNameOrId2.substring("INDEX:".length(), frameNameOrId2.length()).trim()));
 		} else {
-			scenarioContext.getActiveAppDriver().getWebDriver().switchTo().frame(frameNameOrId);
+			scenarioContext.getActiveAppDriver().getWebDriver().switchTo().frame(frameNameOrId2);
 		}
 	}
 
@@ -205,6 +282,7 @@ public class SmartUiWindowAndFrameOperationsStepDefs {
 		for(int i = 0; i <= maxIters; i++) {	
 			try {
 				String textValue = webDriver.switchTo().alert().getText();
+				expectedInfo = scenarioContext.applyParamsValueOnText(expectedInfo);
 				ExpectedInfo eInfo = JsonYamlUtil.parseExpectedInfo(expectedInfo);
 				
 				ParamPath pPath = new ParamPath("Alert-Text", "string");
