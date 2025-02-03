@@ -22,6 +22,7 @@ import static org.testng.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 
+import org.testng.Assert;
 import org.uitnet.testing.smartfwk.SmartCucumberScenarioContext;
 import org.uitnet.testing.smartfwk.api.core.reader.YamlDocumentReader;
 import org.uitnet.testing.smartfwk.core.validator.ExpectedInfo;
@@ -34,7 +35,6 @@ import org.uitnet.testing.smartfwk.ui.core.utils.JsonYamlUtil;
 
 import com.jayway.jsonpath.DocumentContext;
 
-import dev.failsafe.internal.util.Assert;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.Then;
@@ -144,7 +144,7 @@ public class SmartYamlDataManagementStepDefs {
 		}
 		
 		Object yamlObjContext = scenarioContext.getParamValue(yamlObjRefVariable);
-		Assert.notNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
+		Assert.assertNotNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
 		assertTrue(yamlObjContext instanceof DocumentContext, "'" +yamlObjRefVariable + "' variable is not a YAML object. It should be the instance of DocumentContext class.");
 		
 		DocumentContext yamlObj = (DocumentContext) yamlObjContext;
@@ -190,7 +190,7 @@ public class SmartYamlDataManagementStepDefs {
 		}
 		
 		Object yamlObjContext = scenarioContext.getParamValue(yamlObjRefVariable);
-		Assert.notNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
+		Assert.assertNotNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
 		assertTrue(yamlObjContext instanceof DocumentContext, "'" +yamlObjRefVariable + "' variable is not a YAML object. It should be the instance of DocumentContext class.");
 		
 		DocumentContext yamlObj = (DocumentContext) yamlObjContext;
@@ -248,7 +248,7 @@ public class SmartYamlDataManagementStepDefs {
 		}
 		
 		Object yamlObjContext = scenarioContext.getParamValue(yamlObjRefVariable);
-		Assert.notNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
+		Assert.assertNotNull(yamlObjContext, "'" +yamlObjRefVariable + "' variable does not have YAML object. Found null.");
 		assertTrue(yamlObjContext instanceof DocumentContext, "'" +yamlObjRefVariable + "' variable is not a YAML object. It should be the instance of DocumentContext class.");
 		
 		DocumentContext yamlObj = (DocumentContext) yamlObjContext;
